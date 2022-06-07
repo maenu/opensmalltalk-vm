@@ -31,7 +31,7 @@ $(THIRDPARTYLIBDIR)/$(LIBGIT2LIBNAME): $(LIBGIT2ARCHIVE)
 			-DLIBSSH2_FOUND=ON \
 			-DLIBSSH2_INCLUDE_DIRS=$(THIRDPARTYINCLUDEDIR) \
 			-DLIBSSH2_LIBRARIES=libssh2.1.dylib \
-			-DCMAKE_C_FLAGS="-m64 -L$(THIRDPARTYLIBDIR) -lssl -lcrypto -liconv" \
+			-DCMAKE_C_FLAGS="-m64 -L$(THIRDPARTYLIBDIR) -L/opt/local/lib -I/opt/local/include -lssl -lcrypto -liconv" \
 			-DCMAKE_OSX_ARCHITECTURES=x86_64 \
 			-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-rpath,@executable_path:@executable_path/Plugins \
 		&& make \
