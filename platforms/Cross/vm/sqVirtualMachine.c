@@ -361,7 +361,7 @@ struct VirtualMachine* sqGetInterpreterProxy(void)
 #ifndef MUSL
 #define STDOUT_STACK_SZ 5
 static int stdoutStackIdx = -1;
-static FILE stdoutStack[STDOUT_STACK_SZ];
+static FILE* stdoutStack[STDOUT_STACK_SZ];
 #endif
 
 /* N.B. As of cygwin 1.5.25 fopen("crash.dmp","a") DOES NOT WORK!  crash.dmp
@@ -412,8 +412,8 @@ pushOutputFile(char *filenameOrStdioIndex)
 			return;
 		}
 	}
-	stdoutStack[++stdoutStackIdx] = *stdout;
-	*stdout = *output;
+	stdoutStack[++stdoutStackIdx] = stdout;
+	dup2(fileno(output), fileno(stdout));
 }
 
 void
@@ -434,7 +434,7 @@ popOutputFile()
 		fclose(stdout);
 #endif
 	}
-	*stdout = stdoutStack[stdoutStackIdx--];
+	dup2(fileno(stdoutStack[stdoutStackIdx--]), fileno(stdout));
 }
 #endif
 
