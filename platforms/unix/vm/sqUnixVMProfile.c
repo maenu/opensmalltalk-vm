@@ -145,7 +145,11 @@ static long pc_buffer_wrapped;
 static void
 pcbufferSIGPROFhandler(int sig, siginfo_t *info, ucontext_t *uap)
 {
+# if EMSCRIPTEN
+	pc_buffer[pc_buffer_index] = 0;
+# else
 	pc_buffer[pc_buffer_index] = uap->_PC_IN_UCONTEXT;
+# endif
 	if (++pc_buffer_index >= pc_buffer_size) {
 		pc_buffer_index = 0;
 		pc_buffer_wrapped = 1;

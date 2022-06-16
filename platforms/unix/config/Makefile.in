@@ -45,12 +45,12 @@ all : $(squeak) plugins squeak.1 $(npsqueak)
 # VM
 
 $(squeak) : config.sh $(SQLIBS) version.o
-	$(LINK) $(squeak) $(SQLIBS) version.o $(LIBS) [plibs] -Wl,-whole-archive,vm/vm.a,-no-whole-archive
-	@echo
-	@size $(squeak)
-	@echo
-	@./$(squeak) -version || ./$(squeak) --version 
-	@echo
+	#$(LINK) $(squeak) $(SQLIBS) version.o $(LIBS) [plibs] -Wl,-whole-archive,vm/vm.a,-no-whole-archive
+	#@echo
+	#@size $(squeak)
+	#@echo
+	#@./$(squeak) -version || ./$(squeak) --version 
+	#@echo
 
 version.o : version.c
 	$(COMPILE) version.o version.c

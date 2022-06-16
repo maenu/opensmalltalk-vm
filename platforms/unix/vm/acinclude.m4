@@ -12,9 +12,9 @@ AC_DEFUN([AC_LANGINFO_CODESET], [
 ])
 
 AC_LANGINFO_CODESET
-
+     
 case $host_os in
-  darwin*) LIBS="$LIBS -framework CoreFoundation -framework CoreServices";;
+  darwin*) if !EMSCRIPTEN; then : LIBS="$LIBS -framework CoreFoundation -framework CoreServices";fi;;
   *)       
     AC_ARG_ENABLE(iconv,
       AC_HELP_STRING([--disable-iconv] [disable iconv support (default=enabled)]),
@@ -29,4 +29,4 @@ case $host_os in
     fi
     ;;
 esac
-
+	 

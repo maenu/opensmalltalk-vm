@@ -130,7 +130,7 @@ static int    installHandlers=	1;	/* 0 to disable sigusr1 & sigsegv handlers */
 static int    dumpImageFile=	0;	/* 1 after SIGHUP received */
 #endif
 
-#if defined(DARWIN)
+#if defined(DARWIN) && !defined(EMSCRIPTEN)
 int inModalLoop= 0;
 #endif
 
@@ -1133,7 +1133,11 @@ sigsegv(int sig, siginfo_t *info, ucontext_t *uap)
 
 	if (!inFault) {
 		extern sqInt primitiveFailForFFIExceptionat(usqLong exceptionCode, usqInt pc);
+# if EMSCRIPTEN
+		primitiveFailForFFIExceptionat(sig, 0);
+# else
 		primitiveFailForFFIExceptionat(sig, uap->_PC_IN_UCONTEXT);
+# endif
 		inFault = 1;
 		crashdump = crashDumpFile();
 		ctime_r(&now,ctimebuf);
@@ -2202,7 +2206,7 @@ extern sqInt reportStackHeadroom;
   return ec;
 }
 
-#if defined(DARWIN)
+#if defined(DARWIN) && !defined(EMSCRIPTEN)
 # include "mac-alias.c"
 #endif
 
@@ -2249,7 +2253,7 @@ sqInt sqGetFilenameFromString(char *aCharBuffer, char *aFilenameString, sqInt fi
 	    continue;
 	  }
 
-#    if defined(DARWIN)
+#    if defined(DARWIN) && !defined(EMSCRIPTEN)
 	if (isMacAlias(aCharBuffer))
 	  {
 	    if ((++numLinks > MAXSYMLINKS) || !resolveMacAlias(aCharBuffer, aCharBuffer, PATH_MAX))

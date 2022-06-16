@@ -528,7 +528,7 @@ sqInt superclassOf(sqInt classPointer);
 unsigned int ioMicroMSecs(void);
 unsigned long long  ioUTCMicroseconds(void);
 unsigned long long  ioUTCMicrosecondsNow(void);
-void forceInterruptCheck(void);
+sqInt forceInterruptCheck(void);
 sqInt getThisSessionID(void);
 sqInt ioFilenamefromStringofLengthresolveAliases(char* aCharBuffer, char* filenameIndex, sqInt filenameLength, sqInt resolveFlag);
 sqInt vmEndianness(void);	

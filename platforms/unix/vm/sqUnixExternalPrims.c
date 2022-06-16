@@ -374,7 +374,7 @@ ioLoadModule(char *pluginName)
         )
     return handle;
 
-#if defined(DARWIN)
+#if defined(DARWIN) && !defined(EMSCRIPTEN)
   // look in the bundle contents dir
   {
     static char *contents= 0;

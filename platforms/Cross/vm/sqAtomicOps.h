@@ -106,7 +106,7 @@ AtomicGet(uint64_t *target)
 #	define set64(variable,value) AtomicSet(&(variable),value)
 
 	/* Currently we provide definitions for x86 and GCC only.  But see below. */
-# elif (defined(__GNUC__) || defined(__SUNPRO_C)) && (defined(i386) || defined(__i386) || defined(__i386__) || defined(_X86_))
+# elif !defined(EMSCRIPTEN) && ((defined(__GNUC__) || defined(__SUNPRO_C)) && (defined(i386) || defined(__i386) || defined(__i386__) || defined(_X86_)))
 
 /* atomic read & write of 64-bit values using SSE2 movq to/from sse register.
  * 64-bit reads & writes are only guaranteed to be atomic if aligned on a 64-bit
@@ -203,7 +203,7 @@ AtomicGet(__int64 *target)
 
 # else /* TARGET_OS_IS_IPHONE elif x86 variants etc */
 
-#if defined(__arm__) && (defined(__ARM_ARCH_6__) || defined(__ARM_ARCH_7A__))
+#if defined(__arm__) && (defined(__ARM_ARCH_6__) || defined(__ARM_ARCH_7A__)) || defined(EMSCRIPTEN)
 /* tpr - this is code intended for the Raspberry Pi Raspbian OS 
  * We'll experimentally trust in our MMU to keep 64bit accesses atomic */
 # define get64(variable) variable

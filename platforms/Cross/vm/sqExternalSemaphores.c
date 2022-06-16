@@ -57,7 +57,7 @@
 #if !COGMTVM
 sqOSThread ioVMThread; /* initialized in the various <plat>/vm/sqFooMain.c */
 #endif
-extern void forceInterruptCheck(void);
+extern sqInt forceInterruptCheck(void);
 extern sqInt doSignalSemaphoreWithIndex(sqInt semaIndex);
 
 /* Use 16-bit counters if possible, otherwise 32-bit */

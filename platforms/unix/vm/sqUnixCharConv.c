@@ -51,7 +51,7 @@ static int convertCopy(char *from, int fromLen, char *to, int toLen, int term)
 }
 
 
-#if defined(__MACH__)
+#if defined(__MACH__) && !defined(EMSCRIPTEN)
 
 // we have to do something special on MacOSX (surprise surprise) because:
 // - MacOSX is not Unix98 compliant and lacks builtin iconv functions

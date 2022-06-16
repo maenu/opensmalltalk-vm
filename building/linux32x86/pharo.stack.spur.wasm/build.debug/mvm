@@ -3,7 +3,8 @@ set -e
 # Stack Spur VM with VM profiler and threaded heartbeat
 INSTALLDIR=wasmstkspur32linuxht
 
-OPT="-g3 -O0 -DDEBUGVM=1"
+#OPT="-fPIC -gsource-map --source-map-base http://localhost:9090/ -s DEMANGLE_SUPPORT=1 -s ASSERTIONS=1 -O0 -DDEBUGVM=1 -Wbad-function-cast -Wcast-function-type" #-g3
+OPT="-fPIC -g -DDEBUGVM=1"
 
 CC=emcc
 
@@ -21,18 +22,25 @@ test -f plugins.int || (test -f ../plugins.int && cp -p ../plugins.int . || cp -
 test -f plugins.ext || (test -f ../plugins.ext && cp -p ../plugins.ext . || cp -p ../../plugins.ext .)
 test -f config.h || emconfigure ../../../../platforms/unix/config/configure \
 		--with-vmversion=5.0 \
-		--with-src=src/spur32.stack --disable-cogit \
-		--without-vm-display-fbdev --without-npsqueak \
-		--with-scriptname=spur32 --target=i386 i386=1 \
-	VM_WORD_SIZE="32" \
+		--with-src=src/spur32.stack \
+		--disable-cogit \
+		--without-vm-display-fbdev \
+		--without-npsqueak \
+		--with-scriptname=spur32 \
+		--without-x \
+		--without-gl \
+		--without-vm-sound-OSS \
 	TARGET_ARCH="-m32" \
 	CC=$CC \
-	CFLAGS="$OPT"
+	CFLAGS="$OPT -DCOGVM=0" #-msse2 -msimd128 
 echo "configured"
 rm -f vm/sqUnixMain.o # nuke version info
 rm -rf ../../../../products/$INSTALLDIR
-echo "cleaned product dir"
 # prefer make install prefix=`readlink -f \`pwd\`/../../../../products/$INSTALLDIR`
 # but older linux readlinks lack the -f flag
-emmake make install-squeak install-plugins prefix=`(cd ../../../../;pwd)`/products/$INSTALLDIR 2>&1 | tee LOG ; test ${PIPESTATUS[0]} -eq 0
+CFLAGS="$CFLAGS -s SIDE_MODULE=1" emmake make install-squeak prefix=`(cd ../../../../;pwd)`/products/$INSTALLDIR 2>&1 | tee LOG ; test ${PIPESTATUS[0]} -eq 0
+
+EMCC_FORCE_STDLIBS=1 ./libtool --mode=link emcc -Wall -g -DDEBUGVM=1 -DCOGVM=0 -pthread -DLSB_FIRST=1 -m32  -L/usr/local/lib   -export-dynamic -o squeak.html vm/vm.a disabledPlugins.o version.o -lpthread    -Wl,-whole-archive,vm/vm.a,-no-whole-archive -s MAIN_MODULE=1
+
+#EMCC_FORCE_STDLIBS=1 emcc -Wall -g3 -O0 -DDEBUGVM=1 -DCOGVM=0 -pthread -DLSB_FIRST=1 -m32 -Wno-missing-braces -Wno-unknown-pragmas -Wno-unused-value -Wno-unused-label -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable  -DHAVE_CONFIG_H  -DSQUEAK_BUILTIN_PLUGIN -I. -I../../../../platforms/unix/vm -I../../../../src/spur32.stack -I../../../../platforms/Cross/vm -I../../../../platforms/unix/vm -I../../../../src/spur32.stack -m32 -Wno-missing-braces -Wno-unknown-pragmas -Wno-unused-value -Wno-unused-label -Wno-unused-function -Wno-unused-variable -Wno-unused-but-set-variable -o sqUnixMain -s MAIN_MODULE=1 -s WARN_ON_UNDEFINED_SYMBOLS=0 ../../../../platforms/unix/vm/sqUnixMain.c
 echo "done"
