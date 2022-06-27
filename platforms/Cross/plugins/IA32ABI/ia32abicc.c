@@ -8,7 +8,7 @@
 /* null if compiled on other than x86, to get around gnu make bugs or
  * misunderstandings on our part.
  */
-#if defined(_M_I386) || defined(_M_IX86) || defined(_X86_) || defined(i386) || defined(i486) || defined(i586) || defined(i686) || defined(__i386__) || defined(__386__) || defined(X86) || defined(I386)
+#if defined(_M_I386) || defined(_M_IX86) || defined(_X86_) || defined(i386) || defined(i486) || defined(i586) || defined(i686) || defined(__i386__) || defined(__386__) || defined(X86) || defined(I386) || defined(EMSCRIPTEN)
 
 #if defined(_MSC_VER) || defined(__MINGW32__)
 # include <Windows.h> /* for GetSystemInfo & VirtualAlloc */
@@ -53,13 +53,13 @@ struct VirtualMachine* interpreterProxy;
 #ifdef _MSC_VER
 # define alloca _alloca
 #endif
-#if __GNUC__
+#if __GNUC__ && !EMSCRIPTEN
 # define setsp(sp) __asm__ volatile ("movl %0,%%esp" : : "m"(sp))
 # define getsp() ({ void *sp; __asm__ volatile ("movl %%esp,%0" : "=r"(sp) : ); sp;})
 #endif
 #if __APPLE__ && __MACH__ && __i386__
 # define STACK_ALIGN_BYTES 16
-#elif __linux__ && __i386__
+#elif __linux__ && __i386__ || EMSCRIPTEN
 # define STACK_ALIGN_BYTES 16
 #elif defined(_WIN32) && __SSE2__
 /* using sse2 instructions requires 16-byte stack alignment but on win32 there's
@@ -207,8 +207,10 @@ thunkEntry(void *thunkp, sqIntptr_t *stackp)
 		long vhigh = vmcc.rvs.valleint64.high;
 #if _MSC_VER
 				_asm mov edx, dword ptr vhigh;
-#elif __GNUC__  || __SUNPRO_C
+#elif !EMSCRIPTEN && (__GNUC__ || __SUNPRO_C)
 				__asm__ ("mov %0,%%edx" : : "m"(vhigh));
+#elif EMSCRIPTEN
+	// TODO see below
 #else
 # error need to load edx with vmcc.rvs.valleint64.high on this compiler
 #endif
@@ -219,8 +221,10 @@ thunkEntry(void *thunkp, sqIntptr_t *stackp)
 		double valflt64 = vmcc.rvs.valflt64;
 #if _MSC_VER
 				_asm fld qword ptr valflt64;
-#elif __GNUC__ || __SUNPRO_C
+#elif !EMSCRIPTEN && (__GNUC__ || __SUNPRO_C)
 				__asm__ ("fldl %0" : : "m"(valflt64));
+#elif EMSCRIPTEN
+	// TODO see below
 #else
 # error need to load %f0 with vmcc.rvs.valflt64 on this compiler
 #endif

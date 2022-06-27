@@ -17,7 +17,7 @@
 # define ARM64AppleFFIPlugin_exports SqueakFFIPrims_exports
 # include "ARM64AppleFFIPlugin.c"
 
-#elif defined(_M_I386) || defined(_M_IX86) || defined(_X86_) || defined(i386) || defined(i486) || defined(i586) || defined(i686) || defined(__i386__) || defined(__386__) || defined(X86) || defined(I386)
+#elif defined(_M_I386) || defined(_M_IX86) || defined(_X86_) || defined(i386) || defined(i486) || defined(i586) || defined(i686) || defined(__i386__) || defined(__386__) || defined(X86) || defined(I386) || defined(EMSCRIPTEN)
 
 # define IA32FFIPlugin_exports SqueakFFIPrims_exports
 # include "IA32FFIPlugin.c"

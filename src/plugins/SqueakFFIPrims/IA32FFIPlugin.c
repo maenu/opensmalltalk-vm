@@ -71,11 +71,11 @@ static char __buildInfo[] = "ThreadedIA32FFIPlugin VMMaker.oscog-mt.3181 uuid: 8
 /* For ABI that require stack alignment greater than natural word size */
 #define MUST_ALIGN_STACK (STACK_ALIGN_BYTES > sizeof(void*))
 
-#if defined(_X86_) || defined(i386) || defined(__i386) || defined(__i386__)
+#if defined(_X86_) || defined(i386) || defined(__i386) || defined(__i386__) || defined(EMSCRIPTEN)
 /* Both Mac OS X x86 and Win32 x86 return structs of a power of two in size
  * less than or equal to eight bytes in length in registers. Linux never does so.
  */
-# if __linux__
+# if __linux__ || EMSCRIPTEN
 #	define WIN32_X86_STRUCT_RETURN 0
 # else
 #	define WIN32_X86_STRUCT_RETURN 1

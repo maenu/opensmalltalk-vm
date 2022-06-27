@@ -47,7 +47,7 @@
 #include <signal.h>
 #include <fcntl.h>
 
-#if !defined(NOEXECINFO)
+#if !NOEXECINFO
 # include <execinfo.h>
 # define BACKTRACE_DEPTH 64
 #endif
@@ -375,12 +375,12 @@ findExecutablePath(const char *localVmName, char *dest, size_t destSize)
  */
 static void *printRegisterState(ucontext_t *uap);
 
-#error "the new exception handling code from platforms/unix/vm/sqUnixMain.c needs to be integrated here. eem 2021/9/28"
+//TODO the new exception handling code from platforms/unix/vm/sqUnixMain.c needs to be integrated here. eem 2021/9/28
 
 static void
 reportStackState(const char *msg, char *date, int printAll, ucontext_t *uap)
 {
-#if !defined(NOEXECINFO)
+#if !NOEXECINFO
 	void *addrs[BACKTRACE_DEPTH];
 	void *pc;
 	int depth;
@@ -402,7 +402,7 @@ reportStackState(const char *msg, char *date, int printAll, ucontext_t *uap)
 		return;
 #endif
 
-#if !defined(NOEXECINFO)
+#if !NOEXECINFO
 	printf("C stack backtrace & registers:\n");
 	if (uap) {
 		addrs[0] = printRegisterState(uap);

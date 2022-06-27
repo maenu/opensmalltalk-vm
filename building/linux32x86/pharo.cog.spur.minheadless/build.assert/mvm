@@ -2,7 +2,15 @@
 # PharoVM with VM profiler and threaded heartbeat
 THIRDPARTYLIBS="libsdl2 openssl libssh2 libgit2"
 
-case "`uname -m`" in # ensure we see x86 as machine type
+
+if $(uname) = 'Darwin'
+then
+	ARCH=arch
+else
+	ARCH=uname -m
+fi
+
+case $ARCH in # ensure we see x86 as machine type
 i*86) ;; # we're good
 *) if type i386 2>&1 >/dev/null; then
 	echo "Re-exec as x86"

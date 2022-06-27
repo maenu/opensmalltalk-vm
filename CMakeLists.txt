@@ -29,6 +29,14 @@ if (CMAKE_BUILD_TYPE STREQUAL "")
 	set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build, options are: None (CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel." FORCE)
 endif ()
 
+if (EMSCRIPTEN)
+	set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
+	set(CMAKE_VERBOSE_MAKEFILE on)
+	set(CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS "-s SIDE_MODULE=1")
+	set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "-s SIDE_MODULE=1")
+	set(CMAKE_STRIP FALSE)
+endif()
+
 # Turn on warnings
 if (MSVC)
 	# using Visual Studio C++
@@ -44,10 +52,10 @@ else()
 		-Wno-conversion -Wno-int-conversion -Wno-sign-conversion -Wpointer-sign
 		-Wno-trigraphs -Wdeprecated-declarations
 
-        # -Wunused-variable -Wunused-value -Wunused-but-set-variable
+         -Wunused-variable -Wunused-value -Wunused-but-set-variable
         # Supress these warning to reduce the side of the Travius log and avoid
         # "The job exceeded the maximum log length, and has been terminated."
-        -Wno-unused-variable -Wno-unused-value
+        #-Wno-unused-variable -Wno-unused-value
 	)
 
 	if("${CMAKE_C_COMPILER_ID}" MATCHES "Clang")
@@ -151,8 +159,15 @@ if(OSVM_PLATFORM_X86_32)
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /arch:SSE2")
     else()
         set(CMAKE_ASM-ATT_FLAGS "--32")
-        set(CMAKE_CXX_FLAGS "-m32 -msse2 ${CMAKE_CXX_FLAGS} ")
-        set(CMAKE_C_FLAGS "-m32 -msse2 ${CMAKE_C_FLAGS}")
+	     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
+	     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
+		  if(EMSCRIPTEN)
+			 #set(CMAKE_EXECUTABLE_SUFFIX ".wasm")
+			 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sSIDE_MODULE")
+   	  	   else()
+	        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse2")
+	        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse2")
+	    endif()
     endif()
     set(FFI_VARIANT_IA32 True)
     set(VM_TARGET_CPU "i686")
@@ -170,8 +185,6 @@ if(LOWCODE_EXTENSIONS)
 	add_definitions(-DLowcodeVM=1)
 	set(SourceFolderName "${SourceFolderName}lowcode.vm")
 	set(ProductFolderName "${ProductFolderName}lowcodevm")
-else()
-	set(SourceFolderName "${SourceFolderName}vm")
 endif()
 
 
@@ -194,12 +207,23 @@ elseif(UNIX)
 endif()
 
 
+# Spur object model
+if(SPUR_OBJECT_MODEL)
+	#add_definitions(SpurVM=1) # not needed because already set in sources
+	set(SourceFolderName "${SourceFolderName}spur")
+	set(ProductFolderName "spur${ProductFolderName}")
+else()
+	set(SourceFolderName "${SourceFolderName}v3")
+	set(ProductFolderName "v3${ProductFolderName}")	
+endif()
+
+
 # 64 bits VM
 if(VM_64BITS)
-	set(SourceFolderName "${SourceFolderName}.64bit")
+	set(SourceFolderName "${SourceFolderName}64")
 	set(ProductFolderName "${ProductFolderName}64")
 else()
-	set(SourceFolderName "${SourceFolderName}.32bit")
+	set(SourceFolderName "${SourceFolderName}32")
 	set(ProductFolderName "${ProductFolderName}32")
 endif()
 
@@ -215,17 +239,6 @@ elseif(COG_JIT)
 else()
 	set(SourceFolderName "${SourceFolderName}.stack")
 	set(ProductFolderName "stack${ProductFolderName}")
-endif()
-
-
-# Spur object model
-if(SPUR_OBJECT_MODEL)
-	#add_definitions(SpurVM=1) # not needed because already set in sources
-	set(SourceFolderName "${SourceFolderName}.spur")
-	set(ProductFolderName "spur${ProductFolderName}")
-else()
-	set(SourceFolderName "${SourceFolderName}.v3")
-	set(ProductFolderName "v3${ProductFolderName}")	
 endif()
 
 
@@ -297,7 +310,6 @@ endif()
 
 add_definitions(-DCOGMTVM=0)
 
-set(SourceFolderName "${SourceFolderName}src")
 set(PluginsSourceFolderName "src/plugins")
 
 message(STATUS "Source folder name: ${SourceFolderName}")
@@ -525,7 +537,7 @@ else()
 endif()
 
 # Compile the interpreter with less aggresive optimization options.
-if(NOT ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug") AND NOT MSVC)
+if(NOT ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug") AND NOT (MSVC OR EMSCRIPTEN))
 	set_source_files_properties(${InterpreterSource} PROPERTIES COMPILE_FLAGS -O1)
 endif()
 
@@ -821,6 +833,12 @@ if(NOT ONLY_CONFIG_H)
 			MACOSX_BUNDLE_INFO_PLIST ${VM_EXECUTABLE_INFO_PLIST})
 		target_link_libraries(${VM_EXECUTABLE_NAME} ${VM_LIBRARY_NAME} ${Foundation_LIBRARY} ${AppKit_LIBRARY})
 	else()
+		if(EMSCRIPTEN)
+			set(CMAKE_EXECUTABLE_SUFFIX ".html")
+			string(REPLACE "-sSIDE_MODULE" "-sMAIN_MODULE" CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
+			# -sALLOW_MEMORY_GROWTH
+			set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sINITIAL_MEMORY=2147483648 -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=4 -sLLD_REPORT_UNDEFINED --pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/pre.js --preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image@/ --preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist@/")
+		endif()
 		add_executable(${VM_EXECUTABLE_NAME} platforms/minheadless/common/sqMain.c)
 	    target_link_libraries(${VM_EXECUTABLE_NAME} ${VM_LIBRARY_NAME})
 

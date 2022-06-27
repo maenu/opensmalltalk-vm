@@ -174,7 +174,7 @@ ioHighResClock(void)
 #if defined(__GNUC__) && (defined(i386) || defined(__i386) || defined(__i386__)  \
 			|| defined(x86_64) || defined(__x86_64) || defined (__x86_64__))
     __asm__ __volatile__ ("rdtsc" : "=A"(value));
-#elif defined(__arm__) && (defined(__ARM_ARCH_6__) || defined(__ARM_ARCH_7A__))
+#elif defined(__arm__) && (defined(__ARM_ARCH_6__) || defined(__ARM_ARCH_7A__)) || defined(EMSCRIPTEN)
 	/* tpr - do nothing for now; needs input from eliot to decide further */
 #else
 # error "no high res clock defined"

@@ -50,7 +50,7 @@
 
 #  define IS_64_BIT_ARCH 1
 
-#elif defined(_M_IX86) || defined(_M_I386) || defined(_X86_) || defined(i386) || defined(__i386__) || defined(__arm32__)
+#elif defined(_M_IX86) || defined(_M_I386) || defined(_X86_) || defined(i386) || defined(__i386__) || defined(__arm32__) || defined(EMSCRIPTEN)
 
 #  define IS_32_BIT_ARCH 1
 

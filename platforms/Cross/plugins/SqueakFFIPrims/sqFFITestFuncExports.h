@@ -1,5 +1,5 @@
 // Export of test functions when FFI is included as an internal plugin
-#ifndef NO_FFI_TEST
+# if !NO_FFI_TEST
 
 # define TUPLE(fn) {(void*)_m, #fn, (void*)fn},
 

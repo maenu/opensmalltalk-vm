@@ -44,7 +44,7 @@ int destroyManualSurface(int surfaceID);
 int setManualSurfacePointer(int surfaceID, void* ptr);
 
 
-# ifndef NO_FFI_TEST
+# if !NO_FFI_TEST
 // Declarations of test functions & types for the foreign function interface
 
 typedef struct ffiTestPoint2 {

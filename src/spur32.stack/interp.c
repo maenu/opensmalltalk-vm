@@ -2513,6 +2513,7 @@ interpret(void)
 		bytecodeDispatchDebugHook();
 
 		VM_LABEL(bytecodeDispatch);
+		//printf("%d\n", currentBytecode);
 		switch (currentBytecode) {
 		case 0:
 		case 256: /*0*/

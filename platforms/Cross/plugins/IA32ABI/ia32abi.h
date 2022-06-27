@@ -66,7 +66,7 @@ extern sqInt callIA32DoubleReturn  (SIGNATURE);
 
 #define thunkEntryType long
 
-#if defined(i386) || defined(__i386) || defined(__i386__) || (defined(_WIN32) && !defined(_WIN64)) || defined(_M_IX86)
+#if defined(i386) || defined(__i386) || defined(__i386__) || (defined(_WIN32) && !defined(_WIN64)) || defined(_M_IX86) || defined(EMSCRIPTEN)
 # define INT_REG_ARGS /* none */
 # define DBL_REG_ARGS /* none */
 #elif _WIN64 || defined(_M_X64) || defined(_M_AMD64) || defined(_WIN64)

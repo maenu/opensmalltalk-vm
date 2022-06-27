@@ -25,6 +25,7 @@
  *
  * Author: roniesalg@gmail.com
  */
+#include "sq.h"
 #include "OpenSmalltalkVM.h"
 
 int
@@ -32,3 +33,6 @@ main(int argc, const char **argv)
 {
     return osvm_main(argc, argv);
 }
+
+sqInt
+ioCanCatchFFIExceptions() { return 1; }
