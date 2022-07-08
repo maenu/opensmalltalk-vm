@@ -885,6 +885,7 @@ osvm_shutdownVM(OSVMInstanceHandle vmHandle)
 OSVM_VM_CORE_PUBLIC OSVMError
 osvm_main(int argc, const char **argv)
 {
+	//printf("%d args, %s, %s, %s, %s\n", argc, argv[0], argv[1], argv[2], argv[3]);
     OSVMError error;
     OSVMInstanceHandle vmHandle;
 

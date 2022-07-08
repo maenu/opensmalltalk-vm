@@ -203,11 +203,17 @@ AtomicGet(__int64 *target)
 
 # else /* TARGET_OS_IS_IPHONE elif x86 variants etc */
 
-#if defined(__arm__) && (defined(__ARM_ARCH_6__) || defined(__ARM_ARCH_7A__)) || defined(EMSCRIPTEN)
+#if defined(__arm__) && (defined(__ARM_ARCH_6__) || defined(__ARM_ARCH_7A__))
 /* tpr - this is code intended for the Raspberry Pi Raspbian OS 
  * We'll experimentally trust in our MMU to keep 64bit accesses atomic */
 # define get64(variable) variable
 # define set64(variable,value) (variable = value)
+
+#elif defined(EMSCRIPTEN)
+
+#include <emscripten/atomic.h>
+# define get64(variable) emscripten_atomic_load_u64(&(variable))
+# define set64(variable,value) emscripten_atomic_store_u64(&(variable),value)
 
 #else
 

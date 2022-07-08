@@ -52,7 +52,7 @@
 # include <fcntl.h>
 # include <sys/ioctl.h>
 
-# ifdef HAVE_SYS_TIME_H
+# if defined(HAVE_SYS_TIME_H) && !defined(EMSCRIPTEN)
 #   include <sys/time.h>
 # else
 #   include <time.h>

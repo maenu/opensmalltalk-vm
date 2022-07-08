@@ -25,9 +25,9 @@
 
 #if EMSCRIPTEN
 /* not around in wasm */
-#	define _PC_IN_UCONTEXT uc_mcontext->__ss.__rip
-#	define _FP_IN_UCONTEXT uc_mcontext->__ss.__rbp
-#	define _SP_IN_UCONTEXT uc_mcontext->__ss.__rsp
+#	define _PC_IN_UCONTEXT uc_mcontext->__ss.__eip
+#	define _FP_IN_UCONTEXT uc_mcontext->__ss.__ebp
+#	define _SP_IN_UCONTEXT uc_mcontext->__ss.__esp
 #elif __APPLE__ && __MACH__ && __DARWIN_UNIX03
 # if __i386__
 #	define _PC_IN_UCONTEXT uc_mcontext->__ss.__eip

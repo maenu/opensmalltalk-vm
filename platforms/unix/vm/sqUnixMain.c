@@ -1133,11 +1133,7 @@ sigsegv(int sig, siginfo_t *info, ucontext_t *uap)
 
 	if (!inFault) {
 		extern sqInt primitiveFailForFFIExceptionat(usqLong exceptionCode, usqInt pc);
-# if EMSCRIPTEN
-		primitiveFailForFFIExceptionat(sig, 0);
-# else
 		primitiveFailForFFIExceptionat(sig, uap->_PC_IN_UCONTEXT);
-# endif
 		inFault = 1;
 		crashdump = crashDumpFile();
 		ctime_r(&now,ctimebuf);

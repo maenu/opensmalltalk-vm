@@ -1,22 +1,21 @@
 #!/bin/sh
-set -x
 
 if ../../../../scripts/checkSCCSversion ; then exit 1; fi
 . ./configure_variant.sh
 
-CC=emcc
-
-# 
+#  -sERROR_ON_WASM_CHANGES_AFTER_LINK -gdwarf-5 -gsplit-dwarf -gpubnames -sSAFE_HEAP_LOG=1
 emcmake cmake ../../../../.. \
 	--debug-trycompile \
 	-DCMAKE_TOOLCHAIN_FILE="$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" \
 	-DCMAKE_BUILD_TYPE="$VARIANT_NAME" $CMAKE_EXTRA_ARGS \
     -DCMAKE_INSTALL_PREFIX=install-dist \
-    -DCMAKE_C_FLAGS="$CMAKE_C_FLAGS -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1" \
-    -DCMAKE_CXX_FLAGS="$CMAKE_CXX_FLAGS -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1" \
-    -DCMAKE_EXE_LINKER_FLAGS="$CMAKE_EXE_LINKER_FLAGS -O0 -g -fPIC -sASSERTIONS=2 -sEXIT_RUNTIME" \
 	-DCMAKE_CROSSCOMPILING_EMULATOR="$(which node);--experimental-wasm-threads" \
 	-G "$GENERATOR_NAME" \
-	-DMINIMAL_PLUGIN_SET=On -DHAVE_NANOSLEEP=Off -DHAVE_KQUEUE=Off \
-    -DPHARO_BRANDING=Off -DSPUR_OBJECT_MODEL=On -DCOG_JIT=Off \
-    -DSUPPORT_TRADITIONAL_DISPLAY=Off -DALLOW_SDL2=Off
+	-DMINIMAL_PLUGIN_SET=On \
+	-DPHARO_BRANDING=On \
+	-DHAVE_KQUEUE=Off \
+	-DSPUR_OBJECT_MODEL=On \
+	-DCOG_JIT=Off \
+	-DGENERATE_TOP_LEVEL_RUN_SCRIPT=Off \
+    -DSUPPORT_TRADITIONAL_DISPLAY=Off \
+	-DALLOW_SDL2=Off

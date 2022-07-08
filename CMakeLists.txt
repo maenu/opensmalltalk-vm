@@ -32,9 +32,15 @@ endif ()
 if (EMSCRIPTEN)
 	set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 	set(CMAKE_VERBOSE_MAKEFILE on)
-	set(CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS "-s SIDE_MODULE=1")
-	set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "-s SIDE_MODULE=1")
+	set(CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS "-sSIDE_MODULE=1")
+	set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "-sSIDE_MODULE=1")
 	set(CMAKE_STRIP FALSE)
+	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sSAFE_HEAP=1")
+	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sSAFE_HEAP=1")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sASSERTIONS=2 -sEXIT_RUNTIME -sSAFE_HEAP=1")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -sEXIT_RUNTIME")
 endif()
 
 # Turn on warnings
@@ -52,10 +58,10 @@ else()
 		-Wno-conversion -Wno-int-conversion -Wno-sign-conversion -Wpointer-sign
 		-Wno-trigraphs -Wdeprecated-declarations
 
-         -Wunused-variable -Wunused-value -Wunused-but-set-variable
+        # -Wunused-variable -Wunused-value -Wunused-but-set-variable
         # Supress these warning to reduce the side of the Travius log and avoid
         # "The job exceeded the maximum log length, and has been terminated."
-        #-Wno-unused-variable -Wno-unused-value
+        -Wno-unused-variable -Wno-unused-value -Wno-unused-but-set-variable
 	)
 
 	if("${CMAKE_C_COMPILER_ID}" MATCHES "Clang")
@@ -162,7 +168,8 @@ if(OSVM_PLATFORM_X86_32)
 	     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
 	     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
 		  if(EMSCRIPTEN)
-			 #set(CMAKE_EXECUTABLE_SUFFIX ".wasm")
+		  	 set(EMCC_DEBUG 1) 
+		  	 set(SUFFIX ".wasm")
 			 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sSIDE_MODULE")
    	  	   else()
 	        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse2")
@@ -211,10 +218,10 @@ endif()
 if(SPUR_OBJECT_MODEL)
 	#add_definitions(SpurVM=1) # not needed because already set in sources
 	set(SourceFolderName "${SourceFolderName}spur")
-	set(ProductFolderName "spur${ProductFolderName}")
+	set(ProductFolderName "${ProductFolderName}spur")
 else()
 	set(SourceFolderName "${SourceFolderName}v3")
-	set(ProductFolderName "v3${ProductFolderName}")	
+	set(ProductFolderName "${ProductFolderName}v3")	
 endif()
 
 
@@ -222,7 +229,7 @@ endif()
 if(VM_64BITS)
 	set(SourceFolderName "${SourceFolderName}64")
 	set(ProductFolderName "${ProductFolderName}64")
-else()
+elseif(SPUR_OBJECT_MODEL)
 	set(SourceFolderName "${SourceFolderName}32")
 	set(ProductFolderName "${ProductFolderName}32")
 endif()
@@ -232,13 +239,13 @@ endif()
 if(SISTA_OPTIMIZER)
 	#add_definitions(SistaVM=1) # not needed because already set in sources
 	set(SourceFolderName "${SourceFolderName}.sista")
-	set(ProductFolderName "sista${ProductFolderName}")
+	set(ProductFolderName "${ProductFolderName}.sista")
 elseif(COG_JIT)
 	set(SourceFolderName "${SourceFolderName}.cog")
-	set(ProductFolderName "cog${ProductFolderName}")
+	set(ProductFolderName "${ProductFolderName}.cog")
 else()
 	set(SourceFolderName "${SourceFolderName}.stack")
-	set(ProductFolderName "stack${ProductFolderName}")
+	set(ProductFolderName "${ProductFolderName}.stack")
 endif()
 
 
@@ -837,10 +844,15 @@ if(NOT ONLY_CONFIG_H)
 			set(CMAKE_EXECUTABLE_SUFFIX ".html")
 			string(REPLACE "-sSIDE_MODULE" "-sMAIN_MODULE" CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
 			# -sALLOW_MEMORY_GROWTH
-			set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sINITIAL_MEMORY=2147483648 -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=4 -sLLD_REPORT_UNDEFINED --pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/pre.js --preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image@/ --preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist@/")
+			set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sINITIAL_MEMORY=256MB -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sLLD_REPORT_UNDEFINED --pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/pre.js --preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image@/ --preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist@/")
 		endif()
+		
 		add_executable(${VM_EXECUTABLE_NAME} platforms/minheadless/common/sqMain.c)
 	    target_link_libraries(${VM_EXECUTABLE_NAME} ${VM_LIBRARY_NAME})
+		
+		if(EMSCRIPTEN)
+			execute_process(COMMAND emdwp -e squeak.wasm -o squeak.wasm.dwp)
+		endif()
 
         if(GENERATE_TOP_LEVEL_RUN_SCRIPT)
     	 	set(expanded_relative_imgdir "lib/${VM_EXECUTABLE_NAME}")

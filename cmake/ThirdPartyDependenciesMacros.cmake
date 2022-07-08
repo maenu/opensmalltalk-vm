@@ -311,6 +311,11 @@ function(ADD_THIRDPARTY_WITH_AUTOCONF NAME)
                 set(autoconf_cxxflags "${autoconf_cxxflags} -m64 -static-libgcc -static-libstdc++")
                 set(autoconf_ldflags "${autoconf_ldflags} -m64 -static-libgcc -static-libstdc++")
             endif()
+	    elseif(EMSCRIPTEN)
+            set(ExtraRequiredAutoconfArgs ${ExtraRequiredAutoconfArgs} "--host=i386")
+            set(autoconf_cflags "${autoconf_cflags} -m32 -fPIC -pthread")
+            set(autoconf_cxxflags "${autoconf_cxxflags} -m32 -fPIC -pthread")
+            set(autoconf_ldflags "${autoconf_ldflags} -bulk-memory -atomics -sSIDE_MODULE=1")
         else()
             if(SQUEAK_PLATFORM_X86_32)
                 set(autoconf_cflags "${autoconf_cflags} -m32 -march=pentium4")
@@ -335,13 +340,27 @@ function(ADD_THIRDPARTY_WITH_AUTOCONF NAME)
             "CFLAGS=${autoconf_cflags}"
             "CXXFLAGS=${autoconf_cxxflags}"
             "LDFLAGS=${autoconf_ldflags}"
-        )
+		)
 
         if(ThirdPartyPkgConfig AND ThirdPartyPkgConfigPath)
             set(thirdparty_autoconf_command ${thirdparty_autoconf_command}
                 "PKG_CONFIG=${ThirdPartyPkgConfig}"
                 "PKG_CONFIG_PATH=${ThirdPartyPkgConfigPath}"
             )
+        endif()
+		
+		if(EMSCRIPTEN)
+	        set(thirdparty_autoconf_command emconfigure "./configure"
+	            "--prefix=${ThirdPartyCacheInstall}"
+            	"--host=${ThirdPartyCacheInstall}"
+	            ${ExtraRequiredAutoconfArgs}
+	            ${parsed_arguments_AUTOCONF_EXTRA_ARGS}
+	            ${ExtraRequiredAutoconfVariables}
+	            "CFLAGS=${autoconf_cflags}"
+	            "CXXFLAGS=${autoconf_cxxflags}"
+	            "LDFLAGS=${autoconf_ldflags}"
+				COMMAND perl -i -pe "s/^#define HAVE_MEMSET_S 1$/\\/\\* #undef HAVE_MEMSET_S \\*\\//g" src/libssh2_config.h
+			)
         endif()
 
         set(CustomBuildCommand)
