@@ -3,7 +3,9 @@ cmake_minimum_required(VERSION 3.11)
 cmake_policy(SET CMP0054 NEW)
 project(OpenSmalltalkVM)
 #for setjmp.asm
-enable_language(ASM-ATT)
+if (!EMSCRIPTEN)
+	enable_language(ASM-ATT)
+endif ()
 
 option(ONLY_CONFIG_H "Only generate config.h" OFF)
 
@@ -30,17 +32,27 @@ if (CMAKE_BUILD_TYPE STREQUAL "")
 endif ()
 
 if (EMSCRIPTEN)
-	set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
-	set(CMAKE_VERBOSE_MAKEFILE on)
-	set(CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS "-sSIDE_MODULE=1")
-	set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "-sSIDE_MODULE=1")
-	set(CMAKE_STRIP FALSE)
+	#set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
+	#set(CMAKE_VERBOSE_MAKEFILE on)
+	#set(CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS "-sSIDE_MODULE=1")
+	#set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "-sSIDE_MODULE=1")
+	#set(CMAKE_STRIP FALSE)
 	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sSAFE_HEAP=1")
 	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sSAFE_HEAP=1")
-    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sASSERTIONS=2 -sEXIT_RUNTIME -sSAFE_HEAP=1")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -sEXIT_RUNTIME")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sEXIT_RUNTIME")  -DDMULTIPLEBYTECODESETS=1
+	# -sERROR_ON_WASM_CHANGES_AFTER_LINK -sSAFE_HEAP=1
+	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -gsource-map --source-map-base 'http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist/' -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
+	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -gsource-map --source-map-base 'http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist/' -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -gsource-map --source-map-base 'http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist/' -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+	#-sPROXY_TO_PTHREAD=1 		-sWASM_BIGINT -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sLLD_REPORT_UNDEFINED -sALLOW_MEMORY_GROWTH -sEXIT_RUNTIME -sEMULATE_FUNCTION_POINTER_CASTS -sASSERTIONS=2")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+			-sWASM_BIGINT -sPTHREAD_POOL_SIZE=2 -sLLD_REPORT_UNDEFINED -sALLOW_MEMORY_GROWTH -sEXIT_RUNTIME -sEMULATE_FUNCTION_POINTER_CASTS -sASSERTIONS=2")
+	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fno-inline -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
+	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fno-inline -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -fno-inline -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+	#		-sWASM_BIGINT -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=3 -sLLD_REPORT_UNDEFINED -sALLOW_MEMORY_GROWTH -sEXIT_RUNTIME -sEMULATE_FUNCTION_POINTER_CASTS -sASSERTIONS=2")
 endif()
 
 # Turn on warnings
@@ -170,7 +182,7 @@ if(OSVM_PLATFORM_X86_32)
 		  if(EMSCRIPTEN)
 		  	 set(EMCC_DEBUG 1) 
 		  	 set(SUFFIX ".wasm")
-			 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sSIDE_MODULE")
+			 #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sSIDE_MODULE")
    	  	   else()
 	        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse2")
 	        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse2")
@@ -842,27 +854,29 @@ if(NOT ONLY_CONFIG_H)
 	else()
 		if(EMSCRIPTEN)
 			set(CMAKE_EXECUTABLE_SUFFIX ".html")
-			string(REPLACE "-sSIDE_MODULE" "-sMAIN_MODULE" CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
-			# -sALLOW_MEMORY_GROWTH
-			set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sINITIAL_MEMORY=256MB -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sLLD_REPORT_UNDEFINED --pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/pre.js --preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image@/ --preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist@/")
+			#string(REPLACE "-sSIDE_MODULE" "-sMAIN_MODULE" CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
+	    	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}  \
+					--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/pre.js \
+					--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image@/ \
+					--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist@/")
 		endif()
 		
 		add_executable(${VM_EXECUTABLE_NAME} platforms/minheadless/common/sqMain.c)
 	    target_link_libraries(${VM_EXECUTABLE_NAME} ${VM_LIBRARY_NAME})
 		
 		if(EMSCRIPTEN)
-			execute_process(COMMAND emdwp -e squeak.wasm -o squeak.wasm.dwp)
+			#execute_process(COMMAND emdwp -e squeak.wasm -o squeak.wasm.dwp)
+		else()
+	        if(GENERATE_TOP_LEVEL_RUN_SCRIPT)
+	    	 	set(expanded_relative_imgdir "lib/${VM_EXECUTABLE_NAME}")
+	    		configure_file(${CMAKE_CURRENT_SOURCE_DIR}/platforms/minheadless/startup.sh.in "${CMAKE_BINARY_DIR}/scripts/${VM_EXECUTABLE_NAME}" @ONLY)
+	            install(PROGRAMS "${CMAKE_BINARY_DIR}/scripts/${VM_EXECUTABLE_NAME}" DESTINATION "${ProductInstallBaseFolder}")
+	        endif()
+
+			set(expanded_relative_imgdir "../lib/${VM_EXECUTABLE_NAME}")
+			configure_file(${CMAKE_CURRENT_SOURCE_DIR}/platforms/minheadless/startup.sh.in "${CMAKE_BINARY_DIR}/scripts/bin/${VM_EXECUTABLE_NAME}" @ONLY)
+	        install(PROGRAMS "${CMAKE_BINARY_DIR}/scripts/bin/${VM_EXECUTABLE_NAME}" DESTINATION "${ProductInstallBaseFolder}/bin")
 		endif()
-
-        if(GENERATE_TOP_LEVEL_RUN_SCRIPT)
-    	 	set(expanded_relative_imgdir "lib/${VM_EXECUTABLE_NAME}")
-    		configure_file(${CMAKE_CURRENT_SOURCE_DIR}/platforms/minheadless/startup.sh.in "${CMAKE_BINARY_DIR}/scripts/${VM_EXECUTABLE_NAME}" @ONLY)
-            install(PROGRAMS "${CMAKE_BINARY_DIR}/scripts/${VM_EXECUTABLE_NAME}" DESTINATION "${ProductInstallBaseFolder}")
-        endif()
-
-		set(expanded_relative_imgdir "../lib/${VM_EXECUTABLE_NAME}")
-		configure_file(${CMAKE_CURRENT_SOURCE_DIR}/platforms/minheadless/startup.sh.in "${CMAKE_BINARY_DIR}/scripts/bin/${VM_EXECUTABLE_NAME}" @ONLY)
-        install(PROGRAMS "${CMAKE_BINARY_DIR}/scripts/bin/${VM_EXECUTABLE_NAME}" DESTINATION "${ProductInstallBaseFolder}/bin")
     endif()
 
 	if(DARWIN)

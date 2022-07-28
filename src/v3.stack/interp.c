@@ -8416,7 +8416,6 @@ stackPageAt(sqInt index)
 	return stackPageAtpages(index, GIV(pages));
 }
 
-
 /*	<Integer> */
 
 	/* CogStackPages>>#stackPageFor: */
@@ -40532,13 +40531,7 @@ readImageFromFileHeapSizeStartingAt(sqImageFile f, usqInt desiredHeapSize, squea
 	}
 	sqImageFileSeek(f, headerStart + headerSize);
 	/* begin readHeapFromImageFile:dataBytes: */
-	bytesRead = 
-#  if PharoVM
-		sqImageFileReadEntireImage(pointerForOop(GIV(memory)), sizeof(char), dataSize, f)
-#  else
-		sqImageFileRead(pointerForOop(GIV(memory)), sizeof(char), dataSize, f)
-#  endif
-		;
+	bytesRead = sqImageFileRead(pointerForOop(GIV(memory)), sizeof(char), dataSize, f);
 	if (bytesRead != dataSize) {
 		unableToReadImageError();
 	}

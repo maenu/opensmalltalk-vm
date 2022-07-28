@@ -1,0 +1,1640 @@
+src/spur32.stack/gcc3x-interp.c:14:#if USE_GLOBAL_STRUCT
+src/spur32.stack/gcc3x-interp.c:19:#if USE_GLOBAL_STRUCT_REG 
+src/spur32.stack/gcc3x-interp.c:328:#if !PRODUCTION && defined(PlatformNoDbgRegParms)
+src/spur32.stack/gcc3x-interp.c:332:#if !defined(NoDbgRegParms)
+src/spur32.stack/gcc3x-interp.c:338:#if !defined(NeverInline)
+src/spur32.stack/gcc3x-interp.c:354:#if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:456:#if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:540:#if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:573:#if TestingPrimitives
+src/spur32.stack/gcc3x-interp.c:794:#if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:962:#if LLDB
+src/spur32.stack/gcc3x-interp.c:979:#if LLDB
+src/spur32.stack/gcc3x-interp.c:1097:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:1426:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:1460:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:1463:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:1488:#if SQ_USE_GLOBAL_STRUCT
+src/spur32.stack/gcc3x-interp.c:1670:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:1673:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:1676:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:1679:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:1684:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:1687:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:1691:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:1695:#if SQ_USE_GLOBAL_STRUCT
+src/spur32.stack/gcc3x-interp.c:1697:# if SQ_USE_GLOBAL_STRUCT_REG
+src/spur32.stack/gcc3x-interp.c:1710:#if SQ_USE_GLOBAL_STRUCT
+src/spur32.stack/gcc3x-interp.c:1711:# if SQ_USE_GLOBAL_STRUCT_REG
+src/spur32.stack/gcc3x-interp.c:2483:#if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:2505:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:4401:#        if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:5061:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:5230:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:5252:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:5383:#          if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:5442:#          if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:5504:#          if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:5563:#          if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:5817:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:6034:#          if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:6167:#          if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:6677:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:6694:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:6711:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:6728:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:6745:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:6762:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:6779:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:6796:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:6824:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:6896:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:6935:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:7233:#            if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:7241:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:7314:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:7327:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:7334:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:8440:#        if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:9725:#            if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:9733:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:9806:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:9819:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:9826:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:10932:#        if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:11600:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:11643:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:11688:#        if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:12198:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:12236:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:12367:#          if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:12431:#        if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:12598:#          if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:12660:#        if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:13209:#if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:14539:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:16514:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:16636:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:16790:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:17039:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:17896:#    if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:18212:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:18455:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:19202:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:19318:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:19466:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:19573:#if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:20110:#  if defined(__GNUC__)
+src/spur32.stack/gcc3x-interp.c:20127:#  elif (defined(_MSC_VER)) || (defined(__ICC))
+src/spur32.stack/gcc3x-interp.c:20697:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:21065:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:21765:#      if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:22495:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:23060:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:23274:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:24296:#if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:24311:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:24746:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:25611:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:25843:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:26327:#if TestingPrimitives
+src/spur32.stack/gcc3x-interp.c:31720:#    if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:31761:#        if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:31783:#          if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:31962:#        if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:32176:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:34125:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:34739:#    if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:36464:#if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:37748:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:38626:#        if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:38901:#        if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:38963:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:40242:#  if LRPCheck
+src/spur32.stack/gcc3x-interp.c:41736:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:41747:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:41784:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:41814:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:41907:#    if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:43211:#if LLDB
+src/spur32.stack/gcc3x-interp.c:44360:#if LLDB
+src/spur32.stack/gcc3x-interp.c:45203:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:45211:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:49411:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:49576:#  if 1
+src/spur32.stack/gcc3x-interp.c:49680:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:49786:#  if LRPCheck
+src/spur32.stack/gcc3x-interp.c:52615:#    if LRPCheck
+src/spur32.stack/gcc3x-interp.c:52819:#if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:52827:#if ITIMER_HEARTBEAT
+src/spur32.stack/gcc3x-interp.c:52833:#if BIT_IDENTICAL_FLOATING_POINT
+src/spur32.stack/gcc3x-interp.c:53326:#  if BytesPerWord > 4
+src/spur32.stack/gcc3x-interp.c:54517:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:55288:#  if LRPCheck
+src/spur32.stack/gcc3x-interp.c:55684:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:56104:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:56478:#  if COGMTVM
+src/spur32.stack/gcc3x-interp.c:60238:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:60873:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:60934:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:61219:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:62038:#    if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:63595:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:63894:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:64044:#      if SPURVM
+src/spur32.stack/gcc3x-interp.c:66114:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:66311:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:67036:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:67184:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:67243:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:67507:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/gcc3x-interp.c:68044:#  if IMMUTABILITY
+src/spur32.stack/gcc3x-interp.c:69197:#    if VM_TICKER
+src/spur32.stack/gcc3x-interp.c:69207:#    if VM_TICKER
+src/spur32.stack/gcc3x-interp.c:69217:#    if VM_TICKER
+src/spur32.stack/gcc3x-interp.c:69537:#      if VM_TICKER
+src/spur32.stack/gcc3x-interp.c:69548:#      if VM_TICKER
+src/spur32.stack/gcc3x-interp.c:69559:#      if VM_TICKER
+src/spur32.stack/gcc3x-interp.c:70488:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:70491:#if LRPCheck
+src/spur32.stack/gcc3x-interp.c:70514:#if TestingPrimitives
+src/spur32.stack/gcc3x-interp.c:70543:#if LLDB
+src/spur32.stack/gcc3x-interp.c:70567:#if LLDB
+src/spur32.stack/interp.c:11:#if USE_GLOBAL_STRUCT
+src/spur32.stack/interp.c:16:#if USE_GLOBAL_STRUCT_REG 
+src/spur32.stack/interp.c:324:#if !PRODUCTION && defined(PlatformNoDbgRegParms)
+src/spur32.stack/interp.c:328:#if !defined(NoDbgRegParms)
+src/spur32.stack/interp.c:334:#if !defined(NeverInline)
+src/spur32.stack/interp.c:350:#if IMMUTABILITY
+src/spur32.stack/interp.c:452:#if IMMUTABILITY
+src/spur32.stack/interp.c:536:#if IMMUTABILITY
+src/spur32.stack/interp.c:569:#if TestingPrimitives
+src/spur32.stack/interp.c:790:#if IMMUTABILITY
+src/spur32.stack/interp.c:958:#if LLDB
+src/spur32.stack/interp.c:975:#if LLDB
+src/spur32.stack/interp.c:1093:#if LRPCheck
+src/spur32.stack/interp.c:1422:#if LRPCheck
+src/spur32.stack/interp.c:1456:#if LRPCheck
+src/spur32.stack/interp.c:1459:#if LRPCheck
+src/spur32.stack/interp.c:1484:#if SQ_USE_GLOBAL_STRUCT
+src/spur32.stack/interp.c:1666:#if LRPCheck
+src/spur32.stack/interp.c:1669:#if LRPCheck
+src/spur32.stack/interp.c:1672:#if LRPCheck
+src/spur32.stack/interp.c:1675:#if LRPCheck
+src/spur32.stack/interp.c:1680:#if LRPCheck
+src/spur32.stack/interp.c:1683:#if LRPCheck
+src/spur32.stack/interp.c:1687:#if LRPCheck
+src/spur32.stack/interp.c:1691:#if SQ_USE_GLOBAL_STRUCT
+src/spur32.stack/interp.c:1693:# if SQ_USE_GLOBAL_STRUCT_REG
+src/spur32.stack/interp.c:1706:#if SQ_USE_GLOBAL_STRUCT
+src/spur32.stack/interp.c:1707:# if SQ_USE_GLOBAL_STRUCT_REG
+src/spur32.stack/interp.c:2495:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:4393:#        if IMMUTABILITY
+src/spur32.stack/interp.c:5053:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:5223:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:5245:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:5376:#          if IMMUTABILITY
+src/spur32.stack/interp.c:5435:#          if IMMUTABILITY
+src/spur32.stack/interp.c:5497:#          if IMMUTABILITY
+src/spur32.stack/interp.c:5556:#          if IMMUTABILITY
+src/spur32.stack/interp.c:5811:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:6028:#          if IMMUTABILITY
+src/spur32.stack/interp.c:6161:#          if IMMUTABILITY
+src/spur32.stack/interp.c:6671:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:6688:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:6705:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:6722:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:6739:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:6756:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:6773:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:6790:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:6818:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:6890:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:6929:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:7227:#            if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:7235:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:7308:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:7321:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:7328:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:8434:#        if IMMUTABILITY
+src/spur32.stack/interp.c:9719:#            if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:9727:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:9800:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:9813:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:9820:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:10926:#        if IMMUTABILITY
+src/spur32.stack/interp.c:11594:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:11637:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:11682:#        if IMMUTABILITY
+src/spur32.stack/interp.c:12192:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:12230:#          if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:12361:#          if IMMUTABILITY
+src/spur32.stack/interp.c:12425:#        if IMMUTABILITY
+src/spur32.stack/interp.c:12592:#          if IMMUTABILITY
+src/spur32.stack/interp.c:12654:#        if IMMUTABILITY
+src/spur32.stack/interp.c:13203:#if IMMUTABILITY
+src/spur32.stack/interp.c:14533:#  if IMMUTABILITY
+src/spur32.stack/interp.c:16508:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:16630:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:16784:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:17033:#  if IMMUTABILITY
+src/spur32.stack/interp.c:17890:#    if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:18206:#  if IMMUTABILITY
+src/spur32.stack/interp.c:18449:#  if IMMUTABILITY
+src/spur32.stack/interp.c:19196:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:19312:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:19460:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:19567:#if IMMUTABILITY
+src/spur32.stack/interp.c:20104:#  if defined(__GNUC__)
+src/spur32.stack/interp.c:20121:#  elif (defined(_MSC_VER)) || (defined(__ICC))
+src/spur32.stack/interp.c:20691:#  if IMMUTABILITY
+src/spur32.stack/interp.c:21059:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:21759:#      if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:22489:#  if IMMUTABILITY
+src/spur32.stack/interp.c:23054:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:23268:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:24290:#if IMMUTABILITY
+src/spur32.stack/interp.c:24305:#  if IMMUTABILITY
+src/spur32.stack/interp.c:24740:#  if IMMUTABILITY
+src/spur32.stack/interp.c:25605:#  if IMMUTABILITY
+src/spur32.stack/interp.c:25837:#  if IMMUTABILITY
+src/spur32.stack/interp.c:26321:#if TestingPrimitives
+src/spur32.stack/interp.c:31714:#    if IMMUTABILITY
+src/spur32.stack/interp.c:31755:#        if IMMUTABILITY
+src/spur32.stack/interp.c:31777:#          if IMMUTABILITY
+src/spur32.stack/interp.c:31956:#        if IMMUTABILITY
+src/spur32.stack/interp.c:32170:#  if IMMUTABILITY
+src/spur32.stack/interp.c:34119:#  if IMMUTABILITY
+src/spur32.stack/interp.c:34733:#    if IMMUTABILITY
+src/spur32.stack/interp.c:36458:#if IMMUTABILITY
+src/spur32.stack/interp.c:37742:#  if IMMUTABILITY
+src/spur32.stack/interp.c:38620:#        if IMMUTABILITY
+src/spur32.stack/interp.c:38895:#        if IMMUTABILITY
+src/spur32.stack/interp.c:38957:#  if IMMUTABILITY
+src/spur32.stack/interp.c:40236:#  if LRPCheck
+src/spur32.stack/interp.c:41730:#  if IMMUTABILITY
+src/spur32.stack/interp.c:41741:#  if IMMUTABILITY
+src/spur32.stack/interp.c:41778:#  if IMMUTABILITY
+src/spur32.stack/interp.c:41808:#  if IMMUTABILITY
+src/spur32.stack/interp.c:41901:#    if IMMUTABILITY
+src/spur32.stack/interp.c:43205:#if LLDB
+src/spur32.stack/interp.c:44354:#if LLDB
+src/spur32.stack/interp.c:45197:#  if IMMUTABILITY
+src/spur32.stack/interp.c:45205:#  if IMMUTABILITY
+src/spur32.stack/interp.c:49405:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:49570:#  if 1
+src/spur32.stack/interp.c:49674:#if LRPCheck
+src/spur32.stack/interp.c:49780:#  if LRPCheck
+src/spur32.stack/interp.c:52628:#    if LRPCheck
+src/spur32.stack/interp.c:52832:#if IMMUTABILITY
+src/spur32.stack/interp.c:52840:#if ITIMER_HEARTBEAT
+src/spur32.stack/interp.c:52846:#if BIT_IDENTICAL_FLOATING_POINT
+src/spur32.stack/interp.c:53339:#  if BytesPerWord > 4
+src/spur32.stack/interp.c:54530:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:55302:#  if LRPCheck
+src/spur32.stack/interp.c:55698:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:56118:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:56492:#  if COGMTVM
+src/spur32.stack/interp.c:60265:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:60900:#        if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:60961:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:61246:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:62065:#    if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:63622:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:63921:#if LRPCheck
+src/spur32.stack/interp.c:64071:#      if SPURVM
+src/spur32.stack/interp.c:66141:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:66338:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:67063:#  if IMMUTABILITY
+src/spur32.stack/interp.c:67211:#if LRPCheck
+src/spur32.stack/interp.c:67270:#if LRPCheck
+src/spur32.stack/interp.c:67534:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.c:68071:#  if IMMUTABILITY
+src/spur32.stack/interp.c:69224:#    if VM_TICKER
+src/spur32.stack/interp.c:69234:#    if VM_TICKER
+src/spur32.stack/interp.c:69244:#    if VM_TICKER
+src/spur32.stack/interp.c:69564:#      if VM_TICKER
+src/spur32.stack/interp.c:69575:#      if VM_TICKER
+src/spur32.stack/interp.c:69586:#      if VM_TICKER
+src/spur32.stack/interp.c:70515:#if LRPCheck
+src/spur32.stack/interp.c:70518:#if LRPCheck
+src/spur32.stack/interp.c:70541:#if TestingPrimitives
+src/spur32.stack/interp.c:70570:#if LLDB
+src/spur32.stack/interp.c:70594:#if LLDB
+src/spur32.stack/validImage.c:11:#if USE_GLOBAL_STRUCT
+src/spur32.stack/validImage.c:16:#if USE_GLOBAL_STRUCT_REG 
+src/spur32.stack/validImage.c:210:#if !PRODUCTION && defined(PlatformNoDbgRegParms)
+src/spur32.stack/validImage.c:214:#if !defined(NoDbgRegParms)
+src/spur32.stack/validImage.c:220:#if !defined(NeverInline)
+src/spur32.stack/validImage.c:407:#if IMMUTABILITY
+src/spur32.stack/validImage.c:680:#if SQ_USE_GLOBAL_STRUCT
+src/spur32.stack/validImage.c:867:#if LRPCheck
+src/spur32.stack/validImage.c:870:#if LRPCheck
+src/spur32.stack/validImage.c:873:#if LRPCheck
+src/spur32.stack/validImage.c:876:#if LRPCheck
+src/spur32.stack/validImage.c:879:#if LRPCheck
+src/spur32.stack/validImage.c:882:#if LRPCheck
+src/spur32.stack/validImage.c:885:#if LRPCheck
+src/spur32.stack/validImage.c:893:#if SQ_USE_GLOBAL_STRUCT
+src/spur32.stack/validImage.c:895:# if SQ_USE_GLOBAL_STRUCT_REG
+src/spur32.stack/validImage.c:908:#if SQ_USE_GLOBAL_STRUCT
+src/spur32.stack/validImage.c:909:# if SQ_USE_GLOBAL_STRUCT_REG
+src/spur32.stack/validImage.c:4398:#  if IMMUTABILITY
+src/spur32.stack/validImage.c:5546:#  if IMMUTABILITY
+src/spur32.stack/validImage.c:5712:#if IMMUTABILITY
+src/spur32.stack/validImage.c:10493:#  if BytesPerWord > 4
+src/spur32.stack/validImage.c:10779:#  if MULTIPLEBYTECODESETS
+src/spur32.stack/interp.h:47:#if !defined(IMMUTABILITY) /* Allow this to be overridden on the compiler command line */
+platforms/Cross/plugins/WeDoPlugin/WeDoPlugin.h:1:#ifndef _SQ_WEDO_PLUGIN_H_
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:11:#ifdef HAVE_CONFIG_H
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:22:#ifdef __cplusplus
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:26:#if __STDC__
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:30:#ifdef _NO_PROTO
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:34:#ifdef NeedFunctionPrototypes
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:39:#if NeedFunctionPrototypes
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:81:#if __cplusplus
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:85:#if __STDC__
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:89:#ifdef	_NO_PROTO
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:104:#if NeedFunctionPrototypes
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:139:#if _LP64
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:179:#ifdef	SASR		/* flag: >> is a signed arithmetic shift right */
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:365:#ifndef	GSM_TABLE_C
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:379:#ifdef NDEBUG
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:554:#	ifdef	SASR
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:568:#	ifdef	SASR
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:754:#ifdef WAV49
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:1194:#ifdef WAV49
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:1571:#ifndef  USE_FLOAT_MUL
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:1573:#ifdef	LTP_CUT
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:1817:#ifdef	LTP_CUT
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2160:#ifdef	FAST
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2161:#ifdef	LTP_CUT
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2409:#if defined(FAST) && defined(USE_FLOAT_MUL)
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2411:#if   defined (LTP_CUT)
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2420:#ifdef LTP_CUT
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2501:#ifdef	USE_FLOAT_MUL
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2529:# ifdef USE_FLOAT_MUL
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2550:# ifdef	USE_FLOAT_MUL
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2557:# ifdef	USE_FLOAT_MUL
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2610:#if defined(USE_FLOAT_MUL) && defined(FAST)
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2796:#if defined(USE_FLOAT_MUL) && defined(FAST)
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:2961:#ifdef	STUPID_COMPILER
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:3324:#if 0	/* Has been inlined in code.c */
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:3592:#if defined(USE_FLOAT_MUL) && defined(FAST)
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:3673:#if defined(FAST) && defined(USE_FLOAT_MUL)
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:3726:#if 	defined(FAST) && defined(USE_FLOAT_MUL)
+platforms/Cross/plugins/SoundCodecPrims/sqSoundCodecPluginBasicPrims.c:3769:#if 	defined(FAST) && defined(USE_FLOAT_MUL)
+platforms/Cross/plugins/SerialPlugin/sqNullSerialPort.c:20:#ifndef NO_NULL_SERIAL_PLUGIN_IMPLEMENTATION
+platforms/Cross/plugins/UnicodePlugin/UnicodePlugin.h:1:#ifndef _SQ_UNICODE_PLUGIN_H_
+platforms/Cross/plugins/SqueakFFIPrims/sqFFITestFuncExports.h:2:# if !NO_FFI_TEST
+platforms/Cross/plugins/SqueakFFIPrims/sqFFIPlugin.c:12:#if !_WIN32 && !__FreeBSD__ && !__OpenBSD__
+platforms/Cross/plugins/SqueakFFIPrims/sqFFIPlugin.c:17:#ifdef _MSC_VER
+platforms/Cross/plugins/SqueakFFIPrims/sqManualSurface.c:8:#ifdef DEBUG 
+platforms/Cross/plugins/SqueakFFIPrims/sqManualSurface.c:11:#elif defined(_DEBUG)
+platforms/Cross/plugins/SqueakFFIPrims/sqManualSurface.c:18:#ifndef NULL
+platforms/Cross/plugins/SqueakFFIPrims/sqManualSurface.c:21:#ifndef FALSE
+platforms/Cross/plugins/SqueakFFIPrims/sqManualSurface.c:24:#ifndef TRUE
+platforms/Cross/plugins/SqueakFFIPrims/sqFFI.h:14:#ifndef SQ_FFI_H
+platforms/Cross/plugins/SqueakFFIPrims/sqFFI.h:47:# if !NO_FFI_TEST
+platforms/Cross/plugins/SurfacePlugin/SurfacePlugin.h:1:#ifndef __SQ_DRAW_SURFACE_H
+platforms/Cross/plugins/SurfacePlugin/SurfacePlugin.c:21:#ifdef HAVE_CONFIG_H
+platforms/Cross/plugins/SurfacePlugin/SurfacePlugin.c:39:#ifdef SQUEAK_BUILTIN_PLUGIN
+platforms/Cross/plugins/SurfacePlugin/SurfacePlugin.c:53:#ifdef SQUEAK_BUILTIN_PLUGIN
+platforms/Cross/plugins/SurfacePlugin/SurfacePlugin.c:233:#ifdef SQUEAK_BUILTIN_PLUGIN
+platforms/Cross/plugins/BochsX64Plugin/sqBochsX64Plugin.cpp:190:#if BX_SUPPORT_ICACHE
+platforms/Cross/plugins/BochsX64Plugin/sqBochsX64Plugin.cpp:318:#if BX_SUPPORT_GLOBAL_PAGES
+platforms/Cross/plugins/BochsX64Plugin/sqBochsX64Plugin.cpp:326:#if BX_PHY_ADDRESS_WIDTH == 32
+platforms/Cross/plugins/BochsX64Plugin/sqBochsX64Plugin.cpp:362:#if BX_CPU_LEVEL >= 4
+platforms/Cross/plugins/BochsX64Plugin/sqBochsX64Plugin.cpp:387:#if BX_DEBUGGER || BX_DISASM || BX_INSTRUMENTATION || BX_GDBSTUB
+platforms/Cross/plugins/BochsX64Plugin/sqBochsX64Plugin.cpp:397:#if BX_X86_DEBUGGER
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:2:#ifndef B3D_ACCELERATOR_PLUGIN_H
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:5:#ifdef USE_METAL
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:8:#  ifdef _WIN32
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:11:#  if defined(BUILD_FOR_OSX) || (MAC_OS_X_VERSION_MAX_ALLOWED >= 1070) || defined(TARGET_API_MAC_CARBON)
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:101:#ifdef USE_METAL
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:104:# if defined(_WIN32)
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:105:#  if defined(_WIN32_PURE_D3D)
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:107:#  elif defined(_WIN32_PURE_GL)
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:121:#if defined(B3DX_METAL)
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:163:#if defined(B3DX_GL)
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:205:#if defined(B3DX_D3D)
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:294:#if defined(B3DX_DUAL)
+platforms/Cross/plugins/B3DAcceleratorPlugin/B3DAcceleratorPlugin.h:297:#if 0 /* initializer is special since it decides what to use */
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:15:#ifdef HAVE_CONFIG_H
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:18:#ifdef _WIN32
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:82:#if !defined(PATH_MAX)
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:83:# if defined(_XOPEN_PATH_MAX)
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:90:#if defined(SQUEAK_BUILTIN_PLUGIN)
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:101:#if !defined(SQUEAK_BUILTIN_PLUGIN)
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:133:#if defined (B3DX_GL)
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:135:#if !defined(GL_VERSION_1_1)
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:263:#ifdef LSB_FIRST
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:281:#ifdef LSB_FIRST
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:877:#ifndef GL_VERSION_1_1
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:909:#ifndef GL_VERSION_1_1
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:973:#ifdef GL_VERSION_1_1
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:1005:#ifdef GL_VERSION_1_1
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:1015:#ifdef GL_VERSION_1_1
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:1025:#ifdef GL_VERSION_1_1
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:1035:#ifdef GL_VERSION_1_1
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:1052:#ifdef GL_VERSION_1_1
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:1070:#ifdef GL_VERSION_1_1
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:1093:#ifdef GL_VERSION_1_1
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.c:1130:#ifdef _WIN32
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.h:1:#ifndef SQ_OPENGL_RENDERER_H
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.h:4:#if defined(macintoshSqueak)
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.h:6:#elif defined(_WIN32)
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.h:8:#elif defined(UNIX)
+platforms/Cross/plugins/B3DAcceleratorPlugin/sqOpenGLRenderer.h:12:#if !defined(GL_RENDERER_DEFINED)
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/libmpeg3.c:101:#if 1
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3io.h:1:#ifndef MPEG3IO_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3io.h:6:#if _MSC_VER
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3io.h:36:#ifdef _WIN32
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/ioctl.h:3:#ifndef _SYS_IOCTL_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/mpeg3videoprotos.h:1:#ifndef MPEG3VIDEOPROTOS_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/reconstruct.c:34:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/reconstruct.c:36:#ifdef HAVE_3Dnow
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/reconstruct.c:345:#ifdef HAVE_3Dnow
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/reconstruct.c:400:#ifdef HAVE_3Dnow
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/reconstruct.c:441:#ifdef HAVE_3Dnow
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/reconstruct.c:499:#ifdef HAVE_3Dnow
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/reconstruct.c:544:# ifdef __POWERPC__
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/reconstruct.c:549:# ifdef __POWERPC__
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/reconstruct.c:572:# ifdef __POWERPC__
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/reconstruct.c:577:# ifdef __POWERPC__
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/reconstruct.c:1000:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/idct.h:1:#ifndef IDCT_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.h:3:#ifndef SLICE_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.h:6:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.h:19:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.h:41:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/mpeg3video.c:253:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/mpeg3video.c:272:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/mpeg3video.c:291:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/mpeg3video.c:303:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/mpeg3video.c:341:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/vlc.h:3:#ifndef VLC_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/mmxtest.c:44:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:39:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:45:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:55:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:65:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:167:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:242:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:626:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:658:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:665:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:700:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:705:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:710:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:715:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:726:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:734:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/slice.c:750:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/layerdata.h:1:#ifndef LAYERDATA_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/idct.c:35:#ifdef _MSC_VER
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/getpicture.c:178:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/getpicture.c:248:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/getpicture.c:347:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/getpicture.c:402:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/getpicture.c:480:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/getpicture.c:580:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/getpicture.c:646:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/getpicture.c:678:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/getpicture.c:687:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/mpeg3video.h:3:#ifndef MPEGVIDEO_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/mpeg3video.h:101:#ifdef USE_PTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/output.c:53:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/output.c:591:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/video/output.c:960:#ifdef HAVE_MMX
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3atrack.h:3:#ifndef MPEG3ATRACK_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3private.inc:1:#ifndef LIBMPEG3_INC
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3toc.c:8:#ifdef MACINTOSH
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/timecode.h:1:#ifndef TIMECODE_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3title.h:1:#ifndef MPEG3TITLE_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3css.h:1:#ifndef MPEG3CSS_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3vtrack.h:3:#ifndef MPEG3_VTRACK_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/audio/tables.c:49:#ifdef USE_3DNOW
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/audio/tables.c:460:#ifdef USE_3DNOW
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/audio/tables.c:491:#ifdef USE_3DNOW
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/audio/mpeg3audio.h:4:#ifndef MPEG3AUDIO_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/audio/mpeg3audio.h:11:#ifndef M_PI
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/audio/tables.h:1:#ifndef TABLES_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/audio/ac3.h:1:#ifndef AC3_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/audio/huffman.h:1:#ifndef HUFFMAN_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/bitstream.h:1:#ifndef BITSTREAM_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3io.c:47:#if defined(__linux__)
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3io.c:209:#if defined(__linux__)
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3io.c:220:#if defined(__linux__)
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/libmpeg3.h:4:#ifndef LIBMPEG3_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/libmpeg3.h:7:#ifdef __cplusplus
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/libmpeg3.h:160:#ifdef __cplusplus
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3private.h:5:#ifndef MPEG3PRIVATE_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3private.h:12:#if defined(__MWERKS__)
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3private.h:17:#ifndef INLINE
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3private.h:18:#ifdef TARGET_MAC_OS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3private.h:25:#ifdef _MSC_VER
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3private.h:35:#ifndef NOPTHREADS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3private.h:36:#ifndef TARGET_MAC_OS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3protos.h:1:#ifndef MPEG3PROTOS_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3protos.h:31:#if defined(MPEG3AUDIO_H)
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3protos.h:41:#if defined(MPEGVIDEO_H)
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/mpeg3demux.h:1:#ifndef MPEG3DEMUX_H
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/changesForSqueak.c:42:#if defined(TARGET_OS_MAC) && !defined ( __APPLE__ ) && !defined ( __MACH__ )
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/changesForSqueak.c:48:#ifdef _WIN32
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/changesForSqueak.c:68:#if defined(TARGET_OS_MAC) && !defined ( __APPLE__ ) && !defined ( __MACH__ )
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/changesForSqueak.c:69:#if TARGET_API_MAC_CARBON
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/changesForSqueak.c:84:#if defined(TARGET_OS_MAC) && !defined ( __APPLE__ ) && !defined ( __MACH__ )
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/changesForSqueak.c:93:#if (defined(TARGET_OS_MAC) && !defined ( __APPLE__ ) && !defined ( __MACH__ )) || (defined(_WIN32) && !defined(__GNUC__))
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/changesForSqueak.c:97:#ifdef NEEDSTRFUNCS
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/changesForSqueak.c:98:#ifndef _MSC_VER
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/changesForSqueak.c:134:#ifdef _WIN32
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/changesForSqueak.c:141:#if defined(TARGET_OS_MAC) && !defined ( __APPLE__ ) && !defined ( __MACH__ )
+platforms/Cross/plugins/Mpeg3Plugin/libmpeg/changesForSqueak.c:152:#if defined(TARGET_OS_MAC) && defined ( __APPLE__ ) && defined ( __MACH__ )
+platforms/Cross/plugins/FileAttributesPlugin/faCommon.c:24:#if 0
+platforms/Cross/plugins/FileAttributesPlugin/faCommon.h:7:#ifndef _FACOMMON__H_
+platforms/Cross/plugins/SqueakSSL/SqueakSSL.h:1:#ifndef SqueakSSL_H
+platforms/Cross/plugins/GdbARMPlugin/sqGdbARMPlugin.c:7:#if __APPLE__ && __MACH__
+platforms/Cross/plugins/GdbARMPlugin/sqGdbARMPlugin.c:53:#if 0 /* XScale seems to disable floating point */
+platforms/Cross/plugins/GdbARMPlugin/sqGdbARMPlugin.c:145:#if 0
+platforms/Cross/plugins/GdbARMPlugin/sqGdbARMPlugin.c:221:#if 1
+platforms/Cross/plugins/SoundGenerationPlugin/SoundGenerationPlugin.h:2:#if OLD_SOUND_PRIMS
+platforms/Cross/plugins/SoundGenerationPlugin/sqOldSoundPrims.c:5:#if OLD_SOUND_PRIMS
+platforms/Cross/plugins/PrintJobPlugin/PrintJobPlugin.h:1:#if defined(macintoshSqueak)
+platforms/Cross/plugins/IA32ABI/x64win64stub.c:7:#if x86_64|x64|__x86_64|__x86_64__|_M_AMD64|_M_X64
+platforms/Cross/plugins/IA32ABI/x64win64stub.c:8:# ifdef _WIN32
+platforms/Cross/plugins/IA32ABI/dabusinessppc.h:19:#if STACK_ALIGN_BYTES
+platforms/Cross/plugins/IA32ABI/dabusinessppc.h:38:#if STACK_ALIGN_BYTES
+platforms/Cross/plugins/IA32ABI/dabusinessppc.h:138:#if STACK_ALIGN_BYTES
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:17:#if x86_64|x64|__x86_64|__x86_64__
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:19:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:22:#elif __APPLE__ && __MACH__
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:24:# if OBJC_DEBUG /* define this to get debug info for struct objc_class et al */
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:51:#if !defined(min)
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:58:#ifdef SQUEAK_BUILTIN_PLUGIN
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:63:#if __GNUC__
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:69:#if !defined(setsp)
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:208:#if _MSC_VER
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:210:#elif __GNUC__ || __SUNPRO_C
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:238:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:247:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:248:#if !defined(MEM_TOP_DOWN)
+platforms/Cross/plugins/IA32ABI/x64sysvabicc.c:266:# if !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200112L
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:13:#if defined(__ARM_ARCH_ISA_A64) || defined(__arm64__) || defined(__aarch64__) || defined(ARM64)
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:18:#if __APPLE__ && __MACH__ /* Mac OS X */
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:19:#  if defined(MAP_JIT) // for pthread_jit_write_protect_np
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:34:#if !defined(min)
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:42:#ifdef SQUEAK_BUILTIN_PLUGIN
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:47:#ifdef _MSC_VER
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:232:#if defined(MAP_JIT)
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:242:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:243:# if !defined(MEM_TOP_DOWN)
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:262:#elif defined(MAP_JIT)
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:263:# if __OpenBSD__
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:271:# if !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200112L
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:286:# if defined(MAP_JIT)
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:302:# if !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200112L
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:321:#if defined(MAP_JIT)
+platforms/Cross/plugins/IA32ABI/arm64abicc.c:343:#if __APPLE__ && __MACH__ /* Mac OS X */
+platforms/Cross/plugins/IA32ABI/xabicc.c:9:#ifdef HAVE_CONFIG_H
+platforms/Cross/plugins/IA32ABI/xabicc.c:13:#if defined(_M_I386) || defined(_M_IX86) || defined(_X86_) || defined(i386) || defined(i486) || defined(i586) || defined(i686) || defined(__i386__) || defined(__386__) || defined(X86) || defined(I386) || defined(EMSCRIPTEN)
+platforms/Cross/plugins/IA32ABI/xabicc.c:15:#elif powerpc|ppc
+platforms/Cross/plugins/IA32ABI/xabicc.c:17:#elif defined(x86_64) || defined(__amd64) || defined(__x86_64) || defined(__amd64__) || defined(__x86_64__) || defined(_M_AMD64) || defined(_M_X64)
+platforms/Cross/plugins/IA32ABI/xabicc.c:18:# if _WIN64
+platforms/Cross/plugins/IA32ABI/xabicc.c:23:#elif defined(__ARM_ARCH_ISA_A64) || defined(__aarch64__) || defined(__arm64__) || defined(ARM64)
+platforms/Cross/plugins/IA32ABI/xabicc.c:25:#elif defined(__ARM_ARCH__) || defined(__arm__) || defined(__arm32__) || defined(ARM32) || defined(_M_ARM)
+platforms/Cross/plugins/IA32ABI/AlienSUnitTestProcedures.c:34:#if ALIEN_TEST_FUNCTIONS // These are in SqueakFFIPrims, and far more complete
+platforms/Cross/plugins/IA32ABI/dabusiness.h:15:#if STACK_ALIGN_BYTES
+platforms/Cross/plugins/IA32ABI/dabusiness.h:19:#if STACKVM /* Need to access args downwards from first arg */
+platforms/Cross/plugins/IA32ABI/dabusiness.h:42:#if STACK_ALIGN_BYTES
+platforms/Cross/plugins/IA32ABI/dabusiness.h:52:# if defined(__MINGW32__) && (__GNUC__ >= 3)
+platforms/Cross/plugins/IA32ABI/dabusiness.h:62:#if STACKVM /* Need to access args downwards from first arg */
+platforms/Cross/plugins/IA32ABI/dabusiness.h:147:#if STACK_ALIGN_BYTES
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:11:#if defined(_M_I386) || defined(_M_IX86) || defined(_X86_) || defined(i386) || defined(i486) || defined(i586) || defined(i686) || defined(__i386__) || defined(__386__) || defined(X86) || defined(I386) || defined(EMSCRIPTEN)
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:13:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:15:#elif __APPLE__ && __MACH__
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:17:# if OBJC_DEBUG /* define this to get debug info for struct objc_class et al */
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:44:#if !defined(min)
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:48:#ifdef SQUEAK_BUILTIN_PLUGIN
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:53:#ifdef _MSC_VER
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:56:#if __GNUC__ && !EMSCRIPTEN
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:60:#if __APPLE__ && __MACH__ && __i386__
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:62:#elif __linux__ && __i386__ || EMSCRIPTEN
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:64:#elif defined(_WIN32) && __SSE2__
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:72:#if !defined(setsp)
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:85:#ifdef _MSC_VER
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:156:#if defined(__GNUC__) && !defined(__clang__)
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:164:#if STACK_ALIGN_HACK
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:168:# if _MSC_VER
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:170:# elif __GNUC__
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:208:#if _MSC_VER
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:210:#elif !EMSCRIPTEN && (__GNUC__ || __SUNPRO_C)
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:212:#elif EMSCRIPTEN
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:222:#if _MSC_VER
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:224:#elif !EMSCRIPTEN && (__GNUC__ || __SUNPRO_C)
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:226:#elif EMSCRIPTEN
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:254:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:263:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:264:#if !defined(MEM_TOP_DOWN)
+platforms/Cross/plugins/IA32ABI/ia32abicc.c:282:# if !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200112L
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:4:#if defined(__powerpc__) || defined(PPC) || defined(_POWER) || defined(_IBMR2) || defined(__ppc__)
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:47:#if OBJC_DEBUG /* define this to get debug info for struct objc_class et al */
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:68:#if !defined(min)
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:72:#if !defined(noteEnterCallback)
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:75:#if !defined(noteExitCallback)
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:78:#if !defined(EnsureHaveVMThreadID)
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:81:#if !defined(CheckInVMThread)
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:85:#ifdef SQUEAK_BUILTIN_PLUGIN
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:90:#ifdef _MSC_VER
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:93:#if __GNUC__
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:99:#if !defined(setsp)
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:222:#if _MSC_VER
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:224:#elif __GNUC__
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:235:#if _MSC_VER
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:237:#elif __GNUC__
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:266:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/ppc32abicc.c:275:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/arm32abicc.c:11:#if defined(__ARM_ARCH_ISA_A64) || defined(__arm64__) || defined(__aarch64__) || defined(ARM64)
+platforms/Cross/plugins/IA32ABI/arm32abicc.c:17:#if defined(__ARM_ARCH__) || (defined(__arm__) && !defined(ARM64)) || defined(__arm32__) || defined(ARM32)
+platforms/Cross/plugins/IA32ABI/arm32abicc.c:32:#if !defined(min)
+platforms/Cross/plugins/IA32ABI/arm32abicc.c:40:#ifdef SQUEAK_BUILTIN_PLUGIN
+platforms/Cross/plugins/IA32ABI/arm32abicc.c:45:#ifdef _MSC_VER
+platforms/Cross/plugins/IA32ABI/arm32abicc.c:193:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/arm32abicc.c:202:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/arm32abicc.c:203:#if !defined(MEM_TOP_DOWN)
+platforms/Cross/plugins/IA32ABI/ia32abi.h:69:#if defined(i386) || defined(__i386) || defined(__i386__) || (defined(_WIN32) && !defined(_WIN64)) || defined(_M_IX86) || defined(EMSCRIPTEN)
+platforms/Cross/plugins/IA32ABI/ia32abi.h:72:#elif _WIN64 || defined(_M_X64) || defined(_M_AMD64) || defined(_WIN64)
+platforms/Cross/plugins/IA32ABI/ia32abi.h:77:#elif defined(__amd64__) || defined(__x86_64__) || defined(__amd64) || defined(__x86_64)
+platforms/Cross/plugins/IA32ABI/ia32abi.h:80:#elif defined(__powerpc__) || defined(PPC) || defined(_POWER) || defined(_IBMR2) || defined(__ppc__)
+platforms/Cross/plugins/IA32ABI/ia32abi.h:83:#elif defined(__ARM_ARCH_ISA_A64) || defined(__arm64__) || defined(__aarch64__) || defined(ARM64)
+platforms/Cross/plugins/IA32ABI/ia32abi.h:88:# if __APPLE__
+platforms/Cross/plugins/IA32ABI/ia32abi.h:94:#elif defined(__ARM_ARCH__) || defined(__arm__) || defined(__arm32__) || defined(ARM32)
+platforms/Cross/plugins/IA32ABI/ia32abi.h:105:#if NewspeakVM
+platforms/Cross/plugins/IA32ABI/x64win64abicc.c:11:#if defined(x86_64) || defined(__amd64) || defined(__x86_64) || defined(__amd64__) || defined(__x86_64__) || defined(_M_AMD64) || defined(_M_X64)
+platforms/Cross/plugins/IA32ABI/x64win64abicc.c:13:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/x64win64abicc.c:29:#if !defined(min)
+platforms/Cross/plugins/IA32ABI/x64win64abicc.c:35:#ifdef SQUEAK_BUILTIN_PLUGIN
+platforms/Cross/plugins/IA32ABI/x64win64abicc.c:40:#ifdef _MSC_VER
+platforms/Cross/plugins/IA32ABI/x64win64abicc.c:43:#if __GNUC__
+platforms/Cross/plugins/IA32ABI/x64win64abicc.c:49:#if !defined(setsp)
+platforms/Cross/plugins/IA32ABI/x64win64abicc.c:247:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/x64win64abicc.c:256:#if defined(_MSC_VER) || defined(__MINGW32__)
+platforms/Cross/plugins/IA32ABI/x64win64abicc.c:257:#if !defined(MEM_TOP_DOWN)
+platforms/Cross/plugins/IA32ABI/dabusinessARM.h:178:#if NUM_REG_ARGS > 4
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:37:#if !_MSC_VER
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:41:#ifndef NO_STD_FILE_SUPPORT
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:48:#if _MSC_VER
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:49:# ifndef S_ISFIFO
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:93:#ifndef SEEK_SET
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:106:#if OBJECTS_32BIT_ALIGNED
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:136:#if 0
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:368:#if _MSC_VER
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:386:#if _MSC_VER
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:466:#if _MSC_VER
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:480:#if _MSC_VER
+platforms/Cross/plugins/FilePlugin/sqFilePluginBasicPrims.c:564:#if defined(_IOLBF) && 0
+platforms/Cross/plugins/FilePlugin/FilePlugin.h:23:#ifdef _MSC_VER
+platforms/Cross/plugins/FilePlugin/FilePlugin.h:33:#if defined(ACORN)
+platforms/Cross/plugins/sqPluginsSCCSVersion.h:11:#if SUBVERSION
+platforms/Cross/plugins/sqPluginsSCCSVersion.h:37:#elif GIT
+platforms/Cross/plugins/GdbARMv8Plugin/sqGdbARMv8Plugin.c:121:#if 0
+platforms/Cross/plugins/GdbARMv8Plugin/sqGdbARMv8Plugin.c:154:#if 0
+platforms/Cross/plugins/GdbARMv8Plugin/sqGdbARMv8Plugin.c:189:#if 0
+platforms/Cross/plugins/BitBltPlugin/BitBltArm.h:26:#ifndef BITBLTARM_H_
+platforms/Cross/plugins/BitBltPlugin/BitBltGeneric.c:42:#ifdef DEBUG
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.h:26:#ifndef BITBLTDISPATCH_H_
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.h:32:#ifndef ColorMapPresent
+platforms/Cross/plugins/BitBltPlugin/BitBltArm64.h:25:#ifndef BITBLTARM64_H_
+platforms/Cross/plugins/BitBltPlugin/BitBltArmSimd.h:26:#ifndef BITBLTARMSIMD_H_
+platforms/Cross/plugins/BitBltPlugin/BitBltInternal.h:26:#ifndef BITBLTINTERNAL_H_
+platforms/Cross/plugins/BitBltPlugin/BitBltGeneric.h:26:#ifndef BITBLTGENERIC_H_
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:42:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:98:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:203:#ifdef __arm__
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:206:#ifdef __aarch64__
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:308:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:321:#ifdef __aarch64__
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:390:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:403:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:411:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:424:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:438:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:449:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:469:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:492:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:498:#ifdef PROFILING
+platforms/Cross/plugins/BitBltPlugin/BitBltDispatch.c:503:#ifdef PROFILING
+platforms/Cross/plugins/ScratchPlugin/ScratchPlugin.h:1:#ifndef _SQ_SCRATCH_PLUGIN_H_
+platforms/Cross/plugins/CroquetPlugin/CroquetPlugin.h:1:#ifndef CROQUET_PLUGIN_H
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpeglib.h:13:#ifndef JPEGLIB_H
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpeglib.h:23:#ifndef JCONFIG_INCLUDED	/* in case jinclude.h already did */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpeglib.h:56:#ifndef D_MAX_BLOCKS_IN_MCU
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpeglib.h:223:#ifndef JDCT_DEFAULT		/* may be overridden in jconfig.h */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpeglib.h:226:#ifndef JDCT_FASTEST		/* may be overridden in jconfig.h */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpeglib.h:817:#ifdef HAVE_PROTOTYPES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpeglib.h:831:#ifdef NEED_SHORT_EXTERNAL_NAMES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpeglib.h:1056:#ifdef INCOMPLETE_TYPES_BROKEN
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpeglib.h:1057:#ifndef JPEG_INTERNALS		/* will be defined in jpegint.h */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpeglib.h:1091:#ifdef JPEG_INTERNALS
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jddctmgr.c:61:#ifdef DCT_IFAST_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jddctmgr.c:64:#ifdef DCT_FLOAT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jddctmgr.c:73:#ifdef DCT_ISLOW_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jddctmgr.c:76:#ifdef IDCT_SCALING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jddctmgr.c:102:#ifdef IDCT_SCALING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jddctmgr.c:118:#ifdef DCT_ISLOW_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jddctmgr.c:124:#ifdef DCT_IFAST_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jddctmgr.c:130:#ifdef DCT_FLOAT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jddctmgr.c:160:#ifdef PROVIDE_ISLOW_TABLES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jddctmgr.c:173:#ifdef DCT_IFAST_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jddctmgr.c:207:#ifdef DCT_FLOAT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdphuff.c:23:#ifdef D_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdphuff.c:42:#ifndef NO_STRUCT_ASSIGN
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdphuff.c:45:#if MAX_COMPS_IN_SCAN == 4
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdphuff.c:204:#ifdef AVOID_TABLES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jerror.h:21:#ifndef JMESSAGE
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jerror.h:22:#ifndef JERROR_H
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jerror.h:31:#ifdef JMAKE_ENUM_LIST
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jerror.h:186:#ifdef JMAKE_ENUM_LIST
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jerror.h:198:#ifndef JERROR_H
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctfst.c:40:#ifdef DCT_IFAST_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctfst.c:47:#if DCTSIZE != 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctfst.c:76:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctfst.c:91:#if CONST_BITS == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctfst.c:109:#ifndef USE_ACCURATE_ROUNDING
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctfst.c:128:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctfst.c:140:#ifdef RIGHT_SHIFT_IS_UNSIGNED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctfst.c:142:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctfst.c:156:#ifdef USE_ACCURATE_ROUNDING
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctfst.c:292:#ifndef NO_ZERO_ROW_TEST
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdhuff.c:39:#ifndef NO_STRUCT_ASSIGN
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdhuff.c:42:#if MAX_COMPS_IN_SCAN == 4
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdhuff.c:284:#ifdef SLOW_SHIFT_32
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdhuff.c:441:#ifdef AVOID_TABLES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdtrans.c:107:#ifdef D_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmaster.c:127:#ifdef C_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmaster.c:139:#ifdef C_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmaster.c:153:#ifdef C_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmaster.c:187:#ifdef C_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmaster.c:195:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmaster.c:244:#ifdef C_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmaster.c:272:#ifdef C_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmaster.c:431:#ifdef ENTROPY_OPT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmaster.c:560:#ifdef C_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdapistd.c:53:#ifdef D_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdapistd.c:105:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdapistd.c:221:#ifdef D_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmarker.c:403:#ifdef D_ARITH_CODING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmarker.c:771:#ifdef SAVE_MARKERS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmarker.c:1332:#ifdef SAVE_MARKERS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmerge.c:39:#ifdef UPSAMPLE_MERGING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jfdctflt.c:42:#ifdef DCT_FLOAT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jfdctflt.c:49:#if DCTSIZE != 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcparam.c:472:#ifdef C_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jccoefct.c:23:#ifdef ENTROPY_OPT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jccoefct.c:26:#ifdef C_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jccoefct.c:63:#ifdef FULL_COEF_BUFFER_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jccoefct.c:113:#ifdef FULL_COEF_BUFFER_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jccoefct.c:221:#ifdef FULL_COEF_BUFFER_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jccoefct.c:417:#ifdef FULL_COEF_BUFFER_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jfdctint.c:31:#ifdef DCT_ISLOW_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jfdctint.c:38:#if DCTSIZE != 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jfdctint.c:77:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jfdctint.c:92:#if CONST_BITS == 13
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jfdctint.c:128:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcsample.c:283:#ifdef INPUT_SMOOTHING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcsample.c:487:#ifdef INPUT_SMOOTHING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcsample.c:500:#ifdef INPUT_SMOOTHING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcsample.c:515:#ifdef INPUT_SMOOTHING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmainct.c:42:#ifdef FULL_MAIN_BUFFER_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmainct.c:57:#ifdef FULL_MAIN_BUFFER_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmainct.c:84:#ifdef FULL_MAIN_BUFFER_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmainct.c:90:#ifdef FULL_MAIN_BUFFER_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmainct.c:161:#ifdef FULL_MAIN_BUFFER_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmainct.c:265:#ifdef FULL_MAIN_BUFFER_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmainct.c:281:#ifdef FULL_MAIN_BUFFER_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jchuff.c:40:#ifndef NO_STRUCT_ASSIGN
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jchuff.c:43:#if MAX_COMPS_IN_SCAN == 4
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jchuff.c:68:#ifdef ENTROPY_OPT_SUPPORTED	/* Statistics tables for optimization */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jchuff.c:92:#ifdef ENTROPY_OPT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jchuff.c:113:#ifdef ENTROPY_OPT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jchuff.c:129:#ifdef ENTROPY_OPT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jchuff.c:566:#ifdef ENTROPY_OPT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jchuff.c:905:#ifdef ENTROPY_OPT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemnobs.c:23:#ifndef HAVE_STDLIB_H		/* <stdlib.h> should declare malloc(),free() */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcprepct.c:27:#ifdef INPUT_SMOOTHING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcprepct.c:64:#ifdef CONTEXT_ROWS_SUPPORTED	/* only needed for context case */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcprepct.c:89:#ifdef CONTEXT_ROWS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcprepct.c:188:#ifdef CONTEXT_ROWS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcprepct.c:336:#ifdef CONTEXT_ROWS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdhuff.h:15:#ifdef NEED_SHORT_EXTERNAL_NAMES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemsys.h:24:#ifdef NEED_SHORT_EXTERNAL_NAMES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemsys.h:77:#ifndef MAX_ALLOC_CHUNK		/* may be overridden in jconfig.h */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemsys.h:119:#ifdef USE_MSDOS_MEMMGR		/* DOS-specific junk */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemsys.h:132:#ifdef USE_MAC_MEMMGR		/* Mac-specific junk */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemsys.h:153:#ifdef USE_MSDOS_MEMMGR
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemsys.h:158:#ifdef USE_MAC_MEMMGR
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jccolor.c:371:#if RGB_PIXELSIZE != 3
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jerror.c:27:#ifdef USE_WINDOWS_MESSAGEBOX
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jerror.c:31:#ifndef EXIT_FAILURE		/* define exit() codes if not provided */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jerror.c:44:#ifdef NEED_SHORT_EXTERNAL_NAMES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jerror.c:105:#ifdef USE_WINDOWS_MESSAGEBOX
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jquant1.c:17:#ifdef QUANT_1PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jquant1.c:127:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:34:#ifdef DCT_FLOAT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:73:#ifdef DCT_ISLOW_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:89:#ifdef DCT_IFAST_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:127:#ifdef DCT_FLOAT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:204:#if DCTSIZE == 8		/* unroll the inner loop */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:246:#ifdef FAST_DIVIDE
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:267:#ifdef DCT_FLOAT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:294:#if DCTSIZE == 8		/* unroll the inner loop */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:357:#ifdef DCT_ISLOW_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:363:#ifdef DCT_IFAST_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:369:#ifdef DCT_FLOAT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcdctmgr.c:383:#ifdef DCT_FLOAT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jutils.c:24:#if 0				/* This table is not actually needed in v6a */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jutils.c:99:#ifndef NEED_FAR_POINTERS	/* normal case, same as regular macros */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jutils.c:103:#ifdef USE_FMEM
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jutils.c:121:#ifdef FMEMCOPY
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jutils.c:134:#ifdef FMEMCOPY
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jutils.c:149:#ifdef FMEMCOPY
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jutils.c:169:#ifdef FMEMZERO
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jconfig.h:102:#ifdef JPEG_INTERNALS
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jconfig.h:120:#ifdef JPEG_CJPEG_DJPEG
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:52:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:57:#ifdef HAVE_UNSIGNED_CHAR
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:65:#ifdef CHAR_IS_UNSIGNED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:79:#if BITS_IN_JSAMPLE == 12
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:108:#ifdef HAVE_UNSIGNED_CHAR
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:116:#ifdef CHAR_IS_UNSIGNED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:134:#ifdef HAVE_UNSIGNED_CHAR
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:137:#ifdef CHAR_IS_UNSIGNED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:146:#ifdef HAVE_UNSIGNED_SHORT
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:154:#ifndef XMD_H			/* X11/xmd.h correctly defines INT16 */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:160:#ifndef XMD_H			/* X11/xmd.h correctly defines INT32 */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:199:#ifdef HAVE_PROTOTYPES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:212:#if !defined(FAR)
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:213:# ifdef NEED_FAR_POINTERS
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:228:#ifndef HAVE_BOOLEAN
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:231:#ifndef FALSE			/* in case these macros already exist */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:234:#ifndef TRUE
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:246:#ifdef JPEG_INTERNALS
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:250:#ifdef JPEG_INTERNAL_OPTIONS
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:329:#ifndef INLINE
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:330:#ifdef __GNUC__			/* for instance, GNU C knows about inline */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:333:#ifndef INLINE
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:344:#ifndef MULTIPLIER
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:357:#ifndef FAST_FLOAT
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmorecfg.h:358:#ifdef HAVE_PROTOTYPES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jfdctfst.c:38:#ifdef DCT_IFAST_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jfdctfst.c:45:#if DCTSIZE != 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jfdctfst.c:78:#if CONST_BITS == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jfdctfst.c:96:#ifndef USE_ACCURATE_ROUNDING
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmaster.c:46:#ifdef UPSAMPLE_MERGING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmaster.c:87:#ifdef IDCT_SCALING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmaster.c:96:#ifdef IDCT_SCALING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmaster.c:178:#if RGB_PIXELSIZE != 3
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmaster.c:336:#ifdef QUANT_1PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmaster.c:346:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmaster.c:361:#ifdef UPSAMPLE_MERGING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmaster.c:379:#ifdef D_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmaster.c:401:#ifdef D_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmaster.c:443:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmaster.c:508:#ifdef D_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdct.h:29:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdct.h:57:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdct.h:83:#ifdef NEED_SHORT_EXTERNAL_NAMES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdct.h:157:#ifdef SHORTxSHORT_32		/* may work if 'int' is 32 bits */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdct.h:160:#ifdef SHORTxLCONST_32		/* known to work with Microsoft C 6.0 */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdct.h:164:#ifndef MULTIPLY16C16		/* default definition */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdct.h:170:#ifdef SHORTxSHORT_32		/* may work if 'int' is 32 bits */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdct.h:174:#ifndef MULTIPLY16V16		/* default definition */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/JPEGReadWriter2Plugin.h:6:#if 0
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jinclude.h:34:#ifdef HAVE_STDDEF_H
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jinclude.h:38:#ifdef HAVE_STDLIB_H
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jinclude.h:42:#ifdef NEED_SYS_TYPES_H
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jinclude.h:58:#ifdef NEED_BSD_STRINGS
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcphuff.c:20:#ifdef C_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcphuff.c:77:#ifdef RIGHT_SHIFT_IS_UNSIGNED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemmgr.c:33:#ifndef NO_GETENV
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemmgr.c:34:#ifndef HAVE_STDLIB_H		/* <stdlib.h> should declare getenv() */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemmgr.c:72:#ifndef ALIGN_TYPE		/* so can override from jconfig.h */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemmgr.c:183:#ifdef MEM_STATS		/* optional extra stuff for statistics */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemmgr.c:221:#ifdef MEM_STATS
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemmgr.c:940:#ifdef MEM_STATS
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jmemmgr.c:1103:#ifndef NO_GETENV
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcmarker.c:227:#ifdef C_ARITH_CODING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jquant2.c:24:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jquant2.c:84:#if RGB_RED == 0
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jquant2.c:87:#if RGB_BLUE == 0
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jquant2.c:90:#if RGB_GREEN == 1
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jquant2.c:93:#if RGB_RED == 2
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jquant2.c:96:#if RGB_BLUE == 2
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jquant2.c:180:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jquant2.c:457:#if RGB_RED == 0
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctint.c:33:#ifdef DCT_ISLOW_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctint.c:40:#if DCTSIZE != 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctint.c:77:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctint.c:92:#if CONST_BITS == 13
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctint.c:128:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctint.c:287:#ifndef NO_ZERO_ROW_TEST
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdapimin.c:199:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jctrans.c:173:#ifdef C_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctflt.c:44:#ifdef DCT_FLOAT_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctflt.c:51:#if DCTSIZE != 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jcinit.c:48:#ifdef C_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jchuff.h:19:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jchuff.h:35:#ifdef NEED_SHORT_EXTERNAL_NAMES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmainct.c:149:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmainct.c:326:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdmainct.c:456:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdcoefct.c:22:#ifndef D_PROGRESSIVE_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdcoefct.c:50:#ifdef D_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdcoefct.c:55:#ifdef BLOCK_SMOOTHING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdcoefct.c:67:#ifdef D_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdcoefct.c:71:#ifdef BLOCK_SMOOTHING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdcoefct.c:121:#ifdef BLOCK_SMOOTHING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdcoefct.c:234:#ifdef D_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdcoefct.c:379:#ifdef BLOCK_SMOOTHING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdcoefct.c:686:#ifdef BLOCK_SMOOTHING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdcoefct.c:692:#ifdef D_MULTISCAN_FILES_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdcoefct.c:702:#ifdef BLOCK_SMOOTHING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdsample.c:350:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctred.c:28:#ifdef IDCT_SCALING_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctred.c:35:#if DCTSIZE != 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctred.c:42:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctred.c:57:#if CONST_BITS == 13
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctred.c:97:#if BITS_IN_JSAMPLE == 8
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctred.c:201:#ifndef NO_ZERO_ROW_TEST
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jidctred.c:334:#ifndef NO_ZERO_ROW_TEST
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpegint.h:282:#ifdef RIGHT_SHIFT_IS_UNSIGNED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpegint.h:296:#ifdef NEED_SHORT_EXTERNAL_NAMES
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpegint.h:380:#if 0				/* This table is not actually needed in v6a */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpegint.h:387:#ifdef INCOMPLETE_TYPES_BROKEN
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jpegint.h:388:#ifndef AM_MEMORY_MANAGER	/* only jmemmgr.c defines these */
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdpostct.c:52:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdpostct.c:98:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdpostct.c:151:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/JPEGReadWriter2Plugin/jdpostct.c:272:#ifdef QUANT_2PASS_SUPPORTED
+platforms/Cross/plugins/FloatMathPlugin/atan.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/log.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/ldexp.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/log10.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/finite.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/scalbn.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/k_rem_pio2.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/sinh.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/sin.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/k_sin.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/modf.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/rint.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/rem_pio2.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/acosh.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/atanh.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/cos.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/k_cos.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/exp.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/atan2.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/pow.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/sqrt.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/acos.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/FloatMathPlugin.h:11:#if !defined(NO_ISNAN) && !defined(isnan)
+platforms/Cross/plugins/FloatMathPlugin/FloatMathPlugin.h:23:#if BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/log1p.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/asin.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/hypot.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/expm1.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/fmod.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/scalb.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/copysign.c:1:#if !BIT_IDENTICAL_FLOATING_POINT && !EMSCRIPTEN
+platforms/Cross/plugins/FloatMathPlugin/tanh.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/isnan.c:1:#if !BIT_IDENTICAL_FLOATING_POINT || EMSCRIPTEN
+platforms/Cross/plugins/FloatMathPlugin/isnan.c:4:#if !defined(NO_ISNAN) || EMSCRIPTEN
+platforms/Cross/plugins/FloatMathPlugin/cosh.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/asinh.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/k_tan.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/FloatMathPlugin/tan.c:1:#if !BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/plugins/Squeak3D/b3dMain.c:15:#ifdef HAVE_CONFIG_H
+platforms/Cross/plugins/Squeak3D/b3dMain.c:25:#ifndef NULL
+platforms/Cross/plugins/Squeak3D/b3dMain.c:29:#ifdef B3D_PROFILE
+platforms/Cross/plugins/Squeak3D/b3dMain.c:726:#ifdef DEBUG
+platforms/Cross/plugins/Squeak3D/b3d.h:15:#ifndef __B3D_H
+platforms/Cross/plugins/Squeak3D/b3d.h:19:#ifndef SQ_CONFIG_DONE
+platforms/Cross/plugins/Squeak3D/b3d.h:24:#ifdef DEBUG
+platforms/Cross/plugins/Squeak3D/b3dAlloc.h:15:#ifndef B3D_ALLOC_H
+platforms/Cross/plugins/Squeak3D/b3dAlloc.h:24:#ifdef DEBUG_ALLOC
+platforms/Cross/plugins/Squeak3D/b3dTypes.h:15:#ifndef B3D_TYPES_H
+platforms/Cross/plugins/Squeak3D/b3dTypes.h:18:#ifndef NULL
+platforms/Cross/plugins/Squeak3D/b3dTypes.h:73:#if VMBIGENDIAN
+platforms/Cross/plugins/Squeak3D/b3dDraw.c:49:#ifndef USE_MULTBL
+platforms/Cross/plugins/Squeak3D/b3dDraw.c:50:# ifdef __POWERPC__
+platforms/Cross/plugins/Squeak3D/b3dDraw.c:69:#ifdef DEBUG_ATTR
+platforms/Cross/plugins/Squeak3D/b3dDraw.c:146:#if USE_MULTBL /* Use a 16x256 table for lookups */
+platforms/Cross/plugins/Squeak3D/b3dDraw.c:437:#if USE_MULTBL
+platforms/Cross/plugins/Squeak3D/b3dDraw.c:466:#if USE_MULTBL
+platforms/Cross/plugins/Squeak3D/b3dInit.c:15:#ifdef HAVE_CONFIG_H
+platforms/Cross/plugins/Squeak3D/b3dAlloc.c:18:#ifdef DEBUG_ALLOC
+platforms/Cross/plugins/SDL2DisplayPlugin/SDL2DisplayPlugin.h:1:#ifndef _SDL2_DISPLAY_PLUGIN_H
+platforms/Cross/plugins/RePlugin/internal.h:52:#if ! HAVE_MEMMOVE
+platforms/Cross/plugins/RePlugin/internal.h:54:#if HAVE_BCOPY
+platforms/Cross/plugins/RePlugin/internal.h:82:#ifndef offsetof
+platforms/Cross/plugins/RePlugin/internal.h:126:#ifndef FALSE
+platforms/Cross/plugins/RePlugin/internal.h:135:#ifndef ESC_E
+platforms/Cross/plugins/RePlugin/internal.h:139:#ifndef ESC_F
+platforms/Cross/plugins/RePlugin/internal.h:143:#ifndef ESC_N
+platforms/Cross/plugins/RePlugin/internal.h:147:#ifndef ESC_R
+platforms/Cross/plugins/RePlugin/internal.h:151:#ifndef ESC_T
+platforms/Cross/plugins/RePlugin/pcre.c:44:#ifdef DEBUG
+platforms/Cross/plugins/RePlugin/pcre.c:58:#ifdef __cplusplus
+platforms/Cross/plugins/RePlugin/pcre.c:75:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:89:#ifdef DEBUG
+platforms/Cross/plugins/RePlugin/pcre.c:187:#ifndef SQUEAK_PLUGIN
+platforms/Cross/plugins/RePlugin/pcre.c:201:#ifndef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:266:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:448:#ifdef DEBUG
+platforms/Cross/plugins/RePlugin/pcre.c:584:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:847:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:1234:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:1268:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:2049:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:2498:#ifdef DEBUG
+platforms/Cross/plugins/RePlugin/pcre.c:2504:#ifndef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:3014:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:3093:#ifndef DEBUG
+platforms/Cross/plugins/RePlugin/pcre.c:3151:#ifdef DEBUG
+platforms/Cross/plugins/RePlugin/pcre.c:3411:#ifdef DEBUG
+platforms/Cross/plugins/RePlugin/pcre.c:3522:#ifdef DEBUG
+platforms/Cross/plugins/RePlugin/pcre.c:3682:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:3886:#ifdef DEBUG
+platforms/Cross/plugins/RePlugin/pcre.c:4018:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:4225:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:4251:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:4272:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:4285:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:4301:#ifdef DEBUG    /* Sigh. Some compilers never learn. */
+platforms/Cross/plugins/RePlugin/pcre.c:4617:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:4688:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:4735:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:4833:#ifdef SUPPORT_UTF8
+platforms/Cross/plugins/RePlugin/pcre.c:5059:#ifdef DEBUG  /* Sigh. Some compilers never learn. */
+platforms/Cross/plugins/RePlugin/pcre.h:7:#ifndef _PCRE_H
+platforms/Cross/plugins/RePlugin/pcre.h:19:#ifdef _WIN32
+platforms/Cross/plugins/RePlugin/pcre.h:21:# ifdef STATIC
+platforms/Cross/plugins/RePlugin/pcre.h:37:#ifdef __cplusplus
+platforms/Cross/plugins/RePlugin/pcre.h:110:#ifdef __cplusplus
+platforms/Cross/plugins/RePlugin/oldInternal.h:52:#if ! HAVE_MEMMOVE
+platforms/Cross/plugins/RePlugin/oldInternal.h:54:#if HAVE_BCOPY
+platforms/Cross/plugins/RePlugin/oldInternal.h:82:#ifndef offsetof
+platforms/Cross/plugins/RePlugin/oldInternal.h:133:#ifndef ESC_E
+platforms/Cross/plugins/RePlugin/oldInternal.h:137:#ifndef ESC_F
+platforms/Cross/plugins/RePlugin/oldInternal.h:141:#ifndef ESC_N
+platforms/Cross/plugins/RePlugin/oldInternal.h:145:#ifndef ESC_R
+platforms/Cross/plugins/RePlugin/oldInternal.h:149:#ifndef ESC_T
+platforms/Cross/plugins/RePlugin/reConfig.h:45:#ifndef NEWLINE
+platforms/Cross/plugins/BochsIA32Plugin/sqBochsIA32Plugin.cpp:170:#if BX_SUPPORT_ICACHE
+platforms/Cross/plugins/BochsIA32Plugin/sqBochsIA32Plugin.cpp:291:#if BX_SUPPORT_GLOBAL_PAGES
+platforms/Cross/plugins/BochsIA32Plugin/sqBochsIA32Plugin.cpp:299:#if BX_PHY_ADDRESS_WIDTH == 32
+platforms/Cross/plugins/BochsIA32Plugin/sqBochsIA32Plugin.cpp:331:#if BX_CPU_LEVEL >= 4
+platforms/Cross/plugins/BochsIA32Plugin/sqBochsIA32Plugin.cpp:356:#if BX_DEBUGGER || BX_DISASM || BX_INSTRUMENTATION || BX_GDBSTUB
+platforms/Cross/plugins/BochsIA32Plugin/sqBochsIA32Plugin.cpp:366:#if BX_X86_DEBUGGER
+platforms/Cross/plugins/CameraPlugin/CameraPlugin.h:1:#ifndef _SQ_CAMERA_PLUGIN_H_
+platforms/Cross/plugins/SoundPlugin/SoundPlugin.h:38:#if TerfVM
+platforms/Cross/vm/sqPath.c:29:#ifdef _WIN32
+platforms/Cross/vm/sqPath.c:32:#elif defined(__unix__) || defined(__MACH__) || defined(__APPLE__)
+platforms/Cross/vm/sqPath.c:44:#ifdef _WIN32
+platforms/Cross/vm/sqPath.c:56:#ifdef _WIN32
+platforms/Cross/vm/sqPath.c:74:#ifdef _WIN32
+platforms/Cross/vm/sqPath.c:94:#ifdef _WIN32
+platforms/Cross/vm/sqPath.c:108:#ifdef _WIN32
+platforms/Cross/vm/sqPath.c:120:#ifdef _WIN32
+platforms/Cross/vm/dispdbg.h:10:#if !defined(VMBIGENDIAN)
+platforms/Cross/vm/dispdbg.h:12:#elif !((VMBIGENDIAN == 1) || (VMBIGENDIAN == 0))
+platforms/Cross/vm/dispdbg.h:20:#if STACKVM
+platforms/Cross/vm/dispdbg.h:34:#if PRODUCTION && !SENDTRACE /* default for no send breakpoint. */
+platforms/Cross/vm/dispdbg.h:38:#elif SENDTRACE /* send tracing.  */
+platforms/Cross/vm/dispdbg.h:45:#elif 0 /* send trace/byte count.  */
+platforms/Cross/vm/dispdbg.h:76:#if STACKVM
+platforms/Cross/vm/dispdbg.h:85:#if PRODUCTION
+platforms/Cross/vm/dispdbg.h:88:#elif 1 /* check for valid instruction pointer */
+platforms/Cross/vm/dispdbg.h:93:#elif 0 /* check for valid stack-related pointers */
+platforms/Cross/vm/dispdbg.h:101:#elif 0 /* maintain byteCount & break-point & heart-beat every 100k bytecodes */
+platforms/Cross/vm/dispdbg.h:121:#elif 0 /* maintain byteCount & check for valid instruction pointer */
+platforms/Cross/vm/dispdbg.h:129:#elif 0 /* maintain byteCount & check for valid instruction pointer */
+platforms/Cross/vm/dispdbg.h:136:#elif 0 /* maintain byteCount & check for valid instruction pointer */
+platforms/Cross/vm/dispdbg.h:143:#elif MULTIPLEBYTECODESETS && 0 /* maintain bytecode trace and check against trace file */
+platforms/Cross/vm/dispdbg.h:144:# if defined(SQ_USE_GLOBAL_STRUCT) /* define only in interpreter */
+platforms/Cross/vm/dispdbg.h:165:#elif 0 /* print current frame & instruction pointer on every bytecode. */
+platforms/Cross/vm/dispdbg.h:171:#elif 0 /* print current frame & pc on every bytecode if sendTrace/hit break. */
+platforms/Cross/vm/dispdbg.h:178:#elif 0
+platforms/Cross/vm/sqLowcodeFFI-x86_64.h:7:#ifndef _SQ_LOWCODE_FFI_X86_64_H_
+platforms/Cross/vm/sqLowcodeFFI-x86_64.h:65:#ifdef _WIN32
+platforms/Cross/vm/sqLowcodeFFI-x86_64.h:77:#if defined(_WIN32)
+platforms/Cross/vm/sqLowcodeFFI-x86_64.h:80:#elif defined(__APPLE__)
+platforms/Cross/vm/sqCircularQueue.h:29:#ifndef _SQ_CIRCULAR_QUEUE_H_
+platforms/Cross/vm/sqAtomicOps.h:35:#if defined(_MSC_VER)
+platforms/Cross/vm/sqAtomicOps.h:39:#if    defined(LP32) || defined(ILP32) \
+platforms/Cross/vm/sqAtomicOps.h:42:#  if LP64 || ILP64 || LLP64
+platforms/Cross/vm/sqAtomicOps.h:44:#  elif LP32 || ILP32
+platforms/Cross/vm/sqAtomicOps.h:49:#elif defined(x86_64) || defined(__x86_64) || defined(__x86_64__) || defined(__amd64) || defined(__amd64__) || defined(x64) || defined(_M_AMD64) || defined(_M_X64) || defined(_M_IA64) || defined(ARM64) || defined(__ARCH_ARM_ISA_A64)
+platforms/Cross/vm/sqAtomicOps.h:53:#elif defined(_M_IX86) || defined(_M_I386) || defined(_X86_) || defined(i386) || defined(__i386__) || defined(__arm32__) || defined(EMSCRIPTEN)
+platforms/Cross/vm/sqAtomicOps.h:57:#elif defined(__SIZEOF_POINTER__)
+platforms/Cross/vm/sqAtomicOps.h:59:#  if __SIZEOF_POINTER__ == 8
+platforms/Cross/vm/sqAtomicOps.h:61:#  elif __SIZEOF_POINTER__ == 4
+platforms/Cross/vm/sqAtomicOps.h:66:#elif defined(LONG_MAX) || defined(__LONG_MAX__)
+platforms/Cross/vm/sqAtomicOps.h:68:#  if (defined(LONG_MAX) && LONG_MAX > 0xFFFFFFFFUL) \
+platforms/Cross/vm/sqAtomicOps.h:78:#if IS_64_BIT_ARCH
+platforms/Cross/vm/sqAtomicOps.h:83:#elif IS_32_BIT_ARCH
+platforms/Cross/vm/sqAtomicOps.h:85:# if TARGET_OS_IS_IPHONE
+platforms/Cross/vm/sqAtomicOps.h:109:# elif !defined(EMSCRIPTEN) && ((defined(__GNUC__) || defined(__SUNPRO_C)) && (defined(i386) || defined(__i386) || defined(__i386__) || defined(_X86_)))
+platforms/Cross/vm/sqAtomicOps.h:115:#  if __SSE2__
+platforms/Cross/vm/sqAtomicOps.h:172:# elif defined(_MSC_VER) &&	(defined(_M_IX86) || defined(_X86_) || defined(i386))
+platforms/Cross/vm/sqAtomicOps.h:206:#if defined(__arm__) && (defined(__ARM_ARCH_6__) || defined(__ARM_ARCH_7A__))
+platforms/Cross/vm/sqAtomicOps.h:212:#elif defined(EMSCRIPTEN)
+platforms/Cross/vm/sqAtomicOps.h:234:#if defined(__GNUC__)
+platforms/Cross/vm/sqAtomicOps.h:248:#if TARGET_OS_IS_IPHONE
+platforms/Cross/vm/sqAtomicOps.h:251:#elif defined(_MSC_VER)
+platforms/Cross/vm/sqAtomicOps.h:261:#elif defined(__GNUC__) || defined(__clang__) || defined(__SUNPRO_C)
+platforms/Cross/vm/sqAtomicOps.h:269:# if defined(i386) || defined(__i386) || defined(__i386__) || defined(_X86_)
+platforms/Cross/vm/sqAtomicOps.h:280:# elif defined(x86_64) || defined(__x86_64) || defined(__x86_64__)
+platforms/Cross/vm/sqAtomicOps.h:293:# elif GCC_HAS_BUILTIN_SYNC || defined(__clang__)
+platforms/Cross/vm/sqAtomicOps.h:298:#if !defined(sqAtomicAddConst)
+platforms/Cross/vm/sqAtomicOps.h:314:#if TARGET_OS_IS_IPHONE
+platforms/Cross/vm/sqAtomicOps.h:320:#elif defined(_MSC_VER)
+platforms/Cross/vm/sqAtomicOps.h:330:#elif defined(__GNUC__) || defined(__clang__) || defined(__SUNPRO_C)
+platforms/Cross/vm/sqAtomicOps.h:331:# if GCC_HAS_BUILTIN_SYNC || defined(__clang__)
+platforms/Cross/vm/sqAtomicOps.h:335:# elif defined(i386) || defined(__i386) || defined(__i386__) || defined(_X86_) \
+platforms/Cross/vm/sqNamedPrims.c:28:#ifdef DEBUG
+platforms/Cross/vm/sqNamedPrims.c:103:#if SPURVM
+platforms/Cross/vm/sqNamedPrims.c:115:#if SPURVM
+platforms/Cross/vm/sqNamedPrims.c:133:#if SPURVM
+platforms/Cross/vm/sqNamedPrims.c:173:#if SPURVM
+platforms/Cross/vm/sqNamedPrims.c:187:#if SPURVM
+platforms/Cross/vm/sqNamedPrims.c:273:#ifdef PharoVM
+platforms/Cross/vm/sqNamedPrims.c:293:#ifdef PharoVM
+platforms/Cross/vm/sqNamedPrims.c:394:#if SPURVM
+platforms/Cross/vm/sqNamedPrims.c:448:#ifdef PharoVM
+platforms/Cross/vm/sqAssert.h:19:#if defined(IMPORT) && defined(SQUEAK_EXTERNAL_PLUGIN)
+platforms/Cross/vm/sqAssert.h:24:# if defined(SQUEAK_BUILTIN_PLUGIN)
+platforms/Cross/vm/sqAssert.h:29:#   if !defined(EXPORT)
+platforms/Cross/vm/sqAssert.h:42:#ifdef NDEBUG /* compatible with Mac OS X (FreeBSD) /usr/include/assert.h */
+platforms/Cross/vm/sqAssert.h:51:#elif defined(_MSC_VER) && !defined(__clang__)
+platforms/Cross/vm/sqAssert.h:55:# if _WIN64
+platforms/Cross/vm/sqVirtualMachine.h:1:#ifndef _SqueakVM_H
+platforms/Cross/vm/sqVirtualMachine.h:9:#if SPURVM
+platforms/Cross/vm/sqVirtualMachine.h:15:#ifndef VM_PROXY_MAJOR
+platforms/Cross/vm/sqVirtualMachine.h:21:#ifndef VM_PROXY_MINOR
+platforms/Cross/vm/sqVirtualMachine.h:23:# if SPURVM
+platforms/Cross/vm/sqVirtualMachine.h:32:#if VM_PROXY_MINOR > 8
+platforms/Cross/vm/sqVirtualMachine.h:71:#if OLD_FOR_REFERENCE
+platforms/Cross/vm/sqVirtualMachine.h:166:# if VM_PROXY_MINOR > 13
+platforms/Cross/vm/sqVirtualMachine.h:177:#if VM_PROXY_MINOR > 1
+platforms/Cross/vm/sqVirtualMachine.h:187:#if VM_PROXY_MINOR > 2
+platforms/Cross/vm/sqVirtualMachine.h:208:#if VM_PROXY_MINOR > 3
+platforms/Cross/vm/sqVirtualMachine.h:215:#if VM_PROXY_MINOR > 4
+platforms/Cross/vm/sqVirtualMachine.h:217:#  if !defined(sqLong)
+platforms/Cross/vm/sqVirtualMachine.h:218:#   if _MSC_VER
+platforms/Cross/vm/sqVirtualMachine.h:234:#if VM_PROXY_MINOR > 5
+platforms/Cross/vm/sqVirtualMachine.h:239:#if VM_PROXY_MINOR > 6
+platforms/Cross/vm/sqVirtualMachine.h:246:#if VM_PROXY_MINOR > 7
+platforms/Cross/vm/sqVirtualMachine.h:256:#if OLD_FOR_REFERENCE
+platforms/Cross/vm/sqVirtualMachine.h:285:#if VM_PROXY_MINOR > 8
+platforms/Cross/vm/sqVirtualMachine.h:291:# if OLD_FOR_REFERENCE /* slot repurposed for storeLong32ofObjectwithValue */
+platforms/Cross/vm/sqVirtualMachine.h:302:#if VM_PROXY_MINOR > 9
+platforms/Cross/vm/sqVirtualMachine.h:303:# if VM_PROXY_MINOR > 13 /* OS Errors available in primitives; easy return forms */
+platforms/Cross/vm/sqVirtualMachine.h:319:#if VM_PROXY_MINOR > 10
+platforms/Cross/vm/sqVirtualMachine.h:333:#if VM_PROXY_MINOR > 11
+platforms/Cross/vm/sqVirtualMachine.h:348:#if VM_PROXY_MINOR > 12 /* Spur */
+platforms/Cross/vm/sqVirtualMachine.h:359:#if VM_PROXY_MINOR > 13 /* OS Errors available in primitives; easy return forms (see above) */
+platforms/Cross/vm/sqVirtualMachine.h:365:#if VM_PROXY_MINOR > 14 /* SmartSyntaxPlugin validation rewrite support */
+platforms/Cross/vm/sqVirtualMachine.h:369:#if VM_PROXY_MINOR > 15 /* Spur integer and float array classes */
+platforms/Cross/vm/sqVirtualMachine.h:376:#if VM_PROXY_MINOR > 16 /* Spur isShorts, isLong64s testing, hash etc */
+platforms/Cross/vm/sqVirtualMachine.h:386:# if (defined(SQUEAK_BUILTIN_PLUGIN) || defined(FOR_SVM_C)) \
+platforms/Cross/vm/sqVirtualMachine.h:413:#if OLD_FOR_REFERENCE /* slot repurposed for error */
+platforms/Cross/vm/sqVirtualMachine.h:454:#if VM_PROXY_MINOR > 10
+platforms/Cross/vm/sqVirtualMachine.h:553:#if VM_PROXY_MINOR > 8
+platforms/Cross/vm/sqVirtualMachine.h:555:# if OLD_FOR_REFERENCE /* slot repurposed for storeLong32ofObjectwithValue */
+platforms/Cross/vm/sqVirtualMachine.h:564:#if VM_PROXY_MINOR > 12 /* Spur */
+platforms/Cross/vm/sqVirtualMachine.h:575:#if VM_PROXY_MINOR > 13 /* More Spur + OS Errors available via prim error code */
+platforms/Cross/vm/sqVirtualMachine.h:581:#if VM_PROXY_MINOR > 14 /* SmartSyntaxPlugin validation rewrite support */
+platforms/Cross/vm/sqVirtualMachine.h:585:#if VM_PROXY_MINOR > 15 /* Spur integer and float array classes */
+platforms/Cross/vm/sqVirtualMachine.h:592:#if VM_PROXY_MINOR > 16 /* Spur isShorts and isLong64s testing support, hash */
+platforms/Cross/vm/sqVirtualMachine.h:606:#if NewspeakVM
+platforms/Cross/vm/sqVirtualMachine.h:619:# if VM_PROXY_MINOR > 13 /* OS Errors available in primitives; easy return forms */
+platforms/Cross/vm/sqLowcodeFFI-Unsupported.h:7:#ifndef _SQ_LOWCODE_FFI_I386_H_
+platforms/Cross/vm/sqSCCSVersion.h:31:#if SUBVERSION
+platforms/Cross/vm/sqSCCSVersion.h:74:#elif GIT
+platforms/Cross/vm/sqSCCSVersion.h:146:#if 1 /* a) mingw32 doesn't have asprintf and b) on Mac OS it segfaults. */
+platforms/Cross/vm/sqSCCSVersion.h:176:#if VERSION_PROGRAM
+platforms/Cross/vm/sqSCCSVersion.h:179:#if SistaVM
+platforms/Cross/vm/sqSCCSVersion.h:181:#elif COGVM
+platforms/Cross/vm/sqSCCSVersion.h:183:#elif STACKVM
+platforms/Cross/vm/sqSCCSVersion.h:189:#if SPURVM
+platforms/Cross/vm/sqSCCSVersion.h:247:# if GIT
+platforms/Cross/vm/sqMathShim.h:6:#if BIT_IDENTICAL_FLOATING_POINT
+platforms/Cross/vm/sqLowcodeFFI-i386.h:7:#ifndef _SQ_LOWCODE_FFI_I386_H_
+platforms/Cross/vm/sqLowcodeFFI-i386.h:48:#if defined(_WIN32)
+platforms/Cross/vm/sqLowcodeFFI-i386.h:51:#elif defined(__APPLE__)
+platforms/Cross/vm/sqSetjmpShim.h:34:#if !defined(_WIN32)
+platforms/Cross/vm/sqSetjmpShim.h:41:#if __MINGW32__ || __MINGW64__ /* clang on cygwin/mingw */
+platforms/Cross/vm/sqPath.h:29:#ifndef SQ_PATH_H
+platforms/Cross/vm/sqCogStackAlignment.h:20:#if COGVM && !defined(getReturnAddress)
+platforms/Cross/vm/sqCogStackAlignment.h:21:# if _MSC_VER
+platforms/Cross/vm/sqCogStackAlignment.h:25:# elif defined(__GNUC__) /* gcc, clang, icc etc */
+platforms/Cross/vm/sqCogStackAlignment.h:37:#if __i386__ || _M_IX86
+platforms/Cross/vm/sqCogStackAlignment.h:38:# if __SSE2__ || (__APPLE__ && __MACH__) || __linux__ || _M_IX86_FP==2
+platforms/Cross/vm/sqCogStackAlignment.h:48:# if _MSC_VER
+platforms/Cross/vm/sqCogStackAlignment.h:53:#if defined(__arm64__) || defined(__aarch64__) || defined(ARM64)
+platforms/Cross/vm/sqCogStackAlignment.h:57:#elif defined(__arm__) || defined(__arm32__) || defined(ARM32)
+platforms/Cross/vm/sqCogStackAlignment.h:65:#if defined(x86_64) || defined(__amd64) || defined(__x86_64) || defined(__amd64__) || defined(__x86_64__) || defined(_M_AMD64) || defined(_M_X64) || defined(_M_IA64)
+platforms/Cross/vm/sqCogStackAlignment.h:87:# if __APPLE__ && __MACH__ && 0/* i.e. the __m256 regime */
+platforms/Cross/vm/sqCogStackAlignment.h:96:#if defined(STACK_ALIGN_BYTES)
+platforms/Cross/vm/sqCogStackAlignment.h:97:# if defined(_X86_) || defined(i386) || defined(__i386) || defined(__i386__)
+platforms/Cross/vm/sqCogStackAlignment.h:98:#  if __GNUC__ || __clang__
+platforms/Cross/vm/sqCogStackAlignment.h:106:# elif defined(__arm64__) || defined(__aarch64__) || defined(ARM64)
+platforms/Cross/vm/sqCogStackAlignment.h:110:#  if __GNUC__
+platforms/Cross/vm/sqCogStackAlignment.h:121:# elif defined(__arm__) || defined(__arm32__) || defined(ARM32)
+platforms/Cross/vm/sqCogStackAlignment.h:125:#  if __GNUC__
+platforms/Cross/vm/sqCogStackAlignment.h:133:# elif defined(x86_64) || defined(__x86_64) || defined(__x86_64__) || defined(__amd64) || defined(__amd64__) || defined(x64) || defined(_M_AMD64) || defined(_M_X64) || defined(_M_IA64)
+platforms/Cross/vm/sqCogStackAlignment.h:134:#  if __GNUC__ || __clang__
+platforms/Cross/vm/sqCogStackAlignment.h:148:#  if defined(powerpc) || defined(__powerpc__) || defined(_POWER) || defined(__POWERPC__) || defined(__PPC__)
+platforms/Cross/vm/sqCogStackAlignment.h:150:#  elif defined(__sparc64__) || defined(__sparcv9__) || defined(__sparc_v9__) /* must precede 32-bit sparc defs */
+platforms/Cross/vm/sqCogStackAlignment.h:152:#  elif defined(sparc) || defined(__sparc__) || defined(__sparclite__)
+platforms/Cross/vm/sqCogStackAlignment.h:160:#if !defined(getfp)
+platforms/Cross/vm/sqCogStackAlignment.h:163:#if !defined(getsp)
+platforms/Cross/vm/sqCogStackAlignment.h:167:#if !defined(STACK_SP_ALIGNMENT)
+platforms/Cross/vm/sqCogStackAlignment.h:170:#if !defined(assertCStackWellAligned)
+platforms/Cross/vm/sqCogStackAlignment.h:171:# if defined(cFramePointerInUse)
+platforms/Cross/vm/sq.h:9:#ifndef _SQ_H
+platforms/Cross/vm/sq.h:13:#ifdef HAVE_CONFIG_H
+platforms/Cross/vm/sq.h:48:#if !defined(IMAGE_DIALECT_NAME)
+platforms/Cross/vm/sq.h:49:# if NewspeakVM
+platforms/Cross/vm/sq.h:53:# elif CuisVM
+platforms/Cross/vm/sq.h:57:# elif PharoVM
+platforms/Cross/vm/sq.h:117:#if STACKVM
+platforms/Cross/vm/sq.h:145:# if ITIMER_HEARTBEAT		/* Hack; allow heartbeat to avoid */
+platforms/Cross/vm/sq.h:151:# if COGVM
+platforms/Cross/vm/sq.h:196:#if VM_TICKER
+platforms/Cross/vm/sq.h:256:#if STACKVM || NewspeakVM
+platforms/Cross/vm/sq.h:261:#if !defined(INITIAL_EXT_SEM_TABLE_SIZE)
+platforms/Cross/vm/sq.h:268:# if !defined(ioCurrentOSThread)
+platforms/Cross/vm/sq.h:271:# if !defined(ioOSThreadsEqual)
+platforms/Cross/vm/sq.h:274:# if !COGMTVM
+platforms/Cross/vm/sq.h:280:#if STACKVM
+platforms/Cross/vm/sq.h:288:#if COGMTVM
+platforms/Cross/vm/sq.h:327:# if !defined(ioGetThreadLocalThreadIndex)
+platforms/Cross/vm/sq.h:330:# if !defined(ioSetThreadLocalThreadIndex)
+platforms/Cross/vm/sq.h:334:# if !defined(ioNewOSThread)
+platforms/Cross/vm/sq.h:337:# if !defined(ioExitOSThread)
+platforms/Cross/vm/sq.h:340:# if !defined(ioReleaseOSThreadState)
+platforms/Cross/vm/sq.h:343:# if !defined(ioOSThreadIsAlive)
+platforms/Cross/vm/sq.h:347:# if !defined(ioDestroyOSSemaphore)
+platforms/Cross/vm/sq.h:353:# if !defined(ioTransferTimeslice)
+platforms/Cross/vm/sq.h:545:#if defined(DEBUG_EVENT_CHAIN)
+platforms/Cross/vm/sq.h:587:#if SPURVM
+platforms/Cross/vm/sq.h:618:#if SPURVM
+platforms/Cross/vm/sqHeapMap.c:21:#ifdef HAVE_CONFIG_H
+platforms/Cross/vm/sqHeapMap.c:34:#if SQ_IMAGE32
+platforms/Cross/vm/sqVirtualMachine.c:1:#ifdef HAVE_CONFIG_H
+platforms/Cross/vm/sqVirtualMachine.c:22:#if !IMMUTABILITY
+platforms/Cross/vm/sqVirtualMachine.c:29:#if STACKVM
+platforms/Cross/vm/sqVirtualMachine.c:40:#if VM_PROXY_MINOR > 10
+platforms/Cross/vm/sqVirtualMachine.c:50:#if SPURVM // For now these are here; perhaps they're better in the VM.
+platforms/Cross/vm/sqVirtualMachine.c:90:#if SPURVM
+platforms/Cross/vm/sqVirtualMachine.c:96:#if OLD_FOR_REFERENCE // slot repurposed for error
+platforms/Cross/vm/sqVirtualMachine.c:179:#if VM_PROXY_MINOR <= 13 // reused in 14 and above
+platforms/Cross/vm/sqVirtualMachine.c:186:#if VM_PROXY_MINOR > 1
+platforms/Cross/vm/sqVirtualMachine.c:195:#if VM_PROXY_MINOR > 2
+platforms/Cross/vm/sqVirtualMachine.c:213:#if VM_PROXY_MINOR > 3
+platforms/Cross/vm/sqVirtualMachine.c:220:#if VM_PROXY_MINOR > 4
+platforms/Cross/vm/sqVirtualMachine.c:229:#if VM_PROXY_MINOR > 5
+platforms/Cross/vm/sqVirtualMachine.c:234:#if VM_PROXY_MINOR > 6
+platforms/Cross/vm/sqVirtualMachine.c:241:#if VM_PROXY_MINOR > 7
+platforms/Cross/vm/sqVirtualMachine.c:243:# if OLD_FOR_REFERENCE
+platforms/Cross/vm/sqVirtualMachine.c:249:# elif VM_PROXY_MINOR > 16
+platforms/Cross/vm/sqVirtualMachine.c:256:#if VM_PROXY_MINOR > 8
+platforms/Cross/vm/sqVirtualMachine.c:261:# if OLD_FOR_REFERENCE /* slot repurposed for storeLong32ofObjectwithValue */
+platforms/Cross/vm/sqVirtualMachine.c:272:#if VM_PROXY_MINOR > 9
+platforms/Cross/vm/sqVirtualMachine.c:273:# if VM_PROXY_MINOR > 13 // OS Errors available in primitives; easy return forms
+platforms/Cross/vm/sqVirtualMachine.c:289:#if VM_PROXY_MINOR > 10
+platforms/Cross/vm/sqVirtualMachine.c:303:#if VM_PROXY_MINOR > 11
+platforms/Cross/vm/sqVirtualMachine.c:317:#if VM_PROXY_MINOR > 12 // Spur
+platforms/Cross/vm/sqVirtualMachine.c:328:#if VM_PROXY_MINOR > 13 // More Spur + OS Errors available via prim error code
+platforms/Cross/vm/sqVirtualMachine.c:335:#if VM_PROXY_MINOR > 14 // SmartSyntaxPlugin validation rewrite support
+platforms/Cross/vm/sqVirtualMachine.c:339:#if VM_PROXY_MINOR > 15 // Spur integer and float array classes
+platforms/Cross/vm/sqVirtualMachine.c:346:#if VM_PROXY_MINOR > 16 // Spur isShorts and isLong64s testing support, hash
+platforms/Cross/vm/sqVirtualMachine.c:361:#ifndef MUSL
+platforms/Cross/vm/sqVirtualMachine.c:371:#if __MINGW32__
+platforms/Cross/vm/sqVirtualMachine.c:383:#elif defined(_WIN32)
+platforms/Cross/vm/sqVirtualMachine.c:389:#ifndef MUSL
+platforms/Cross/vm/sqVirtualMachine.c:393:#ifndef STDOUT_FILENO
+platforms/Cross/vm/sqVirtualMachine.c:431:#if __linux__
+platforms/Cross/vm/sqExternalSemaphores.c:57:#if !COGMTVM
+platforms/Cross/vm/sqExternalSemaphores.c:65:# if ATOMICADD16
+platforms/Cross/vm/sqExternalSemaphores.c:111:#if COGMTVM
+platforms/Cross/vm/sqExternalSemaphores.c:263:#if FOR_SQUEAK_VM_TESTS
+platforms/Cross/vm/sqTicker.c:31:#if !VM_TICKER
+platforms/Cross/vm/sqTicker.c:97:#if ITIMER_HEARTBEAT
+platforms/Cross/vm/sqTicker.c:149:#if ITIMER_HEARTBEAT
+platforms/Cross/vm/sqTicker.c:163:#if !ITIMER_HEARTBEAT	/* Hack; allow heartbeat to avoid */
+platforms/Cross/vm/sqTicker.c:254:#if ITIMER_HEARTBEAT
+platforms/Cross/vm/sqTicker.c:282:#if ITIMER_HEARTBEAT
+platforms/Cross/vm/sqMemoryFence.h:37:#if defined(__GNUC__)
+platforms/Cross/vm/sqMemoryFence.h:44:#if defined(__GNUC__) || defined(__clang__)
+platforms/Cross/vm/sqMemoryFence.h:45:# if GCC_HAS_BUILTIN_SYNC || defined(__clang__)
+platforms/Cross/vm/sqMemoryFence.h:47:# elif defined(i386) || defined(__i386) || defined(__i386__) || defined(_X86_)
+platforms/Cross/vm/sqMemoryFence.h:48:#	if defined(__MINGW32__) && !__SSE2__
+platforms/Cross/vm/sqMemoryFence.h:55:#elif defined(__SUNPRO_C)
+platforms/Cross/vm/sqMemoryFence.h:57:#elif defined(_MSC_VER)
+platforms/Cross/vm/sqMemoryFence.h:61:# if defined(_M_IX86) || defined(_X86_)
+platforms/Cross/vm/sqMemoryFence.h:65:# elif defined(_WIN64) || defined(_M_X64) || defined(_M_AMD64)
+platforms/Cross/vm/sqMemoryFence.h:70:#if !defined(sqLowLevelMFence)
+platforms/Cross/vm/sqMemoryAccess.h:20:#ifndef __sqMemoryAccess_h
+platforms/Cross/vm/sqMemoryAccess.h:26:#ifndef SIZEOF_LONG
+platforms/Cross/vm/sqMemoryAccess.h:27:#  if LLP64
+platforms/Cross/vm/sqMemoryAccess.h:34:#if (SQ_VI_BYTES_PER_WORD == 4)
+platforms/Cross/vm/sqMemoryAccess.h:42:#if (SQ_IMAGE64 || SPURVM)
+platforms/Cross/vm/sqMemoryAccess.h:50:#if (SIZEOF_VOID_P == 4)
+platforms/Cross/vm/sqMemoryAccess.h:52:#elif (SIZEOF_VOID_P == 8)
+platforms/Cross/vm/sqMemoryAccess.h:63:#if SQ_IMAGE32
+platforms/Cross/vm/sqMemoryAccess.h:71:#elif SQ_HOST64 && (SIZEOF_LONG == 8)
+platforms/Cross/vm/sqMemoryAccess.h:79:#elif (SIZEOF_LONG_LONG != 8)
+platforms/Cross/vm/sqMemoryAccess.h:94:#if !defined(sqLong)
+platforms/Cross/vm/sqMemoryAccess.h:95:#  if SIZEOF_LONG == 8
+platforms/Cross/vm/sqMemoryAccess.h:99:#  elif _MSC_VER
+platforms/Cross/vm/sqMemoryAccess.h:114:#if SIZEOF_LONG == SIZEOF_VOID_P
+platforms/Cross/vm/sqMemoryAccess.h:130:#if SQ_HOST64 && SQ_IMAGE32
+platforms/Cross/vm/sqMemoryAccess.h:137:#ifdef USE_INLINE_MEMORY_ACCESSORS
+platforms/Cross/vm/sqMemoryAccess.h:156:# if defined(sqMemoryBase) && !sqMemoryBase
+platforms/Cross/vm/sqMemoryAccess.h:219:# if defined(sqMemoryBase) && !sqMemoryBase
+platforms/Cross/vm/sqMemoryAccess.h:294:#if BigEndianFloats && !VMBIGENDIAN
+platforms/Cross/vm/sqMemoryAccess.h:326:#ifndef __has_builtin
+platforms/Cross/vm/sqMemoryAccess.h:331:#if (defined(__clang__) && __has_builtin(__builtin_bswap32) && __has_builtin(__builtin_bswap64)) \
+platforms/Cross/vm/sqMemoryAccess.h:336:#elif defined(__linux__)
+platforms/Cross/vm/sqMemoryAccess.h:340:#elif defined(_MSC_VER)
+platforms/Cross/vm/sqMemoryAccess.h:363:#if VMBIGENDIAN
+platforms/Cross/vm/sqMemoryAccess.h:383:#if SPURVM
+platforms/Cross/vm/sqMemoryAccess.h:418:#if COGVM
+platforms/Cross/vm/sqMemoryAccess.h:450:#if !defined(EXPORT)
+platforms/Cross/vm/sqMemoryAccess.h:453:#if !defined(VM_EXPORT)
+platforms/Cross/vm/sqMemoryAccess.h:456:#if !defined(VM_FUNCTION_EXPORT)
+platforms/Cross/vm/sqMemoryAccess.h:470:#if defined(_SQ_PLATFORM_SPECIFIC_H)
+platforms/Cross/vm/sqTextEncoding.h:29:#ifndef SQ_TEXT_ENCODING_H
+platforms/Cross/vm/sqLowcodeFFI.h:7:#ifndef _SQ_LOWCODE_FFI_H_
+platforms/Cross/vm/sqLowcodeFFI.h:12:#if defined(__i386__)
+platforms/Cross/vm/sqLowcodeFFI.h:14:#elif defined(__x86_64__)
+platforms/Cross/third-party/fdlibm/w_lgamma.c:26:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_atanh.c:20:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_acosh.c:22:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_jn.c:43:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_jn.c:58:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_pow.c:22:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/fdlibm.h:13:#ifndef __FDLIBM_H
+platforms/Cross/third-party/fdlibm/fdlibm.h:19:#ifdef __cplusplus
+platforms/Cross/third-party/fdlibm/fdlibm.h:44:#if !defined(MAXFLOAT)
+platforms/Cross/third-party/fdlibm/fdlibm.h:67:#ifndef __MATH_H__ /* math.h may define this */
+platforms/Cross/third-party/fdlibm/fdlibm.h:86:#if !defined(DOMAIN)
+platforms/Cross/third-party/fdlibm/fdlibm.h:101:#if defined(_IEEE_LIBM)
+platforms/Cross/third-party/fdlibm/fdlibm.h:150:# ifdef _SCALB_INT
+platforms/Cross/third-party/fdlibm/fdlibm.h:181:# ifdef _REENTRANT
+platforms/Cross/third-party/fdlibm/fdlibm.h:214:#ifdef _SCALB_INT
+platforms/Cross/third-party/fdlibm/fdlibm.h:227:#ifdef __cplusplus
+platforms/Cross/third-party/fdlibm/e_scalb.c:21:#ifdef _SCALB_INT
+platforms/Cross/third-party/fdlibm/e_scalb.c:27:#ifdef _SCALB_INT
+platforms/Cross/third-party/fdlibm/w_j0.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_j0.c:35:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_exp.c:18:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_exp.c:27:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_atan2.c:22:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/k_standard.c:17:#ifndef _USE_WRITE
+platforms/Cross/third-party/fdlibm/k_standard.c:79:#ifndef HUGE_VAL        /* this is the only routine that uses HUGE_VAL */ 
+platforms/Cross/third-party/fdlibm/k_standard.c:86:#ifdef _USE_WRITE
+platforms/Cross/third-party/fdlibm/configure:1813:#ifndef __GNUC__
+platforms/Cross/third-party/fdlibm/configure:2048:#ifndef __cplusplus
+platforms/Cross/third-party/fdlibm/w_log.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_sinh.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_log10.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_gamma.c:26:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_asin.c:23:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_scalb.c:23:#ifdef _SCALB_INT
+platforms/Cross/third-party/fdlibm/w_scalb.c:29:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_scalb.c:41:#ifndef _SCALB_INT
+platforms/Cross/third-party/fdlibm/w_hypot.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_acos.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_lgamma_r.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_remainder.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_sqrt.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_gamma_r.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/s_lib_version.c:22:#ifdef _POSIX_MODE
+platforms/Cross/third-party/fdlibm/s_lib_version.c:25:#ifdef _XOPEN_MODE
+platforms/Cross/third-party/fdlibm/s_lib_version.c:28:#ifdef _SVID3_MODE
+platforms/Cross/third-party/fdlibm/w_cosh.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_fmod.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_j1.c:21:#ifdef _IEEE_LIBM
+platforms/Cross/third-party/fdlibm/w_j1.c:36:#ifdef _IEEE_LIBM
+platforms/minheadless/common/sqExternalPrimitives.c:29:#ifdef _WIN32
+platforms/minheadless/common/sqExternalPrimitives.c:50:#if defined(_WIN32)
+platforms/minheadless/common/sqExternalPrimitives.c:53:#elif defined(__APPLE__)
+platforms/minheadless/common/sqExternalPrimitives.c:65:#ifdef _WIN32
+platforms/minheadless/common/sqExternalPrimitives.c:67:#if defined(__linux__) || defined(unix) || defined(__APPLE__)
+platforms/minheadless/common/sqExternalPrimitives.c:71:#   if defined(__linux__)
+platforms/minheadless/common/sqExternalPrimitives.c:72:#       if defined(__i386__)
+platforms/minheadless/common/sqExternalPrimitives.c:76:#       elif defined(__x86_64__)
+platforms/minheadless/common/sqExternalPrimitives.c:142:#if SPURVM
+platforms/minheadless/common/sqExternalPrimitives.c:158:#if SPURVM
+platforms/minheadless/common/sqExternalPrimitives.c:178:#if defined(_WIN32)
+platforms/minheadless/common/sqExternalPrimitives.c:185:#ifdef DEBUG
+platforms/minheadless/common/sqExternalPrimitives.c:203:#elif defined(__linux__) || defined(__unix__) || defined(__APPLE__)
+platforms/minheadless/common/sqExternalPrimitives.c:211:#ifdef RTLD_DEEPBIND
+platforms/minheadless/common/sqExternalPrimitives.c:215:#ifdef DEBUG
+platforms/minheadless/common/debug.h:1:#ifndef SQ_DEBUG_H
+platforms/minheadless/common/sqGnu.h:41:#if defined(__powerpc__) || defined(PPC) || defined(_POWER) || defined(_IBMR2) || defined(__ppc__)
+platforms/minheadless/common/sqGnu.h:49:#if MULTIPLEBYTECODESETS
+platforms/minheadless/common/sqGnu.h:143:#if defined(__mips__)
+platforms/minheadless/common/sqGnu.h:147:#elif defined(__sparc__)
+platforms/minheadless/common/sqGnu.h:151:#elif defined(__alpha__)
+platforms/minheadless/common/sqGnu.h:155:#elif defined(__i386__)
+platforms/minheadless/common/sqGnu.h:158:# if (__GNUC__ > 2) || ((__GNUC__ == 2) && (__GNUC_MINOR__ >= 95))
+platforms/minheadless/common/sqGnu.h:163:#elif defined(__powerpc__) || defined(PPC) || defined(_POWER) || defined(_IBMR2) || defined(__ppc__)
+platforms/minheadless/common/sqGnu.h:169:#elif defined(__hppa__)
+platforms/minheadless/common/sqGnu.h:173:#elif defined(__mc68000__)
+platforms/minheadless/common/sqGnu.h:179:#if !defined(JP_REG)
+platforms/minheadless/common/sqGnu.h:182:#if !defined(IP_REG)
+platforms/minheadless/common/sqGnu.h:185:#if !defined(SP_REG)
+platforms/minheadless/common/sqGnu.h:188:#if !defined(CB_REG)
+platforms/minheadless/common/sqGnu.h:191:#if !defined(GP_REG)
+platforms/minheadless/common/sqGnu.h:194:#if !defined(FP_REG)
+platforms/minheadless/common/glibc.h:2:#if defined(__GNUC__) && defined(__GLIBC_PREREQ)
+platforms/minheadless/common/glibc.h:3:# if __GLIBC_PREREQ(2,3)
+platforms/minheadless/common/sqaio.h:31:#ifndef __sqaio_h
+platforms/minheadless/common/sqaio.h:101:#ifdef AIO_DEBUG
+platforms/minheadless/common/sqaio.h:102:# ifdef ACORN
+platforms/minheadless/common/sqWindow-Dispatch.c:11:#ifdef SUPPORT_TRADITIONAL_DISPLAY
+platforms/minheadless/common/sqWindow-Dispatch.c:12:#   ifdef HAVE_SDL2
+platforms/minheadless/common/sqWindow-Dispatch.c:19:#ifdef SUPPORT_TRADITIONAL_DISPLAY
+platforms/minheadless/common/sqWindow-Dispatch.c:20:#   ifdef HAVE_SDL2
+platforms/minheadless/common/sqEventCommon.h:29:#ifndef SQ_EVENT_COMMON_H
+platforms/minheadless/common/sqEventCommon.h:35:#ifndef SQ_EVENT_QUEUE_SIZE
+platforms/minheadless/common/sqPlatformSpecificCommon.h:29:#ifndef _SQ_PLATFORM_SPECIFIC_COMMON_H
+platforms/minheadless/common/sqPlatformSpecificCommon.h:44:#ifndef error
+platforms/minheadless/common/sqVirtualMachineInterface.c:29:#ifndef _WIN32
+platforms/minheadless/common/sqVirtualMachineInterface.c:106:#ifdef _WIN32
+platforms/minheadless/common/sqVirtualMachineInterface.c:243:#if STACKVM
+platforms/minheadless/common/sqVirtualMachineInterface.c:248:# if COGVM
+platforms/minheadless/common/sqVirtualMachineInterface.c:286:#if STACKVM
+platforms/minheadless/common/sqVirtualMachineInterface.c:289:# if COGVM
+platforms/minheadless/common/sqVirtualMachineInterface.c:301:#if SPURVM
+platforms/minheadless/common/sqVirtualMachineInterface.c:302:# if BytesPerOop == 8
+platforms/minheadless/common/sqVirtualMachineInterface.c:310:#if defined(NDEBUG)
+platforms/minheadless/common/sqVirtualMachineInterface.c:312:#elif DEBUGVM
+platforms/minheadless/common/sqVirtualMachineInterface.c:318:#if ITIMER_HEARTBEAT
+platforms/minheadless/common/sqVirtualMachineInterface.c:327:#if defined(USE_XSHM)
+platforms/minheadless/common/sqVirtualMachineInterface.c:334:#if COGVM
+platforms/minheadless/common/sqVirtualMachineInterface.c:411:#ifdef __APPLE__
+platforms/minheadless/common/sqVirtualMachineInterface.c:474:#ifndef _WIN32
+platforms/minheadless/common/sqVirtualMachineInterface.c:541:#ifdef __APPLE__
+platforms/minheadless/common/sqVirtualMachineInterface.c:574:#ifdef __APPLE__
+platforms/minheadless/common/sqVirtualMachineInterface.c:677:#    ifdef DEBUG_IMAGE
+platforms/minheadless/common/sqVirtualMachineInterface.c:681:#if SPURVM
+platforms/minheadless/common/sqVirtualMachineInterface.c:775:#ifdef __APPLE__
+platforms/minheadless/common/sqVirtualMachineInterface.c:805:#ifdef __APPLE__
+platforms/minheadless/common/sqPrinting.c:33:#ifdef error
+platforms/minheadless/common/sqPrinting.c:51:#ifdef _WIN32
+platforms/minheadless/common/sqPrinting.c:179:#ifndef printLastError
+platforms/minheadless/common/sqPrinting.c:193:#ifndef vprintLastError
+platforms/minheadless/common/sqPrinting.c:216:#ifndef sqMessageBox
+platforms/minheadless/common/sqPrinting.c:237:#ifndef abortMessage
+platforms/minheadless/common/version.c:7:#if VERSION_PROGRAM
+platforms/minheadless/common/version.c:10:# if !defined __VERSION__
+platforms/minheadless/common/version.c:14:# if !defined(TZ)
+platforms/minheadless/common/sqWindow.h:1:#ifndef SQUEAK_WINDOW_H
+platforms/minheadless/common/sqConfig.h:1:#ifndef SQ_COMFIG_H_
+platforms/minheadless/common/sqConfig.h:6:#if defined(__GNUC__)
+platforms/minheadless/common/sqConfig.h:11:# if defined(_M_I386) || defined(_X86_) || defined(i386) || defined(i486) || defined(i586) || defined(i686) || defined(__i386__) || defined(__386__) || defined(X86) || defined(I386)
+platforms/minheadless/common/sqConfig.h:17:#if defined( __clang__)
+platforms/minheadless/common/sqPlatformSpecific.h:29:#ifndef _SQ_PLATFORM_SPECIFIC_H
+platforms/minheadless/common/sqPlatformSpecific.h:35:#if defined(_WIN32)
+platforms/minheadless/common/sqPlatformSpecific.h:37:#elif defined(__linux__) || defined(__unix__) || defined(__APPLE__)
+platforms/minheadless/unix/sqUnixHeartbeat.c:18:#if ITIMER_HEARTBEAT
+platforms/minheadless/unix/sqUnixHeartbeat.c:19:# if VM_TICKER
+platforms/minheadless/unix/sqUnixHeartbeat.c:59:#if LOG_CLOCK
+platforms/minheadless/unix/sqUnixHeartbeat.c:153:#ifdef HAVE_TM_GMTOFF
+platforms/minheadless/unix/sqUnixHeartbeat.c:159:# ifdef HAVE_TIMEZONE
+platforms/minheadless/unix/sqUnixHeartbeat.c:174:#if defined(__GNUC__) && (defined(i386) || defined(__i386) || defined(__i386__)  \
+platforms/minheadless/unix/sqUnixHeartbeat.c:177:#elif defined(__arm__) && (defined(__ARM_ARCH_6__) || defined(__ARM_ARCH_7A__))
+platforms/minheadless/unix/sqUnixHeartbeat.c:179:#elif defined(EMSCRIPTEN)
+platforms/minheadless/unix/sqUnixHeartbeat.c:237:#if macintoshSqueak
+platforms/minheadless/unix/sqUnixHeartbeat.c:301:#if !defined(DEFAULT_BEAT_MS)
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:50:#if !NOEXECINFO
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:54:#if __OpenBSD__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:57:#if __FreeBSD__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:60:#if __sun__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:71:#ifdef __APPLE__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:75:#if defined(__GNUC__) && ( defined(i386) || defined(__i386) || defined(__i386__)  \
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:86:#if defined(__GNUC__) && ( defined(ppc) || defined(__ppc) || defined(__ppc__)  \
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:97:#if !defined(min)
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:143:#ifdef HAVE_TM_GMTOFF
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:146:# ifdef HAVE_TIMEZONE
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:157:#if COGVM
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:261:#    if defined(DARWIN)
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:339:#if defined(__linux__)
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:344:#if defined(__linux__)
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:383:#if !NOEXECINFO
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:391:#if COGVM
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:399:#if COGVM
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:405:#if !NOEXECINFO
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:420:#if COGVM
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:425:# if __APPLE__ && __MACH__ && __i386__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:426:#	  if __GNUC__ && !__INTEL_COMPILER /* icc pretends to be gcc */
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:433:# elif __APPLE__ && __MACH__ && __x86_64__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:436:# elif __linux__ && __i386__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:439:#	elif __linux__ && __x86_64__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:442:# elif __FreeBSD__ && __i386__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:445:# elif __OpenBSD__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:448:# elif __sun__ && __i386__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:451:# elif defined(__arm__) || defined(__arm32__) || defined(ARM32)
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:472:#if COGVM
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:480:#if STACKVM
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:483:# if COGVM
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:496:#if __linux__ && __i386__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:505:#elif __APPLE__ && __DARWIN_UNIX03 && __i386__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:514:#elif __APPLE__ && __i386__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:523:#elif __APPLE__ && __x86_64__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:536:# elif __APPLE__ && (defined(__arm__) || defined(__arm32__))
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:548:#elif __FreeBSD__ && __i386__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:557:#elif __linux__ && __x86_64__
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:570:# elif __linux__ && (defined(__arm__) || defined(__arm32__) || defined(ARM32))
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:644:#if defined(IMAGE_DUMP)
+platforms/minheadless/unix/sqPlatformSpecific-Unix.c:671:#if defined(IMAGE_DUMP)
+platforms/minheadless/unix/sqUnixCharConv.c:32:#if !defined(__MACH__)
+platforms/minheadless/unix/sqUnixCharConv.c:55:#if defined(__MACH__)
+platforms/minheadless/unix/sqUnixCharConv.c:154:#elif defined(HAVE_ICONV_H)
+platforms/minheadless/unix/sqUnixCharConv.c:404:#if defined(__MACH__)
+platforms/minheadless/unix/sqUnixCharConv.c:427:#if defined(CONV_TEST)
+platforms/minheadless/unix/sqUnixCharConv.c:430:#if defined(HAVE_LANGINFO_CODESET)
+platforms/minheadless/unix/sqUnixCharConv.c:436:#if defined(HAVE_LANGINFO_CODESET)
+platforms/minheadless/unix/aioUnix.c:36:#ifdef HAVE_CONFIG_H
+platforms/minheadless/unix/aioUnix.c:40:# ifdef HAVE_UNISTD_H
+platforms/minheadless/unix/aioUnix.c:45:# ifdef NEED_GETHOSTNAME_P
+platforms/minheadless/unix/aioUnix.c:55:# if defined(HAVE_SYS_TIME_H) && !defined(EMSCRIPTEN)
+platforms/minheadless/unix/aioUnix.c:61:# if HAVE_KQUEUE
+platforms/minheadless/unix/aioUnix.c:63:# elif HAVE_EPOLL
+platforms/minheadless/unix/aioUnix.c:65:# elif HAVE_SELECT
+platforms/minheadless/unix/aioUnix.c:69:# ifndef FIONBIO
+platforms/minheadless/unix/aioUnix.c:70:#   ifdef HAVE_SYS_FILIO_H
+platforms/minheadless/unix/aioUnix.c:73:#   ifndef FIONBIO
+platforms/minheadless/unix/aioUnix.c:74:#     ifdef FIOSNBIO
+platforms/minheadless/unix/aioUnix.c:82:# if __sun__
+platforms/minheadless/unix/aioUnix.c:103:#if defined(AIO_DEBUG)
+platforms/minheadless/unix/aioUnix.c:131:#ifdef AIO_DEBUG
+platforms/minheadless/unix/aioUnix.c:144:#ifdef DEBUG_SOCKETS
+platforms/minheadless/unix/aioUnix.c:204:#if COGMTVM
+platforms/minheadless/unix/aioUnix.c:242:#ifdef TARGET_OS_IS_IPHONE
+platforms/minheadless/unix/aioUnix.c:302:#if defined(HAVE_NANOSLEEP)
+platforms/minheadless/unix/aioUnix.c:352:#if defined(O_ASYNC)
+platforms/minheadless/unix/aioUnix.c:360:#elif defined(FASYNC)
+platforms/minheadless/unix/aioUnix.c:368:#elif defined(FIOASYNC)
+platforms/minheadless/unix/sqImageFileAccess.h:11:#ifndef _SQ_IMAGE_FILE_ACCESS_H
+platforms/minheadless/unix/sqImageFileAccess.h:54:#if !defined(min)
+platforms/minheadless/unix/sqUnixThreads.c:20:#if COGMTVM
+platforms/minheadless/unix/sqUnixThreads.c:66:#if DEBUG
+platforms/minheadless/unix/sqUnixThreads.c:94:#if DEBUG
+platforms/minheadless/unix/sqUnixThreads.c:120:#if DEBUG
+platforms/minheadless/unix/sqUnixThreads.c:165:# if defined(CTL_HW) && defined(HW_AVAILCPU)
+platforms/minheadless/unix/sqUnixThreads.c:176:# elif defined(_SC_NPROCESSORS_ONLN)
+platforms/minheadless/unix/sqUnixThreads.c:198:#if !COGMTVM
+platforms/minheadless/unix/sqUnixThreads.c:204:#if COGMTVM
+platforms/minheadless/unix/sqUnixSpurMemory.c:32:#if DUAL_MAPPED_CODE_ZONE
+platforms/minheadless/unix/sqUnixSpurMemory.c:43:#if SPURVM
+platforms/minheadless/unix/sqUnixSpurMemory.c:76:# if !defined(HAVE_MMAP)
+platforms/minheadless/unix/sqUnixSpurMemory.c:79:# if !defined(MAP_ANON) && !defined(MAP_ANONYMOUS)
+platforms/minheadless/unix/sqUnixSpurMemory.c:85:# if !defined(MAP_ANON)
+platforms/minheadless/unix/sqUnixSpurMemory.c:155:# if COGVM
+platforms/minheadless/unix/sqUnixSpurMemory.c:156:#   if DUAL_MAPPED_CODE_ZONE
+platforms/minheadless/unix/sqUnixSpurMemory.c:203:#  if DUAL_MAPPED_CODE_ZONE
+platforms/minheadless/unix/sqUnixSpurMemory.c:245:# if TEST_MEMORY
+platforms/minheadless/unix/sqPlatformSpecific-Unix.h:44:#if COGVM
+platforms/minheadless/unix/sqPlatformSpecific-Unix.h:50:#if STACKVM || NewspeakVM
+platforms/minheadless/unix/sqPlatformSpecific-Unix.h:57:# if COGMTVM
+platforms/minheadless/unix/sqPlatformSpecific-Unix.h:67:#  if !ForCOGMTVMImplementation /* this is a read-only export */
+platforms/minheadless/unix/sqPlatformSpecific-Unix.h:98:#if defined(__GNUC__)
+platforms/minheadless/unix/sqPlatformSpecific-Unix.h:99:# if !defined(VM_LABEL)
+platforms/minheadless/unix/sqPlatformSpecific-Unix.h:103:# if HAVE_ALLOCA_H
+platforms/minheadless/unix/sqPlatformSpecific-Unix.h:106:#   ifdef _AIX
+platforms/minheadless/unix/sqPlatformSpecific-Unix.h:109:#     ifndef alloca /* predefined by HP cc +Olibcalls */
+platforms/minheadless/unix/sqPlatformSpecific-Unix.h:116:#if !defined(VM_LABEL) || COGVM || STACKVM
+platforms/minheadless/unix/sqUnixMemory.c:42:#if !SPURVM /* Spur uses sqUnixSpurMemory.c */
+platforms/minheadless/unix/sqUnixMemory.c:71:#if defined(HAVE_MMAP)
+platforms/minheadless/unix/sqUnixMemory.c:75:#if !defined(MAP_ANON)
+platforms/minheadless/unix/sqUnixMemory.c:76:# if defined(MAP_ANONYMOUS)
+platforms/minheadless/unix/sqUnixMemory.c:90:#if COGVM
+platforms/minheadless/unix/sqUnixMemory.c:94:#if SQ_IMAGE32 && SQ_HOST64
+platforms/minheadless/unix/sqUnixMemory.c:114:#if SPURVM
+platforms/minheadless/unix/sqUnixMemory.c:127:# if !ALWAYS_USE_MMAP
+platforms/minheadless/unix/sqUnixMemory.c:141:# if (!MAP_ANON)
+platforms/minheadless/unix/sqUnixMemory.c:260:# if COG
+platforms/minheadless/unix/sqUnixMemory.c:270:#	if SPURVM
+platforms/minheadless/unix/sqUnixMemory.c:287:#if SQ_IMAGE32 && SQ_HOST64
+platforms/minheadless/unix/sqUnixMemory.c:323:#if COGVM
+platforms/minheadless/unix/sqUnixMemory.c:341:# if 0
+platforms/minheadless/unix/sqUnixMemory.c:355:# if defined(TEST_MEMORY)
+platforms/minheadless/unix/sqUnixCharConv.h:32:#ifndef __sqUnixCharConv_h

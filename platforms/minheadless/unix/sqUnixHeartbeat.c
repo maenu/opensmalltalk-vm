@@ -140,6 +140,7 @@ updateMicrosecondClock()
 
 	set64(utcMicrosecondClock,newUtcMicrosecondClock);
 	set64(localMicrosecondClock,newLocalMicrosecondClock);
+	//printf("%llu utcMicrosecondClock\n%llu get64(utcMicrosecondClock)\n", utcMicrosecondClock, get64(utcMicrosecondClock));
 	millisecondClock = microToMilliseconds(newUtcMicrosecondClock);
 
 	logusecs(newUtcMicrosecondClock);

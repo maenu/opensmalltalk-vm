@@ -126,11 +126,18 @@ sqAllocateMemory(usqInt minHeapSize, usqInt desiredHeapSize)
 void *
 sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(sqInt size, void *minAddress, sqInt *allocatedSizePointer)
 {
-	void *alloc;
-	long bytes;
+	char *address, *alloc;
+	long bytes, delta;
+#ifdef EMSCRIPTEN
+	char *allocSpacer;
+#endif
 
+	address = (char *)roundUpToPage((unsigned long)minAddress);
 	bytes = roundUpToPage(size);
-	// WASM takes no hints
+	delta = max(pageSize,1024*1024);
+	
+#ifdef EMSCRIPTEN
+	// take it or leave it
 	alloc = mmap(0, bytes, PROT_READ | PROT_WRITE /*| PROT_EXEC*/,
 				 MAP_ANON | MAP_PRIVATE, -1, 0);
 	if (alloc == MAP_FAILED) {
@@ -140,6 +147,28 @@ sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(sqInt size, void *minAddress
 	}
 	*allocatedSizePointer = bytes;
 	return alloc;
+#else
+	while ((unsigned long)(address + bytes) > (unsigned long)address) {
+		alloc = mmap(address, bytes, PROT_READ | PROT_WRITE /*| PROT_EXEC*/,
+					 MAP_ANON | MAP_PRIVATE, -1, 0);
+		if (alloc == MAP_FAILED) {
+			mmapErrno = errno;
+			perror("sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto mmap");
+			return 0;
+		}
+		if (alloc >= address && alloc <= address + delta) {
+			*allocatedSizePointer = bytes;
+			return alloc;
+		}
+		/* mmap answered a mapping well away from where Spur prefers.  Discard
+		 * the mapping and try again delta higher.
+		 */
+		if (munmap(alloc, bytes) != 0)
+			perror("sqAllocateMemorySegment... munmap");
+		address += delta;
+	}
+#endif
+	return 0;
 }
 
 /* Deallocate a region of memory previously allocated by

@@ -3,13 +3,13 @@
 if ../../../../scripts/checkSCCSversion ; then exit 1; fi
 . ./configure_variant.sh
 
-#  -sERROR_ON_WASM_CHANGES_AFTER_LINK -gdwarf-5 -gsplit-dwarf -gpubnames -sSAFE_HEAP_LOG=1
+# --debug-trycompile \
+# -DCMAKE_TOOLCHAIN_FILE="$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" \
+# -DCMAKE_CROSSCOMPILING_EMULATOR="$(which node);--experimental-wasm-threads" \
+# -sERROR_ON_WASM_CHANGES_AFTER_LINK -gdwarf-5 -gsplit-dwarf -gpubnames -sSAFE_HEAP_LOG=1
 emcmake cmake ../../../../.. \
-	--debug-trycompile \
-	-DCMAKE_TOOLCHAIN_FILE="$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" \
 	-DCMAKE_BUILD_TYPE="$VARIANT_NAME" $CMAKE_EXTRA_ARGS \
     -DCMAKE_INSTALL_PREFIX=install-dist \
-	-DCMAKE_CROSSCOMPILING_EMULATOR="$(which node);--experimental-wasm-threads" \
 	-G "$GENERATOR_NAME" \
 	-DMINIMAL_PLUGIN_SET=On \
 	-DPHARO_BRANDING=On \

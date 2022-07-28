@@ -30,89 +30,6 @@ char *__interpBuildInfo = __buildInfo;
 #include "sqSetjmpShim.h"
 #include "dispdbg.h"
 
-#include <sys/ucontext.h>
-static void
-reportStackState(FILE *file,const char *msg, char *date, int printAll, ucontext_t *uap)
-{
-#if !defined(NOEXECINFO) && defined(HAVE_EXECINFO_H)
-	void *addrs[BACKTRACE_DEPTH];
-	void *pc;
-	int depth;
-#endif
-	/* flag prevents recursive error when trying to print a broken stack */
-	static sqInt printingStack = false;
-
-#if COGVM
-	/* Testing stackLimit tells us whether the VM is initialized. */
-	extern usqInt stackLimitAddress(void);
-#endif
-
-	fprintf(file,"\n%s%s%s\n\n", msg, date ? " " : "", date ? date : "");
-	//fprintf(file,"%s\n%s\n\n", GetAttributeString(0), getVersionInfo(1));
-
-#if COGVM
-	/* Do not attempt to report the stack until the VM is initialized!! */
-	if (!*(char **)stackLimitAddress())
-		return;
-#endif
-
-#if !defined(NOEXECINFO) && defined(HAVE_EXECINFO_H)
-	fprintf(file,"C stack backtrace & registers:\n");
-	if (uap) {
-		addrs[0] = printRegisterState(file,uap);
-		depth = 1 + backtrace(addrs + 1, BACKTRACE_DEPTH);
-	}
-	else
-		depth = backtrace(addrs, BACKTRACE_DEPTH);
-	fputc('*',file); /* indicate where pc is */
-	fflush(file); /* backtrace_symbols_fd uses unbuffered i/o */
-	backtrace_symbols_fd(addrs, depth + 1, fileno(file));
-#endif
-
-	if (ioOSThreadsEqual(ioCurrentOSThread(),getVMOSThread())) {
-		if (!printingStack) {
-#if COGVM
-			/* If we're in generated machine code then the only way the stack
-			 * dump machinery has of giving us an accurate report is if we set
-			 * stackPointer & framePointer to the native stack & frame pointers.
-			 */
-			void *fp = (void *)(uap ? uap->_FP_IN_UCONTEXT : 0);
-			void *sp = (void *)(uap ? uap->_SP_IN_UCONTEXT : 0);
-			char *savedSP, *savedFP;
-
-			ifValidWriteBackStackPointersSaveTo(fp,sp,&savedFP,&savedSP);
-#endif /* COGVM */
-
-			printingStack = true;
-			if (printAll) {
-				fprintf(file,"\n\nAll Smalltalk process stacks (active first):\n");
-				printAllStacksOn(file);
-			}
-			else {
-				fprintf(file,"\n\nSmalltalk stack dump:\n");
-				printCallStackOn(file);
-			}
-			printingStack = false;
-#if COGVM
-			/* Now restore framePointer and stackPointer via same function */
-			ifValidWriteBackStackPointersSaveTo(savedFP,savedSP,0,0);
-#endif
-		}
-	}
-	else
-		fprintf(file,"\nCan't dump Smalltalk stack(s). Not in VM thread\n");
-#if STACKVM
-	fprintf(file,"\nMost recent primitives\n");
-	dumpPrimTraceLogOn(file);
-# if COGVM
-	fprintf(file,"\n");
-	reportMinimumUnusedHeadroom();
-# endif
-#endif
-	fprintf(file,"\n\t(%s)\n", msg);
-	fflush(file);
-}
-
 /* StackInterpreter class>>preambleCCode */
 /* Disable Intel compiler inlining of warning which is used for breakpoints */
 #pragma auto_inline(off)
@@ -2596,6 +2513,8 @@ interpret(void)
 
 		VM_LABEL(bytecodeDispatch);
 		printf("currentBytecode = %d\n", currentBytecode);
+		printCallStack();
+		printMethodCache();
 		switch (currentBytecode) {
 		case 0:
 		case 256: /*0*/
@@ -5179,7 +5098,6 @@ interpret(void)
 		case 348: /*92*/
 			/* returnTopFromMethod */
 			{
-				reportStackState(stdout,0,0,0,0);
 				VM_LABEL(returnTopFromMethod);
 				/* begin internalStackTop */
 				localReturnValue = longAtPointer(localSP);
@@ -5812,7 +5730,43 @@ interpret(void)
 							localPrimIndex = ((sqInt) primitiveFunctionPointer);
 							assert((localPrimIndex > 0xFF)
 							 && (localPrimIndex < 520));
-							printf("localPrimIndex = %d\n", localPrimIndex);
+							if (localPrimIndex == 402) {
+								printf("localPrimIndex = %d\n", localPrimIndex);
+								printf("primitiveFunctionPointer %d, primitiveTable[171]: %d, primitiveImmediateAsInteger %p\n", primitiveFunctionPointer, primitiveTable[171], &primitiveImmediateAsInteger);
+								printf("printRememberedSet();\n");
+								printRememberedSet();
+								printf("printBogons();\n");
+								printBogons();
+								printf("printForwarders();\n");
+								printForwarders();
+								printf("printFreeChunks();\n");
+								printFreeChunks();
+								printf("printFreeListHeads();\n");
+								printFreeListHeads();
+								printf("printFreeTree();\n");
+								printFreeTree();
+								printf("printInvalidClassTableEntries();\n");
+								printInvalidClassTableEntries();
+								printf("printAllStacks();\n");
+								printAllStacks();
+								printf("printCallStack();\n");
+								printCallStack();
+								printf("printExternalHeadFrame();\n");
+								printExternalHeadFrame();
+								printf("printFramesOnStackPageListInUse();\n");
+								printFramesOnStackPageListInUse();
+								printf("printMethodCache();\n");
+								printMethodCache();
+								printf("printStackPageList();\n");
+								printStackPageList();
+								printf("printStackPageListInUse();\n");
+								printStackPageListInUse();
+								printf("printStackPages();\n");
+								printStackPages();
+								printf("printStackPagesInUse();\n");
+								printStackPagesInUse();
+								exit(1);
+							}
 							if (localPrimIndex >= 264) {
 								/* begin internalStackTopPut: */
 								aValue = longAt(((longAtPointer(localSP)) + BaseHeaderSize) + (((sqInt)((usqInt)((localPrimIndex - 264)) << (shiftForWord())))));
@@ -51693,7 +51647,7 @@ externalQuickPrimitiveResponse(void)
 	localPrimIndex = ((sqInt) primitiveFunctionPointer);
 	assert((localPrimIndex > 0xFF)
 	 && (localPrimIndex < 520));
-	printf("localPrimIndex = %d\n", localPrimIndex);
+	printf("external localPrimIndex = %d\n", localPrimIndex);
 	if (localPrimIndex >= 264) {
 		/* begin pop:thenPush: */
 		oop = longAt(((longAt(GIV(stackPointer))) + BaseHeaderSize) + (((sqInt)((usqInt)((localPrimIndex - 264)) << (shiftForWord())))));
@@ -60291,7 +60245,7 @@ readImageFromFileHeapSizeStartingAt(sqImageFile f, usqInt desiredHeapSize, squea
 		GIV(globalSessionID) = ((time(NULL)) + (ioMSecs())) & 0x7FFFFFFF;
 	}
 	GIV(metaAccessorDepth) = -2;
-	sHEAFn = ioLoadFunctionFrom("secHasEnvironmentAccess", "SecurityPlugin");
+	//sHEAFn = ioLoadFunctionFrom("secHasEnvironmentAccess", "SecurityPlugin");
 	return dataSize;
 }
 

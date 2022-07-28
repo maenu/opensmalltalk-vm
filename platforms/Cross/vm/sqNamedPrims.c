@@ -213,6 +213,11 @@ findFunctionIn(char *functionName, ModuleEntry *module)
 	b) initialiseModule (if defined) and check its return
 	as well.
 */
+
+typedef const char* (*getModuleName_)(void);
+typedef sqInt (*setInterpreter_)(struct VirtualMachine*);
+typedef sqInt (*initialiseModule_)(void);
+
 static sqInt
 callInitializersIn(ModuleEntry *module)
 {

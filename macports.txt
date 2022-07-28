@@ -1,0 +1,18 @@
+CFLAGS='-I/opt/local/include -L/opt/local/lib' ./mvm -d
+
+
+cd builddbg/third-party/libgit2-0.28.1 \
+&& cmake . \
+-DCMAKE_INSTALL_PREFIX=/Users/maenu/Documents/feenk/opensmalltalk-vm/.thirdparty-cache/macOS/x86_64 \
+-DUSE_SSH=ON \
+-DCURL=ON \
+-DBUILD_CLAR=OFF \
+-DOPENSSL_FOUND=ON \
+-DLIBSSH2_FOUND=ON \
+-DLIBSSH2_INCLUDE_DIRS=/Users/maenu/Documents/feenk/opensmalltalk-vm/.thirdparty-cache/macOS/x86_64/include \
+-DLIBSSH2_LIBRARIES=libssh2.1.dylib \
+-DCMAKE_C_FLAGS="-m64 -L/Users/maenu/Documents/feenk/opensmalltalk-vm/.thirdparty-cache/macOS/x86_64/lib -L/opt/local/lib -I/opt/local/include -liconv -lssl -lcrypto" \
+-DCMAKE_OSX_ARCHITECTURES=x86_64 \
+-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-rpath,@executable_path:@executable_path/Plugins \
+&& make \
+&& make install
