@@ -188,6 +188,8 @@ ioHighResClock(void)
 	/* Tim, not sure I have input beyond:
 		Is there a 64-bit clock on ARM?  If so, access it here :-)
 	 */
+#elif defined(__riscv64__)
+  	__asm__ __volatile__ ("rdcycle a0" : "=r"(value));
 #elif defined(EMSCRIPTEN)
 	struct timespec *tp;
 	clock_gettime(CLOCK_MONOTONIC, tp);
