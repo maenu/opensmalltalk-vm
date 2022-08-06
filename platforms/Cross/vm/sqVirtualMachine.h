@@ -48,9 +48,9 @@ typedef struct VirtualMachine {
 	/* InterpreterProxy methodsFor: 'stack access' */
 
 	sqInt  (*pop)(sqInt nItems);
-	sqInt  (*popthenPush)(sqInt nItems, sqInt oop);
+	void  (*popthenPush)(sqInt nItems, sqInt oop);
 	sqInt  (*push)(sqInt object);
-	sqInt  (*pushBool)(sqInt trueOrFalse);
+	void  (*pushBool)(sqInt trueOrFalse);
 	sqInt  (*pushFloat)(double f);
 	sqInt  (*pushInteger)(sqInt integerValue);
 	double (*stackFloatValue)(sqInt offset);
@@ -147,7 +147,7 @@ typedef struct VirtualMachine {
 	sqInt (*instantiateClassindexableSize)(sqInt classPointer, sqInt size);
 	sqInt (*makePointwithxValueyValue)(sqInt xValue, sqInt yValue);
 	sqInt (*popRemappableOop)(void);
-	sqInt (*pushRemappableOop)(sqInt oop);
+	void (*pushRemappableOop)(sqInt oop);
 
 	/* InterpreterProxy methodsFor: 'other' */
 
@@ -389,9 +389,9 @@ typedef struct VirtualMachine {
 
 /* InterpreterProxy methodsFor: 'stack access' */
 sqInt  pop(sqInt nItems);
-sqInt  popthenPush(sqInt nItems, sqInt oop);
+void  popthenPush(sqInt nItems, sqInt oop);
 sqInt  push(sqInt object);
-sqInt  pushBool(sqInt trueOrFalse);
+void  pushBool(sqInt trueOrFalse);
 sqInt  pushFloat(double f);
 sqInt  pushInteger(sqInt integerValue);
 double stackFloatValue(sqInt offset);
@@ -509,7 +509,7 @@ sqInt cloneObject(sqInt oop);
 sqInt instantiateClassindexableSize(sqInt classPointer, sqInt size);
 sqInt makePointwithxValueyValue(sqInt xValue, sqInt yValue);
 sqInt popRemappableOop(void);
-sqInt pushRemappableOop(sqInt oop);
+void pushRemappableOop(sqInt oop);
 
 
 /* InterpreterProxy methodsFor: 'other' */

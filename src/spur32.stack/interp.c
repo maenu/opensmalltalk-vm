@@ -502,7 +502,7 @@ EXPORT(void) primitiveModLargeIntegers(void);
 EXPORT(sqInt) primitiveMultipleBytecodeSetsActive(void);
 static void primitiveMultiply(void);
 EXPORT(void) primitiveMultiplyLargeIntegers(void);
-static void primitiveNew(void);
+EXPORT(void) primitiveNew(void);
 static void primitiveNewMethod(void);
 static void primitiveNewWithArg(void);
 static void primitiveNextInstance(void);
@@ -684,7 +684,7 @@ extern sqInt byteSizeOf(sqInt oop);
 extern usqInt bytesPerElement(sqInt oop);
 static sqInt NoDbgRegParms changeClassOfto(sqInt rcvr, sqInt argClass);
 extern sqInt characterObjectOf(sqInt characterCode);
-extern void characterTable(void);
+extern sqInt characterTable(void);
 extern usqInt characterValueOf(sqInt oop);
 extern sqInt checkedLongAt(sqInt byteAddress);
 extern void checkFreeSpace(sqInt gcModes);
@@ -21915,7 +21915,7 @@ primitiveMultiplyLargeIntegers(void)
 }
 
 	/* InterpreterPrimitives>>#primitiveNew */
-static void
+EXPORT(void)
 primitiveNew(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt obj;
@@ -33062,10 +33062,11 @@ characterObjectOf(sqInt characterCode)
 }
 
 	/* SpurMemoryManager>>#characterTable */
-void
+sqInt
 characterTable(void)
 {
 	error("shouldNotImplement");
+	return 1;
 }
 
 
@@ -49976,6 +49977,11 @@ addNewMethodToCache(sqInt classObj)
 		 && (isForwarded(GIV(newMethod)))));
 		primitiveFunctionPointer = primitiveInvokeObjectAsMethod;
 	}
+	if(primitiveIndex==70){
+		printf("%p %p\n", primitiveFunctionPointer, primitiveNew);
+		assert(primitiveFunctionPointer==primitiveNew);
+		primitiveFunctionPointer=primitiveNew;
+	}
 	for (p = 0; p < CacheProbeMax; p += 1) {
 		probe = (((usqInt)(hash)) >> p) & MethodCacheMask;
 		if ((GIV(methodCache)[probe + MethodCacheSelector]) == 0) {
@@ -55319,6 +55325,9 @@ lookupMethodInClass(sqInt class)
 		warning("lookup class send break (heartbeat suppressed)");
 	}
 	currentClass = class;
+	if (messageSelector == 0xea3990) {
+		printf("hey\n");
+	}
 	while (currentClass != GIV(nilObj)) {
 		/* begin followObjField:ofObject: */
 		objOop = longAt((currentClass + BaseHeaderSize) + (((int)((usqInt)(MethodDictionaryIndex) << (shiftForWord())))));

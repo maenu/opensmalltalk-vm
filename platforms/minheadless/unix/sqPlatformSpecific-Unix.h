@@ -35,6 +35,12 @@
 
 #include "sqMemoryAccess.h"
 
+#ifdef EMSCRIPTEN
+#  include <emscripten.h>
+#  undef EXPORT
+#  define EXPORT(returnType) returnType EMSCRIPTEN_KEEPALIVE 
+#endif
+
 extern usqInt sqAllocateMemory(usqInt minHeapSize, usqInt desiredHeapSize);
 #define allocateMemoryMinimumImageFileHeaderSize(heapSize, minimumMemory, fileStream, headerSize) \
 sqAllocateMemory(minimumMemory, heapSize)
@@ -95,7 +101,7 @@ extern void sqFilenameFromString(char *uxName, sqInt stNameIndex, int sqNameLeng
 /* sqFTruncate should return 0 on success, ftruncate does also */
 #define	sqFTruncate(f,o) ftruncate(fileno(f), o)
 
-#if defined(__GNUC__)
+#if defined(__GNUC__) && !defined(EMSCRIPTEN)
 # if !defined(VM_LABEL)
 #	define VM_LABEL(foo) asm("\n.globl L" #foo "\nL" #foo ":")
 # endif

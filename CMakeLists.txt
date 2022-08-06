@@ -32,11 +32,23 @@ if (CMAKE_BUILD_TYPE STREQUAL "")
 endif ()
 
 if (EMSCRIPTEN)
-	#set_property(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 	#set(CMAKE_VERBOSE_MAKEFILE on)
+	#set(CMAKE_STRIP FALSE)
+	#set(CMAKE_EXECUTABLE_SUFFIX ".wasm")
 	#set(CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS "-sSIDE_MODULE=1")
 	#set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "-sSIDE_MODULE=1")
-	#set(CMAKE_STRIP FALSE)
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -O0 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+			-sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sINITIAL_MEMORY=256MB -sASSERTIONS=2 -sEXIT_RUNTIME -sEMULATE_FUNCTION_POINTER_CASTS")
+	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O1 -fPIC -fsanitize=address -fsanitize=undefined -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1")
+	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O1 -fPIC -fsanitize=address -fsanitize=undefined -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -O1 -fPIC -fsanitize=address -fsanitize=undefined -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+	#		-sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sINITIAL_MEMORY=256MB -sASSERTIONS=2 -sEXIT_RUNTIME -sEMULATE_FUNCTION_POINTER_CASTS")
+	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-inline -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
+	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-inline -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fno-inline -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+	#		-sSIDE_MODULE -sWASM_BIGINT -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sLLD_REPORT_UNDEFINED -sALLOW_MEMORY_GROWTH -sEXIT_RUNTIME -sEMULATE_FUNCTION_POINTER_CASTS -sSAFE_HEAP=1 -sSAFE_HEAP_LOG=1 -sASSERTIONS=2")
 	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sSAFE_HEAP=1")
 	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sSAFE_HEAP=1")
     #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sEXIT_RUNTIME")  -DDMULTIPLEBYTECODESETS=1
@@ -44,15 +56,7 @@ if (EMSCRIPTEN)
 	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -gsource-map --source-map-base 'http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist/' -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
 	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -gsource-map --source-map-base 'http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist/' -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
     #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -gsource-map --source-map-base 'http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist/' -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
-	#-sPROXY_TO_PTHREAD=1 		-sWASM_BIGINT -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sLLD_REPORT_UNDEFINED -sALLOW_MEMORY_GROWTH -sEXIT_RUNTIME -sEMULATE_FUNCTION_POINTER_CASTS -sASSERTIONS=2")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
-			-sWASM_BIGINT -sPTHREAD_POOL_SIZE=2 -sLLD_REPORT_UNDEFINED -sALLOW_MEMORY_GROWTH -sEXIT_RUNTIME -sEMULATE_FUNCTION_POINTER_CASTS -sASSERTIONS=2")
-	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fno-inline -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
-	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fno-inline -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
-    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -fno-inline -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
-	#		-sWASM_BIGINT -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=3 -sLLD_REPORT_UNDEFINED -sALLOW_MEMORY_GROWTH -sEXIT_RUNTIME -sEMULATE_FUNCTION_POINTER_CASTS -sASSERTIONS=2")
+	#  -fsanitize=address -fsanitize=undefined -fsanitize-minimal-runtime
 endif()
 
 # Turn on warnings
@@ -105,6 +109,7 @@ endif()
 # Set optimization flags
 set(CMAKE_CONFIGURATION_TYPES Debug Release RelWithDebInfo Assert)
 if (MSVC)
+elseif(EMSCRIPTEN)
 else()
 	set(COMMON_FLAGS "-fno-strict-aliasing")
 	#if(WIN32)
@@ -175,18 +180,13 @@ if(OSVM_PLATFORM_X86_32)
     if (MSVC)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:SSE2")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /arch:SSE2")
+	elseif(EMSCRIPTEN)
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32 -msse2 -msimd128")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32 -msse2 -msimd128")
     else()
         set(CMAKE_ASM-ATT_FLAGS "--32")
-	     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
-	     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
-		  if(EMSCRIPTEN)
-		  	 set(EMCC_DEBUG 1) 
-		  	 set(SUFFIX ".wasm")
-			 #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -sSIDE_MODULE")
-   	  	   else()
-	        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse2")
-	        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse2")
-	    endif()
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32 -msse2")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32 -msse2")
     endif()
     set(FFI_VARIANT_IA32 True)
     set(VM_TARGET_CPU "i686")
@@ -855,7 +855,7 @@ if(NOT ONLY_CONFIG_H)
 		if(EMSCRIPTEN)
 			set(CMAKE_EXECUTABLE_SUFFIX ".html")
 			#string(REPLACE "-sSIDE_MODULE" "-sMAIN_MODULE" CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
-	    	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}  \
+	    	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} \
 					--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/pre.js \
 					--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image@/ \
 					--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist@/")

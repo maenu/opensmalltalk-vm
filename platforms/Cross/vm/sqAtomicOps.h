@@ -212,8 +212,8 @@ AtomicGet(__int64 *target)
 #elif defined(EMSCRIPTEN)
 
 #include <emscripten/atomic.h>
-# define get64(variable) emscripten_atomic_load_u64(&(variable))
-# define set64(variable,value) emscripten_atomic_store_u64(&(variable),value)
+# define get64(variable) emscripten_atomic_load_u64((uint64_t)&(variable))
+# define set64(variable,value) emscripten_atomic_store_u64((uint64_t)&(variable),value)
 
 #else
 
@@ -328,7 +328,7 @@ AtomicGet(__int64 *target)
 	} while (0)
 
 #elif defined(__GNUC__) || defined(__clang__) || defined(__SUNPRO_C)
-# if GCC_HAS_BUILTIN_SYNC || defined(__clang__)
+# if GCC_HAS_BUILTIN_SYNC || defined(__clang__) || defined(EMSCRIPTEN)
 #	define sqCompareAndSwap(var,old,new) \
 	__sync_bool_compare_and_swap(&(var), old, new)
 
@@ -353,5 +353,5 @@ AtomicGet(__int64 *target)
 /* Dear implementor, you have choices.  Google atomic compare and swap and you
  * will find a number of alternative implementations.
  */
-#	error atomic compare/swap of 32-bit variables not yet defined for this platfom
+	error atomic compare/swap of 32-bit variables not yet defined for this platfom
 #endif

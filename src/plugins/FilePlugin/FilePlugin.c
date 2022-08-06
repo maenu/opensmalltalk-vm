@@ -124,7 +124,7 @@ static sqInt (*nilObject)(void);
 static sqInt (*ownVM)(sqInt flags);
 static sqInt (*pinObject)(sqInt anObject);
 static sqInt (*pop)(sqInt nItems);
-static sqInt (*popthenPush)(sqInt nItems, sqInt oop);
+static void (*popthenPush)(sqInt nItems, sqInt oop);
 static sqInt (*popRemappableOop)(void);
 static sqInt (*positive32BitIntegerFor)(unsigned int integerValue);
 static usqInt (*positive32BitValueOf)(sqInt oop);
@@ -135,7 +135,7 @@ static sqInt (*primitiveFail)(void);
 static sqInt (*primitiveFailFor)(sqInt reasonCode);
 static sqInt (*primitiveFailForOSError)(sqLong osErrorCode);
 static sqInt (*primitiveFailureCode)(void);
-static sqInt (*pushRemappableOop)(sqInt oop);
+static void (*pushRemappableOop)(sqInt oop);
 static sqInt (*slotSizeOf)(sqInt oop);
 static sqInt (*stackIntegerValue)(sqInt offset);
 static sqInt (*stackValue)(sqInt offset);
@@ -189,7 +189,7 @@ extern sqInt pinObject(sqInt anObject);
 # define pinObject(anObject) 0
 #endif
 extern sqInt pop(sqInt nItems);
-extern sqInt popthenPush(sqInt nItems, sqInt oop);
+extern void popthenPush(sqInt nItems, sqInt oop);
 extern sqInt popRemappableOop(void);
 extern sqInt positive32BitIntegerFor(unsigned int integerValue);
 extern usqInt positive32BitValueOf(sqInt oop);
@@ -204,7 +204,7 @@ extern sqInt primitiveFailForOSError(sqLong osErrorCode);
 # define primitiveFailForOSError(osErrorCode) 0
 #endif
 extern sqInt primitiveFailureCode(void);
-extern sqInt pushRemappableOop(sqInt oop);
+extern void pushRemappableOop(sqInt oop);
 extern sqInt slotSizeOf(sqInt oop);
 extern sqInt stackIntegerValue(sqInt offset);
 extern sqInt stackValue(sqInt offset);

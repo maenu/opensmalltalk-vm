@@ -386,7 +386,7 @@ static sqInt (*methodReturnValue)(sqInt oop);
 static sqInt (*nilObject)(void);
 static sqInt (*ownVM)(sqInt flags);
 static sqInt (*pop)(sqInt nItems);
-static sqInt (*popthenPush)(sqInt nItems, sqInt oop);
+static void (*popthenPush)(sqInt nItems, sqInt oop);
 static sqInt (*popRemappableOop)(void);
 static sqInt (*positive32BitIntegerFor)(unsigned int integerValue);
 static usqInt (*positive32BitValueOf)(sqInt oop);
@@ -399,7 +399,7 @@ static sqInt (*primitiveFailFor)(sqInt reasonCode);
 static sqInt (*primitiveFailForwithSecondary)(sqInt reasonCode, sqLong extraErrorCode);
 static sqInt (*primitiveFailForOSError)(sqLong osErrorCode);
 static sqInt (*primitiveMethod)(void);
-static sqInt (*pushRemappableOop)(sqInt oop);
+static void (*pushRemappableOop)(sqInt oop);
 static sqInt (*signed32BitIntegerFor)(sqInt integerValue);
 static int (*signed32BitValueOf)(sqInt oop);
 static sqInt (*signed64BitIntegerFor)(sqLong integerValue);
@@ -496,7 +496,7 @@ extern sqInt methodReturnValue(sqInt oop);
 extern sqInt nilObject(void);
 extern sqInt ownVM(sqInt flags);
 extern sqInt pop(sqInt nItems);
-extern sqInt popthenPush(sqInt nItems, sqInt oop);
+extern void popthenPush(sqInt nItems, sqInt oop);
 extern sqInt popRemappableOop(void);
 extern sqInt positive32BitIntegerFor(unsigned int integerValue);
 extern usqInt positive32BitValueOf(sqInt oop);
@@ -517,7 +517,7 @@ extern sqInt primitiveFailForOSError(sqLong osErrorCode);
 # define primitiveFailForOSError(osErrorCode) 0
 #endif
 extern sqInt primitiveMethod(void);
-extern sqInt pushRemappableOop(sqInt oop);
+extern void pushRemappableOop(sqInt oop);
 extern sqInt signed32BitIntegerFor(sqInt integerValue);
 extern int signed32BitValueOf(sqInt oop);
 extern sqInt signed64BitIntegerFor(sqLong integerValue);
@@ -5007,7 +5007,8 @@ primitiveCreateManualSurface(void)
 		return primitiveFail();
 	}
 	result = signed32BitIntegerFor(result);
-	return popthenPush(6, result);
+	popthenPush(6, result);
+	return 0;
 }
 
 	/* ThreadedFFIPlugin>>#primitiveDestroyManualSurface */
@@ -5100,7 +5101,8 @@ primitiveFFIAllocate(void)
 	oop = instantiateClassindexableSize(classExternalAddress(), sizeof(sqIntptr_t));
 	ptr = firstIndexableField(oop);
 	ptr[0] = addr;
-	return popthenPush(2, oop);
+	popthenPush(2, oop);
+	return 0;
 }
 
 
