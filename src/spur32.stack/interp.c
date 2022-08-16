@@ -2442,7 +2442,9 @@ volatile int sendTrace;
 #define segments() GIV(segments)
 #define alternateHeaderNumLiteralsMask() 0x7FFF
 #define cr() fputc('\n',transcript)
-#define dispatchFunctionPointer(aFunctionPointer) (aFunctionPointer)()
+void dispatchFunctionPointer(void* aFunctionPointer) {
+	((void (*)(void)) aFunctionPointer)();
+}
 #define enterSmalltalkExecutive() enterSmalltalkExecutiveImplementation()
 #define initialEnterSmalltalkExecutive() enterSmalltalkExecutiveImplementation()
 #define primitiveDoMixedArithmetic() primitiveDoMixedArithmetic
@@ -2525,9 +2527,9 @@ interpret(void)
 		bytecodeDispatchDebugHook();
 
 		VM_LABEL(bytecodeDispatch);
-		printf("currentBytecode = %d\n", currentBytecode);
-		printCallStack();
-		printMethodCache();
+		//printf("currentBytecode = %d\n", currentBytecode);
+		//printCallStack();
+		//printMethodCache();
 		switch (currentBytecode) {
 		case 0:
 		case 256: /*0*/
@@ -5737,15 +5739,16 @@ interpret(void)
 	l823:	/* end internalFindNewMethodOrdinary */;
 					/* begin internalExecuteNewMethod */
 					if (primitiveFunctionPointer != 0) {
-						if ((((usqIntptr_t) primitiveFunctionPointer)) <= MaxQuickPrimitiveIndex) {
+						if ((((usqIntptr_t) primitiveFunctionPointer)) <= MaxQuickPrimitiveIndex && ((usqIntptr_t) primitiveFunctionPointer) > 0xFF) {
 							/* begin internalQuickPrimitiveResponse */
 							assert(isPrimitiveFunctionPointerAnIndex());
 							localPrimIndex = ((sqInt) primitiveFunctionPointer);
 							assert((localPrimIndex > 0xFF)
 							 && (localPrimIndex < 520));
-							if (localPrimIndex == 402) {
+							if (!((localPrimIndex > 0xFF)
+							 && (localPrimIndex < 520))) {
 								printf("localPrimIndex = %d\n", localPrimIndex);
-								printf("primitiveFunctionPointer %d, primitiveTable[171]: %d, primitiveImmediateAsInteger %p\n", primitiveFunctionPointer, primitiveTable[171], &primitiveImmediateAsInteger);
+								printf("primitiveFunctionPointer %d, primitiveTable[70]: %d, primitiveImmediateAsInteger %p\n", primitiveFunctionPointer, primitiveTable[70], &primitiveImmediateAsInteger);
 								printf("printRememberedSet();\n");
 								printRememberedSet();
 								printf("printBogons();\n");
@@ -5778,7 +5781,7 @@ interpret(void)
 								printStackPages();
 								printf("printStackPagesInUse();\n");
 								printStackPagesInUse();
-								exit(1);
+								//exit(1);
 							}
 							if (localPrimIndex >= 264) {
 								/* begin internalStackTopPut: */
@@ -49981,6 +49984,7 @@ addNewMethodToCache(sqInt classObj)
 		printf("%p %p\n", primitiveFunctionPointer, primitiveNew);
 		assert(primitiveFunctionPointer==primitiveNew);
 		primitiveFunctionPointer=primitiveNew;
+		//primitiveNew();
 	}
 	for (p = 0; p < CacheProbeMax; p += 1) {
 		probe = (((usqInt)(hash)) >> p) & MethodCacheMask;
