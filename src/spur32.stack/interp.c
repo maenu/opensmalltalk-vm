@@ -2442,9 +2442,7 @@ volatile int sendTrace;
 #define segments() GIV(segments)
 #define alternateHeaderNumLiteralsMask() 0x7FFF
 #define cr() fputc('\n',transcript)
-void dispatchFunctionPointer(void* aFunctionPointer) {
-	((void (*)(void)) aFunctionPointer)();
-}
+#define dispatchFunctionPointer(aFunctionPointer) (aFunctionPointer)()
 #define enterSmalltalkExecutive() enterSmalltalkExecutiveImplementation()
 #define initialEnterSmalltalkExecutive() enterSmalltalkExecutiveImplementation()
 #define primitiveDoMixedArithmetic() primitiveDoMixedArithmetic
@@ -49980,12 +49978,6 @@ addNewMethodToCache(sqInt classObj)
 		 && (isForwarded(GIV(newMethod)))));
 		primitiveFunctionPointer = primitiveInvokeObjectAsMethod;
 	}
-	if(primitiveIndex==70){
-		printf("%p %p\n", primitiveFunctionPointer, primitiveNew);
-		assert(primitiveFunctionPointer==primitiveNew);
-		primitiveFunctionPointer=primitiveNew;
-		//primitiveNew();
-	}
 	for (p = 0; p < CacheProbeMax; p += 1) {
 		probe = (((usqInt)(hash)) >> p) & MethodCacheMask;
 		if ((GIV(methodCache)[probe + MethodCacheSelector]) == 0) {
@@ -66696,6 +66688,7 @@ primitiveDoPrimitiveWithArgs(void)
 	assert((remapBufferCount()) == 0);
 	/* begin initPrimCall */
 	GIV(primFailCode) = 0;
+	printCallStack();
 	dispatchFunctionPointer(primitiveFunctionPointer);
 	assert(maybeLeakCheckExternalPrimCall(GIV(newMethod)));
 	/* begin maybeRetryPrimitiveOnFailure */

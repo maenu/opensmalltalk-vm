@@ -115,11 +115,10 @@ ioLoadModule(char *pluginName)
     moduleHandle = tryToLoadModuleInPath(squeakExtraPluginsPath, pluginName);
     if(moduleHandle)
         return moduleHandle;
-
+#ifndef EMSCRIPTEN
     moduleHandle = tryToLoadModuleInPath("", pluginName);
     if(moduleHandle)
         return moduleHandle;
-
     const char **currentPath = additionalModuleSearchPaths;
     for(; *currentPath; ++currentPath)
     {
@@ -127,6 +126,7 @@ ioLoadModule(char *pluginName)
         if(moduleHandle)
             return moduleHandle;
     }
+#endif
 
     if(sqVMOptionTraceModuleLoading)
         fprintf(stderr, "Failed to load module: %s\n", pluginName);

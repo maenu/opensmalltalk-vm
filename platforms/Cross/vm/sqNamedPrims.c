@@ -22,8 +22,6 @@ typedef struct {
 
 #include "sqNamedPrims.h"
 
-#undef DEBUG
-
 #undef DPRINTF
 // In practice these reasons are too important to hide. So if VM compiled with
 // -DPRINT_DL_ERRORS=1 always print dlopen errors

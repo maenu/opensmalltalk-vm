@@ -35,12 +35,6 @@
 
 #include "sqMemoryAccess.h"
 
-#ifdef EMSCRIPTEN
-#  include <emscripten.h>
-#  undef EXPORT
-#  define EXPORT(returnType) returnType EMSCRIPTEN_KEEPALIVE 
-#endif
-
 extern usqInt sqAllocateMemory(usqInt minHeapSize, usqInt desiredHeapSize);
 #define allocateMemoryMinimumImageFileHeaderSize(heapSize, minimumMemory, fileStream, headerSize) \
 sqAllocateMemory(minimumMemory, heapSize)
