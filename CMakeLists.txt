@@ -36,18 +36,18 @@ if (EMSCRIPTEN)
 	#set(CMAKE_STRIP FALSE)
 	#set(SUFFIX ".wasm")
 	#set(CMAKE_EXECUTABLE_SUFFIX ".wasm")
-	#set(CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS "-sSIDE_MODULE=1")
-	#set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "-sSIDE_MODULE=1")
+	#set(CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS "-sSIDE_MODULE=1 -sEMULATE_FUNCTION_POINTER_CASTS")
+	#set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "-sSIDE_MODULE=1 -sEMULATE_FUNCTION_POINTER_CASTS")
 	SET_PROPERTY(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
-			-O2 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+			-O0 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
 			")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
-			-O2 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+			-O0 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
 			")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} \
-			-O2 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
-			-sEMULATE_FUNCTION_POINTER_CASTS -sUSE_PTHREADS -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sINITIAL_MEMORY=256MB -sEXIT_RUNTIME \
+			-O0 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+			-sEMULATE_FUNCTION_POINTER_CASTS -sUSE_SDL=2 -sUSE_PTHREADS -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sLLD_REPORT_UNDEFINED -sINITIAL_MEMORY=256MB -sEXIT_RUNTIME -sASSERTIONS=0 \
 			")
 	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O1 -fPIC -fsanitize=address -fsanitize=undefined -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1")
 	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O1 -fPIC -fsanitize=address -fsanitize=undefined -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1")
@@ -619,7 +619,9 @@ if(SUPPORT_TRADITIONAL_DISPLAY AND ALLOW_SDL2)
 	set(VM_WINDOW_SYSTEM
 		platforms/minheadless/sdl2-window/sqWindow-SDL2.c
 	)
-	set(VM_DEPENDENCIES_LIBRARIES ${VM_DEPENDENCIES_LIBRARIES} ${SDL2_LIBRARIES})
+	if(NOT EMSCRIPTEN)
+		set(VM_DEPENDENCIES_LIBRARIES ${VM_DEPENDENCIES_LIBRARIES} ${SDL2_LIBRARIES})
+	endif()
 endif()
 
 # Different source categories
@@ -872,7 +874,7 @@ if(NOT ONLY_CONFIG_H)
 		SET_TARGET_PROPERTIES(${VM_EXECUTABLE_NAME} PROPERTIES LINK_FLAGS " \
 			 -sMAIN_MODULE \
 			--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/pre.js \
-			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image@/ \
+			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image-old@/ \
 			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist@/ \
 			")
 	    target_link_libraries(${VM_EXECUTABLE_NAME} ${VM_LIBRARY_NAME})

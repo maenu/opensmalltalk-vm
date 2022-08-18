@@ -78,7 +78,7 @@ else()
 			"--prefix=${ThirdPartyCacheInstall}" shared linux-x86
 			COMMAND perl -i -pe "s/(^CFLAGS=.*$)/$1 -fPIC -pthread/g" Makefile
 			COMMAND perl -i -pe "s/(^CXXFLAGS=.*$)/$1 -fPIC -pthread/g" Makefile
-			COMMAND perl -i -pe "s/(^LDFLAGS=.*$)/$1 -bulk-memory -atomics -sSIDE_MODULE=1/g" Makefile
+			COMMAND perl -i -pe "s/(^LDFLAGS=.*$)/$1 -bulk-memory -atomics -sSIDE_MODULE=1 -sEMULATE_FUNCTION_POINTER_CASTS/g" Makefile
 			COMMAND perl -i -pe "s/^CROSS_COMPILE=.*$/CROSS_COMPILE=/g" Makefile
 			COMMAND perl -i -pe "s/^CNF_CFLAGS=.*$/CNF_CFLAGS=/g" Makefile)
         set(OpenSSL_BuildCommand emmake make build_libs) #clean all

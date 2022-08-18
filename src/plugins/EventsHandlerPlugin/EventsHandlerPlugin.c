@@ -42,12 +42,12 @@ EXPORT(sqInt) setInterpreter(struct VirtualMachine*anInterpreter);
 
 #if !defined(SQUEAK_BUILTIN_PLUGIN)
 static sqInt (*argumentCountOf)(sqInt methodPointer);
-static sqInt (*popthenPush)(sqInt nItems, sqInt oop);
+static void (*popthenPush)(sqInt nItems, sqInt oop);
 static sqInt (*primitiveMethod)(void);
 static sqInt (*trueObject)(void);
 #else /* !defined(SQUEAK_BUILTIN_PLUGIN) */
 extern sqInt argumentCountOf(sqInt methodPointer);
-extern sqInt popthenPush(sqInt nItems, sqInt oop);
+extern void popthenPush(sqInt nItems, sqInt oop);
 extern sqInt primitiveMethod(void);
 extern sqInt trueObject(void);
 extern

@@ -1063,7 +1063,7 @@ sqSDL2_dropRequestFileHandle(sqInt dropIndex)
 extern sqInt argumentCountOf(sqInt methodPointer);
 extern sqInt failed(void);
 extern sqInt pop(sqInt nItems);
-extern sqInt popthenPush(sqInt nItems, sqInt oop);
+extern void popthenPush(sqInt nItems, sqInt oop);
 extern sqInt primitiveMethod(void);
 extern sqInt stackIntegerValue(sqInt offset);
 extern sqInt stackValue(sqInt offset);

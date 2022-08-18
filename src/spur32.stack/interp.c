@@ -2522,10 +2522,10 @@ interpret(void)
 	/* begin fetchNextBytecode */
 	currentBytecode = (byteAtPointer(++localIP)) + GIV(bytecodeSetSelector);
 	while (1) {
-		bytecodeDispatchDebugHook();
+		//bytecodeDispatchDebugHook();
 
 		VM_LABEL(bytecodeDispatch);
-		//printf("currentBytecode = %d\n", currentBytecode);
+		//printf("%d\n", currentBytecode);
 		//printCallStack();
 		//printMethodCache();
 		switch (currentBytecode) {

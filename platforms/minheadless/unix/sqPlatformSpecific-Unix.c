@@ -332,6 +332,26 @@ ioDisablePowerManager(sqInt disableIfNonZero)
     return true;
 }
 
+sqInt ioGatherEntropy(char *buffer, sqInt bufSize)
+{
+  int fd, count= 0;
+
+  if ((fd= open("/dev/urandom", O_RDONLY)) < 0)
+    return 0;
+
+  while (count < bufSize)
+    {
+      int n;
+      if ((n= read(fd, buffer + count, bufSize)) < 1)
+	break;
+      count += n;
+    }
+
+  close(fd);
+
+  return count == bufSize;
+}
+
 /* Executable path. */
 void
 findExecutablePath(const char *localVmName, char *dest, size_t destSize)
