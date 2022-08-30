@@ -1,0 +1,10 @@
+#!/bin/sh
+VARIANT_FOLDER="$1"
+VARIANT_NAME="$2"
+OS_NAME="WASM"
+GENERATOR_NAME="Unix Makefiles"
+CMAKE_EXTRA_ARGS=""
+
+rm -rf "./$VARIANT_FOLDER"
+mkdir "./$VARIANT_FOLDER"
+cd "./$VARIANT_FOLDER"

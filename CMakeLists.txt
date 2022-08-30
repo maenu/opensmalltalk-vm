@@ -40,14 +40,17 @@ if (EMSCRIPTEN)
 	#set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "-sSIDE_MODULE=1 -sEMULATE_FUNCTION_POINTER_CASTS")
 	SET_PROPERTY(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
-			-O0 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+			-O1 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
 			")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
-			-O0 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+			-O1 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
 			")
+			#  -sPROXY_TO_PTHREAD=1 -sASYNCIFY -fsanitize=alignment -sSAFE_HEAP=1 -sDYLINK_DEBUG -sGL_DEBUG=1 -sLEGACY_GL_EMULATION=1 -sGL_UNSAFE_OPTS=0 \
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} \
-			-O0 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
-			-sEMULATE_FUNCTION_POINTER_CASTS -sUSE_SDL=2 -sUSE_PTHREADS -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sLLD_REPORT_UNDEFINED -sINITIAL_MEMORY=256MB -sEXIT_RUNTIME -sASSERTIONS=0 \
+			-O1 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
+			-lGL -sMAX_WEBGL_VERSION=2 -sFULL_ES2 -sUSE_SDL=2 \
+			-sASYNCIFY -sEMULATE_FUNCTION_POINTER_CASTS -sASSERTIONS \
+			-sUSE_PTHREADS -sPTHREAD_POOL_SIZE=1 -sLLD_REPORT_UNDEFINED -sERROR_ON_UNDEFINED_SYMBOLS=0 -sINITIAL_MEMORY=512MB -sEXIT_RUNTIME \
 			")
 	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O1 -fPIC -fsanitize=address -fsanitize=undefined -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1")
 	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O1 -fPIC -fsanitize=address -fsanitize=undefined -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1")
@@ -619,7 +622,9 @@ if(SUPPORT_TRADITIONAL_DISPLAY AND ALLOW_SDL2)
 	set(VM_WINDOW_SYSTEM
 		platforms/minheadless/sdl2-window/sqWindow-SDL2.c
 	)
-	if(NOT EMSCRIPTEN)
+	if(EMSCRIPTEN)
+		set(HAVE_SDL2 True)
+	else()
 		set(VM_DEPENDENCIES_LIBRARIES ${VM_DEPENDENCIES_LIBRARIES} ${SDL2_LIBRARIES})
 	endif()
 endif()
@@ -865,17 +870,10 @@ if(NOT ONLY_CONFIG_H)
 		#string(REPLACE "-sSIDE_MODULE" "-sMAIN_MODULE" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 		#string(REPLACE "-sSIDE_MODULE" "-sMAIN_MODULE" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 		#string(REPLACE "-sSIDE_MODULE" "-sMAIN_MODULE" CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
-    	#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} \
-		#		--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/pre.js \
-		#		--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image@/ \
-		#		--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist@/")
-		add_executable(${VM_EXECUTABLE_NAME} platforms/minheadless/common/sqMain.c)
-		SET_TARGET_PROPERTIES(${VM_EXECUTABLE_NAME} PROPERTIES COMPILE_FLAGS "-sMAIN_MODULE")
+    	add_executable(${VM_EXECUTABLE_NAME} platforms/minheadless/common/sqMain.c)
 		SET_TARGET_PROPERTIES(${VM_EXECUTABLE_NAME} PROPERTIES LINK_FLAGS " \
-			 -sMAIN_MODULE \
-			--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/pre.js \
-			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image-old@/ \
-			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist@/ \
+			--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/squeak.stack.spur.wasm/pre.js \
+			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/squeak.stack.spur.wasm/image@/ \
 			")
 	    target_link_libraries(${VM_EXECUTABLE_NAME} ${VM_LIBRARY_NAME})
 	else()

@@ -80,7 +80,7 @@ static void * forwardSignaltoSemaphoreAt(sqInt sigNum, sqInt semaphoreIndex);
 EXPORT(sqInt) getCurrentWorkingDirectoryAsType(sqInt classIdentifier);
 static char ** getEnvironmentVector(void);
 EXPORT(const char*) getModuleName(void);
-static sqInt getStdHandle(sqInt n);
+static void getStdHandle(sqInt n);
 static sqInt getThisSessionIdentifier(void);
 static void * handleSignalFunctionAddress(void);
 static void handleSignal(int sigNum);
@@ -106,7 +106,7 @@ EXPORT(sqInt) primitiveArgumentAt(void);
 EXPORT(sqInt) primitiveArgumentAtAsBytes(void);
 EXPORT(sqInt) primitiveCanReceiveSignals(void);
 EXPORT(sqInt) primitiveChdir(void);
-EXPORT(sqInt) primitiveConfstr(void);
+EXPORT(void) primitiveConfstr(void);
 EXPORT(sqInt) primitiveCreatePipe(void);
 EXPORT(sqInt) primitiveCreatePipeWithSessionIdentifier(void);
 EXPORT(sqInt) primitiveDup(sqInt fileDescriptor);
@@ -279,13 +279,13 @@ static sqInt (*methodReturnString)(char *aCString);
 static sqInt (*methodReturnValue)(sqInt oop);
 static sqInt (*nilObject)(void);
 static sqInt (*pop)(sqInt nItems);
-static sqInt (*popthenPush)(sqInt nItems, sqInt oop);
+static void (*popthenPush)(sqInt nItems, sqInt oop);
 static sqInt (*popRemappableOop)(void);
 static sqInt (*primitiveFail)(void);
 static sqInt (*primitiveFailFor)(sqInt reasonCode);
 static sqInt (*push)(sqInt object);
 static sqInt (*pushInteger)(sqInt integerValue);
-static sqInt (*pushRemappableOop)(sqInt oop);
+static void (*pushRemappableOop)(sqInt oop);
 static sqInt (*signalSemaphoreWithIndex)(sqInt semaIndex);
 static sqInt (*signed32BitIntegerFor)(sqInt integerValue);
 static sqInt (*sizeOfSTArrayFromCPrimitive)(void *cPtr);
@@ -323,13 +323,13 @@ extern sqInt methodReturnString(char *aCString);
 extern sqInt methodReturnValue(sqInt oop);
 extern sqInt nilObject(void);
 extern sqInt pop(sqInt nItems);
-extern sqInt popthenPush(sqInt nItems, sqInt oop);
+extern void popthenPush(sqInt nItems, sqInt oop);
 extern sqInt popRemappableOop(void);
 extern sqInt primitiveFail(void);
 extern sqInt primitiveFailFor(sqInt reasonCode);
 extern sqInt push(sqInt object);
 extern sqInt pushInteger(sqInt integerValue);
-extern sqInt pushRemappableOop(sqInt oop);
+extern void pushRemappableOop(sqInt oop);
 extern sqInt signalSemaphoreWithIndex(sqInt semaIndex);
 extern sqInt signed32BitIntegerFor(sqInt integerValue);
 extern sqInt sizeOfSTArrayFromCPrimitive(void *cPtr);
@@ -1180,7 +1180,7 @@ getModuleName(void)
 	0 = stdin, 1 = stdout, 2 = stderr. */
 
 	/* UnixOSProcessPlugin>>#getStdHandle: */
-static sqInt
+static void
 getStdHandle(sqInt n)
 {
     sqInt fileOop;
@@ -1189,14 +1189,16 @@ getStdHandle(sqInt n)
 
 	validMask = sqFileStdioHandlesInto(fileRecords);
 	if ((validMask & (1U << n)) == 0) {
-		return primitiveFailFor(PrimErrUnsupported);
+		primitiveFailFor(PrimErrUnsupported);
+		return;
 	}
 	fileOop = instantiateClassindexableSize(classByteArray(), sizeof(SQFile));
 	if (failed()) {
-		return primitiveFailFor(PrimErrNoMemory);
+		primitiveFailFor(PrimErrNoMemory);
+		return;
 	}
 	memcpy(firstIndexableField(fileOop), &fileRecords[n], sizeof(SQFile));
-	return popthenPush(1, fileOop);
+	popthenPush(1, fileOop);
 }
 
 	/* OSProcessPlugin>>#getThisSessionIdentifier */
@@ -1706,7 +1708,7 @@ primitiveChdir(void)
 	values are defined in /usr/include/bits/confname.h */
 
 	/* UnixOSProcessPlugin>>#primitiveConfstr */
-EXPORT(sqInt)
+EXPORT(void)
 primitiveConfstr(void)
 {
     char *buffer;
@@ -1716,23 +1718,25 @@ primitiveConfstr(void)
     long result;
 
 	if (!((methodArgumentCount()) == 1)) {
-		return primitiveFailFor(PrimErrBadNumArgs);
+		primitiveFailFor(PrimErrBadNumArgs);
+		return;
 	}
 	optionIndex = stackIntegerValue(0);
 	if (failed()) {
-		return primitiveFailFor(PrimErrBadArgument);
+		primitiveFailFor(PrimErrBadArgument);
+		return;
 	}
 
 	/* Find required buffer size */
 	bufferSize = confstr(optionIndex, 0, 0);
 	if (bufferSize == 0) {
-		return popthenPush(2, nilObject());
+		popthenPush(2, nilObject());
+		return;
 	}
 	bufferString = instantiateClassindexableSize(classString(), bufferSize);
 	buffer = firstIndexableField(bufferString);
 	result = confstr(optionIndex, buffer, bufferSize);
 	popthenPush(2, cStringasCollection(buffer, classString()));
-	return 0;
 }
 
 

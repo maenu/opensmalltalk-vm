@@ -92,7 +92,7 @@ static sqInt (*instantiateClassindexableSize)(sqInt classPointer, sqInt size);
 #if !defined(integerValueOf)
 static sqInt (*integerValueOf)(sqInt oop);
 #endif
-static sqInt (*ioFilenamefromStringofLengthresolveAliases)(char *aCharBuffer, char *aFilenameString, sqInt filenameLength, sqInt aBoolean);
+static void (*ioFilenamefromStringofLengthresolveAliases)(char *aCharBuffer, char *aFilenameString, sqInt filenameLength, sqInt aBoolean);
 static sqInt (*isBooleanObject)(sqInt oop);
 static sqInt (*isBytes)(sqInt oop);
 static sqInt (*isFloatObject)(sqInt oop);
@@ -121,7 +121,7 @@ extern sqInt instantiateClassindexableSize(sqInt classPointer, sqInt size);
 #if !defined(integerValueOf)
 extern sqInt integerValueOf(sqInt oop);
 #endif
-extern sqInt ioFilenamefromStringofLengthresolveAliases(char *aCharBuffer, char *aFilenameString, sqInt filenameLength, sqInt aBoolean);
+extern void ioFilenamefromStringofLengthresolveAliases(char *aCharBuffer, char *aFilenameString, sqInt filenameLength, sqInt aBoolean);
 #if VM_PROXY_MAJOR > 1 || (VM_PROXY_MAJOR == 1 && VM_PROXY_MINOR >= 15)
 extern sqInt isBooleanObject(sqInt oop);
 #else

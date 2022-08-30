@@ -2522,7 +2522,7 @@ interpret(void)
 	/* begin fetchNextBytecode */
 	currentBytecode = (byteAtPointer(++localIP)) + GIV(bytecodeSetSelector);
 	while (1) {
-		//bytecodeDispatchDebugHook();
+		bytecodeDispatchDebugHook();
 
 		VM_LABEL(bytecodeDispatch);
 		//printf("%d\n", currentBytecode);
@@ -52336,7 +52336,7 @@ externalQuickPrimitiveResponse(void)
 	localPrimIndex = ((sqInt) primitiveFunctionPointer);
 	assert((localPrimIndex > 0xFF)
 	 && (localPrimIndex < 520));
-	printf("external localPrimIndex = %d\n", localPrimIndex);
+	//printf("external localPrimIndex = %d\n", localPrimIndex);
 	if (localPrimIndex >= 264) {
 		/* begin pop:thenPush: */
 		oop = longAt(((longAt(GIV(stackPointer))) + BaseHeaderSize) + (((sqInt)((usqInt)((localPrimIndex - 264)) << (shiftForWord())))));

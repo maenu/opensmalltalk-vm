@@ -40,6 +40,11 @@
 #include "sqSCCSVersion.h"
 #include "sqTextEncoding.h"
 #include "sqImageFileAccess.h"
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+# define browserPluginReturnIfNeeded() emscripten_sleep(1)
+# define browserPluginInitialiseIfNeeded()
+#endif
 
 #define DefaultHeapSize		  20	     	/* megabytes BEYOND actual image size */
 #define DefaultMmapSize		1024     	/* megabytes of virtual memory */
@@ -845,7 +850,13 @@ static int
 osvm_doRunInterpreter(void *userdata)
 {
     (void)userdata;
+
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+	emscripten_set_main_loop(interpret, 0, 0);
+#else
     interpret();
+#endif
     return OSVM_SUCCESS;
 }
 

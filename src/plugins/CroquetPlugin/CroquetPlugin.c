@@ -75,7 +75,7 @@ static sqInt (*popRemappableOop)(void);
 static sqInt (*positive32BitIntegerFor)(unsigned int integerValue);
 static sqInt (*primitiveFail)(void);
 static sqInt (*primitiveFailFor)(sqInt reasonCode);
-static sqInt (*push)(sqInt object);
+static void (*push)(sqInt object);
 static void (*pushRemappableOop)(sqInt oop);
 static sqInt (*slotSizeOf)(sqInt oop);
 static sqInt (*stackIntegerValue)(sqInt offset);
@@ -101,7 +101,7 @@ extern sqInt popRemappableOop(void);
 extern sqInt positive32BitIntegerFor(unsigned int integerValue);
 extern sqInt primitiveFail(void);
 extern sqInt primitiveFailFor(sqInt reasonCode);
-extern sqInt push(sqInt object);
+extern void push(sqInt object);
 extern void pushRemappableOop(sqInt oop);
 extern sqInt slotSizeOf(sqInt oop);
 extern sqInt stackIntegerValue(sqInt offset);
@@ -859,7 +859,8 @@ primitiveTransposeMatrix(void)
 	dst[13] = (src[7]);
 	dst[14] = (src[11]);
 	pop(1);
-	return push(dstOop);
+	push(dstOop);
+	return null;
 }
 
 

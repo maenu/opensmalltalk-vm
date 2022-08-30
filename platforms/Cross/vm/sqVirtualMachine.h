@@ -49,7 +49,7 @@ typedef struct VirtualMachine {
 
 	sqInt  (*pop)(sqInt nItems);
 	void  (*popthenPush)(sqInt nItems, sqInt oop);
-	sqInt  (*push)(sqInt object);
+	void  (*push)(sqInt object);
 	void  (*pushBool)(sqInt trueOrFalse);
 	sqInt  (*pushFloat)(double f);
 	sqInt  (*pushInteger)(sqInt integerValue);
@@ -239,7 +239,7 @@ typedef struct VirtualMachine {
 #if VM_PROXY_MINOR > 6
 	sqInt  (*fetchLong32ofObject)(sqInt fieldFieldIndex, sqInt oop);
 	sqInt  (*getThisSessionID)(void);
-	sqInt  (*ioFilenamefromStringofLengthresolveAliases)(char* aCharBuffer, char* filenameIndex, sqInt filenameLength, sqInt resolveFlag);
+	void  (*ioFilenamefromStringofLengthresolveAliases)(char* aCharBuffer, char* filenameIndex, sqInt filenameLength, sqInt resolveFlag);
 	sqInt  (*vmEndianness)(void);	
 #endif
 
@@ -390,7 +390,7 @@ typedef struct VirtualMachine {
 /* InterpreterProxy methodsFor: 'stack access' */
 sqInt  pop(sqInt nItems);
 void  popthenPush(sqInt nItems, sqInt oop);
-sqInt  push(sqInt object);
+void  push(sqInt object);
 void  pushBool(sqInt trueOrFalse);
 sqInt  pushFloat(double f);
 sqInt  pushInteger(sqInt integerValue);
@@ -530,7 +530,7 @@ unsigned long long  ioUTCMicroseconds(void);
 unsigned long long  ioUTCMicrosecondsNow(void);
 sqInt forceInterruptCheck(void);
 sqInt getThisSessionID(void);
-sqInt ioFilenamefromStringofLengthresolveAliases(char* aCharBuffer, char* filenameIndex, sqInt filenameLength, sqInt resolveFlag);
+void ioFilenamefromStringofLengthresolveAliases(char* aCharBuffer, char* filenameIndex, sqInt filenameLength, sqInt resolveFlag);
 sqInt vmEndianness(void);	
 sqInt getInterruptPending(void);
 void  error(const char *);

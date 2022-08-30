@@ -229,13 +229,13 @@ callInitializersIn(ModuleEntry *module)
 {
 	char *moduleName;
 	sqInt okay;
-	void *init0 = findFunctionIn("getModuleName", module);
-	void *init1 = findFunctionIn("setInterpreter", module);
-	void *init2 = findFunctionIn("initialiseModule", module);
+	getModuleName_ init0 = (getModuleName_) findFunctionIn("getModuleName", module);
+	setInterpreter_ init1 = (setInterpreter_) findFunctionIn("setInterpreter", module);
+	initialiseModule_ init2 = (initialiseModule_) findFunctionIn("initialiseModule", module);
 
 	if (init0) {
 		/* Check the compiled name of the module */
-		moduleName = ((char* (*) (void))init0)();
+		moduleName = init0();
 		if (!moduleName) {
 			DERRPRINTF(("ERROR: getModuleName() returned NULL\n"));
 			return 0;
@@ -254,13 +254,13 @@ callInitializersIn(ModuleEntry *module)
 		return 0;
 	}
 	/* call setInterpreter */
-	okay = ((sqInt (*) (struct VirtualMachine*))init1)(sqGetInterpreterProxy());
+	okay = init1(sqGetInterpreterProxy());
 	if (!okay) {
 		DERRPRINTF(("ERROR: setInterpreter() returned false\n"));
 		return 0;
 	}
 	if (init2) {
-		okay = ((sqInt (*) (void)) init2)();
+		okay = init2();
 		if (!okay) {
 			DERRPRINTF(("ERROR: initialiseModule() returned false\n"));
 			return 0;
@@ -301,16 +301,39 @@ findAndLoadModule(char *pluginName, sqInt ffiLoad)
 	void *handle;
 	ModuleEntry *module;
 
-#ifdef PharoVM
+#ifdef PharoVM 
 	if (!moduleLoadingEnabled)
 		return NULL;
 #endif
 	DPRINTF(("Looking for plugin %s\n", (pluginName ? pluginName : "<intrinsic>")));
+#ifdef EMSCRIPTEN
+	/* might be internal, so go looking for setInterpreter() */
+	if (!findInternalFunctionIn("setInterpreter", pluginName NADA)) {
+		return NULL; /* PluginName_setInterpreter() not found */
+	} else {
+		printf("found it!\n");
+	}
+	handle = squeakModule->handle;
+	module = addToModuleList(pluginName, handle, ffiLoad);
+	if (!callInitializersIn(module)) {
+		/* Initializers failed */
+		if (handle != squeakModule->handle) {
+			 /* physically unload module */
+			ioFreeModule(handle);
+		}
+		removeFromList(module); /* remove list entry */
+		free(module); /* give back space */
+		module = NULL;
+	} else {
+		printf("initialized it!\n");
+	}
+	return module;
+#else
 	if (breakSelectorLength > 0
 	 && !strncmp(pluginName, breakSelector, breakSelectorLength)
-	 && strlen(pluginName) == breakSelectorLength)
+	 && strlen(pluginName) == breakSelectorLength) {
 		warning("plugin load");
-
+	}
 	/* Try to load the module externally */
 	handle = ioLoadModule(pluginName);
 	if (ffiLoad) {
@@ -336,6 +359,7 @@ findAndLoadModule(char *pluginName, sqInt ffiLoad)
 		module = NULL;
 	}
 	return module;
+#endif
 }
 
 /* findOrLoadModule:

@@ -245,7 +245,7 @@ createWindow(sqInt width, sqInt height, sqInt fullscreenFlag)
     }
 
     windowID = SDL_GetWindowID(window);
-    windowRenderer = SDL_CreateRenderer(window, 0, 0);
+    windowRenderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_PRESENTVSYNC);
     restoreOpenGLState();
 }
 
@@ -650,7 +650,6 @@ handleEvents()
     SDL_Event event;
     while(SDL_PollEvent(&event))
         handleEvent(&event);
-
     if(newDisplayEvent)
         ioSignalInputEvent();
     if(newSDLEvent)

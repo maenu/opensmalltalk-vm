@@ -20,7 +20,7 @@ endif()
 #include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/FT2Plugin.cmake")
 
 # OSProcess
-if(UNIX AND (NOT EMSCRIPTEN))
+if(UNIX)
     if(NOT APPLE)
         add_vm_plugin_auto(VMProfileLinuxSupportPlugin INTERNAL)
     endif()
