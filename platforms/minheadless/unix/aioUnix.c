@@ -99,6 +99,10 @@
 
 #endif /* !HAVE_CONFIG_H */
 
+	
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
 
 #if defined(AIO_DEBUG)
 long	aioLastTick = 0;
@@ -300,10 +304,10 @@ long
 aioSleepForUsecs(long microSeconds)
 {
 #ifdef EMSCRIPTEN
-#include <emscripten.h>
 	emscripten_sleep(microSeconds);
 	microSeconds = 0;	/* poll but don't block */
 #elif defined(HAVE_NANOSLEEP)
+	//#if defined(HAVE_NANOSLEEP)
 	if (microSeconds < (1000000 / 60)) {	/* < 1 timeslice? */
 		if (!aioPoll(0)) {
 			struct timespec rqtp = {0, microSeconds * 1000};

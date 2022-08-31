@@ -42,7 +42,7 @@
 #include "sqImageFileAccess.h"
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
-# define browserPluginReturnIfNeeded() emscripten_sleep(1)
+# define browserPluginReturnIfNeeded() emscripten_sleep(0)
 # define browserPluginInitialiseIfNeeded()
 #endif
 
@@ -851,12 +851,7 @@ osvm_doRunInterpreter(void *userdata)
 {
     (void)userdata;
 
-#ifdef EMSCRIPTEN
-#include <emscripten.h>
-	emscripten_set_main_loop(interpret, 0, 0);
-#else
     interpret();
-#endif
     return OSVM_SUCCESS;
 }
 

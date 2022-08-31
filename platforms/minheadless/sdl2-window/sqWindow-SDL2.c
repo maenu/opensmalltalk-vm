@@ -219,7 +219,11 @@ createWindow(sqInt width, sqInt height, sqInt fullscreenFlag)
         return;
 
     storeOpenGLState();
+#ifdef EMSCRIPTEN
+    flags = SDL_WINDOW_SHOWN;
+#else
     flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI;
+#endif
     if(fullscreenFlag)
         flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 

@@ -233,7 +233,7 @@ typedef struct VirtualMachine {
 
 #if VM_PROXY_MINOR > 5
 	sqInt (*isArray)(sqInt oop);
-	void (*forceInterruptCheck)(void);
+	sqInt (*forceInterruptCheck)(void);
 #endif
 
 #if VM_PROXY_MINOR > 6
