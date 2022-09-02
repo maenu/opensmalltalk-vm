@@ -258,8 +258,8 @@ static sqInt isFloatAtomicType(sqInt atomicTypeCode);
 static sqInt isUnionSpecOfLengthStartingAt(unsigned int *specs, sqInt specSize, sqInt startIndex);
 static sqInt msg(char *s);
 static sqInt nonRegisterStructReturnIsViaImplicitFirstArgument(void);
-EXPORT(void) primitiveCallout(void);
-EXPORT(void) primitiveCalloutWithArgs(void);
+EXPORT(sqInt) primitiveCallout(void);
+EXPORT(sqInt) primitiveCalloutWithArgs(void);
 EXPORT(sqInt) primitiveCDataModel(void);
 EXPORT(sqInt) primitiveCreateManualSurface(void);
 EXPORT(sqInt) primitiveDestroyManualSurface(void);
@@ -3657,7 +3657,7 @@ nonRegisterStructReturnIsViaImplicitFirstArgument(void)
 	Only invoked from method containing explicit external call spec. */
 
 	/* ThreadedFFIPlugin>>#primitiveCallout */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveCallout(void)
 {
     sqInt address;
@@ -3775,7 +3775,7 @@ primitiveCallout(void)
 	meth = primitiveMethod();
 	if (!((literalCountOf(meth)) > 0)) {
 		primitiveFailFor(PrimErrBadMethod);
-		return;
+		return 1;
 	}
 	externalFunction = literalofMethod(0, meth);
 #  if COGMTVM
@@ -4607,7 +4607,7 @@ primitiveCallout(void)
 	popthenPush(primNumArgs1 + 1, result2);
 	l24:	/* end ffiCall:ArgArrayOrNil:NumArgs: */;
 #  endif // COGMTVM
-	return;
+	return 0;
 }
 
 
@@ -4615,7 +4615,7 @@ primitiveCallout(void)
 	Only invoked from ExternalFunction>>invokeWithArguments: */
 
 	/* ThreadedFFIPlugin>>#primitiveCalloutWithArgs */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveCalloutWithArgs(void)
 {
     sqInt address;
@@ -4731,7 +4731,7 @@ primitiveCalloutWithArgs(void)
 
 	if (!((methodArgumentCount()) == 1)) {
 		primitiveFailFor(PrimErrBadNumArgs);
-		return;
+		return 1;
 	}
 #  if COGMTVM
 	retryCount = 0;
@@ -4740,7 +4740,7 @@ primitiveCalloutWithArgs(void)
 		argArray = stackValue(0);
 		if (!(isArray(argArray))) {
 			primitiveFailFor(PrimErrBadArgument);
-			return;
+			return 2;
 		}
 		nArgs = slotSizeOf(argArray);
 		/* begin ffiCall:ArgArrayOrNil:NumArgs: */
@@ -5574,7 +5574,7 @@ primitiveCalloutWithArgs(void)
 	popthenPush(primNumArgs1 + 1, result2);
 	l24:	/* end ffiCall:ArgArrayOrNil:NumArgs: */;
 #  endif // COGMTVM
-	return;
+	return 0;
 }
 
 

@@ -106,7 +106,7 @@ EXPORT(sqInt) primitiveArgumentAt(void);
 EXPORT(sqInt) primitiveArgumentAtAsBytes(void);
 EXPORT(sqInt) primitiveCanReceiveSignals(void);
 EXPORT(sqInt) primitiveChdir(void);
-EXPORT(void) primitiveConfstr(void);
+EXPORT(sqInt) primitiveConfstr(void);
 EXPORT(sqInt) primitiveCreatePipe(void);
 EXPORT(sqInt) primitiveCreatePipeWithSessionIdentifier(void);
 EXPORT(sqInt) primitiveDup(sqInt fileDescriptor);
@@ -1708,7 +1708,7 @@ primitiveChdir(void)
 	values are defined in /usr/include/bits/confname.h */
 
 	/* UnixOSProcessPlugin>>#primitiveConfstr */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveConfstr(void)
 {
     char *buffer;

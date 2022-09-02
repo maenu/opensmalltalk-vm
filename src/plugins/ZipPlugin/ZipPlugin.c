@@ -65,7 +65,7 @@ EXPORT(sqInt) primitiveDeflateBlock(void);
 EXPORT(sqInt) primitiveDeflateUpdateHashTable(void);
 EXPORT(sqInt) primitiveInflateDecompressBlock(void);
 EXPORT(sqInt) primitiveUpdateAdler32(void);
-EXPORT(void) primitiveUpdateGZipCrc32(void);
+EXPORT(sqInt) primitiveUpdateGZipCrc32(void);
 EXPORT(sqInt) primitiveZipSendBlock(void);
 static sqInt sendBlockwithwithwith(sqInt literalStream, sqInt distanceStream, sqInt litTree, sqInt distTree);
 EXPORT(sqInt) setInterpreter(struct VirtualMachine *anInterpreter);
@@ -1042,7 +1042,7 @@ primitiveUpdateAdler32(void)
 /*	Using AlignForFloats since the arithmetic is potentially vectorizable... */
 
 	/* DeflatePlugin>>#primitiveUpdateGZipCrc32 */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveUpdateGZipCrc32(void)
 {
     unsigned char *bytePtr;
@@ -1058,18 +1058,18 @@ primitiveUpdateGZipCrc32(void)
 	startIndex = stackIntegerValue(2);
 	crc = positive32BitValueOf(stackValue(3));
 	if (failed()) {
-		return;
+		return 1;
 	}
 	if (!((isBytes(collection))
 		 && ((stopIndex >= startIndex)
 		 && (startIndex > 0)))) {
 		primitiveFail();
-		return;
+		return 2;
 	}
 	length = byteSizeOf(collection);
 	if (!(stopIndex <= length)) {
 		primitiveFail();
-		return;
+		return 3;
 	}
 	bytePtr = firstIndexableField(collection);
 	startIndex -= 1;
@@ -1078,6 +1078,7 @@ primitiveUpdateGZipCrc32(void)
 		crc = (zipCrcTable[(crc ^ (bytePtr[i])) & 0xFF]) ^ (((usqInt)(crc)) >> 8);
 	}
 	methodReturnValue(positive32BitIntegerFor(crc));
+	return 0;
 }
 
 	/* DeflatePlugin>>#primitiveZipSendBlock */

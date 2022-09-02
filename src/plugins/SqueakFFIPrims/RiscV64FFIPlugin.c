@@ -263,8 +263,8 @@ static sqInt isFloatAtomicType(sqInt atomicTypeCode);
 static sqInt isUnionSpecOfLengthStartingAt(unsigned int *specs, sqInt specSize, sqInt startIndex);
 static sqInt msg(char *s);
 static sqInt nonRegisterStructReturnIsViaImplicitFirstArgument(void);
-EXPORT(void) primitiveCallout(void);
-EXPORT(void) primitiveCalloutWithArgs(void);
+EXPORT(sqInt) primitiveCallout(void);
+EXPORT(sqInt) primitiveCalloutWithArgs(void);
 EXPORT(sqInt) primitiveCDataModel(void);
 EXPORT(sqInt) primitiveCreateManualSurface(void);
 EXPORT(sqInt) primitiveDestroyManualSurface(void);
@@ -3678,7 +3678,7 @@ nonRegisterStructReturnIsViaImplicitFirstArgument(void)
 	Only invoked from method containing explicit external call spec. */
 
 	/* ThreadedFFIPlugin>>#primitiveCallout */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveCallout(void)
 {
     sqInt externalFunction;
@@ -3713,7 +3713,7 @@ primitiveCallout(void)
 	Only invoked from ExternalFunction>>invokeWithArguments: */
 
 	/* ThreadedFFIPlugin>>#primitiveCalloutWithArgs */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveCalloutWithArgs(void)
 {
     sqInt argArray;
