@@ -32,42 +32,11 @@ if (CMAKE_BUILD_TYPE STREQUAL "")
 endif ()
 
 if (EMSCRIPTEN)
-	#set(CMAKE_VERBOSE_MAKEFILE on)
-	#set(CMAKE_STRIP FALSE)
-	#set(SUFFIX ".wasm")
-	#set(CMAKE_EXECUTABLE_SUFFIX ".wasm")
-	#set(CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS "-sSIDE_MODULE=1 -sEMULATE_FUNCTION_POINTER_CASTS")
-	#set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "-sSIDE_MODULE=1 -sEMULATE_FUNCTION_POINTER_CASTS")
+	set(CMAKE_VERBOSE_MAKEFILE on)
 	SET_PROPERTY(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
-			-O3 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
-			")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
-			-O3 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
-			")
-			#  -sASYNCIFY_DEBUG=1 -sSAFE_HEAP=1 -sEMULATE_FUNCTION_POINTER_CASTS  -DDEBUG -sPROXY_TO_PTHREAD=1 -fsanitize=alignment -sDYLINK_DEBUG -sGL_DEBUG=1 -sLEGACY_GL_EMULATION=1 -sGL_UNSAFE_OPTS=0 \
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} \
-			-O3 -fPIC -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
-			-lGL -sMAX_WEBGL_VERSION=2 -sFULL_ES2 -sUSE_SDL=2 \
-			-sASYNCIFY -sASSERTIONS=2 \
-			-sUSE_PTHREADS -sPTHREAD_POOL_SIZE=1 -sLLD_REPORT_UNDEFINED -sERROR_ON_UNDEFINED_SYMBOLS=0 -sINITIAL_MEMORY=512MB -sEXIT_RUNTIME \
-			")
-	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O1 -fPIC -fsanitize=address -fsanitize=undefined -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1")
-	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O1 -fPIC -fsanitize=address -fsanitize=undefined -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1")
-    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -O1 -fPIC -fsanitize=address -fsanitize=undefined -DDEBUG -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
-	#		-sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sINITIAL_MEMORY=256MB -sASSERTIONS=2 -sEXIT_RUNTIME -sEMULATE_FUNCTION_POINTER_CASTS")
-	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-inline -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
-	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-inline -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
-    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fno-inline -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
-	#		-sSIDE_MODULE -sWASM_BIGINT -sPROXY_TO_PTHREAD=1 -sPTHREAD_POOL_SIZE=2 -sLLD_REPORT_UNDEFINED -sALLOW_MEMORY_GROWTH -sEXIT_RUNTIME -sEMULATE_FUNCTION_POINTER_CASTS -sSAFE_HEAP=1 -sSAFE_HEAP_LOG=1 -sASSERTIONS=2")
-	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sSAFE_HEAP=1")
-	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sSAFE_HEAP=1")
-    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -v -O0 -g -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=1 -sEXIT_RUNTIME")  -DDMULTIPLEBYTECODESETS=1
-	# -sERROR_ON_WASM_CHANGES_AFTER_LINK -sSAFE_HEAP=1
-	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -gsource-map --source-map-base 'http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist/' -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
-	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -gsource-map --source-map-base 'http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist/' -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 -Wbad-function-cast -Wcast-function-type")
-    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -gsource-map --source-map-base 'http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist/' -fPIC -fsanitize=address -DNOEXECINFO=1 -DNO_FFI_TEST=1 \
-	#  -fsanitize=address -fsanitize=undefined -fsanitize-minimal-runtime
+	# <O2 yields too many locals in interpret and other async errors
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG -DDEBUGVM=1")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG -DDEBUGVM=1")
 endif()
 
 # Turn on warnings
@@ -866,12 +835,14 @@ if(NOT ONLY_CONFIG_H)
 			MACOSX_BUNDLE_INFO_PLIST ${VM_EXECUTABLE_INFO_PLIST})
 		target_link_libraries(${VM_EXECUTABLE_NAME} ${VM_LIBRARY_NAME} ${Foundation_LIBRARY} ${AppKit_LIBRARY})
 	elseif(EMSCRIPTEN)
+		#  -sASYNCIFY_DEBUG=1 -sSAFE_HEAP=1 -sEMULATE_FUNCTION_POINTER_CASTS  -DDEBUG -sPROXY_TO_PTHREAD=1 -fsanitize=alignment -sDYLINK_DEBUG -sGL_DEBUG=1 -sLEGACY_GL_EMULATION=1 -sGL_UNSAFE_OPTS=0 \
+    	# ASSERTIONS=2 yield duplicate symbols, use 1 instead (https://github.com/emscripten-core/emscripten/issues/13040)
 		set(CMAKE_EXECUTABLE_SUFFIX ".html")
-		#string(REPLACE "-sSIDE_MODULE" "-sMAIN_MODULE" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
-		#string(REPLACE "-sSIDE_MODULE" "-sMAIN_MODULE" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-		#string(REPLACE "-sSIDE_MODULE" "-sMAIN_MODULE" CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
-    	add_executable(${VM_EXECUTABLE_NAME} platforms/minheadless/common/sqMain.c)
+		add_executable(${VM_EXECUTABLE_NAME} platforms/minheadless/common/sqMain.c)
 		SET_TARGET_PROPERTIES(${VM_EXECUTABLE_NAME} PROPERTIES LINK_FLAGS " \
+			-lGL -sUSE_SDL=2 \
+			-sMAIN_MODULE -sASYNCIFY -sASSERTIONS=1 \
+			-sUSE_PTHREADS -sPTHREAD_POOL_SIZE=1 -sLLD_REPORT_UNDEFINED -sERROR_ON_UNDEFINED_SYMBOLS=0 -sINITIAL_MEMORY=512MB -sEXIT_RUNTIME \
 			--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/squeak.stack.spur.wasm/pre.js \
 			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/squeak.stack.spur.wasm/image@/ \
 			")

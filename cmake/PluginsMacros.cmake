@@ -21,8 +21,6 @@ macro(add_vm_plugin NAME TYPE)
     # HACK: External plugins are not yet properly implemented on Windows.
     if(WIN32)
         set(VM_PLUGIN_${NAME}_TYPE INTERNAL)
-    elseif(EMSCRIPTEN)
-        set(VM_PLUGIN_${NAME}_TYPE INTERNAL)
     endif()
 
     if(BUILD_PLUGIN_${NAME})

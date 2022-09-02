@@ -40,11 +40,6 @@
 #include "sqSCCSVersion.h"
 #include "sqTextEncoding.h"
 #include "sqImageFileAccess.h"
-#ifdef EMSCRIPTEN
-#include <emscripten.h>
-# define browserPluginReturnIfNeeded() emscripten_sleep(0)
-# define browserPluginInitialiseIfNeeded()
-#endif
 
 #define DefaultHeapSize		  20	     	/* megabytes BEYOND actual image size */
 #define DefaultMmapSize		1024     	/* megabytes of virtual memory */

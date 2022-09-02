@@ -62,7 +62,7 @@ static const char *moduleNamePatterns[] = {
 };
 
 static const char *additionalModuleSearchPaths[] = {
-#ifdef _WIN32
+#if defined(_WIN32) || defined(EMSCRIPTEN)
 #endif
 #if defined(__linux__) || defined(unix) || defined(__APPLE__)
     "/usr/local/lib/",
@@ -119,6 +119,7 @@ ioLoadModule(char *pluginName)
     moduleHandle = tryToLoadModuleInPath("", pluginName);
     if(moduleHandle)
         return moduleHandle;
+#endif
     const char **currentPath = additionalModuleSearchPaths;
     for(; *currentPath; ++currentPath)
     {
@@ -126,7 +127,6 @@ ioLoadModule(char *pluginName)
         if(moduleHandle)
             return moduleHandle;
     }
-#endif
 
     if(sqVMOptionTraceModuleLoading)
         fprintf(stderr, "Failed to load module: %s\n", pluginName);

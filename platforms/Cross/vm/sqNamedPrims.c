@@ -306,29 +306,6 @@ findAndLoadModule(char *pluginName, sqInt ffiLoad)
 		return NULL;
 #endif
 	DPRINTF(("Looking for plugin %s\n", (pluginName ? pluginName : "<intrinsic>")));
-#ifdef EMSCRIPTEN
-	/* might be internal, so go looking for setInterpreter() */
-	if (!findInternalFunctionIn("setInterpreter", pluginName NADA)) {
-		return NULL; /* PluginName_setInterpreter() not found */
-	} else {
-		printf("found it!\n");
-	}
-	handle = squeakModule->handle;
-	module = addToModuleList(pluginName, handle, ffiLoad);
-	if (!callInitializersIn(module)) {
-		/* Initializers failed */
-		if (handle != squeakModule->handle) {
-			 /* physically unload module */
-			ioFreeModule(handle);
-		}
-		removeFromList(module); /* remove list entry */
-		free(module); /* give back space */
-		module = NULL;
-	} else {
-		printf("initialized it!\n");
-	}
-	return module;
-#else
 	if (breakSelectorLength > 0
 	 && !strncmp(pluginName, breakSelector, breakSelectorLength)
 	 && strlen(pluginName) == breakSelectorLength) {
@@ -359,7 +336,6 @@ findAndLoadModule(char *pluginName, sqInt ffiLoad)
 		module = NULL;
 	}
 	return module;
-#endif
 }
 
 /* findOrLoadModule:
