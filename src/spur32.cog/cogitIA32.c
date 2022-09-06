@@ -1002,7 +1002,7 @@ static AbstractInstruction * NoDbgRegParms jumpNotCharacterUnsignedValueInRegist
 static sqInt NoDbgRegParms markAndTraceLiteralinatpc(sqInt literal, CogMethod *cogMethodOrNil, usqInt address);
 static void NoDbgRegParms markAndTraceLiteralinat(sqInt literal, CogMethod *cogMethod, sqInt *address);
 static void NoDbgRegParms markAndTraceUpdatedLiteralin(sqInt objOop, CogMethod *cogMethodOrNil);
-static sqInt NoDbgRegParms maybeCompileRetryOfonPrimitiveFailflags(void (*primitiveRoutine)(void), sqInt primIndex, sqInt flags);
+static sqInt NoDbgRegParms maybeCompileRetryOfonPrimitiveFailflags(sqInt (*primitiveRoutine)(void), sqInt primIndex, sqInt flags);
 static sqInt NoDbgRegParms maybeShiftClassTagRegisterForMethodCacheProbe(sqInt classTagReg);
 static sqInt numCharacterBits(void);
 static sqInt NoDbgRegParms remapObject(sqInt objOop);
@@ -1025,8 +1025,8 @@ extern sqInt cogMethodHasMachineCodePrim(CogMethod *aCogMethod);
 static sqInt compileBlockDispatch(void);
 static void compileGetErrorCode(void);
 static sqInt compileInterpreterPrimitive(void);
-static sqInt NoDbgRegParms compileInterpreterPrimitiveflags(void (*primitiveRoutine)(void), sqInt flags);
-static sqInt NoDbgRegParms compileOnStackExternalPrimitiveflags(void (*primitiveRoutine)(void), sqInt flags);
+static sqInt NoDbgRegParms compileInterpreterPrimitiveflags(sqInt (*primitiveRoutine)(void), sqInt flags);
+static sqInt NoDbgRegParms compileOnStackExternalPrimitiveflags(sqInt (*primitiveRoutine)(void), sqInt flags);
 static AbstractInstruction * NoDbgRegParms compileOpenPICMethodCacheProbeForwithShiftbaseRegOrNone(sqInt selector, sqInt shift, sqInt baseRegOrNone);
 static void NoDbgRegParms compileOpenPICnumArgs(sqInt selector, sqInt numArgs);
 static AbstractInstruction * NoDbgRegParms compilePerformMethodCacheProbeForwithShiftbaseRegOrNone(sqInt selectorReg, sqInt shift, sqInt baseRegOrNone);
@@ -2536,7 +2536,7 @@ void (*ceCallCogCodePopReceiverAndClassRegs)(void);
 void (*ceCallCogCodePopReceiverArg0Regs)(void);
 void (*ceCallCogCodePopReceiverArg1Arg0Regs)(void);
 void (*ceCallCogCodePopReceiverReg)(void);
-void (*ceCaptureCStackPointers)(void);
+sqInt (*ceCaptureCStackPointers)(void);
 void (*ceEnterCogCodePopReceiverReg)(void);
 usqIntptr_t (*ceGetFP)(void);
 usqIntptr_t (*ceGetSP)(void);
@@ -3682,7 +3682,9 @@ detectFeatures(AbstractInstruction * self_in_detectFeatures)
 #  if !DUAL_MAPPED_CODE_ZONE
 	
 #  endif
+#ifndef EMSCRIPTEN
 	setCpuidWord0(self_in_detectFeatures, cpuid(1));
+#endif
 	zeroOpcodeIndexForNewOpcodes();
 	genoperand(PushR, EDX);
 	genoperand(PushR, ECX);
@@ -3698,7 +3700,9 @@ detectFeatures(AbstractInstruction * self_in_detectFeatures)
 	outputInstructionsForGeneratedRuntimeAt(startAddress);
 	/* begin resetMethodZoneBase: */
 	methodZoneBase = startAddress;
+#ifndef EMSCRIPTEN
 	setCpuidWord1(self_in_detectFeatures, cpuid(0x80000001));
+#endif
 }
 
 
@@ -11582,7 +11586,7 @@ generateCaptureCStackPointers(sqInt captureFramePointer)
 	outputInstructionsForGeneratedRuntimeAt(startAddress);
 	flushICacheFromto(backEnd, ((usqInt)startAddress), ((usqInt)methodZoneBase));
 	recordGeneratedRunTimeaddress("ceCaptureCStackPointers", startAddress);
-	ceCaptureCStackPointers = ((void (*)(void)) startAddress);
+	ceCaptureCStackPointers = ((sqInt (*)(void)) startAddress);
 }
 
 
@@ -11957,6 +11961,7 @@ generateStackPointerCapture(void)
 	assertCStackWellAligned();
 	oldMethodZoneBase = methodZoneBase;
 	oldTrampolineTableIndex = trampolineTableIndex;
+#ifndef EMSCRIPTEN
 	generateCaptureCStackPointers(1);
 	ceCaptureCStackPointers();
 	if (!((cFramePointerInUse = checkIfCFramePointerInUse()))) {
@@ -11964,6 +11969,7 @@ generateStackPointerCapture(void)
 		trampolineTableIndex = oldTrampolineTableIndex;
 		generateCaptureCStackPointers(0);
 	}
+#endif
 #  endif // defined(cFramePointerInUse)
 	/* begin ensureWritableCodeZone */
 #  if !DUAL_MAPPED_CODE_ZONE
@@ -22884,7 +22890,7 @@ markAndTraceUpdatedLiteralin(sqInt objOop, CogMethod *cogMethodOrNil)
 
 	/* CogObjectRepresentationForSpur>>#maybeCompileRetryOf:onPrimitiveFail:flags: */
 static sqInt NoDbgRegParms
-maybeCompileRetryOfonPrimitiveFailflags(void (*primitiveRoutine)(void), sqInt primIndex, sqInt flags)
+maybeCompileRetryOfonPrimitiveFailflags(sqInt (*primitiveRoutine)(void), sqInt primIndex, sqInt flags)
 {
     AbstractInstruction *anInstruction;
     AbstractInstruction *anInstruction1;
@@ -23310,7 +23316,7 @@ static sqInt
 compileInterpreterPrimitive(void)
 {
     sqInt flags;
-    void (*primitiveRoutine)(void);
+    sqInt (*primitiveRoutine)(void);
 
 	flags = 0;
 	primitiveRoutine = functionPointerForCompiledMethodprimitiveIndexprimitivePropertyFlagsInto(methodObj, primitiveIndex, (&flags));
@@ -23327,7 +23333,7 @@ compileInterpreterPrimitive(void)
 
 	/* SimpleStackBasedCogit>>#compileInterpreterPrimitive:flags: */
 static sqInt NoDbgRegParms
-compileInterpreterPrimitiveflags(void (*primitiveRoutine)(void), sqInt flags)
+compileInterpreterPrimitiveflags(sqInt (*primitiveRoutine)(void), sqInt flags)
 {
     AbstractInstruction *abstractInstruction;
     AbstractInstruction *abstractInstruction1;
@@ -23531,7 +23537,7 @@ compileInterpreterPrimitiveflags(void (*primitiveRoutine)(void), sqInt flags)
 
 	/* SimpleStackBasedCogit>>#compileOnStackExternalPrimitive:flags: */
 static sqInt NoDbgRegParms
-compileOnStackExternalPrimitiveflags(void (*primitiveRoutine)(void), sqInt flags)
+compileOnStackExternalPrimitiveflags(sqInt (*primitiveRoutine)(void), sqInt flags)
 {
     AbstractInstruction *abstractInstruction;
     AbstractInstruction *abstractInstruction1;
@@ -23961,7 +23967,7 @@ compilePrimitive(void)
     sqInt flags;
     sqInt opcodeIndexAtPrimitive;
     PrimitiveDescriptor *primitiveDescriptor;
-    void (*primitiveRoutine)(void);
+    sqInt (*primitiveRoutine)(void);
 
 	flags = 0;
 	if (primitiveIndex == 0) {
@@ -28219,7 +28225,7 @@ genPrimitiveClosureValue(void)
     AbstractInstruction *jumpFail4;
     AbstractInstruction *jumpFailNArgs;
     sqInt offset;
-    void (*primitiveRoutine)(void);
+    sqInt (*primitiveRoutine)(void);
     sqInt result;
 
 	genPushRegisterArgs();
@@ -28289,7 +28295,7 @@ genPrimitiveFullClosureValue(void)
     AbstractInstruction *jumpFail4;
     AbstractInstruction *jumpFailImmediateMethod;
     AbstractInstruction *jumpFailNArgs;
-    void (*primitiveRoutine)(void);
+    sqInt (*primitiveRoutine)(void);
     sqInt quickConstant;
     sqInt result;
 

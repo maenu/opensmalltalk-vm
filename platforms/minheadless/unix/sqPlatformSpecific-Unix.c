@@ -442,7 +442,10 @@ reportStackState(const char *msg, char *date, int printAll, ucontext_t *uap)
 			 * dump machinery has of giving us an accurate report is if we set
 			 * stackPointer & framePointer to the native stack & frame pointers.
 			 */
-# if __APPLE__ && __MACH__ && __i386__
+# if EMSCRIPTEN
+	void *fp = (void *)(uap ? uap->uc_mcontext.gregs[REG_EBP]: 0);
+	void *sp = (void *)(uap ? uap->uc_mcontext.gregs[REG_ESP]: 0);
+# elif __APPLE__ && __MACH__ && __i386__
 #	  if __GNUC__ && !__INTEL_COMPILER /* icc pretends to be gcc */
 			void *fp = (void *)(uap ? uap->uc_mcontext->__ss.__ebp: 0);
 			void *sp = (void *)(uap ? uap->uc_mcontext->__ss.__esp: 0);

@@ -243,6 +243,10 @@ aioPoll(long microSeconds)
 	 * cpu
 	 */
 
+#ifdef EMSCRIPTEN
+	if (1)
+		return 0;
+#endif
 #ifdef TARGET_OS_IS_IPHONE
 	if (maxFd == 0)
 		return 0;

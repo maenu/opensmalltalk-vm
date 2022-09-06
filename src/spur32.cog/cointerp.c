@@ -491,7 +491,7 @@ static sqInt NoDbgRegParms frameMethodObject(char *theFP);
 static sqInt NoDbgRegParms frameNumArgs(char *theFP);
 extern usqInt framePointerAddress(void);
 static sqInt NoDbgRegParms frameReceiver(char *theFP);
-extern void (*functionPointerForCompiledMethodprimitiveIndexprimitivePropertyFlagsInto(sqInt methodObj, sqInt primitiveIndex, sqInt *flagsPtr))(void);
+extern sqInt (*functionPointerForCompiledMethodprimitiveIndexprimitivePropertyFlagsInto(sqInt methodObj, sqInt primitiveIndex, sqInt *flagsPtr))(void);
 extern sqInt getCurrentBytecode(void);
 static sqInt getImageHeaderFlags(void);
 static sqInt NoDbgRegParms handleForwardedSendFaultForReceiverstackDelta(sqInt forwardedReceiver, sqInt stackDelta);
@@ -17545,7 +17545,7 @@ frameReceiver(char *theFP)
 }
 
 	/* CoInterpreter>>#functionPointerForCompiledMethod:primitiveIndex:primitivePropertyFlagsInto: */
-void (*functionPointerForCompiledMethodprimitiveIndexprimitivePropertyFlagsInto(sqInt methodObj, sqInt primitiveIndex, sqInt *flagsPtr))(void)
+sqInt (*functionPointerForCompiledMethodprimitiveIndexprimitivePropertyFlagsInto(sqInt methodObj, sqInt primitiveIndex, sqInt *flagsPtr))(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt firstBytecode;
     sqInt firstLiteral;

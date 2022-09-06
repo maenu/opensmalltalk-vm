@@ -108,7 +108,7 @@ extern void (*ceCallCogCodePopReceiverArg0Regs)(void);
 extern void (*ceCallCogCodePopReceiverArg1Arg0Regs)(void);
 extern void (*ceCallCogCodePopReceiverReg)(void);
 extern sqInt ceCannotResumeTrampoline;
-extern void (*ceCaptureCStackPointers)(void);
+extern sqInt (*ceCaptureCStackPointers)(void);
 extern sqInt ceCheckForInterruptTrampoline;
 extern void (*ceEnterCogCodePopReceiverReg)(void);
 extern usqIntptr_t (*ceGetFP)(void);
