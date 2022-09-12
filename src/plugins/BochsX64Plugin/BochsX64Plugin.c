@@ -162,7 +162,7 @@ extern sqInt primitiveFailForOSError(sqLong osErrorCode);
 #else
 # define primitiveFailForOSError(osErrorCode) 0
 #endif
-extern sqInt pushRemappableOop(sqInt oop);
+extern void pushRemappableOop(sqInt oop);
 extern void * setInterruptCheckChain(void (*aFunction)());
 extern sqInt stackValue(sqInt offset);
 extern sqInt storeIntegerofObjectwithValue(sqInt index, sqInt oop, sqInt integer);

@@ -567,7 +567,7 @@ extern sqInt primitiveFailForOSError(sqLong osErrorCode);
 # define primitiveFailForOSError(osErrorCode) 0
 #endif
 extern sqInt primitiveMethod(void);
-extern sqInt pushRemappableOop(sqInt oop);
+extern void pushRemappableOop(sqInt oop);
 extern sqInt signed32BitIntegerFor(sqInt integerValue);
 extern int signed32BitValueOf(sqInt oop);
 extern sqInt signed64BitIntegerFor(sqLong integerValue);

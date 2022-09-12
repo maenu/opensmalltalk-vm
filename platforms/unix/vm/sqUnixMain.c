@@ -1090,8 +1090,14 @@ crashDumpFile()
 }
 
 static void
+#ifdef EMSCRIPTEN
+sigusr1(int sig, siginfo_t *info, void *uap_)
+{
+	ucontext_t *uap = (ucontext_t *)uap_;
+#else
 sigusr1(int sig, siginfo_t *info, ucontext_t *uap)
 {
+#endif
 	int saved_errno = errno;
 	time_t now = time(NULL);
 	char ctimebuf[32];
@@ -1118,8 +1124,14 @@ sqInt
 ioCanCatchFFIExceptions() { return 1; }
 
 static void
+#ifdef EMSCRIPTEN
+sigsegv(int sig, siginfo_t *info, void *uap_)
+{
+	ucontext_t *uap = (ucontext_t *)uap_;
+#else
 sigsegv(int sig, siginfo_t *info, ucontext_t *uap)
 {
+#endif
 	time_t now = time(NULL);
 	char ctimebuf[32];
 	FILE *crashdump;
@@ -1847,7 +1859,7 @@ char *getVersionInfo(int verbose)
   char processor[32];
   char *info = (char *)malloc(4096);
   info[0] = '\0';
-  getAttributeIntoLength(1003,processor,sizeof(processor));
+  getAttributeIntoLength(1003,(sqInt)processor,sizeof(processor));
 
 #if SPURVM
 # if BytesPerOop == 8

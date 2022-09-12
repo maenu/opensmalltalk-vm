@@ -87,7 +87,7 @@ extern sqInt pop(sqInt nItems);
 extern sqInt popRemappableOop(void);
 extern sqInt push(sqInt object);
 extern sqInt pushInteger(sqInt integerValue);
-extern sqInt pushRemappableOop(sqInt oop);
+extern void pushRemappableOop(sqInt oop);
 extern sqInt sizeOfSTArrayFromCPrimitive(void *cPtr);
 extern sqInt stackObjectValue(sqInt offset);
 extern sqInt trueObject(void);

@@ -20,8 +20,8 @@
 #ifndef __sqMemoryAccess_h
 #define __sqMemoryAccess_h
 
-#include <stdio.h>
 #include "config.h"
+#include <stdio.h>
 #include "interp.h"
 
 #define true	1

@@ -107,9 +107,9 @@ static sqInt (*popRemappableOop)(void);
 static sqInt (*positive32BitIntegerFor)(unsigned int integerValue);
 static usqInt (*positive32BitValueOf)(sqInt oop);
 static sqInt (*primitiveFail)(void);
-static sqInt (*pushBool)(sqInt trueOrFalse);
+static void (*pushBool)(sqInt trueOrFalse);
 static sqInt (*pushInteger)(sqInt integerValue);
-static sqInt (*pushRemappableOop)(sqInt oop);
+static void (*pushRemappableOop)(sqInt oop);
 static sqInt (*slotSizeOf)(sqInt oop);
 static sqInt (*stackIntegerValue)(sqInt offset);
 static sqInt (*stackObjectValue)(sqInt offset);
@@ -134,9 +134,9 @@ extern sqInt popRemappableOop(void);
 extern sqInt positive32BitIntegerFor(unsigned int integerValue);
 extern usqInt positive32BitValueOf(sqInt oop);
 extern sqInt primitiveFail(void);
-extern sqInt pushBool(sqInt trueOrFalse);
+extern void pushBool(sqInt trueOrFalse);
 extern sqInt pushInteger(sqInt integerValue);
-extern sqInt pushRemappableOop(sqInt oop);
+extern void pushRemappableOop(sqInt oop);
 extern sqInt slotSizeOf(sqInt oop);
 extern sqInt stackIntegerValue(sqInt offset);
 extern sqInt stackObjectValue(sqInt offset);
@@ -756,7 +756,8 @@ primitiveEnableDrawRangeChecks(void)
 
 	if ((methodArgumentCount()) == 0) {
 		pop(1);
-		return pushBool(doRangeChecks);
+		pushBool(doRangeChecks);
+		return 0;
 	}
 	if ((methodArgumentCount()) == 1) {
 		enabled = booleanValueOf(stackValue(0));
@@ -962,7 +963,8 @@ primitiveIsOverlayRenderer(void)
 	}
 	result = b3dxIsOverlayRenderer(handle);
 	pop(2);
-	return pushBool(result);
+	pushBool(result);
+	return 0;
 }
 
 	/* B3DAcceleratorPlugin>>#primitiveRendererVersion */
@@ -1297,7 +1299,8 @@ primitiveTextureByteSex(void)
 		return primitiveFail();
 	}
 	pop(3);
-	return pushBool(result);
+	pushBool(result);
+	return 0;
 }
 
 	/* B3DAcceleratorPlugin>>#primitiveTextureDepth */

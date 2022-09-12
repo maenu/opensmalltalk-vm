@@ -262,7 +262,7 @@ extern sqInt push(sqInt object);
 extern sqInt pushBool(sqInt trueOrFalse);
 extern sqInt pushFloat(double f);
 extern sqInt pushInteger(sqInt integerValue);
-extern sqInt pushRemappableOop(sqInt oop);
+extern void pushRemappableOop(sqInt oop);
 extern sqInt slotSizeOf(sqInt oop);
 extern sqInt stackIntegerValue(sqInt offset);
 extern sqInt stackObjectValue(sqInt offset);

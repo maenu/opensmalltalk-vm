@@ -143,13 +143,16 @@ static long pc_buffer_size;
 static long pc_buffer_wrapped;
 
 static void
+#ifdef EMSCRIPTEN
+pcbufferSIGPROFhandler(int sig, siginfo_t *info, void *uap_)
+{
+	ucontext_t *uap = (ucontext_t *)uap_;
+	pc_buffer[pc_buffer_index] = 0;
+#else
 pcbufferSIGPROFhandler(int sig, siginfo_t *info, ucontext_t *uap)
 {
-# if EMSCRIPTEN
-	pc_buffer[pc_buffer_index] = 0;
-# else
 	pc_buffer[pc_buffer_index] = uap->_PC_IN_UCONTEXT;
-# endif
+#endif
 	if (++pc_buffer_index >= pc_buffer_size) {
 		pc_buffer_index = 0;
 		pc_buffer_wrapped = 1;

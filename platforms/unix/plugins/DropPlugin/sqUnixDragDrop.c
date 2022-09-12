@@ -66,6 +66,12 @@ fileValueOf(sqInt anSQFileRecord)
 sqInt dropInit(void)     { return 1; }
 sqInt dropShutdown(void) { return 1; }
 
+static usqIntptr_t
+fileRecordSize(void)
+{
+	return sizeof(SQFile);
+}
+
 /* We now set USE_FILE_URIs to 1 in platforms/unix//vm-display-X11/sqUnixXdnd.c
  * hence dropRequestFileName skips the URI prefix and dropRequestURI includes it
  */

@@ -151,7 +151,7 @@ extern sqInt positive32BitIntegerFor(unsigned int integerValue);
 extern usqInt positive32BitValueOf(sqInt oop);
 extern sqInt primitiveFail(void);
 extern sqInt primitiveFailFor(sqInt reasonCode);
-extern sqInt pushRemappableOop(sqInt oop);
+extern void pushRemappableOop(sqInt oop);
 extern double stackFloatValue(sqInt offset);
 extern sqInt stackValue(sqInt offset);
 extern sqInt storePointerofObjectwithValue(sqInt index, sqInt oop, sqInt valuePointer);

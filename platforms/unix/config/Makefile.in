@@ -45,12 +45,12 @@ all : $(squeak) plugins squeak.1 $(npsqueak)
 # VM
 
 $(squeak) : config.sh $(SQLIBS) version.o
-	#$(LINK) $(squeak) $(SQLIBS) version.o $(LIBS) [plibs] -Wl,-whole-archive,vm/vm.a,-no-whole-archive
-	#@echo
-	#@size $(squeak)
-	#@echo
-	#@./$(squeak) -version || ./$(squeak) --version 
-	#@echo
+	$(LINK) $(squeak) $(SQLIBS) version.o $(LIBS) [plibs] -Wl,-whole-archive,vm/vm.a,-no-whole-archive
+	@echo
+	@size $(squeak)
+	@echo
+	@./$(squeak) -version || ./$(squeak) --version 
+	@echo
 
 version.o : version.c
 	$(COMPILE) version.o version.c
@@ -76,6 +76,11 @@ squeak.sh: ${cfgdir}/squeak.sh.in getversion
 
 bin.squeak.sh: ${cfgdir}/bin.squeak.sh.in getversion
 	sed "s|.expanded_relative_imgdir.|lib/squeak/`./getversion VERSION_TAG`|" <${cfgdir}/bin.squeak.sh.in >bin.squeak.sh
+	
+# WASM
+
+wasmsqueak : config.sh $(SQLIBS) version.o plugins
+	$(LINK) wasmsqueak.html $(SQLIBS) version.o $(LIBS) [plibs] -Wl,-whole-archive,vm/vm.a,-no-whole-archive -sLLD_REPORT_UNDEFINED -lGL -sUSE_SDL=2 -sMAIN_MODULE -sASYNCIFY -sASSERTIONS=1 -sUSE_PTHREADS -sPTHREAD_POOL_SIZE=1 -sLLD_REPORT_UNDEFINED -sERROR_ON_UNDEFINED_SYMBOLS=0 -sINITIAL_MEMORY=512MB -sEXIT_RUNTIME --pre-js ../pre.js --preload-file ../image@/
 
 # npsqueak
 
@@ -87,7 +92,7 @@ nps :
 
 nps/npsqueak.so : nps getversion
 	$(SHELL) -ec 'cd nps; $(MAKE) plgdir=$(plgdir) bindir=$(bindir) imgdir=$(imgdir)'
-
+	
 # OSX app bundle
 
 osxdir=$(topdir)/platforms/unix/vm-display-Quartz

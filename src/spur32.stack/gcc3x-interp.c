@@ -366,10 +366,10 @@ extern unsigned int positive32BitValueOf(sqInt oop);
 extern usqLong positive64BitValueOf(sqInt oop);
 extern usqIntptr_t positiveMachineIntegerValueOf(sqInt oop);
 static sqInt primitiveAdd(void);
-EXPORT(void) primitiveAddLargeIntegers(void);
+EXPORT(sqInt) primitiveAddLargeIntegers(void);
 static sqInt primitiveAdoptInstance(void);
-EXPORT(void) primitiveAllInstances(void);
-EXPORT(void) primitiveAllObjects(void);
+EXPORT(sqInt) primitiveAllInstances(void);
+EXPORT(sqInt) primitiveAllObjects(void);
 static sqInt primitiveArctan(void);
 static sqInt primitiveArrayBecome(void);
 static sqInt primitiveArrayBecomeOneWay(void);
@@ -384,13 +384,13 @@ static sqInt primitiveBeDisplay(void);
 static sqInt primitiveBeep(void);
 static sqInt primitiveBehaviorHash(void);
 static sqInt primitiveBitAnd(void);
-EXPORT(void) primitiveBitAndLargeIntegers(void);
+EXPORT(sqInt) primitiveBitAndLargeIntegers(void);
 static sqInt primitiveBitOr(void);
-EXPORT(void) primitiveBitOrLargeIntegers(void);
+EXPORT(sqInt) primitiveBitOrLargeIntegers(void);
 static sqInt primitiveBitShift(void);
-EXPORT(void) primitiveBitShiftLargeIntegers(void);
+EXPORT(sqInt) primitiveBitShiftLargeIntegers(void);
 static sqInt primitiveBitXor(void);
-EXPORT(void) primitiveBitXorLargeIntegers(void);
+EXPORT(sqInt) primitiveBitXorLargeIntegers(void);
 EXPORT(sqInt) primitiveBytecodeSetsAvailable(void);
 static sqInt primitiveBytesLeft(void);
 static sqInt primitiveCalloutToFFI(void);
@@ -400,12 +400,12 @@ static sqInt primitiveClearVMProfile(void);
 static sqInt primitiveClipboardText(void);
 EXPORT(sqInt) primitiveClockLogAddresses(void);
 static sqInt primitiveClosureValue(void);
-extern void primitiveClosureValueNoContextSwitch(void);
+extern sqInt primitiveClosureValueNoContextSwitch(void);
 static sqInt primitiveClosureValueWithArgs(void);
 static sqInt primitiveCoarseLocalMicrosecondClock(void);
 static sqInt primitiveCoarseUTCMicrosecondClock(void);
 EXPORT(sqInt) primitiveCompareBytes(void);
-EXPORT(void) primitiveCompareWith(void);
+EXPORT(sqInt) primitiveCompareWith(void);
 static sqInt primitiveConstantFill(void);
 static sqInt primitiveControlVMProfiling(void);
 static sqInt primitiveCopyObject(void);
@@ -413,11 +413,11 @@ EXPORT(sqInt) primitiveCrashVM(void);
 EXPORT(sqInt) primitiveDisablePowerManager(void);
 static sqInt primitiveDiv(void);
 static sqInt primitiveDivide(void);
-EXPORT(void) primitiveDivideLargeIntegers(void);
-EXPORT(void) primitiveDivLargeIntegers(void);
+EXPORT(sqInt) primitiveDivideLargeIntegers(void);
+EXPORT(sqInt) primitiveDivLargeIntegers(void);
 static sqInt primitiveEnterCriticalSection(void);
 static sqInt primitiveEqual(void);
-EXPORT(void) primitiveEqualLargeIntegers(void);
+EXPORT(sqInt) primitiveEqualLargeIntegers(void);
 static sqInt primitiveExitCriticalSection(void);
 static sqInt primitiveExitToDebugger(void);
 static sqInt primitiveExp(void);
@@ -449,23 +449,23 @@ static sqInt primitiveForceDisplayUpdate(void);
 static sqInt primitiveFormPrint(void);
 static sqInt primitiveFractionalPart(void);
 static sqInt primitiveFullClosureValue(void);
-extern void primitiveFullClosureValueNoContextSwitch(void);
+extern sqInt primitiveFullClosureValueNoContextSwitch(void);
 static sqInt primitiveFullClosureValueWithArgs(void);
 static sqInt primitiveGetAttribute(void);
 EXPORT(sqInt) primitiveGetenv(void);
 #if IMMUTABILITY
 static sqInt primitiveGetImmutability(void);
 #else
-# define primitiveGetImmutability (void (*)(void))0
+# define primitiveGetImmutability (sqInt (*)(void))0
 #endif /* IMMUTABILITY */
 EXPORT(sqInt) primitiveGetLogDirectory(void);
 static sqInt primitiveGetNextEvent(void);
 EXPORT(sqInt) primitiveGetWindowLabel(void);
 EXPORT(sqInt) primitiveGetWindowSize(void);
 static sqInt primitiveGreaterOrEqual(void);
-EXPORT(void) primitiveGreaterOrEqualLargeIntegers(void);
+EXPORT(sqInt) primitiveGreaterOrEqualLargeIntegers(void);
 static sqInt primitiveGreaterThan(void);
-EXPORT(void) primitiveGreaterThanLargeIntegers(void);
+EXPORT(sqInt) primitiveGreaterThanLargeIntegers(void);
 static sqInt primitiveGrowMemoryByAtLeast(void);
 static sqInt primitiveHashMultiply(void);
 EXPORT(sqInt) primitiveHeartbeatFrequency(void);
@@ -487,9 +487,9 @@ EXPORT(sqInt) primitiveIsBigEnder(void);
 static sqInt primitiveIsPinned(void);
 EXPORT(sqInt) primitiveIsWindowObscured(void);
 static sqInt primitiveLessOrEqual(void);
-EXPORT(void) primitiveLessOrEqualLargeIntegers(void);
+EXPORT(sqInt) primitiveLessOrEqualLargeIntegers(void);
 static sqInt primitiveLessThan(void);
-EXPORT(void) primitiveLessThanLargeIntegers(void);
+EXPORT(sqInt) primitiveLessThanLargeIntegers(void);
 static sqInt primitiveListBuiltinModule(void);
 static sqInt primitiveListExternalModule(void);
 static sqInt primitiveLoadImageSegment(void);
@@ -502,10 +502,10 @@ extern usqInt primitiveMethod(void);
 static sqInt primitiveMillisecondClock(void);
 EXPORT(sqInt) primitiveMillisecondClockMask(void);
 static sqInt primitiveMod(void);
-EXPORT(void) primitiveModLargeIntegers(void);
+EXPORT(sqInt) primitiveModLargeIntegers(void);
 EXPORT(sqInt) primitiveMultipleBytecodeSetsActive(void);
 static sqInt primitiveMultiply(void);
-EXPORT(void) primitiveMultiplyLargeIntegers(void);
+EXPORT(sqInt) primitiveMultiplyLargeIntegers(void);
 static sqInt primitiveNew(void);
 static sqInt primitiveNewMethod(void);
 static sqInt primitiveNewWithArg(void);
@@ -513,7 +513,7 @@ static sqInt primitiveNextInstance(void);
 static sqInt primitiveNextObject(void);
 static sqInt primitiveNoop(void);
 static sqInt primitiveNotEqual(void);
-EXPORT(void) primitiveNotEqualLargeIntegers(void);
+EXPORT(sqInt) primitiveNotEqualLargeIntegers(void);
 static sqInt primitiveNotIdentical(void);
 static sqInt primitiveObjectAt(void);
 static sqInt primitiveObjectAtPut(void);
@@ -528,9 +528,9 @@ EXPORT(sqInt) primitiveProfileSemaphore(void);
 EXPORT(sqInt) primitiveProfileStart(void);
 static sqInt primitiveQuit(void);
 static sqInt primitiveQuo(void);
-EXPORT(void) primitiveQuoLargeIntegers(void);
+EXPORT(sqInt) primitiveQuoLargeIntegers(void);
 static sqInt primitiveRelinquishProcessor(void);
-EXPORT(void) primitiveRemLargeIntegers(void);
+EXPORT(sqInt) primitiveRemLargeIntegers(void);
 static sqInt primitiveResume(void);
 static sqInt primitiveScanCharacters(void);
 EXPORT(sqInt) primitiveScreenDepth(void);
@@ -542,7 +542,7 @@ static sqInt primitiveSetFullScreen(void);
 #if IMMUTABILITY
 static sqInt primitiveSetImmutability(void);
 #else
-# define primitiveSetImmutability (void (*)(void))0
+# define primitiveSetImmutability (sqInt (*)(void))0
 #endif /* IMMUTABILITY */
 static sqInt primitiveSetInterruptKey(void);
 EXPORT(sqInt) primitiveSetLogDirectory(void);
@@ -569,7 +569,7 @@ static sqInt primitiveStringAt(void);
 static sqInt primitiveStringAtPut(void);
 static sqInt primitiveStringReplace(void);
 static sqInt primitiveSubtract(void);
-EXPORT(void) primitiveSubtractLargeIntegers(void);
+EXPORT(sqInt) primitiveSubtractLargeIntegers(void);
 static sqInt primitiveTestAndSetOwnershipOfCriticalSection(void);
 static sqInt primitiveTestDisplayDepth(void);
 #if TestingPrimitives
@@ -688,7 +688,7 @@ extern sqInt byteSizeOf(sqInt oop);
 extern usqInt bytesPerElement(sqInt oop);
 static sqInt NoDbgRegParms changeClassOfto(sqInt rcvr, sqInt argClass);
 extern sqInt characterObjectOf(sqInt characterCode);
-extern void characterTable(void);
+extern sqInt characterTable(void);
 extern usqInt characterValueOf(sqInt oop);
 extern sqInt checkedLongAt(sqInt byteAddress);
 extern void checkFreeSpace(sqInt gcModes);
@@ -1181,7 +1181,7 @@ static sqInt NoDbgRegParms frameReceiver(char *theFP);
 static sqInt NoDbgRegParms frameStackedReceiverOffset(char *theFP);
 static void freeUntracedStackPages(void);
 extern sqInt fullDisplayUpdate(void);
-extern void (*functionPointerForinClass(sqInt primIdx,sqInt theClass))(void);
+extern sqInt (*functionPointerForinClass(sqInt primIdx,sqInt theClass))(void);
 static sqInt getCogVMFeatureFlags(void);
 extern sqInt getCurrentBytecode(void);
 static sqInt getDesiredCogCodeSize(void);
@@ -1295,7 +1295,7 @@ extern sqInt positive32BitIntegerFor(unsigned int integerValue);
 extern sqInt positive64BitIntegerFor(usqLong integerValue);
 static sqInt NoDbgRegParms positiveMachineIntegerFor(usqIntptr_t value);
 static sqInt postGCUpdateDisplayBits(void);
-EXPORT(void) primitiveEventProcessingControl(void);
+EXPORT(sqInt) primitiveEventProcessingControl(void);
 static sqInt NoDbgRegParms primitiveFloatEqualtoArg(sqInt rcvrOop, sqInt argOop);
 static sqInt NoDbgRegParms primitiveFloatGreaterOrEqualtoArg(sqInt rcvrOop, sqInt argOop);
 static sqInt NoDbgRegParms primitiveFloatGreaterthanArg(sqInt rcvrOop, sqInt argOop);
@@ -1365,7 +1365,7 @@ static sqInt NoDbgRegParms resumepreemptedYieldingIf(sqInt aProcess, sqInt yield
 static sqInt retryPrimitiveOnFailure(void);
 EXPORT(sqInt) returnAsThroughCallbackContext(sqInt returnTypeOop, VMCallbackContext *vmCallbackContext, sqInt callbackMethodContext);
 static void NoDbgRegParms reverseDisplayFromto(sqInt startIndex, sqInt endIndex);
-static void NoDbgRegParms rewriteMethodCacheEntryForExternalPrimitiveToFunction(void (*localPrimAddress)());
+static void NoDbgRegParms rewriteMethodCacheEntryForExternalPrimitiveToFunction(sqInt (*localPrimAddress)());
 static sqInt NoDbgRegParms roomToPushNArgs(sqInt n);
 static sqInt NoDbgRegParms safeMethodClassOf(sqInt methodPointer);
 static sqInt NoDbgRegParms saneFunctionPointerForFailureOfPrimIndex(sqInt primIndex);
@@ -1442,7 +1442,7 @@ static usqInt NoDbgRegParms cloneContext(sqInt aContext);
 static sqInt NoDbgRegParms fieldOrSenderFPofContext(sqInt index, sqInt contextObj);
 static sqInt NoDbgRegParms fieldofFrame(sqInt index, char *theFP);
 static sqInt NoDbgRegParms isAppropriateForCopyObject(sqInt oop);
-static void (*linkExternalCallerrInto(sqInt externalCallLiteral, sqInt *failPtr))();
+static sqInt (*linkExternalCallerrInto(sqInt externalCallLiteral, sqInt *failPtr))();
 static double NoDbgRegParms NeverInline noInlineLoadFloatOrIntFrom(sqInt floatOrInt);
 static sqInt primitiveClone(void);
 static sqInt primitiveClosureCopyWithCopiedValues(void);
@@ -1466,7 +1466,7 @@ static sqInt primitiveIncrementalGC(void);
 static sqInt primitiveInstVarAt(void);
 static sqInt primitiveInstVarAtPut(void);
 #if LRPCheck
-EXPORT(void) primitiveLongRunningPrimitive(void);
+EXPORT(sqInt) primitiveLongRunningPrimitive(void);
 #endif /* LRPCheck */
 #if LRPCheck
 EXPORT(sqInt) primitiveLongRunningPrimitiveSemaphore(void);
@@ -1474,7 +1474,7 @@ EXPORT(sqInt) primitiveLongRunningPrimitiveSemaphore(void);
 static sqInt primitiveObjectPointsTo(void);
 static sqInt primitivePerform(void);
 static sqInt primitivePin(void);
-EXPORT(void) primitiveSetGCSemaphore(void);
+EXPORT(sqInt) primitiveSetGCSemaphore(void);
 static sqInt primitiveSignalAtMilliseconds(void);
 static sqInt primitiveSignalAtUTCMicroseconds(void);
 static sqInt primitiveSlotAt(void);
@@ -1482,11 +1482,11 @@ static sqInt primitiveSlotAtPut(void);
 static sqInt primitiveStoreStackp(void);
 static sqInt primitiveSuspend(void);
 static sqInt primitiveSuspendBackingUpV1(void);
-EXPORT(void) primitiveSuspendBackingUpV2(void);
+EXPORT(sqInt) primitiveSuspendBackingUpV2(void);
 static sqInt primitiveTerminateTo(void);
 static sqInt primitiveUnloadModule(void);
 static sqInt primitiveVMParameter(void);
-EXPORT(void) primitiveVoidReceiver(void);
+EXPORT(sqInt) primitiveVoidReceiver(void);
 static sqInt primitiveVoidVMState(void);
 static void NoDbgRegParms pruneStackstackp(sqInt stack, sqInt stackp);
 static void unmarkAfterPathTo(void);
@@ -1724,7 +1724,7 @@ register struct foo * foo asm(fooxstr(USE_GLOBAL_STRUCT_REG));
 static struct foo * foo = &fum;
 # endif
 #endif
-static void *primitiveCalloutPointer = (void *)-1;
+static sqInt *primitiveCalloutPointer = (void *)-1;
 static signed char primitiveAccessorDepthTable[MaxPrimitiveIndex + 2 /* 584 */] = {
 //       0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19
 /*0*/	-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,-1,
@@ -1758,13 +1758,13 @@ static signed char primitiveAccessorDepthTable[MaxPrimitiveIndex + 2 /* 584 */] 
 /*560*/	-1,-1,-1,-1,-1,-1,-1,-1, 2,-1,-1, 1, 0, 0,-1, 0,-1,-1, 2,-1,
 /*580*/	 0, 0, 0
 	};
-static void (*primitiveFunctionPointer)();
+static sqInt (*primitiveFunctionPointer)();
 static void (*interruptCheckChain)(void) = 0;
 static sqInt (* const pcPreviousToFunction)(sqInt,sqInt) = pcPreviousToinSqueakV3PlusClosuresOrSistaV1Method;
 static int (*sHEAFn)() = 0;
-static void (*externalPrimitiveTable[MaxExternalPrimitiveTableSize + 1 /* 4097 */])(void);
-static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
-	/* 0 */ (void (*)(void))0,
+static sqInt (*externalPrimitiveTable[MaxExternalPrimitiveTableSize + 1 /* 4097 */])(void);
+static sqInt (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
+	/* 0 */ (sqInt (*)(void))0,
 	/* 1 */ primitiveAdd,
 	/* 2 */ primitiveSubtract,
 	/* 3 */ primitiveLessThan,
@@ -1783,7 +1783,7 @@ static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
 	/* 16 */ primitiveBitXor,
 	/* 17 */ primitiveBitShift,
 	/* 18 */ primitiveMakePoint,
-	/* 19 */ (void (*)(void))0,
+	/* 19 */ (sqInt (*)(void))0,
 	/* 20 */ primitiveRemLargeIntegers,
 	/* 21 */ primitiveAddLargeIntegers,
 	/* 22 */ primitiveSubtractLargeIntegers,
@@ -1829,9 +1829,9 @@ static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
 	/* 62 */ primitiveSize,
 	/* 63 */ primitiveStringAt,
 	/* 64 */ primitiveStringAtPut,
-	/* 65 */ (void (*)(void))0,
-	/* 66 */ (void (*)(void))0,
-	/* 67 */ (void (*)(void))0,
+	/* 65 */ (sqInt (*)(void))0,
+	/* 66 */ (sqInt (*)(void))0,
+	/* 67 */ (sqInt (*)(void))0,
 	/* 68 */ primitiveObjectAt,
 	/* 69 */ primitiveObjectAtPut,
 	/* 70 */ primitiveNew,
@@ -1844,9 +1844,9 @@ static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
 	/* 77 */ primitiveSomeInstance,
 	/* 78 */ primitiveNextInstance,
 	/* 79 */ primitiveNewMethod,
-	/* 80 */ (void (*)(void))0,
-	/* 81 */ (void (*)(void))0,
-	/* 82 */ (void (*)(void))0,
+	/* 80 */ (sqInt (*)(void))0,
+	/* 81 */ (sqInt (*)(void))0,
+	/* 82 */ (sqInt (*)(void))0,
 	/* 83 */ primitivePerform,
 	/* 84 */ primitivePerformWithArgs,
 	/* 85 */ primitiveSignal,
@@ -1854,13 +1854,13 @@ static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
 	/* 87 */ primitiveResume,
 	/* 88 */ primitiveSuspend,
 	/* 89 */ primitiveFlushCache,
-	/* 90 */ (void (*)(void))0,
+	/* 90 */ (sqInt (*)(void))0,
 	/* 91 */ primitiveTestDisplayDepth,
 	/* 92 */ primitiveSetDisplayMode,
 	/* 93 */ primitiveInputSemaphore,
 	/* 94 */ primitiveGetNextEvent,
 	/* 95 */ primitiveInputWord,
-	/* 96 */ (void (*)(void))0,
+	/* 96 */ (sqInt (*)(void))0,
 	/* 97 */ primitiveSnapshot,
 	/* 98 */ primitiveStoreImageSegment,
 	/* 99 */ primitiveLoadImageSegment,
@@ -1868,12 +1868,12 @@ static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
 	/* 101 */ primitiveBeCursor,
 	/* 102 */ primitiveBeDisplay,
 	/* 103 */ primitiveScanCharacters,
-	/* 104 */ (void (*)(void))0,
+	/* 104 */ (sqInt (*)(void))0,
 	/* 105 */ primitiveStringReplace,
 	/* 106 */ primitiveScreenSize,
-	/* 107 */ (void (*)(void))0,
-	/* 108 */ (void (*)(void))0,
-	/* 109 */ (void (*)(void))0,
+	/* 107 */ (sqInt (*)(void))0,
+	/* 108 */ (sqInt (*)(void))0,
+	/* 109 */ (sqInt (*)(void))0,
 	/* 110 */ primitiveIdentical,
 	/* 111 */ primitiveClass,
 	/* 112 */ primitiveBytesLeft,
@@ -1887,7 +1887,7 @@ static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
 	/* 120 */ primitiveCalloutToFFI,
 	/* 121 */ primitiveImageName,
 	/* 122 */ primitiveNoop,
-	/* 123 */ (void (*)(void))0,
+	/* 123 */ (sqInt (*)(void))0,
 	/* 124 */ primitiveLowSpaceSemaphore,
 	/* 125 */ primitiveSignalAtBytesLeft,
 	/* 126 */ primitiveDeferDisplayUpdates,
@@ -1910,23 +1910,23 @@ static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
 	/* 143 */ primitiveShortAt,
 	/* 144 */ primitiveShortAtPut,
 	/* 145 */ primitiveConstantFill,
-	/* 146 */ (void (*)(void))0,
-	/* 147 */ (void (*)(void))0,
+	/* 146 */ (sqInt (*)(void))0,
+	/* 147 */ (sqInt (*)(void))0,
 	/* 148 */ primitiveClone,
 	/* 149 */ primitiveGetAttribute,
-	/* 150 */ (void (*)(void))0,
-	/* 151 */ (void (*)(void))0,
-	/* 152 */ (void (*)(void))0,
-	/* 153 */ (void (*)(void))0,
-	/* 154 */ (void (*)(void))0,
-	/* 155 */ (void (*)(void))0,
-	/* 156 */ (void (*)(void))0,
-	/* 157 */ (void (*)(void))0,
+	/* 150 */ (sqInt (*)(void))0,
+	/* 151 */ (sqInt (*)(void))0,
+	/* 152 */ (sqInt (*)(void))0,
+	/* 153 */ (sqInt (*)(void))0,
+	/* 154 */ (sqInt (*)(void))0,
+	/* 155 */ (sqInt (*)(void))0,
+	/* 156 */ (sqInt (*)(void))0,
+	/* 157 */ (sqInt (*)(void))0,
 	/* 158 */ primitiveCompareWith,
 	/* 159 */ primitiveHashMultiply,
 	/* 160 */ primitiveAdoptInstance,
 	/* 161 */ primitiveSetOrHasIdentityHash,
-	/* 162 */ (void (*)(void))0,
+	/* 162 */ (sqInt (*)(void))0,
 	/* 163 */ primitiveGetImmutability,
 	/* 164 */ primitiveSetImmutability,
 	/* 165 */ primitiveIntegerAt,
@@ -1943,7 +1943,7 @@ static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
 	/* 176 */ primitiveMaxIdentityHash,
 	/* 177 */ primitiveAllInstances,
 	/* 178 */ primitiveAllObjects,
-	/* 179 */ (void (*)(void))0,
+	/* 179 */ (sqInt (*)(void))0,
 	/* 180 */ primitiveGrowMemoryByAtLeast,
 	/* 181 */ primitiveSizeInBytesOfInstance,
 	/* 182 */ primitiveSizeInBytes,
@@ -1954,16 +1954,16 @@ static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
 	/* 187 */ primitiveTestAndSetOwnershipOfCriticalSection,
 	/* 188 */ primitiveExecuteMethodArgsArray,
 	/* 189 */ primitiveExecuteMethod,
-	/* 190 */ (void (*)(void))0,
-	/* 191 */ (void (*)(void))0,
-	/* 192 */ (void (*)(void))0,
-	/* 193 */ (void (*)(void))0,
-	/* 194 */ (void (*)(void))0,
+	/* 190 */ (sqInt (*)(void))0,
+	/* 191 */ (sqInt (*)(void))0,
+	/* 192 */ (sqInt (*)(void))0,
+	/* 193 */ (sqInt (*)(void))0,
+	/* 194 */ (sqInt (*)(void))0,
 	/* 195 */ primitiveFindNextUnwindContext,
 	/* 196 */ primitiveTerminateTo,
 	/* 197 */ primitiveFindHandlerContext,
-	/* 198 */ (void (*)(void))0,
-	/* 199 */ (void (*)(void))0,
+	/* 198 */ (sqInt (*)(void))0,
+	/* 199 */ (sqInt (*)(void))0,
 	/* 200 */ primitiveClosureCopyWithCopiedValues,
 	/* 201 */ primitiveClosureValue,
 	/* 202 */ primitiveClosureValue,
@@ -1980,28 +1980,28 @@ static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
 	/* 213 */ primitiveContextXray,
 	/* 214 */ primitiveVoidVMState,
 	/* 215 */ primitiveFlushCacheByMethod,
-	/* 216 */ (void (*)(void))0,
-	/* 217 */ (void (*)(void))0,
+	/* 216 */ (sqInt (*)(void))0,
+	/* 217 */ (sqInt (*)(void))0,
 	/* 218 */ primitiveDoNamedPrimitiveWithArgs,
-	/* 219 */ (void (*)(void))0,
+	/* 219 */ (sqInt (*)(void))0,
 	/* 220 */ primitiveGetSetFFIExceptionHandling,
 	/* 221 */ primitiveClosureValueNoContextSwitch,
 	/* 222 */ primitiveClosureValueNoContextSwitch,
-	/* 223 */ (void (*)(void))0,
-	/* 224 */ (void (*)(void))0,
-	/* 225 */ (void (*)(void))0,
-	/* 226 */ (void (*)(void))0,
-	/* 227 */ (void (*)(void))0,
-	/* 228 */ (void (*)(void))0,
-	/* 229 */ (void (*)(void))0,
+	/* 223 */ (sqInt (*)(void))0,
+	/* 224 */ (sqInt (*)(void))0,
+	/* 225 */ (sqInt (*)(void))0,
+	/* 226 */ (sqInt (*)(void))0,
+	/* 227 */ (sqInt (*)(void))0,
+	/* 228 */ (sqInt (*)(void))0,
+	/* 229 */ (sqInt (*)(void))0,
 	/* 230 */ primitiveRelinquishProcessor,
 	/* 231 */ primitiveForceDisplayUpdate,
 	/* 232 */ primitiveFormPrint,
 	/* 233 */ primitiveSetFullScreen,
-	/* 234 */ (void (*)(void))0,
-	/* 235 */ (void (*)(void))0,
-	/* 236 */ (void (*)(void))0,
-	/* 237 */ (void (*)(void))0,
+	/* 234 */ (sqInt (*)(void))0,
+	/* 235 */ (sqInt (*)(void))0,
+	/* 236 */ (sqInt (*)(void))0,
+	/* 237 */ (sqInt (*)(void))0,
 	/* 238 */ primitiveFloatArrayAt,
 	/* 239 */ primitiveFloatArrayAtPut,
 	/* 240 */ primitiveUTCMicrosecondClock,
@@ -2017,333 +2017,333 @@ static void (*primitiveTable[MaxPrimitiveIndex + 2 /* 584 */])(void) = {
 	/* 250 */ primitiveClearVMProfile,
 	/* 251 */ primitiveControlVMProfiling,
 	/* 252 */ primitiveVMProfileSamplesInto,
-	/* 253 */ (void (*)(void))0,
+	/* 253 */ (sqInt (*)(void))0,
 	/* 254 */ primitiveVMParameter,
-	/* 255 */ (void (*)(void))0,
-	/* 256 */ (void (*)(void))256,
-	/* 257 */ (void (*)(void))257,
-	/* 258 */ (void (*)(void))258,
-	/* 259 */ (void (*)(void))259,
-	/* 260 */ (void (*)(void))260,
-	/* 261 */ (void (*)(void))261,
-	/* 262 */ (void (*)(void))262,
-	/* 263 */ (void (*)(void))263,
-	/* 264 */ (void (*)(void))264,
-	/* 265 */ (void (*)(void))265,
-	/* 266 */ (void (*)(void))266,
-	/* 267 */ (void (*)(void))267,
-	/* 268 */ (void (*)(void))268,
-	/* 269 */ (void (*)(void))269,
-	/* 270 */ (void (*)(void))270,
-	/* 271 */ (void (*)(void))271,
-	/* 272 */ (void (*)(void))272,
-	/* 273 */ (void (*)(void))273,
-	/* 274 */ (void (*)(void))274,
-	/* 275 */ (void (*)(void))275,
-	/* 276 */ (void (*)(void))276,
-	/* 277 */ (void (*)(void))277,
-	/* 278 */ (void (*)(void))278,
-	/* 279 */ (void (*)(void))279,
-	/* 280 */ (void (*)(void))280,
-	/* 281 */ (void (*)(void))281,
-	/* 282 */ (void (*)(void))282,
-	/* 283 */ (void (*)(void))283,
-	/* 284 */ (void (*)(void))284,
-	/* 285 */ (void (*)(void))285,
-	/* 286 */ (void (*)(void))286,
-	/* 287 */ (void (*)(void))287,
-	/* 288 */ (void (*)(void))288,
-	/* 289 */ (void (*)(void))289,
-	/* 290 */ (void (*)(void))290,
-	/* 291 */ (void (*)(void))291,
-	/* 292 */ (void (*)(void))292,
-	/* 293 */ (void (*)(void))293,
-	/* 294 */ (void (*)(void))294,
-	/* 295 */ (void (*)(void))295,
-	/* 296 */ (void (*)(void))296,
-	/* 297 */ (void (*)(void))297,
-	/* 298 */ (void (*)(void))298,
-	/* 299 */ (void (*)(void))299,
-	/* 300 */ (void (*)(void))300,
-	/* 301 */ (void (*)(void))301,
-	/* 302 */ (void (*)(void))302,
-	/* 303 */ (void (*)(void))303,
-	/* 304 */ (void (*)(void))304,
-	/* 305 */ (void (*)(void))305,
-	/* 306 */ (void (*)(void))306,
-	/* 307 */ (void (*)(void))307,
-	/* 308 */ (void (*)(void))308,
-	/* 309 */ (void (*)(void))309,
-	/* 310 */ (void (*)(void))310,
-	/* 311 */ (void (*)(void))311,
-	/* 312 */ (void (*)(void))312,
-	/* 313 */ (void (*)(void))313,
-	/* 314 */ (void (*)(void))314,
-	/* 315 */ (void (*)(void))315,
-	/* 316 */ (void (*)(void))316,
-	/* 317 */ (void (*)(void))317,
-	/* 318 */ (void (*)(void))318,
-	/* 319 */ (void (*)(void))319,
-	/* 320 */ (void (*)(void))320,
-	/* 321 */ (void (*)(void))321,
-	/* 322 */ (void (*)(void))322,
-	/* 323 */ (void (*)(void))323,
-	/* 324 */ (void (*)(void))324,
-	/* 325 */ (void (*)(void))325,
-	/* 326 */ (void (*)(void))326,
-	/* 327 */ (void (*)(void))327,
-	/* 328 */ (void (*)(void))328,
-	/* 329 */ (void (*)(void))329,
-	/* 330 */ (void (*)(void))330,
-	/* 331 */ (void (*)(void))331,
-	/* 332 */ (void (*)(void))332,
-	/* 333 */ (void (*)(void))333,
-	/* 334 */ (void (*)(void))334,
-	/* 335 */ (void (*)(void))335,
-	/* 336 */ (void (*)(void))336,
-	/* 337 */ (void (*)(void))337,
-	/* 338 */ (void (*)(void))338,
-	/* 339 */ (void (*)(void))339,
-	/* 340 */ (void (*)(void))340,
-	/* 341 */ (void (*)(void))341,
-	/* 342 */ (void (*)(void))342,
-	/* 343 */ (void (*)(void))343,
-	/* 344 */ (void (*)(void))344,
-	/* 345 */ (void (*)(void))345,
-	/* 346 */ (void (*)(void))346,
-	/* 347 */ (void (*)(void))347,
-	/* 348 */ (void (*)(void))348,
-	/* 349 */ (void (*)(void))349,
-	/* 350 */ (void (*)(void))350,
-	/* 351 */ (void (*)(void))351,
-	/* 352 */ (void (*)(void))352,
-	/* 353 */ (void (*)(void))353,
-	/* 354 */ (void (*)(void))354,
-	/* 355 */ (void (*)(void))355,
-	/* 356 */ (void (*)(void))356,
-	/* 357 */ (void (*)(void))357,
-	/* 358 */ (void (*)(void))358,
-	/* 359 */ (void (*)(void))359,
-	/* 360 */ (void (*)(void))360,
-	/* 361 */ (void (*)(void))361,
-	/* 362 */ (void (*)(void))362,
-	/* 363 */ (void (*)(void))363,
-	/* 364 */ (void (*)(void))364,
-	/* 365 */ (void (*)(void))365,
-	/* 366 */ (void (*)(void))366,
-	/* 367 */ (void (*)(void))367,
-	/* 368 */ (void (*)(void))368,
-	/* 369 */ (void (*)(void))369,
-	/* 370 */ (void (*)(void))370,
-	/* 371 */ (void (*)(void))371,
-	/* 372 */ (void (*)(void))372,
-	/* 373 */ (void (*)(void))373,
-	/* 374 */ (void (*)(void))374,
-	/* 375 */ (void (*)(void))375,
-	/* 376 */ (void (*)(void))376,
-	/* 377 */ (void (*)(void))377,
-	/* 378 */ (void (*)(void))378,
-	/* 379 */ (void (*)(void))379,
-	/* 380 */ (void (*)(void))380,
-	/* 381 */ (void (*)(void))381,
-	/* 382 */ (void (*)(void))382,
-	/* 383 */ (void (*)(void))383,
-	/* 384 */ (void (*)(void))384,
-	/* 385 */ (void (*)(void))385,
-	/* 386 */ (void (*)(void))386,
-	/* 387 */ (void (*)(void))387,
-	/* 388 */ (void (*)(void))388,
-	/* 389 */ (void (*)(void))389,
-	/* 390 */ (void (*)(void))390,
-	/* 391 */ (void (*)(void))391,
-	/* 392 */ (void (*)(void))392,
-	/* 393 */ (void (*)(void))393,
-	/* 394 */ (void (*)(void))394,
-	/* 395 */ (void (*)(void))395,
-	/* 396 */ (void (*)(void))396,
-	/* 397 */ (void (*)(void))397,
-	/* 398 */ (void (*)(void))398,
-	/* 399 */ (void (*)(void))399,
-	/* 400 */ (void (*)(void))400,
-	/* 401 */ (void (*)(void))401,
-	/* 402 */ (void (*)(void))402,
-	/* 403 */ (void (*)(void))403,
-	/* 404 */ (void (*)(void))404,
-	/* 405 */ (void (*)(void))405,
-	/* 406 */ (void (*)(void))406,
-	/* 407 */ (void (*)(void))407,
-	/* 408 */ (void (*)(void))408,
-	/* 409 */ (void (*)(void))409,
-	/* 410 */ (void (*)(void))410,
-	/* 411 */ (void (*)(void))411,
-	/* 412 */ (void (*)(void))412,
-	/* 413 */ (void (*)(void))413,
-	/* 414 */ (void (*)(void))414,
-	/* 415 */ (void (*)(void))415,
-	/* 416 */ (void (*)(void))416,
-	/* 417 */ (void (*)(void))417,
-	/* 418 */ (void (*)(void))418,
-	/* 419 */ (void (*)(void))419,
-	/* 420 */ (void (*)(void))420,
-	/* 421 */ (void (*)(void))421,
-	/* 422 */ (void (*)(void))422,
-	/* 423 */ (void (*)(void))423,
-	/* 424 */ (void (*)(void))424,
-	/* 425 */ (void (*)(void))425,
-	/* 426 */ (void (*)(void))426,
-	/* 427 */ (void (*)(void))427,
-	/* 428 */ (void (*)(void))428,
-	/* 429 */ (void (*)(void))429,
-	/* 430 */ (void (*)(void))430,
-	/* 431 */ (void (*)(void))431,
-	/* 432 */ (void (*)(void))432,
-	/* 433 */ (void (*)(void))433,
-	/* 434 */ (void (*)(void))434,
-	/* 435 */ (void (*)(void))435,
-	/* 436 */ (void (*)(void))436,
-	/* 437 */ (void (*)(void))437,
-	/* 438 */ (void (*)(void))438,
-	/* 439 */ (void (*)(void))439,
-	/* 440 */ (void (*)(void))440,
-	/* 441 */ (void (*)(void))441,
-	/* 442 */ (void (*)(void))442,
-	/* 443 */ (void (*)(void))443,
-	/* 444 */ (void (*)(void))444,
-	/* 445 */ (void (*)(void))445,
-	/* 446 */ (void (*)(void))446,
-	/* 447 */ (void (*)(void))447,
-	/* 448 */ (void (*)(void))448,
-	/* 449 */ (void (*)(void))449,
-	/* 450 */ (void (*)(void))450,
-	/* 451 */ (void (*)(void))451,
-	/* 452 */ (void (*)(void))452,
-	/* 453 */ (void (*)(void))453,
-	/* 454 */ (void (*)(void))454,
-	/* 455 */ (void (*)(void))455,
-	/* 456 */ (void (*)(void))456,
-	/* 457 */ (void (*)(void))457,
-	/* 458 */ (void (*)(void))458,
-	/* 459 */ (void (*)(void))459,
-	/* 460 */ (void (*)(void))460,
-	/* 461 */ (void (*)(void))461,
-	/* 462 */ (void (*)(void))462,
-	/* 463 */ (void (*)(void))463,
-	/* 464 */ (void (*)(void))464,
-	/* 465 */ (void (*)(void))465,
-	/* 466 */ (void (*)(void))466,
-	/* 467 */ (void (*)(void))467,
-	/* 468 */ (void (*)(void))468,
-	/* 469 */ (void (*)(void))469,
-	/* 470 */ (void (*)(void))470,
-	/* 471 */ (void (*)(void))471,
-	/* 472 */ (void (*)(void))472,
-	/* 473 */ (void (*)(void))473,
-	/* 474 */ (void (*)(void))474,
-	/* 475 */ (void (*)(void))475,
-	/* 476 */ (void (*)(void))476,
-	/* 477 */ (void (*)(void))477,
-	/* 478 */ (void (*)(void))478,
-	/* 479 */ (void (*)(void))479,
-	/* 480 */ (void (*)(void))480,
-	/* 481 */ (void (*)(void))481,
-	/* 482 */ (void (*)(void))482,
-	/* 483 */ (void (*)(void))483,
-	/* 484 */ (void (*)(void))484,
-	/* 485 */ (void (*)(void))485,
-	/* 486 */ (void (*)(void))486,
-	/* 487 */ (void (*)(void))487,
-	/* 488 */ (void (*)(void))488,
-	/* 489 */ (void (*)(void))489,
-	/* 490 */ (void (*)(void))490,
-	/* 491 */ (void (*)(void))491,
-	/* 492 */ (void (*)(void))492,
-	/* 493 */ (void (*)(void))493,
-	/* 494 */ (void (*)(void))494,
-	/* 495 */ (void (*)(void))495,
-	/* 496 */ (void (*)(void))496,
-	/* 497 */ (void (*)(void))497,
-	/* 498 */ (void (*)(void))498,
-	/* 499 */ (void (*)(void))499,
-	/* 500 */ (void (*)(void))500,
-	/* 501 */ (void (*)(void))501,
-	/* 502 */ (void (*)(void))502,
-	/* 503 */ (void (*)(void))503,
-	/* 504 */ (void (*)(void))504,
-	/* 505 */ (void (*)(void))505,
-	/* 506 */ (void (*)(void))506,
-	/* 507 */ (void (*)(void))507,
-	/* 508 */ (void (*)(void))508,
-	/* 509 */ (void (*)(void))509,
-	/* 510 */ (void (*)(void))510,
-	/* 511 */ (void (*)(void))511,
-	/* 512 */ (void (*)(void))512,
-	/* 513 */ (void (*)(void))513,
-	/* 514 */ (void (*)(void))514,
-	/* 515 */ (void (*)(void))515,
-	/* 516 */ (void (*)(void))516,
-	/* 517 */ (void (*)(void))517,
-	/* 518 */ (void (*)(void))518,
-	/* 519 */ (void (*)(void))519,
-	/* 520 */ (void (*)(void))0,
-	/* 521 */ (void (*)(void))0,
-	/* 522 */ (void (*)(void))0,
-	/* 523 */ (void (*)(void))0,
-	/* 524 */ (void (*)(void))0,
-	/* 525 */ (void (*)(void))0,
-	/* 526 */ (void (*)(void))0,
-	/* 527 */ (void (*)(void))0,
-	/* 528 */ (void (*)(void))0,
-	/* 529 */ (void (*)(void))0,
-	/* 530 */ (void (*)(void))0,
-	/* 531 */ (void (*)(void))0,
-	/* 532 */ (void (*)(void))0,
-	/* 533 */ (void (*)(void))0,
-	/* 534 */ (void (*)(void))0,
-	/* 535 */ (void (*)(void))0,
-	/* 536 */ (void (*)(void))0,
-	/* 537 */ (void (*)(void))0,
-	/* 538 */ (void (*)(void))0,
-	/* 539 */ (void (*)(void))0,
-	/* 540 */ (void (*)(void))0,
-	/* 541 */ (void (*)(void))0,
-	/* 542 */ (void (*)(void))0,
-	/* 543 */ (void (*)(void))0,
-	/* 544 */ (void (*)(void))0,
-	/* 545 */ (void (*)(void))0,
-	/* 546 */ (void (*)(void))0,
-	/* 547 */ (void (*)(void))0,
-	/* 548 */ (void (*)(void))0,
-	/* 549 */ (void (*)(void))0,
-	/* 550 */ (void (*)(void))0,
-	/* 551 */ (void (*)(void))0,
-	/* 552 */ (void (*)(void))0,
-	/* 553 */ (void (*)(void))0,
-	/* 554 */ (void (*)(void))0,
-	/* 555 */ (void (*)(void))0,
-	/* 556 */ (void (*)(void))0,
-	/* 557 */ (void (*)(void))0,
-	/* 558 */ (void (*)(void))0,
-	/* 559 */ (void (*)(void))0,
-	/* 560 */ (void (*)(void))0,
-	/* 561 */ (void (*)(void))0,
-	/* 562 */ (void (*)(void))0,
-	/* 563 */ (void (*)(void))0,
-	/* 564 */ (void (*)(void))0,
-	/* 565 */ (void (*)(void))0,
-	/* 566 */ (void (*)(void))0,
-	/* 567 */ (void (*)(void))0,
+	/* 255 */ (sqInt (*)(void))0,
+	/* 256 */ (sqInt (*)(void))256,
+	/* 257 */ (sqInt (*)(void))257,
+	/* 258 */ (sqInt (*)(void))258,
+	/* 259 */ (sqInt (*)(void))259,
+	/* 260 */ (sqInt (*)(void))260,
+	/* 261 */ (sqInt (*)(void))261,
+	/* 262 */ (sqInt (*)(void))262,
+	/* 263 */ (sqInt (*)(void))263,
+	/* 264 */ (sqInt (*)(void))264,
+	/* 265 */ (sqInt (*)(void))265,
+	/* 266 */ (sqInt (*)(void))266,
+	/* 267 */ (sqInt (*)(void))267,
+	/* 268 */ (sqInt (*)(void))268,
+	/* 269 */ (sqInt (*)(void))269,
+	/* 270 */ (sqInt (*)(void))270,
+	/* 271 */ (sqInt (*)(void))271,
+	/* 272 */ (sqInt (*)(void))272,
+	/* 273 */ (sqInt (*)(void))273,
+	/* 274 */ (sqInt (*)(void))274,
+	/* 275 */ (sqInt (*)(void))275,
+	/* 276 */ (sqInt (*)(void))276,
+	/* 277 */ (sqInt (*)(void))277,
+	/* 278 */ (sqInt (*)(void))278,
+	/* 279 */ (sqInt (*)(void))279,
+	/* 280 */ (sqInt (*)(void))280,
+	/* 281 */ (sqInt (*)(void))281,
+	/* 282 */ (sqInt (*)(void))282,
+	/* 283 */ (sqInt (*)(void))283,
+	/* 284 */ (sqInt (*)(void))284,
+	/* 285 */ (sqInt (*)(void))285,
+	/* 286 */ (sqInt (*)(void))286,
+	/* 287 */ (sqInt (*)(void))287,
+	/* 288 */ (sqInt (*)(void))288,
+	/* 289 */ (sqInt (*)(void))289,
+	/* 290 */ (sqInt (*)(void))290,
+	/* 291 */ (sqInt (*)(void))291,
+	/* 292 */ (sqInt (*)(void))292,
+	/* 293 */ (sqInt (*)(void))293,
+	/* 294 */ (sqInt (*)(void))294,
+	/* 295 */ (sqInt (*)(void))295,
+	/* 296 */ (sqInt (*)(void))296,
+	/* 297 */ (sqInt (*)(void))297,
+	/* 298 */ (sqInt (*)(void))298,
+	/* 299 */ (sqInt (*)(void))299,
+	/* 300 */ (sqInt (*)(void))300,
+	/* 301 */ (sqInt (*)(void))301,
+	/* 302 */ (sqInt (*)(void))302,
+	/* 303 */ (sqInt (*)(void))303,
+	/* 304 */ (sqInt (*)(void))304,
+	/* 305 */ (sqInt (*)(void))305,
+	/* 306 */ (sqInt (*)(void))306,
+	/* 307 */ (sqInt (*)(void))307,
+	/* 308 */ (sqInt (*)(void))308,
+	/* 309 */ (sqInt (*)(void))309,
+	/* 310 */ (sqInt (*)(void))310,
+	/* 311 */ (sqInt (*)(void))311,
+	/* 312 */ (sqInt (*)(void))312,
+	/* 313 */ (sqInt (*)(void))313,
+	/* 314 */ (sqInt (*)(void))314,
+	/* 315 */ (sqInt (*)(void))315,
+	/* 316 */ (sqInt (*)(void))316,
+	/* 317 */ (sqInt (*)(void))317,
+	/* 318 */ (sqInt (*)(void))318,
+	/* 319 */ (sqInt (*)(void))319,
+	/* 320 */ (sqInt (*)(void))320,
+	/* 321 */ (sqInt (*)(void))321,
+	/* 322 */ (sqInt (*)(void))322,
+	/* 323 */ (sqInt (*)(void))323,
+	/* 324 */ (sqInt (*)(void))324,
+	/* 325 */ (sqInt (*)(void))325,
+	/* 326 */ (sqInt (*)(void))326,
+	/* 327 */ (sqInt (*)(void))327,
+	/* 328 */ (sqInt (*)(void))328,
+	/* 329 */ (sqInt (*)(void))329,
+	/* 330 */ (sqInt (*)(void))330,
+	/* 331 */ (sqInt (*)(void))331,
+	/* 332 */ (sqInt (*)(void))332,
+	/* 333 */ (sqInt (*)(void))333,
+	/* 334 */ (sqInt (*)(void))334,
+	/* 335 */ (sqInt (*)(void))335,
+	/* 336 */ (sqInt (*)(void))336,
+	/* 337 */ (sqInt (*)(void))337,
+	/* 338 */ (sqInt (*)(void))338,
+	/* 339 */ (sqInt (*)(void))339,
+	/* 340 */ (sqInt (*)(void))340,
+	/* 341 */ (sqInt (*)(void))341,
+	/* 342 */ (sqInt (*)(void))342,
+	/* 343 */ (sqInt (*)(void))343,
+	/* 344 */ (sqInt (*)(void))344,
+	/* 345 */ (sqInt (*)(void))345,
+	/* 346 */ (sqInt (*)(void))346,
+	/* 347 */ (sqInt (*)(void))347,
+	/* 348 */ (sqInt (*)(void))348,
+	/* 349 */ (sqInt (*)(void))349,
+	/* 350 */ (sqInt (*)(void))350,
+	/* 351 */ (sqInt (*)(void))351,
+	/* 352 */ (sqInt (*)(void))352,
+	/* 353 */ (sqInt (*)(void))353,
+	/* 354 */ (sqInt (*)(void))354,
+	/* 355 */ (sqInt (*)(void))355,
+	/* 356 */ (sqInt (*)(void))356,
+	/* 357 */ (sqInt (*)(void))357,
+	/* 358 */ (sqInt (*)(void))358,
+	/* 359 */ (sqInt (*)(void))359,
+	/* 360 */ (sqInt (*)(void))360,
+	/* 361 */ (sqInt (*)(void))361,
+	/* 362 */ (sqInt (*)(void))362,
+	/* 363 */ (sqInt (*)(void))363,
+	/* 364 */ (sqInt (*)(void))364,
+	/* 365 */ (sqInt (*)(void))365,
+	/* 366 */ (sqInt (*)(void))366,
+	/* 367 */ (sqInt (*)(void))367,
+	/* 368 */ (sqInt (*)(void))368,
+	/* 369 */ (sqInt (*)(void))369,
+	/* 370 */ (sqInt (*)(void))370,
+	/* 371 */ (sqInt (*)(void))371,
+	/* 372 */ (sqInt (*)(void))372,
+	/* 373 */ (sqInt (*)(void))373,
+	/* 374 */ (sqInt (*)(void))374,
+	/* 375 */ (sqInt (*)(void))375,
+	/* 376 */ (sqInt (*)(void))376,
+	/* 377 */ (sqInt (*)(void))377,
+	/* 378 */ (sqInt (*)(void))378,
+	/* 379 */ (sqInt (*)(void))379,
+	/* 380 */ (sqInt (*)(void))380,
+	/* 381 */ (sqInt (*)(void))381,
+	/* 382 */ (sqInt (*)(void))382,
+	/* 383 */ (sqInt (*)(void))383,
+	/* 384 */ (sqInt (*)(void))384,
+	/* 385 */ (sqInt (*)(void))385,
+	/* 386 */ (sqInt (*)(void))386,
+	/* 387 */ (sqInt (*)(void))387,
+	/* 388 */ (sqInt (*)(void))388,
+	/* 389 */ (sqInt (*)(void))389,
+	/* 390 */ (sqInt (*)(void))390,
+	/* 391 */ (sqInt (*)(void))391,
+	/* 392 */ (sqInt (*)(void))392,
+	/* 393 */ (sqInt (*)(void))393,
+	/* 394 */ (sqInt (*)(void))394,
+	/* 395 */ (sqInt (*)(void))395,
+	/* 396 */ (sqInt (*)(void))396,
+	/* 397 */ (sqInt (*)(void))397,
+	/* 398 */ (sqInt (*)(void))398,
+	/* 399 */ (sqInt (*)(void))399,
+	/* 400 */ (sqInt (*)(void))400,
+	/* 401 */ (sqInt (*)(void))401,
+	/* 402 */ (sqInt (*)(void))402,
+	/* 403 */ (sqInt (*)(void))403,
+	/* 404 */ (sqInt (*)(void))404,
+	/* 405 */ (sqInt (*)(void))405,
+	/* 406 */ (sqInt (*)(void))406,
+	/* 407 */ (sqInt (*)(void))407,
+	/* 408 */ (sqInt (*)(void))408,
+	/* 409 */ (sqInt (*)(void))409,
+	/* 410 */ (sqInt (*)(void))410,
+	/* 411 */ (sqInt (*)(void))411,
+	/* 412 */ (sqInt (*)(void))412,
+	/* 413 */ (sqInt (*)(void))413,
+	/* 414 */ (sqInt (*)(void))414,
+	/* 415 */ (sqInt (*)(void))415,
+	/* 416 */ (sqInt (*)(void))416,
+	/* 417 */ (sqInt (*)(void))417,
+	/* 418 */ (sqInt (*)(void))418,
+	/* 419 */ (sqInt (*)(void))419,
+	/* 420 */ (sqInt (*)(void))420,
+	/* 421 */ (sqInt (*)(void))421,
+	/* 422 */ (sqInt (*)(void))422,
+	/* 423 */ (sqInt (*)(void))423,
+	/* 424 */ (sqInt (*)(void))424,
+	/* 425 */ (sqInt (*)(void))425,
+	/* 426 */ (sqInt (*)(void))426,
+	/* 427 */ (sqInt (*)(void))427,
+	/* 428 */ (sqInt (*)(void))428,
+	/* 429 */ (sqInt (*)(void))429,
+	/* 430 */ (sqInt (*)(void))430,
+	/* 431 */ (sqInt (*)(void))431,
+	/* 432 */ (sqInt (*)(void))432,
+	/* 433 */ (sqInt (*)(void))433,
+	/* 434 */ (sqInt (*)(void))434,
+	/* 435 */ (sqInt (*)(void))435,
+	/* 436 */ (sqInt (*)(void))436,
+	/* 437 */ (sqInt (*)(void))437,
+	/* 438 */ (sqInt (*)(void))438,
+	/* 439 */ (sqInt (*)(void))439,
+	/* 440 */ (sqInt (*)(void))440,
+	/* 441 */ (sqInt (*)(void))441,
+	/* 442 */ (sqInt (*)(void))442,
+	/* 443 */ (sqInt (*)(void))443,
+	/* 444 */ (sqInt (*)(void))444,
+	/* 445 */ (sqInt (*)(void))445,
+	/* 446 */ (sqInt (*)(void))446,
+	/* 447 */ (sqInt (*)(void))447,
+	/* 448 */ (sqInt (*)(void))448,
+	/* 449 */ (sqInt (*)(void))449,
+	/* 450 */ (sqInt (*)(void))450,
+	/* 451 */ (sqInt (*)(void))451,
+	/* 452 */ (sqInt (*)(void))452,
+	/* 453 */ (sqInt (*)(void))453,
+	/* 454 */ (sqInt (*)(void))454,
+	/* 455 */ (sqInt (*)(void))455,
+	/* 456 */ (sqInt (*)(void))456,
+	/* 457 */ (sqInt (*)(void))457,
+	/* 458 */ (sqInt (*)(void))458,
+	/* 459 */ (sqInt (*)(void))459,
+	/* 460 */ (sqInt (*)(void))460,
+	/* 461 */ (sqInt (*)(void))461,
+	/* 462 */ (sqInt (*)(void))462,
+	/* 463 */ (sqInt (*)(void))463,
+	/* 464 */ (sqInt (*)(void))464,
+	/* 465 */ (sqInt (*)(void))465,
+	/* 466 */ (sqInt (*)(void))466,
+	/* 467 */ (sqInt (*)(void))467,
+	/* 468 */ (sqInt (*)(void))468,
+	/* 469 */ (sqInt (*)(void))469,
+	/* 470 */ (sqInt (*)(void))470,
+	/* 471 */ (sqInt (*)(void))471,
+	/* 472 */ (sqInt (*)(void))472,
+	/* 473 */ (sqInt (*)(void))473,
+	/* 474 */ (sqInt (*)(void))474,
+	/* 475 */ (sqInt (*)(void))475,
+	/* 476 */ (sqInt (*)(void))476,
+	/* 477 */ (sqInt (*)(void))477,
+	/* 478 */ (sqInt (*)(void))478,
+	/* 479 */ (sqInt (*)(void))479,
+	/* 480 */ (sqInt (*)(void))480,
+	/* 481 */ (sqInt (*)(void))481,
+	/* 482 */ (sqInt (*)(void))482,
+	/* 483 */ (sqInt (*)(void))483,
+	/* 484 */ (sqInt (*)(void))484,
+	/* 485 */ (sqInt (*)(void))485,
+	/* 486 */ (sqInt (*)(void))486,
+	/* 487 */ (sqInt (*)(void))487,
+	/* 488 */ (sqInt (*)(void))488,
+	/* 489 */ (sqInt (*)(void))489,
+	/* 490 */ (sqInt (*)(void))490,
+	/* 491 */ (sqInt (*)(void))491,
+	/* 492 */ (sqInt (*)(void))492,
+	/* 493 */ (sqInt (*)(void))493,
+	/* 494 */ (sqInt (*)(void))494,
+	/* 495 */ (sqInt (*)(void))495,
+	/* 496 */ (sqInt (*)(void))496,
+	/* 497 */ (sqInt (*)(void))497,
+	/* 498 */ (sqInt (*)(void))498,
+	/* 499 */ (sqInt (*)(void))499,
+	/* 500 */ (sqInt (*)(void))500,
+	/* 501 */ (sqInt (*)(void))501,
+	/* 502 */ (sqInt (*)(void))502,
+	/* 503 */ (sqInt (*)(void))503,
+	/* 504 */ (sqInt (*)(void))504,
+	/* 505 */ (sqInt (*)(void))505,
+	/* 506 */ (sqInt (*)(void))506,
+	/* 507 */ (sqInt (*)(void))507,
+	/* 508 */ (sqInt (*)(void))508,
+	/* 509 */ (sqInt (*)(void))509,
+	/* 510 */ (sqInt (*)(void))510,
+	/* 511 */ (sqInt (*)(void))511,
+	/* 512 */ (sqInt (*)(void))512,
+	/* 513 */ (sqInt (*)(void))513,
+	/* 514 */ (sqInt (*)(void))514,
+	/* 515 */ (sqInt (*)(void))515,
+	/* 516 */ (sqInt (*)(void))516,
+	/* 517 */ (sqInt (*)(void))517,
+	/* 518 */ (sqInt (*)(void))518,
+	/* 519 */ (sqInt (*)(void))519,
+	/* 520 */ (sqInt (*)(void))0,
+	/* 521 */ (sqInt (*)(void))0,
+	/* 522 */ (sqInt (*)(void))0,
+	/* 523 */ (sqInt (*)(void))0,
+	/* 524 */ (sqInt (*)(void))0,
+	/* 525 */ (sqInt (*)(void))0,
+	/* 526 */ (sqInt (*)(void))0,
+	/* 527 */ (sqInt (*)(void))0,
+	/* 528 */ (sqInt (*)(void))0,
+	/* 529 */ (sqInt (*)(void))0,
+	/* 530 */ (sqInt (*)(void))0,
+	/* 531 */ (sqInt (*)(void))0,
+	/* 532 */ (sqInt (*)(void))0,
+	/* 533 */ (sqInt (*)(void))0,
+	/* 534 */ (sqInt (*)(void))0,
+	/* 535 */ (sqInt (*)(void))0,
+	/* 536 */ (sqInt (*)(void))0,
+	/* 537 */ (sqInt (*)(void))0,
+	/* 538 */ (sqInt (*)(void))0,
+	/* 539 */ (sqInt (*)(void))0,
+	/* 540 */ (sqInt (*)(void))0,
+	/* 541 */ (sqInt (*)(void))0,
+	/* 542 */ (sqInt (*)(void))0,
+	/* 543 */ (sqInt (*)(void))0,
+	/* 544 */ (sqInt (*)(void))0,
+	/* 545 */ (sqInt (*)(void))0,
+	/* 546 */ (sqInt (*)(void))0,
+	/* 547 */ (sqInt (*)(void))0,
+	/* 548 */ (sqInt (*)(void))0,
+	/* 549 */ (sqInt (*)(void))0,
+	/* 550 */ (sqInt (*)(void))0,
+	/* 551 */ (sqInt (*)(void))0,
+	/* 552 */ (sqInt (*)(void))0,
+	/* 553 */ (sqInt (*)(void))0,
+	/* 554 */ (sqInt (*)(void))0,
+	/* 555 */ (sqInt (*)(void))0,
+	/* 556 */ (sqInt (*)(void))0,
+	/* 557 */ (sqInt (*)(void))0,
+	/* 558 */ (sqInt (*)(void))0,
+	/* 559 */ (sqInt (*)(void))0,
+	/* 560 */ (sqInt (*)(void))0,
+	/* 561 */ (sqInt (*)(void))0,
+	/* 562 */ (sqInt (*)(void))0,
+	/* 563 */ (sqInt (*)(void))0,
+	/* 564 */ (sqInt (*)(void))0,
+	/* 565 */ (sqInt (*)(void))0,
+	/* 566 */ (sqInt (*)(void))0,
+	/* 567 */ (sqInt (*)(void))0,
 	/* 568 */ primitiveSuspendBackingUpV1,
-	/* 569 */ (void (*)(void))0,
+	/* 569 */ (sqInt (*)(void))0,
 	/* 570 */ primitiveFlushExternalPrimitives,
 	/* 571 */ primitiveUnloadModule,
 	/* 572 */ primitiveListBuiltinModule,
 	/* 573 */ primitiveListExternalModule,
-	/* 574 */ (void (*)(void))0,
+	/* 574 */ (sqInt (*)(void))0,
 	/* 575 */ primitiveHighBit,
-	/* 576 */ (void (*)(void))0,
-	/* 577 */ (void (*)(void))0,
+	/* 576 */ (sqInt (*)(void))0,
+	/* 577 */ (sqInt (*)(void))0,
 	/* 578 */ primitiveSuspendBackingUpV2,
-	/* 579 */ (void (*)(void))0,
+	/* 579 */ (sqInt (*)(void))0,
 	/* 580 */ primitivePinnedNew,
 	/* 581 */ primitivePinnedNewWithArg,
 	/* 582 */ primitiveUninitializedNewWithArg,
@@ -5681,7 +5681,7 @@ interpret(void)
 					if (((GIV(methodCache)[probe1 + MethodCacheSelector]) == GIV(messageSelector))
 					 && ((GIV(methodCache)[probe1 + MethodCacheClass]) == lkupClassTag)) {
 						GIV(newMethod) = GIV(methodCache)[probe1 + MethodCacheMethod];
-						primitiveFunctionPointer = ((void (*)()) (GIV(methodCache)[probe1 + MethodCachePrimFunction]));
+						primitiveFunctionPointer = ((sqInt (*)(void)) (GIV(methodCache)[probe1 + MethodCachePrimFunction]));
 						goto l830;
 					}
 
@@ -5690,14 +5690,14 @@ interpret(void)
 					if (((GIV(methodCache)[probe1 + MethodCacheSelector]) == GIV(messageSelector))
 					 && ((GIV(methodCache)[probe1 + MethodCacheClass]) == lkupClassTag)) {
 						GIV(newMethod) = GIV(methodCache)[probe1 + MethodCacheMethod];
-						primitiveFunctionPointer = ((void (*)()) (GIV(methodCache)[probe1 + MethodCachePrimFunction]));
+						primitiveFunctionPointer = ((sqInt (*)(void)) (GIV(methodCache)[probe1 + MethodCachePrimFunction]));
 						goto l830;
 					}
 					probe1 = (((usqInt)(hash1)) >> 2) & MethodCacheMask;
 					if (((GIV(methodCache)[probe1 + MethodCacheSelector]) == GIV(messageSelector))
 					 && ((GIV(methodCache)[probe1 + MethodCacheClass]) == lkupClassTag)) {
 						GIV(newMethod) = GIV(methodCache)[probe1 + MethodCacheMethod];
-						primitiveFunctionPointer = ((void (*)()) (GIV(methodCache)[probe1 + MethodCachePrimFunction]));
+						primitiveFunctionPointer = ((sqInt (*)(void)) (GIV(methodCache)[probe1 + MethodCachePrimFunction]));
 						goto l830;
 					}
 					/* begin externalizeIPandSP */
@@ -13909,7 +13909,7 @@ positiveMachineIntegerValueOf(sqInt oop)
 }
 
 	/* InterpreterPrimitives>>#primitiveAdd */
-static void
+static sqInt
 primitiveAdd(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerResult;
@@ -13932,13 +13932,14 @@ primitiveAdd(void)
 			}
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive arithmetic operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveAddLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveAddLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong a;
@@ -13959,7 +13960,7 @@ primitiveAddLargeIntegers(void)
 	a = magnitude64BitValueOf(oopRcvr);
 	b = magnitude64BitValueOf(oopArg);
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	if (aIsNegative == bIsNegative) {
 
@@ -13969,7 +13970,7 @@ primitiveAddLargeIntegers(void)
 			if (!GIV(primFailCode)) {
 				GIV(primFailCode) = 1;
 			}
-			return;
+			return 2;
 		}
 		result = a + b;
 		resultIsNegative = aIsNegative;
@@ -13990,6 +13991,7 @@ primitiveAddLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -14009,7 +14011,7 @@ primitiveAddLargeIntegers(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveAdoptInstance */
-static void
+static sqInt
 primitiveAdoptInstance(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -14024,7 +14026,7 @@ primitiveAdoptInstance(void)
 	 && ((((rcvr & (tagMask())) != 0))
 	 || (!(objCouldBeClassObj(rcvr)))))) {
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	err = changeClassOfto(arg, rcvr);
 	if (err == 0) {
@@ -14050,7 +14052,7 @@ primitiveAdoptInstance(void)
 		}
 		GIV(primFailCode) = err;
 	}
-	return;
+	return 0;
 }
 
 
@@ -14059,7 +14061,7 @@ primitiveAdoptInstance(void)
 	garbage collected as a side effect of allocating the result array. */
 
 	/* InterpreterPrimitives>>#primitiveAllInstances */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveAllInstances(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt delta;
@@ -14074,12 +14076,13 @@ primitiveAllInstances(void)
 		result = allInstancesOf(longAt(GIV(stackPointer)));
 		if ((result & 1)) {
 			GIV(primFailCode) = PrimErrNoMemory;
-			return;
+			return 1;
 		}
 	}
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), result);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -14088,7 +14091,7 @@ primitiveAllInstances(void)
 	a side effect of allocating the result array. */
 
 	/* InterpreterPrimitives>>#primitiveAllObjects */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveAllObjects(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt delta;
@@ -14103,12 +14106,13 @@ primitiveAllObjects(void)
 		result = allObjects();
 		if ((result & 1)) {
 			GIV(primFailCode) = PrimErrNoMemory;
-			return;
+			return 1;
 		}
 	}
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), result);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -14117,7 +14121,7 @@ primitiveAllObjects(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveArctan */
-static void
+static sqInt
 primitiveArctan(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aValue;
@@ -14146,6 +14150,7 @@ primitiveArctan(void)
 		aValue = floatObjectOf(atan(rcvr));
 		longAtPointerput(GIV(stackPointer), aValue);
 	}
+	return 0;
 }
 
 
@@ -14153,7 +14158,7 @@ primitiveArctan(void)
 	to mutated classes and/or selectors. */
 
 	/* InterpreterPrimitives>>#primitiveArrayBecome */
-static void
+static sqInt
 primitiveArrayBecome(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -14170,6 +14175,7 @@ primitiveArrayBecome(void)
 	else {
 		GIV(primFailCode) = ec;
 	}
+	return 0;
 }
 
 
@@ -14177,7 +14183,7 @@ primitiveArrayBecome(void)
 	to mutated classes and/or selectors. */
 
 	/* InterpreterPrimitives>>#primitiveArrayBecomeOneWay */
-static void
+static sqInt
 primitiveArrayBecomeOneWay(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -14194,6 +14200,7 @@ primitiveArrayBecomeOneWay(void)
 	else {
 		GIV(primFailCode) = ec;
 	}
+	return 0;
 }
 
 
@@ -14204,7 +14211,7 @@ primitiveArrayBecomeOneWay(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveArrayBecomeOneWayCopyHashArg */
-static void
+static sqInt
 primitiveArrayBecomeOneWayCopyHashArg(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt copyHashFlag;
@@ -14220,7 +14227,7 @@ primitiveArrayBecomeOneWayCopyHashArg(void)
 		}
 		else {
 			GIV(primFailCode) = PrimErrBadArgument;
-			return;
+			return 1;
 		}
 	}
 	ec = becomewithtwoWaycopyHash(longAt(GIV(stackPointer) + (2 * BytesPerWord)), longAt(GIV(stackPointer) + (1 * BytesPerWord)), 0, copyHashFlag);
@@ -14231,6 +14238,7 @@ primitiveArrayBecomeOneWayCopyHashArg(void)
 	else {
 		GIV(primFailCode) = ec;
 	}
+	return 0;
 }
 
 
@@ -14238,7 +14246,7 @@ primitiveArrayBecomeOneWayCopyHashArg(void)
 	elements identity hashes over the argument's elements identity hashes. */
 
 	/* InterpreterPrimitives>>#primitiveArrayBecomeOneWayNoCopyHash */
-static void
+static sqInt
 primitiveArrayBecomeOneWayNoCopyHash(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -14255,10 +14263,11 @@ primitiveArrayBecomeOneWayNoCopyHash(void)
 	else {
 		GIV(primFailCode) = ec;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveAsCharacter */
-static void
+static sqInt
 primitiveAsCharacter(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt characterCode;
@@ -14275,13 +14284,14 @@ primitiveAsCharacter(void)
 			? PrimErrBadReceiver
 			: PrimErrBadArgument);
 		GIV(primFailCode) = reasonCode;
-		return;
+		return 1;
 	}
 	/* begin characterObjectOf: */
 	characterObject = (((sqInt)((usqInt)(characterCode) << (numTagBits())))) + (characterTag());
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), characterObject);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -14290,7 +14300,7 @@ primitiveAsCharacter(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveAsFloat */
-static void
+static sqInt
 primitiveAsFloat(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt rcvr;
@@ -14301,10 +14311,11 @@ primitiveAsFloat(void)
 	/* begin pop:thenPushFloat: */
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), floatObjectOf(((double) ((rcvr >> 1)) )));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveAt */
-static void
+static sqInt
 primitiveAt(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt class;
@@ -14505,10 +14516,11 @@ primitiveAt(void)
 		GIV(stackPointer) = sp;
 	}
 	l15:	/* end commonAt: */;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveAtPut */
-static void
+static sqInt
 primitiveAtPut(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt class1;
@@ -14721,6 +14733,7 @@ primitiveAtPut(void)
 		GIV(stackPointer) = sp;
 	}
 	l32:	/* end commonAtPut: */;
+	return 0;
 }
 
 
@@ -14729,7 +14742,7 @@ primitiveAtPut(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveBeCursor */
-static void
+static sqInt
 primitiveBeCursor(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bitsObj;
@@ -14965,7 +14978,7 @@ primitiveBeCursor(void)
 					if (!GIV(primFailCode)) {
 						GIV(primFailCode) = 1;
 					}
-					return;
+					return 0;
 				}
 			}
 			else {
@@ -14978,6 +14991,7 @@ primitiveBeCursor(void)
 		/* begin pop: */
 		GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
 	}
+	return 1;
 }
 
 
@@ -14986,7 +15000,7 @@ primitiveBeCursor(void)
 	to alow the VM to record the location, width heigth & depth of the bitmap. */
 
 	/* InterpreterPrimitives>>#primitiveBeDisplay */
-static void
+static sqInt
 primitiveBeDisplay(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bitsOop;
@@ -15009,7 +15023,7 @@ primitiveBeDisplay(void)
 			 && (((((heightOop = longAt((rcvr + BaseHeaderSize) + (2U << (shiftForWord()))))) & 1))
 			 && ((((depthOop = longAt((rcvr + BaseHeaderSize) + (3U << (shiftForWord()))))) & 1))))))))) {
 		GIV(primFailCode) = PrimErrBadReceiver;
-		return;
+		return 0;
 	}
 	/* begin splObj:put: */
 	objOop = GIV(specialObjectsOop);
@@ -15045,20 +15059,22 @@ primitiveBeDisplay(void)
 	displayHeight = (heightOop >> 1);
 	displayDepth = (depthOop >> 1);
 	ioNoteDisplayChangedwidthheightdepth(bitsOrHandle, (widthOop >> 1), (heightOop >> 1), (depthOop >> 1));
+	return 0;
 }
 
 
 /*	make the basic beep noise */
 
 	/* InterpreterPrimitives>>#primitiveBeep */
-static void
+static sqInt
 primitiveBeep(void)
 {
 	ioBeep();
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveBehaviorHash */
-static void
+static sqInt
 primitiveBehaviorHash(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aBehavior;
@@ -15088,6 +15104,7 @@ primitiveBehaviorHash(void)
 	else {
 		GIV(primFailCode) = -hashOrError;
 	}
+	return 0;
 }
 
 
@@ -15095,7 +15112,7 @@ primitiveBehaviorHash(void)
 	bytecode or the JIT primitive will handle this case. */
 
 	/* InterpreterPrimitives>>#primitiveBitAnd */
-static void
+static sqInt
 primitiveBitAnd(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bs;
@@ -15235,13 +15252,14 @@ primitiveBitAnd(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oop);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
 /*	Primitive logical operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveBitAndLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveBitAndLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong integerArg;
@@ -15252,7 +15270,7 @@ primitiveBitAndLargeIntegers(void)
 	integerArg = positive64BitValueOf(longAt(GIV(stackPointer) + (0 * BytesPerWord)));
 	integerRcvr = positive64BitValueOf(longAt(GIV(stackPointer) + (1 * BytesPerWord)));
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	oopResult = positive64BitIntegerFor(integerRcvr & integerArg);
 	if (!GIV(primFailCode)) {
@@ -15260,6 +15278,7 @@ primitiveBitAndLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -15267,7 +15286,7 @@ primitiveBitAndLargeIntegers(void)
 	bytecode or the JIT primitive will handle this case. */
 
 	/* InterpreterPrimitives>>#primitiveBitOr */
-static void
+static sqInt
 primitiveBitOr(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bs;
@@ -15407,13 +15426,14 @@ primitiveBitOr(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oop);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
 /*	Primitive logical operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveBitOrLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveBitOrLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong integerArg;
@@ -15424,7 +15444,7 @@ primitiveBitOrLargeIntegers(void)
 	integerArg = positive64BitValueOf(longAt(GIV(stackPointer) + (0 * BytesPerWord)));
 	integerRcvr = positive64BitValueOf(longAt(GIV(stackPointer) + (1 * BytesPerWord)));
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	oopResult = positive64BitIntegerFor(integerRcvr | integerArg);
 	if (!GIV(primFailCode)) {
@@ -15432,6 +15452,7 @@ primitiveBitOrLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -15439,7 +15460,7 @@ primitiveBitOrLargeIntegers(void)
 	integers. In 64-bits deal with signed 64-bit quantities (max (2^63)-1). */
 
 	/* InterpreterPrimitives>>#primitiveBitShift */
-static void
+static sqInt
 primitiveBitShift(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerArgument;
@@ -15457,7 +15478,7 @@ primitiveBitShift(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	integerReceiver = longAt(GIV(stackPointer) + (1 * BytesPerWord));
 	integerReceiver = positive32BitValueOf(integerReceiver);
@@ -15470,7 +15491,7 @@ primitiveBitShift(void)
 				if (!GIV(primFailCode)) {
 					GIV(primFailCode) = 1;
 				}
-				return;
+				return 1;
 			}
 			shifted = ((sqInt)((usqInt)(integerReceiver) << integerArgument));
 			if (!(integerReceiver == (((usqInt)(shifted)) >> integerArgument))) {
@@ -15478,7 +15499,7 @@ primitiveBitShift(void)
 				if (!GIV(primFailCode)) {
 					GIV(primFailCode) = 1;
 				}
-				return;
+				return 2;
 			}
 		}
 		else {
@@ -15489,7 +15510,7 @@ primitiveBitShift(void)
 				if (!GIV(primFailCode)) {
 					GIV(primFailCode) = 1;
 				}
-				return;
+				return 3;
 			}
 			shifted = ((usqInt)(integerReceiver)) >> (0 - integerArgument);
 		}
@@ -15542,13 +15563,14 @@ primitiveBitShift(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), shifted);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
 /*	Primitive arithmetic operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveBitShiftLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveBitShiftLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong a;
@@ -15580,7 +15602,7 @@ primitiveBitShiftLargeIntegers(void)
 	aIsNegative = isNegativeIntegerValueOf(oopRcvr);
 	a = magnitude64BitValueOf(oopRcvr);
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	if (shift >= 0) {
 
@@ -15594,7 +15616,7 @@ primitiveBitShiftLargeIntegers(void)
 			if (!GIV(primFailCode)) {
 				GIV(primFailCode) = 1;
 			}
-			return;
+			return 2;
 		}
 		result = a << shift;
 	}
@@ -15617,10 +15639,11 @@ primitiveBitShiftLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveBitXor */
-static void
+static sqInt
 primitiveBitXor(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bs;
@@ -15773,13 +15796,14 @@ primitiveBitXor(void)
 			GIV(stackPointer) = sp1;
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive logical operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveBitXorLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveBitXorLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong integerArg;
@@ -15790,7 +15814,7 @@ primitiveBitXorLargeIntegers(void)
 	integerArg = positive64BitValueOf(longAt(GIV(stackPointer) + (0 * BytesPerWord)));
 	integerRcvr = positive64BitValueOf(longAt(GIV(stackPointer) + (1 * BytesPerWord)));
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	oopResult = positive64BitIntegerFor(integerRcvr ^ integerArg);
 	if (!GIV(primFailCode)) {
@@ -15798,6 +15822,7 @@ primitiveBitXorLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -15879,7 +15904,7 @@ primitiveBytecodeSetsAvailable(void)
 	or incremental garbage collection. */
 
 	/* InterpreterPrimitives>>#primitiveBytesLeft */
-static void
+static sqInt
 primitiveBytesLeft(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aBool;
@@ -15898,7 +15923,7 @@ primitiveBytesLeft(void)
 		/* begin pop:thenPushInteger: */
 		longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), ((GIV(totalFreeOldSpace) << 1) | 1));
 		GIV(stackPointer) = sp;
-		return;
+		return 0;
 	}
 	if (GIV(argumentCount) == 1) {
 
@@ -15921,7 +15946,7 @@ primitiveBytesLeft(void)
 	l2:	/* end sizeOfLargestFreeChunk */;
 			longAtput((sp1 = GIV(stackPointer) + ((1) * BytesPerWord)), (((usqInt)integerVal << 1) | 1));
 			GIV(stackPointer) = sp1;
-			return;
+			return 0;
 		}
 		/* begin booleanValueOf: */
 		if ((longAt(GIV(stackPointer))) == GIV(trueObj)) {
@@ -15945,14 +15970,14 @@ primitiveBytesLeft(void)
 			integerVal1 = (((GIV(totalFreeOldSpace) + ((((eden()).limit)) - GIV(freeStart))) + ((((pastSpace()).limit)) - GIV(pastSpaceStart))) + ((((futureSpace()).limit)) - (((futureSpace()).limit)))) - (interpreterAllocationReserveBytes());
 			longAtput((sp2 = GIV(stackPointer) + ((1) * BytesPerWord)), (((usqInt)integerVal1 << 1) | 1));
 			GIV(stackPointer) = sp2;
-			return;
+			return 0;
 		}
 	}
 	/* begin primitiveFail */
 	if (!GIV(primFailCode)) {
 		GIV(primFailCode) = 1;
 	}
-	return;
+	return 0;
 }
 
 
@@ -15968,17 +15993,17 @@ primitiveBytesLeft(void)
 /*	since call signature is in first literal... */
 
 	/* InterpreterPrimitives>>#primitiveCalloutToFFI */
-static void
+static sqInt
 primitiveCalloutToFFI(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
-    void (*primitiveCallout)(void);
+    sqInt (*primitiveCallout)(void);
 
 	/* begin functionForPrimitiveCallout */
 	if ((((sqInt)primitiveCalloutPointer)) == -1) {
 		/* begin reloadPrimitiveCalloutPointer */
 		primitiveCalloutPointer = ioLoadFunctionFrom("primitiveCallout", "SqueakFFIPrims");
 	}
-	primitiveCallout = ((void (*)(void)) primitiveCalloutPointer);
+	primitiveCallout = ((sqInt (*)(void)) primitiveCalloutPointer);
 	if (primitiveCallout == null) {
 		/* begin primitiveFail */
 		if (!GIV(primFailCode)) {
@@ -15988,6 +16013,7 @@ primitiveCalloutToFFI(void)
 	else {
 		dispatchFunctionPointer(primitiveCallout);
 	}
+	return 0;
 }
 
 
@@ -16006,7 +16032,7 @@ primitiveCalloutToFFI(void)
 	that an instance of the argument's class should have. */
 
 	/* InterpreterPrimitives>>#primitiveChangeClass */
-static void
+static sqInt
 primitiveChangeClass(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -16042,7 +16068,7 @@ primitiveChangeClass(void)
 	rcvr = oop1;
 	l3:	/* end stackObjectValue: */;
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	argClass = fetchClassOfNonImm(arg);
 	err = changeClassOfto(rcvr, argClass);
@@ -16059,11 +16085,11 @@ primitiveChangeClass(void)
 	else {
 		GIV(primFailCode) = err;
 	}
-	return;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveClass */
-static void
+static sqInt
 primitiveClass(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt instance;
@@ -16092,18 +16118,20 @@ primitiveClass(void)
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), oop);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
 /*	Primitive. Void the VM profile histograms. */
 
 	/* InterpreterPrimitives>>#primitiveClearVMProfile */
-static void
+static sqInt
 primitiveClearVMProfile(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
 	ioClearProfile();
 	/* begin pop: */
 	GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
+	return 0;
 }
 
 
@@ -16112,7 +16140,7 @@ primitiveClearVMProfile(void)
 	string containing the current clipboard contents. */
 
 	/* InterpreterPrimitives>>#primitiveClipboardText */
-static void
+static sqInt
 primitiveClipboardText(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt fmt;
@@ -16128,7 +16156,7 @@ primitiveClipboardText(void)
 			if (!GIV(primFailCode)) {
 				GIV(primFailCode) = 1;
 			}
-			return;
+			return 1;
 		}
 		if (!GIV(primFailCode)) {
 			/* begin numBytesOfBytes: */
@@ -16151,13 +16179,14 @@ primitiveClipboardText(void)
 			if (!GIV(primFailCode)) {
 				GIV(primFailCode) = 1;
 			}
-			return;
+			return 1;
 		}
 		clipboardReadIntoAt(sz, s + BaseHeaderSize, 0);
 		/* begin pop:thenPush: */
 		longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), s);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -16380,7 +16409,7 @@ primitiveClockLogAddresses(void)
 }
 
 	/* InterpreterPrimitives>>#primitiveClosureValue */
-static void
+static sqInt
 primitiveClosureValue(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt blockClosure;
@@ -16413,7 +16442,7 @@ primitiveClosureValue(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	outerContext = longAt((blockClosure + BaseHeaderSize) + (((int)((usqInt)(ClosureOuterContextIndex) << (shiftForWord())))));
 	if (!(((!(outerContext & (tagMask()))))
@@ -16422,7 +16451,7 @@ primitiveClosureValue(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 
 	/* Check if the closure's method is actually a CompiledMethod. */
@@ -16433,7 +16462,7 @@ primitiveClosureValue(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 3;
 	}
 	/* begin activateNewClosure:outer:method:numArgs:mayContextSwitch: */
 	assert(isContext(outerContext));
@@ -16493,6 +16522,7 @@ primitiveClosureValue(void)
 	if (GIV(stackPointer) < GIV(stackLimit)) {
 		handleStackOverflowOrEventAllowContextSwitch(1);
 	}
+	return 0;
 }
 
 
@@ -16502,7 +16532,7 @@ primitiveClosureValue(void)
 	checkForInterruptsMayContextSwitch:  */
 
 	/* InterpreterPrimitives>>#primitiveClosureValueNoContextSwitch */
-void
+sqInt
 primitiveClosureValueNoContextSwitch(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt blockClosure;
@@ -16535,7 +16565,7 @@ primitiveClosureValueNoContextSwitch(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	outerContext = longAt((blockClosure + BaseHeaderSize) + (((int)((usqInt)(ClosureOuterContextIndex) << (shiftForWord())))));
 	if (!(((!(outerContext & (tagMask()))))
@@ -16544,7 +16574,7 @@ primitiveClosureValueNoContextSwitch(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 
 	/* Check if the closure's method is actually a CompiledMethod. */
@@ -16555,7 +16585,7 @@ primitiveClosureValueNoContextSwitch(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 3;
 	}
 	/* begin activateNewClosure:outer:method:numArgs:mayContextSwitch: */
 	assert(isContext(outerContext));
@@ -16615,10 +16645,11 @@ primitiveClosureValueNoContextSwitch(void)
 	if (GIV(stackPointer) < GIV(stackLimit)) {
 		handleStackOverflowOrEventAllowContextSwitch(0);
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveClosureValueWithArgs */
-static void
+static sqInt
 primitiveClosureValueWithArgs(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt argumentArray;
@@ -16654,7 +16685,7 @@ primitiveClosureValueWithArgs(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin numSlotsOf: */
 	assert((classIndexOf(argumentArray)) > (isForwardedObjectClassIndexPun()));
@@ -16667,7 +16698,7 @@ primitiveClosureValueWithArgs(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 	blockClosure = longAt(GIV(stackPointer) + (GIV(argumentCount) * BytesPerWord));
 	/* begin quickFetchInteger:ofObject: */
@@ -16679,7 +16710,7 @@ primitiveClosureValueWithArgs(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 3;
 	}
 	outerContext = longAt((blockClosure + BaseHeaderSize) + (((int)((usqInt)(ClosureOuterContextIndex) << (shiftForWord())))));
 	if (!(((!(outerContext & (tagMask()))))
@@ -16688,7 +16719,7 @@ primitiveClosureValueWithArgs(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 4;
 	}
 
 	/* Check if the closure's method is actually a CompiledMethod. */
@@ -16699,7 +16730,7 @@ primitiveClosureValueWithArgs(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 5;
 	}
 	/* begin popStack */
 	top = longAt(GIV(stackPointer));
@@ -16769,6 +16800,7 @@ primitiveClosureValueWithArgs(void)
 	if (GIV(stackPointer) < GIV(stackLimit)) {
 		handleStackOverflowOrEventAllowContextSwitch(1);
 	}
+	return 0;
 }
 
 
@@ -16783,7 +16815,7 @@ primitiveClosureValueWithArgs(void)
 	primitiveUTCMicrosecondClock, which always entails a system call. */
 
 	/* InterpreterPrimitives>>#primitiveCoarseLocalMicrosecondClock */
-static void
+static sqInt
 primitiveCoarseLocalMicrosecondClock(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt oop;
@@ -16793,6 +16825,7 @@ primitiveCoarseLocalMicrosecondClock(void)
 	oop = positive64BitIntegerFor(ioLocalMicroseconds());
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), oop);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -16807,7 +16840,7 @@ primitiveCoarseLocalMicrosecondClock(void)
 	primitiveUTCMicrosecondClock, which always entails a system call. */
 
 	/* InterpreterPrimitives>>#primitiveCoarseUTCMicrosecondClock */
-static void
+static sqInt
 primitiveCoarseUTCMicrosecondClock(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt oop;
@@ -16817,6 +16850,7 @@ primitiveCoarseUTCMicrosecondClock(void)
 	oop = positive64BitIntegerFor(ioUTCMicroseconds());
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), oop);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -16889,7 +16923,7 @@ primitiveCompareBytes(void)
 /*	1 - fetch the parameters from the stack */
 
 	/* InterpreterPrimitives>>#primitiveCompareWith */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveCompareWith(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt c1;
@@ -16914,14 +16948,14 @@ primitiveCompareWith(void)
 	if (!(GIV(argumentCount) == 1)) {
 		if (GIV(argumentCount) != 2) {
 			GIV(primFailCode) = PrimErrBadNumArgs;
-			return;
+			return 1;
 		}
 		order = longAt(GIV(stackPointer));
 		if (!((((!(order & (tagMask()))))
 			 && (((((usqInt)((longAt(order)))) >> (formatShift())) & (formatMask())) >= (firstByteFormat())))
 			 && ((numBytesOfBytes(order)) == 0x100))) {
 			GIV(primFailCode) = PrimErrBadArgument;
-			return;
+			return 2;
 		}
 	}
 	string1 = longAt(GIV(stackPointer) + (GIV(argumentCount) * BytesPerWord));
@@ -16933,7 +16967,7 @@ primitiveCompareWith(void)
 		 && (((!(string2 & (tagMask()))))
 		 && (((((usqInt)((longAt(string2)))) >> (formatShift())) & (formatMask())) >= (firstByteFormat()))))) {
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 3;
 	}
 	/* begin numBytesOfBytes: */
 	fmt = (((usqInt)((longAt(string1)))) >> (formatShift())) & (formatMask());
@@ -16978,6 +17012,7 @@ primitiveCompareWith(void)
 	/* begin pop:thenPushInteger: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)result << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -16985,7 +17020,7 @@ primitiveCompareWith(void)
 	object, with the given integer value. */
 
 	/* InterpreterPrimitives>>#primitiveConstantFill */
-static void
+static sqInt
 primitiveConstantFill(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqInt end;
@@ -17074,6 +17109,7 @@ primitiveConstantFill(void)
 	/* begin pop: */
 	GIV(stackPointer) += 1 * BytesPerWord;
 	l3:	/* end primitiveConstantFillSpur */;
+	return 0;
 }
 
 
@@ -17083,7 +17119,7 @@ primitiveConstantFill(void)
 	sample buffer. Answer the current number of samples in the buffer. */
 
 	/* InterpreterPrimitives>>#primitiveControlVMProfiling */
-static void
+static sqInt
 primitiveControlVMProfiling(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bufferSize;
@@ -17096,7 +17132,7 @@ primitiveControlVMProfiling(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	if (((onOffBar = longAt(GIV(stackPointer) + (1 * BytesPerWord)))) == GIV(trueObj)) {
 		onOffBar = 1;
@@ -17110,7 +17146,7 @@ primitiveControlVMProfiling(void)
 			if (!GIV(primFailCode)) {
 				GIV(primFailCode) = 1;
 			}
-			return;
+			return 2;
 		}
 	}
 	if (((bufferSize = longAt(GIV(stackPointer)))) == GIV(nilObj)) {
@@ -17123,13 +17159,14 @@ primitiveControlVMProfiling(void)
 			if (!GIV(primFailCode)) {
 				GIV(primFailCode) = 1;
 			}
-			return;
+			return 3;
 		}
 	}
 	numSamples = ioControlNewProfile(onOffBar,bufferSize);
 	/* begin pop:thenPushInteger: */
 	longAtput((sp = GIV(stackPointer) + ((2) * BytesPerWord)), (((usqInt)numSamples << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -17142,7 +17179,7 @@ primitiveControlVMProfiling(void)
 	contexts and Cogged methods) */
 
 	/* InterpreterPrimitives>>#primitiveCopyObject */
-static void
+static sqInt
 primitiveCopyObject(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -17157,21 +17194,21 @@ primitiveCopyObject(void)
 
 	if (!(GIV(argumentCount) >= 1)) {
 		GIV(primFailCode) = PrimErrBadNumArgs;
-		return;
+		return 1;
 	}
 	arg = longAt(GIV(stackPointer));
 	rcvr = longAt(GIV(stackPointer) + (1 * BytesPerWord));
 	if (((rcvr & (tagMask())) != 0)) {
 		GIV(primFailCode) = PrimErrBadReceiver;
-		return;
+		return 2;
 	}
 	if (((arg & (tagMask())) != 0)) {
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 3;
 	}
 	if (((longAt(rcvr)) & (classIndexMask())) != ((longAt(arg)) & (classIndexMask()))) {
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 4;
 	}
 	if (isPureBitsFormat((((usqInt)((longAt(rcvr)))) >> (formatShift())) & (formatMask()))) {
 		/* begin numBytesOf: */
@@ -17202,14 +17239,14 @@ primitiveCopyObject(void)
 		if (!((((((usqInt)((longAt(rcvr)))) >> (formatShift())) & (formatMask())) == ((((usqInt)((longAt(arg)))) >> (formatShift())) & (formatMask())))
 			 && (length == (numBytesOf(arg))))) {
 			GIV(primFailCode) = PrimErrBadArgument;
-			return;
+			return 1;
 		}
 		memcpy(((void *)(rcvr + BaseHeaderSize)), ((void *)(arg + BaseHeaderSize)), length);
 	}
 	else {
 		if (!(isAppropriateForCopyObject(rcvr))) {
 			GIV(primFailCode) = PrimErrBadReceiver;
-			return;
+			return 5;
 		}
 		/* begin numSlotsOf: */
 		assert((classIndexOf(rcvr)) > (isForwardedObjectClassIndexPun()));
@@ -17220,7 +17257,7 @@ primitiveCopyObject(void)
 		if (!((isAppropriateForCopyObject(arg))
 			 && (length == (lengthOfformat(arg, (((usqInt)((longAt(arg)))) >> (formatShift())) & (formatMask())))))) {
 			GIV(primFailCode) = PrimErrBadArgument;
-			return;
+			return 1;
 		}
 		for (i = 0; i < length; i += 1) {
 			/* begin storePointer:ofObject:withValue: */
@@ -17243,6 +17280,7 @@ primitiveCopyObject(void)
 	}
 	/* begin pop: */
 	GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
+	return 0;
 }
 
 
@@ -17328,7 +17366,7 @@ primitiveDisablePowerManager(void)
 }
 
 	/* InterpreterPrimitives>>#primitiveDiv */
-static void
+static sqInt
 primitiveDiv(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt quotient;
@@ -17351,10 +17389,11 @@ primitiveDiv(void)
 			}
 		}
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveDivide */
-static void
+static sqInt
 primitiveDivide(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerArgument;
@@ -17420,13 +17459,14 @@ primitiveDivide(void)
 			GIV(primFailCode) = 1;
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive arithmetic operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveDivideLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveDivideLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong a;
@@ -17446,7 +17486,7 @@ primitiveDivideLargeIntegers(void)
 	a = magnitude64BitValueOf(oopRcvr);
 	b = magnitude64BitValueOf(oopArg);
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	if (!((b != 0)
 		 && ((a % b) == 0))) {
@@ -17454,7 +17494,7 @@ primitiveDivideLargeIntegers(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 	result = a / b;
 	oopResult = magnitude64BitIntegerForneg(result, aIsNegative != bIsNegative);
@@ -17463,13 +17503,14 @@ primitiveDivideLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
 /*	Primitive arithmetic operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveDivLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveDivLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong a;
@@ -17496,7 +17537,7 @@ primitiveDivLargeIntegers(void)
 		}
 	}
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	result = a / b;
 	if (!(a == 0)) {
@@ -17517,6 +17558,7 @@ primitiveDivLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -17529,7 +17571,7 @@ primitiveDivLargeIntegers(void)
 	activeProcess (see Process>>effectiveProcess). */
 
 	/* InterpreterPrimitives>>#primitiveEnterCriticalSection */
-static void
+static sqInt
 primitiveEnterCriticalSection(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt activeProc;
@@ -17586,7 +17628,7 @@ primitiveEnterCriticalSection(void)
 		/* begin pop:thenPush: */
 		longAtput((sp1 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), GIV(falseObj));
 		GIV(stackPointer) = sp1;
-		return;
+		return 0;
 	}
 	if (owningProcess == activeProc) {
 		/* begin methodReturnValue: */
@@ -17594,17 +17636,18 @@ primitiveEnterCriticalSection(void)
 		/* begin pop:thenPush: */
 		longAtput((sp2 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), GIV(trueObj));
 		GIV(stackPointer) = sp2;
-		return;
+		return 0;
 	}
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), GIV(falseObj));
 	GIV(stackPointer) = sp;
 	addLastLinktoList(activeProc, criticalSection);
 	transferTo(wakeHighestPriority());
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveEqual */
-static void
+static sqInt
 primitiveEqual(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerArgument;
@@ -17632,13 +17675,14 @@ primitiveEqual(void)
 			GIV(stackPointer) = sp1;
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive comparison operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveEqualLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveEqualLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqLong integerArg;
@@ -17654,6 +17698,7 @@ primitiveEqualLargeIntegers(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -17661,7 +17706,7 @@ primitiveEqualLargeIntegers(void)
 	This may change the active process as a result. */
 
 	/* InterpreterPrimitives>>#primitiveExitCriticalSection */
-static void
+static sqInt
 primitiveExitCriticalSection(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt criticalSection;
@@ -17689,13 +17734,15 @@ primitiveExitCriticalSection(void)
 		longAtput((criticalSection + BaseHeaderSize) + (((sqInt)((usqInt)(owningProcessIndex) << (shiftForWord())))), owningProcess);
 		resumepreemptedYieldingIf(owningProcess, GIV(preemptionYields));
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveExitToDebugger */
-static void
+static sqInt
 primitiveExitToDebugger(void)
 {
 	error("Exit to debugger at user request");
+	return 0;
 }
 
 
@@ -17704,7 +17751,7 @@ primitiveExitToDebugger(void)
 	primitive is specific to floats. eem 2/13/2017 */
 
 	/* InterpreterPrimitives>>#primitiveExp */
-static void
+static sqInt
 primitiveExp(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aValue;
@@ -17733,6 +17780,7 @@ primitiveExp(void)
 		aValue = floatObjectOf(exp(rcvr));
 		longAtPointerput(GIV(stackPointer), aValue);
 	}
+	return 0;
 }
 
 
@@ -17741,7 +17789,7 @@ primitiveExp(void)
 	primitive is specific to floats. eem 2/13/2017 */
 
 	/* InterpreterPrimitives>>#primitiveExponent */
-static void
+static sqInt
 primitiveExponent(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt isFloat;
@@ -17772,6 +17820,7 @@ primitiveExponent(void)
 		frexp(rcvr, (&pwr));
 		longAtPointerput(GIV(stackPointer), (((usqInt)(pwr - 1) << 1) | 1));
 	}
+	return 0;
 }
 
 
@@ -17947,7 +17996,7 @@ primitiveFailureCode(void)
 }
 
 	/* InterpreterPrimitives>>#primitiveFetchNextMourner */
-static void
+static sqInt
 primitiveFetchNextMourner(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt mourner;
@@ -17965,10 +18014,11 @@ primitiveFetchNextMourner(void)
 		longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), mourner);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFloatAdd */
-static void
+static sqInt
 primitiveFloatAdd(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     double arg;
@@ -18029,7 +18079,7 @@ primitiveFloatAdd(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), floatObjectOf(rcvr + arg));
 		GIV(stackPointer) = sp;
 	}
-	return;
+	return 0;
 }
 
 
@@ -18038,7 +18088,7 @@ primitiveFloatAdd(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveFloatArrayAt */
-static void
+static sqInt
 primitiveFloatArrayAt(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     float aFloat;
@@ -18141,6 +18191,7 @@ primitiveFloatArrayAt(void)
 	/* begin primitiveFailFor: */
 	GIV(primFailCode) = PrimErrBadReceiver;
 	l7:	/* end primitiveSpurFloatArrayAt */;
+	return 0;
 }
 
 
@@ -18149,7 +18200,7 @@ primitiveFloatArrayAt(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveFloatArrayAtPut */
-static void
+static sqInt
 primitiveFloatArrayAtPut(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     float aFloat;
@@ -18246,6 +18297,7 @@ primitiveFloatArrayAtPut(void)
 	/* begin primitiveFailFor: */
 	GIV(primFailCode) = PrimErrBadReceiver;
 	l9:	/* end primitiveSpurFloatArrayAtPut */;
+	return 0;
 }
 
 
@@ -18254,7 +18306,7 @@ primitiveFloatArrayAtPut(void)
 	onto the least significant word. */
 
 	/* InterpreterPrimitives>>#primitiveFloatAt */
-static void
+static sqInt
 primitiveFloatAt(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt fieldIndex;
@@ -18331,7 +18383,7 @@ primitiveFloatAt(void)
 		/* begin pop:thenPush: */
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), result);
 		GIV(stackPointer) = sp;
-		return;
+		return 0;
 	}
 	if (index == ConstTwo) {
 		/* begin positive32BitIntegerFor: */
@@ -18386,13 +18438,14 @@ primitiveFloatAt(void)
 		/* begin pop:thenPush: */
 		longAtput((sp1 = GIV(stackPointer) + ((1) * BytesPerWord)), result);
 		GIV(stackPointer) = sp1;
-		return;
+		return 0;
 	}
 	/* begin primitiveFailFor: */
 	reasonCode = ((index & 1)
 		? PrimErrBadIndex
 		: PrimErrBadArgument);
 	GIV(primFailCode) = reasonCode;
+	return 1;
 }
 
 
@@ -18401,7 +18454,7 @@ primitiveFloatAt(void)
 	onto the least significant word. */
 
 	/* InterpreterPrimitives>>#primitiveFloatAtPut */
-static void
+static sqInt
 primitiveFloatAtPut(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt fieldIndex;
@@ -18419,7 +18472,7 @@ primitiveFloatAtPut(void)
 	if (GIV(primFailCode)) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	rcvr = longAt(GIV(stackPointer) + (2 * BytesPerWord));
 	index = longAt(GIV(stackPointer) + (1 * BytesPerWord));
@@ -18433,7 +18486,7 @@ primitiveFloatAtPut(void)
 		) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrNoModification;
-		return;
+		return 2;
 	}
 	if (index == ConstOne) {
 		/* begin storeLong32:ofObject:withValue: */
@@ -18444,7 +18497,7 @@ primitiveFloatAtPut(void)
 		/* begin pop:thenPush: */
 		longAtput((sp = GIV(stackPointer) + ((2) * BytesPerWord)), oopToStore);
 		GIV(stackPointer) = sp;
-		return;
+		return 0;
 	}
 	if (index == ConstTwo) {
 		/* begin storeLong32:ofObject:withValue: */
@@ -18455,17 +18508,18 @@ primitiveFloatAtPut(void)
 		/* begin pop:thenPush: */
 		longAtput((sp1 = GIV(stackPointer) + ((2) * BytesPerWord)), oopToStore);
 		GIV(stackPointer) = sp1;
-		return;
+		return 0;
 	}
 	/* begin primitiveFailFor: */
 	reasonCode = ((index & 1)
 		? PrimErrBadIndex
 		: PrimErrBadArgument);
 	GIV(primFailCode) = reasonCode;
+	return 1;
 }
 
 	/* InterpreterPrimitives>>#primitiveFloatDivide */
-static void
+static sqInt
 primitiveFloatDivide(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     double arg;
@@ -18534,10 +18588,11 @@ primitiveFloatDivide(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), floatObjectOf(rcvr / arg));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFloatEqual */
-static void
+static sqInt
 primitiveFloatEqual(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aBool;
@@ -18551,10 +18606,11 @@ primitiveFloatEqual(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFloatGreaterOrEqual */
-static void
+static sqInt
 primitiveFloatGreaterOrEqual(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aBool;
@@ -18568,10 +18624,11 @@ primitiveFloatGreaterOrEqual(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFloatGreaterThan */
-static void
+static sqInt
 primitiveFloatGreaterThan(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aBool;
@@ -18585,10 +18642,11 @@ primitiveFloatGreaterThan(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFloatLessOrEqual */
-static void
+static sqInt
 primitiveFloatLessOrEqual(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aBool;
@@ -18602,10 +18660,11 @@ primitiveFloatLessOrEqual(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFloatLessThan */
-static void
+static sqInt
 primitiveFloatLessThan(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aBool;
@@ -18619,10 +18678,11 @@ primitiveFloatLessThan(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFloatMultiply */
-static void
+static sqInt
 primitiveFloatMultiply(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     double arg;
@@ -18683,10 +18743,11 @@ primitiveFloatMultiply(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), floatObjectOf(rcvr * arg));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFloatNotEqual */
-static void
+static sqInt
 primitiveFloatNotEqual(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aBool;
@@ -18700,10 +18761,11 @@ primitiveFloatNotEqual(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFloatSubtract */
-static void
+static sqInt
 primitiveFloatSubtract(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     double arg;
@@ -18764,7 +18826,7 @@ primitiveFloatSubtract(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), floatObjectOf(rcvr - arg));
 		GIV(stackPointer) = sp;
 	}
-	return;
+	return 0;
 }
 
 
@@ -18773,10 +18835,11 @@ primitiveFloatSubtract(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveFlushCache */
-static void
+static sqInt
 primitiveFlushCache(void)
 {
 	flushMethodCache();
+	return 0;
 }
 
 
@@ -18785,7 +18848,7 @@ primitiveFlushCache(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveFlushExternalPrimitives */
-static void
+static sqInt
 primitiveFlushExternalPrimitives(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt address;
@@ -18848,6 +18911,7 @@ primitiveFlushExternalPrimitives(void)
 		externalPrimitiveTable[i] = 0;
 	}
 	GIV(externalPrimitiveTableFirstFreeIndex) = 0;
+	return 0;
 }
 
 
@@ -18856,10 +18920,11 @@ primitiveFlushExternalPrimitives(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveForceDisplayUpdate */
-static void
+static sqInt
 primitiveForceDisplayUpdate(void)
 {
 	ioForceDisplayUpdate();
+	return 0;
 }
 
 
@@ -18868,7 +18933,7 @@ primitiveForceDisplayUpdate(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveFormPrint */
-static void
+static sqInt
 primitiveFormPrint(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bitsArray;
@@ -19033,6 +19098,7 @@ primitiveFormPrint(void)
 			GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
 		}
 	}
+	return 0;
 }
 
 
@@ -19041,7 +19107,7 @@ primitiveFormPrint(void)
 	primitive is specific to floats. eem 2/13/2017 */
 
 	/* InterpreterPrimitives>>#primitiveFractionalPart */
-static void
+static sqInt
 primitiveFractionalPart(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aValue;
@@ -19071,10 +19137,11 @@ primitiveFractionalPart(void)
 		aValue = floatObjectOf(modf(rcvr, (&trunc)));
 		longAtPointerput(GIV(stackPointer), aValue);
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFullClosureValue */
-static void
+static sqInt
 primitiveFullClosureValue(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt blockClosure;
@@ -19107,7 +19174,7 @@ primitiveFullClosureValue(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	closureMethod = longAt((blockClosure + BaseHeaderSize) + (((int)((usqInt)(FullClosureCompiledBlockIndex) << (shiftForWord())))));
 	if (!(((!(closureMethod & (tagMask()))))
@@ -19116,7 +19183,7 @@ primitiveFullClosureValue(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 	/* begin activateNewFullClosure:method:numArgs:mayContextSwitch: */
 	assert(closureMethod == (fetchPointerofObject(FullClosureCompiledBlockIndex, blockClosure)));
@@ -19181,6 +19248,7 @@ primitiveFullClosureValue(void)
 	if (GIV(stackPointer) < GIV(stackLimit)) {
 		handleStackOverflowOrEventAllowContextSwitch(1);
 	}
+	return 0;
 }
 
 
@@ -19190,7 +19258,7 @@ primitiveFullClosureValue(void)
 	checkForInterruptsMayContextSwitch:  */
 
 	/* InterpreterPrimitives>>#primitiveFullClosureValueNoContextSwitch */
-void
+sqInt
 primitiveFullClosureValueNoContextSwitch(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt blockClosure;
@@ -19223,7 +19291,7 @@ primitiveFullClosureValueNoContextSwitch(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	closureMethod = longAt((blockClosure + BaseHeaderSize) + (((int)((usqInt)(FullClosureCompiledBlockIndex) << (shiftForWord())))));
 	if (!(((!(closureMethod & (tagMask()))))
@@ -19232,7 +19300,7 @@ primitiveFullClosureValueNoContextSwitch(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin activateNewFullClosure:method:numArgs:mayContextSwitch: */
 	assert(closureMethod == (fetchPointerofObject(FullClosureCompiledBlockIndex, blockClosure)));
@@ -19297,10 +19365,11 @@ primitiveFullClosureValueNoContextSwitch(void)
 	if (GIV(stackPointer) < GIV(stackLimit)) {
 		handleStackOverflowOrEventAllowContextSwitch(0);
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFullClosureValueWithArgs */
-static void
+static sqInt
 primitiveFullClosureValueWithArgs(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt argumentArray;
@@ -19336,7 +19405,7 @@ primitiveFullClosureValueWithArgs(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin numSlotsOf: */
 	assert((classIndexOf(argumentArray)) > (isForwardedObjectClassIndexPun()));
@@ -19349,7 +19418,7 @@ primitiveFullClosureValueWithArgs(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 	blockClosure = longAt(GIV(stackPointer) + (GIV(argumentCount) * BytesPerWord));
 	/* begin quickFetchInteger:ofObject: */
@@ -19361,7 +19430,7 @@ primitiveFullClosureValueWithArgs(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 3;
 	}
 	closureMethod = longAt((blockClosure + BaseHeaderSize) + (((int)((usqInt)(FullClosureCompiledBlockIndex) << (shiftForWord())))));
 	if (!(((!(closureMethod & (tagMask()))))
@@ -19370,7 +19439,7 @@ primitiveFullClosureValueWithArgs(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 4;
 	}
 	/* begin popStack */
 	top = longAt(GIV(stackPointer));
@@ -19445,6 +19514,7 @@ primitiveFullClosureValueWithArgs(void)
 	if (GIV(stackPointer) < GIV(stackLimit)) {
 		handleStackOverflowOrEventAllowContextSwitch(1);
 	}
+	return 0;
 }
 
 
@@ -19453,7 +19523,7 @@ primitiveFullClosureValueWithArgs(void)
 	defined. */
 
 	/* InterpreterPrimitives>>#primitiveGetAttribute */
-static void
+static sqInt
 primitiveGetAttribute(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt attr;
@@ -19489,6 +19559,7 @@ primitiveGetAttribute(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), s);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -19543,7 +19614,7 @@ primitiveGetenv(void)
 
 	/* InterpreterPrimitives>>#primitiveGetImmutability */
 #if IMMUTABILITY
-static void
+static sqInt
 primitiveGetImmutability(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt rcvr;
@@ -19558,6 +19629,7 @@ primitiveGetImmutability(void)
 		? GIV(trueObj)
 		: GIV(falseObj)));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 #endif /* IMMUTABILITY */
 
@@ -19599,7 +19671,7 @@ primitiveGetLogDirectory(void)
 /*	Primitive. Return the next input event from the VM event queue. */
 
 	/* InterpreterPrimitives>>#primitiveGetNextEvent */
-static void
+static sqInt
 primitiveGetNextEvent(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -19615,11 +19687,11 @@ primitiveGetNextEvent(void)
 		 && ((slotSizeOf(arg)) == 8))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	ioGetNextEvent(((sqInputEvent*) evtBuf));
 	if (GIV(primFailCode)) {
-		return;
+		return 2;
 	}
 	if ((eventTraceMask != 0)
 	 && (((eventTraceMask & ((((evtBuf[0]) < 0) ? (((usqInt)(1)) >> (-(evtBuf[0]))) : (1U << (evtBuf[0]))))) != 0))) {
@@ -19664,7 +19736,7 @@ primitiveGetNextEvent(void)
 		}
 	}
 	if (GIV(primFailCode)) {
-		return;
+		return 3;
 	}
 	if (eventTypeIs == 6) {
 
@@ -19704,7 +19776,7 @@ primitiveGetNextEvent(void)
 			}
 		}
 		if (GIV(primFailCode)) {
-			return;
+			return 4;
 		}
 		for (i = 2; i <= 7; i += 1) {
 			value = evtBuf[i];
@@ -19746,6 +19818,7 @@ primitiveGetNextEvent(void)
 		/* begin pop: */
 		GIV(stackPointer) += 1 * BytesPerWord;
 	}
+	return 0;
 }
 
 
@@ -19833,7 +19906,7 @@ primitiveGetWindowSize(void)
 }
 
 	/* InterpreterPrimitives>>#primitiveGreaterOrEqual */
-static void
+static sqInt
 primitiveGreaterOrEqual(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerArgument;
@@ -19855,13 +19928,14 @@ primitiveGreaterOrEqual(void)
 			GIV(primFailCode) = 1;
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive comparison operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveGreaterOrEqualLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveGreaterOrEqualLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqLong integerArg;
@@ -19877,10 +19951,11 @@ primitiveGreaterOrEqualLargeIntegers(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveGreaterThan */
-static void
+static sqInt
 primitiveGreaterThan(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerArgument;
@@ -19902,13 +19977,14 @@ primitiveGreaterThan(void)
 			GIV(primFailCode) = 1;
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive comparison operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveGreaterThanLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveGreaterThanLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqLong integerArg;
@@ -19924,10 +20000,11 @@ primitiveGreaterThanLargeIntegers(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveGrowMemoryByAtLeast */
-static void
+static sqInt
 primitiveGrowMemoryByAtLeast(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt ammount;
@@ -19938,7 +20015,7 @@ primitiveGrowMemoryByAtLeast(void)
 	if (!((ammount & 1))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	segSize = growOldSpaceByAtLeast((ammount >> 1));
 	if (segSize == null) {
@@ -19950,6 +20027,7 @@ primitiveGrowMemoryByAtLeast(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), ((segSize << 1) | 1));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -19958,7 +20036,7 @@ primitiveGrowMemoryByAtLeast(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveHashMultiply */
-static void
+static sqInt
 primitiveHashMultiply(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt ccIndex;
@@ -19986,13 +20064,14 @@ primitiveHashMultiply(void)
 		if (!ok) {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = PrimErrBadReceiver;
-			return;
+			return 1;
 		}
 		value = SQ_SWAP_4_BYTES_IF_BIGENDIAN((long32At((value + BaseHeaderSize))));
 	}
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), (((((((usqInt) value)) * HashMultiplyConstant) & 0xFFFFFFF) << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -20066,7 +20145,7 @@ primitiveHeartbeatFrequency(void)
 }
 
 	/* InterpreterPrimitives>>#primitiveHighBit */
-static void
+static sqInt
 primitiveHighBit(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt highestBitZeroBased;
@@ -20091,7 +20170,7 @@ primitiveHighBit(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin pop:thenPushInteger: */
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), (((usqInt)(leadingZeroCount ^ ((BytesPerWord * 8) - 1)) << 1) | 1));
@@ -20106,7 +20185,7 @@ primitiveHighBit(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 
 	/* We do not even test the return value, because integerReceiverOop is never zero */
@@ -20123,6 +20202,7 @@ primitiveHighBit(void)
 		GIV(primFailCode) = 1;
 	}
 #  endif // defined(__GNUC__) || (defined(_MSC_VER)) || (defined(__ICC))
+	return 0;
 }
 
 
@@ -20157,7 +20237,7 @@ primitiveHighResClock(void)
 	pop argumentCount because this can be used as a mirror primitive. */
 
 	/* InterpreterPrimitives>>#primitiveIdentical */
-static void
+static sqInt
 primitiveIdentical(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt otherObject;
@@ -20181,10 +20261,11 @@ primitiveIdentical(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveIdentityHash */
-static void
+static sqInt
 primitiveIdentityHash(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqInt hash;
@@ -20225,6 +20306,7 @@ primitiveIdentityHash(void)
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)integerVal << 1) | 1));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -20316,7 +20398,7 @@ primitiveImageFormatVersion(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveImageName */
-static void
+static sqInt
 primitiveImageName(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt ccIndex;
@@ -20344,7 +20426,7 @@ primitiveImageName(void)
 		if (!isString) {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = PrimErrBadArgument;
-			return;
+			return 1;
 		}
 		sCRIfn = ioLoadFunctionFrom("secCanRenameImage", "SecurityPlugin");
 		if (sCRIfn != 0) {
@@ -20352,13 +20434,13 @@ primitiveImageName(void)
 			if (!okToRename) {
 				/* begin primitiveFailFor: */
 				GIV(primFailCode) = PrimErrUnsupported;
-				return;
+				return 2;
 			}
 		}
 		imageNamePutLength(s + BaseHeaderSize, numBytesOf(s));
 		/* begin pop: */
 		GIV(stackPointer) += 1 * BytesPerWord;
-		return;
+		return 0;
 	}
 	sz = imageNameSize();
 	s = instantiateClassindexableSize(longAt((GIV(specialObjectsOop) + BaseHeaderSize) + (((int)((usqInt)(ClassByteString) << (shiftForWord()))))), sz);
@@ -20368,6 +20450,7 @@ primitiveImageName(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), s);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -20378,7 +20461,7 @@ primitiveImageName(void)
 	This is a good value for an immediate's hash. */
 
 	/* InterpreterPrimitives>>#primitiveImmediateAsInteger */
-static void
+static sqInt
 primitiveImmediateAsInteger(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt oop;
@@ -20397,11 +20480,12 @@ primitiveImmediateAsInteger(void)
 	}
 	/* begin primitiveFailFor: */
 	GIV(primFailCode) = PrimErrBadReceiver;
-	return;
+	return 1;
 	l2:	/* end immediateAsInteger:ifFail: */;
 	/* begin pop:thenPushInteger: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)value << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -20409,7 +20493,7 @@ primitiveImmediateAsInteger(void)
 	Semaphore, unregister the current input semaphore. */
 
 	/* InterpreterPrimitives>>#primitiveInputSemaphore */
-static void
+static sqInt
 primitiveInputSemaphore(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -20426,14 +20510,14 @@ primitiveInputSemaphore(void)
 			/* begin pop: */
 			GIV(stackPointer) += 1 * BytesPerWord;
 		}
-		return;
+		return 1;
 	}
 	if (TheInputSemaphore == null) {
 		/* begin primitiveFail */
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 	if ((arg == GIV(nilObj))
 	 || (((!(arg & (tagMask()))))
@@ -20461,6 +20545,7 @@ primitiveInputSemaphore(void)
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
 	}
+	return 0;
 }
 
 
@@ -20469,7 +20554,7 @@ primitiveInputSemaphore(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveInputWord */
-static void
+static sqInt
 primitiveInputWord(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     char *sp;
@@ -20477,10 +20562,11 @@ primitiveInputWord(void)
 	/* begin pop:thenPushInteger: */
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), (((usqInt)0 << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveIntegerAt */
-static void
+static sqInt
 primitiveIntegerAt(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt classFormat;
@@ -20636,10 +20722,11 @@ primitiveIntegerAt(void)
 	/* begin primitiveFailFor: */
 	GIV(primFailCode) = PrimErrBadReceiver;
 	l13:	/* end primitiveSpurIntegerAt */;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveIntegerAtPut */
-static void
+static sqInt
 primitiveIntegerAtPut(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt classFormat;
@@ -20844,6 +20931,7 @@ primitiveIntegerAtPut(void)
 	/* begin primitiveFailFor: */
 	GIV(primFailCode) = PrimErrBadReceiver;
 	l15:	/* end primitiveSpurIntegerAtPut */;
+	return 0;
 }
 
 
@@ -20882,7 +20970,7 @@ primitiveInterruptChecksPerMSec(void)
 	semaphore. */
 
 	/* InterpreterPrimitives>>#primitiveInterruptSemaphore */
-static void
+static sqInt
 primitiveInterruptSemaphore(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -20915,6 +21003,7 @@ primitiveInterruptSemaphore(void)
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
 	}
+	return 0;
 }
 
 
@@ -20923,7 +21012,7 @@ primitiveInterruptSemaphore(void)
 	 */
 
 	/* InterpreterPrimitives>>#primitiveInvokeObjectAsMethod */
-static void
+static sqInt
 primitiveInvokeObjectAsMethod(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt i;
@@ -21088,6 +21177,7 @@ primitiveInvokeObjectAsMethod(void)
 	l13:	/* end executeNewMethod */;
 	/* begin initPrimCall */
 	GIV(primFailCode) = 0;
+	return 0;
 }
 
 
@@ -21111,7 +21201,7 @@ primitiveIsBigEnder(void)
 /*	Answer if the receiver is pinned, i.e. immobile. */
 
 	/* InterpreterPrimitives>>#primitiveIsPinned */
-static void
+static sqInt
 primitiveIsPinned(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt obj;
@@ -21123,7 +21213,7 @@ primitiveIsPinned(void)
 	 || ((!((longAt(obj)) & ((classIndexMask()) - (isForwardedObjectClassIndexPun())))))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadReceiver;
-		return;
+		return 1;
 	}
 	/* begin pop:thenPushBool: */
 	trueOrFalse = ((((usqInt)((longAt(obj)))) >> (pinnedBitShift())) & 1) != 0;
@@ -21131,6 +21221,7 @@ primitiveIsPinned(void)
 		? GIV(trueObj)
 		: GIV(falseObj)));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -21160,7 +21251,7 @@ primitiveIsWindowObscured(void)
 }
 
 	/* InterpreterPrimitives>>#primitiveLessOrEqual */
-static void
+static sqInt
 primitiveLessOrEqual(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerArgument;
@@ -21182,13 +21273,14 @@ primitiveLessOrEqual(void)
 			GIV(primFailCode) = 1;
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive comparison operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveLessOrEqualLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveLessOrEqualLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqLong integerArg;
@@ -21204,10 +21296,11 @@ primitiveLessOrEqualLargeIntegers(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveLessThan */
-static void
+static sqInt
 primitiveLessThan(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerArgument;
@@ -21229,13 +21322,14 @@ primitiveLessThan(void)
 			GIV(primFailCode) = 1;
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive comparison operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveLessThanLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveLessThanLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqLong integerArg;
@@ -21251,13 +21345,14 @@ primitiveLessThanLargeIntegers(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
 /*	Primitive. Return the n-th builtin module name. */
 
 	/* InterpreterPrimitives>>#primitiveListBuiltinModule */
-static void
+static sqInt
 primitiveListBuiltinModule(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt index;
@@ -21270,7 +21365,7 @@ primitiveListBuiltinModule(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin stackIntegerValue: */
 	integerPointer = longAt(GIV(stackPointer) + (0 * BytesPerWord));
@@ -21294,7 +21389,7 @@ primitiveListBuiltinModule(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 	moduleName = ioListBuiltinModule(index);
 	if (moduleName == null) {
@@ -21307,13 +21402,14 @@ primitiveListBuiltinModule(void)
 	else {
 		methodReturnString(moduleName);
 	}
+	return 0;
 }
 
 
 /*	Primitive. Answer the n-th loaded external module name. */
 
 	/* InterpreterPrimitives>>#primitiveListExternalModule */
-static void
+static sqInt
 primitiveListExternalModule(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt index;
@@ -21326,7 +21422,7 @@ primitiveListExternalModule(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin stackIntegerValue: */
 	integerPointer = longAt(GIV(stackPointer) + (0 * BytesPerWord));
@@ -21350,7 +21446,7 @@ primitiveListExternalModule(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 	moduleName = ioListLoadedModule(index);
 	if (moduleName == null) {
@@ -21363,6 +21459,7 @@ primitiveListExternalModule(void)
 	else {
 		methodReturnString(moduleName);
 	}
+	return 0;
 }
 
 
@@ -21388,7 +21485,7 @@ primitiveListExternalModule(void)
 	which Spur doesn't support. */
 
 	/* InterpreterPrimitives>>#primitiveLoadImageSegment */
-static void
+static sqInt
 primitiveLoadImageSegment(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt outPointerArray;
@@ -21410,7 +21507,7 @@ primitiveLoadImageSegment(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	result = loadImageSegmentFromoutPointers(segmentWordArray, outPointerArray);
 	if (oopisGreaterThan(result, segmentWordArray)) {
@@ -21422,6 +21519,7 @@ primitiveLoadImageSegment(void)
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = result;
 	}
+	return 0;
 }
 
 
@@ -21434,7 +21532,7 @@ primitiveLoadImageSegment(void)
 	primitive accesses the time as answered by the OS. */
 
 	/* InterpreterPrimitives>>#primitiveLocalMicrosecondClock */
-static void
+static sqInt
 primitiveLocalMicrosecondClock(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt oop;
@@ -21444,6 +21542,7 @@ primitiveLocalMicrosecondClock(void)
 	oop = positive64BitIntegerFor(ioLocalMicrosecondsNow());
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), oop);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -21452,7 +21551,7 @@ primitiveLocalMicrosecondClock(void)
 	primitive is specific to floats. eem 2/13/2017 */
 
 	/* InterpreterPrimitives>>#primitiveLogN */
-static void
+static sqInt
 primitiveLogN(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aValue;
@@ -21481,6 +21580,7 @@ primitiveLogN(void)
 		aValue = floatObjectOf(log(rcvr));
 		longAtPointerput(GIV(stackPointer), aValue);
 	}
+	return 0;
 }
 
 
@@ -21488,7 +21588,7 @@ primitiveLogN(void)
 	Semaphore, unregister the current low-space Semaphore. */
 
 	/* InterpreterPrimitives>>#primitiveLowSpaceSemaphore */
-static void
+static sqInt
 primitiveLowSpaceSemaphore(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -21521,10 +21621,11 @@ primitiveLowSpaceSemaphore(void)
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveMakePoint */
-static void
+static sqInt
 primitiveMakePoint(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -21545,7 +21646,7 @@ primitiveMakePoint(void)
 			: ((longAt(arg)) & (classIndexMask())) == ClassFloatCompactIndex))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	/* begin eeInstantiateSmallClass:numSlots: */
 	classObj = longAt((GIV(specialObjectsOop) + BaseHeaderSize) + (((int)((usqInt)(ClassPoint) << (shiftForWord())))));
@@ -21592,10 +21693,11 @@ primitiveMakePoint(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), pt);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveMaxIdentityHash */
-static void
+static sqInt
 primitiveMaxIdentityHash(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerVal;
@@ -21605,6 +21707,7 @@ primitiveMaxIdentityHash(void)
 	integerVal = identityHashHalfWordMask();
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), (((usqInt)integerVal << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -21625,7 +21728,7 @@ primitiveMethod(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveMillisecondClock */
-static void
+static sqInt
 primitiveMillisecondClock(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt oop;
@@ -21635,6 +21738,7 @@ primitiveMillisecondClock(void)
 	oop = (((usqInt)((ioMSecs()) & MillisecondClockMask) << 1) | 1);
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), oop);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -21654,7 +21758,7 @@ primitiveMillisecondClockMask(void)
 }
 
 	/* InterpreterPrimitives>>#primitiveMod */
-static void
+static sqInt
 primitiveMod(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt mod;
@@ -21677,13 +21781,14 @@ primitiveMod(void)
 			}
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive arithmetic operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveModLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveModLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong a;
@@ -21709,7 +21814,7 @@ primitiveModLargeIntegers(void)
 		}
 	}
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 
 	/* Handle remainder of same sign as argument */
@@ -21725,6 +21830,7 @@ primitiveModLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -21773,7 +21879,7 @@ primitiveMultipleBytecodeSetsActive(void)
 }
 
 	/* InterpreterPrimitives>>#primitiveMultiply */
-static void
+static sqInt
 primitiveMultiply(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerArg;
@@ -21838,13 +21944,14 @@ primitiveMultiply(void)
 			GIV(stackPointer) = sp;
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive arithmetic operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveMultiplyLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveMultiplyLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong a;
@@ -21864,7 +21971,7 @@ primitiveMultiplyLargeIntegers(void)
 	a = magnitude64BitValueOf(oopRcvr);
 	b = magnitude64BitValueOf(oopArg);
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	if ((a > 1)
 	 && ((b > 1)
@@ -21873,7 +21980,7 @@ primitiveMultiplyLargeIntegers(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 	result = a * b;
 	oopResult = magnitude64BitIntegerForneg(result, aIsNegative != bIsNegative);
@@ -21882,10 +21989,11 @@ primitiveMultiplyLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveNew */
-static void
+static sqInt
 primitiveNew(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt obj;
@@ -21908,10 +22016,11 @@ primitiveNew(void)
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), obj);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveNewMethod */
-static void
+static sqInt
 primitiveNewMethod(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bytecodeCount;
@@ -21941,7 +22050,7 @@ primitiveNewMethod(void)
 		 && (((bytecodeCount = (bytecodeCount >> 1))) >= 0)))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	class = longAt(GIV(stackPointer) + (2 * BytesPerWord));
 	assert((header & 1));
@@ -22038,7 +22147,7 @@ primitiveNewMethod(void)
 			? PrimErrNoMemory
 			: PrimErrBadReceiver);
 		GIV(primFailCode) = reasonCode;
-		return;
+		return 1;
 	}
 	assert(!(isOopForwarded(theMethod)));
 	longAtput((theMethod + BaseHeaderSize) + (((int)((usqInt)(HeaderIndex) << (shiftForWord())))), header);
@@ -22050,6 +22159,7 @@ primitiveNewMethod(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((2) * BytesPerWord)), theMethod);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -22058,7 +22168,7 @@ primitiveNewMethod(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveNewWithArg */
-static void
+static sqInt
 primitiveNewWithArg(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bs;
@@ -22136,7 +22246,7 @@ primitiveNewWithArg(void)
 		/* positiveMachineIntegerValueOf: succeeds only for non-negative integers. */
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	obj = instantiateClassindexableSize(longAt(GIV(stackPointer) + (1 * BytesPerWord)), size);
 	if (obj == null) {
@@ -22157,10 +22267,11 @@ primitiveNewWithArg(void)
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), obj);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveNextInstance */
-static void
+static sqInt
 primitiveNextInstance(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt actualObj;
@@ -22262,13 +22373,14 @@ primitiveNextInstance(void)
 			/* begin pop:thenPush: */
 			longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), subsequentObject);
 			GIV(stackPointer) = sp;
-			return;
+			return 0;
 		}
 	}
 	/* begin primitiveFail */
 	if (!GIV(primFailCode)) {
 		GIV(primFailCode) = 1;
 	}
+	return 1;
 }
 
 
@@ -22277,7 +22389,7 @@ primitiveNextInstance(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveNextObject */
-static void
+static sqInt
 primitiveNextObject(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt instance;
@@ -22287,7 +22399,7 @@ primitiveNextObject(void)
 	if ((((longAt(GIV(stackPointer))) & (tagMask())) != 0)) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadReceiver;
-		return;
+		return 1;
 	}
 	instance = accessibleObjectAfter(longAt(GIV(stackPointer)));
 	if (instance == null) {
@@ -22301,6 +22413,7 @@ primitiveNextObject(void)
 		longAtput((sp1 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), instance);
 		GIV(stackPointer) = sp1;
 	}
+	return 0;
 }
 
 
@@ -22309,15 +22422,16 @@ primitiveNextObject(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveNoop */
-static void
+static sqInt
 primitiveNoop(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
 	/* begin pop: */
 	GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveNotEqual */
-static void
+static sqInt
 primitiveNotEqual(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerArgument;
@@ -22345,13 +22459,14 @@ primitiveNotEqual(void)
 			GIV(stackPointer) = sp1;
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive comparison operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveNotEqualLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveNotEqualLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqLong integerArg;
@@ -22367,6 +22482,7 @@ primitiveNotEqualLargeIntegers(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -22378,7 +22494,7 @@ primitiveNotEqualLargeIntegers(void)
 	pop argumentCount because this can be used as a mirror primitive. */
 
 	/* InterpreterPrimitives>>#primitiveNotIdentical */
-static void
+static sqInt
 primitiveNotIdentical(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt otherObject;
@@ -22402,13 +22518,14 @@ primitiveNotIdentical(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
 /*	Defined for CompiledMethods only */
 
 	/* InterpreterPrimitives>>#primitiveObjectAt */
-static void
+static sqInt
 primitiveObjectAt(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt index;
@@ -22435,18 +22552,19 @@ primitiveObjectAt(void)
 	if (GIV(primFailCode)) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	thisReceiver = longAt(GIV(stackPointer) + (1 * BytesPerWord));
 	if (!((index > 0)
 		 && (index <= ((literalCountOfMethodHeader(methodHeaderOf(thisReceiver))) + LiteralStart)))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadIndex;
-		return;
+		return 1;
 	}
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), longAt((thisReceiver + BaseHeaderSize) + (((sqInt)((usqInt)((index - 1)) << (shiftForWord()))))));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -22455,7 +22573,7 @@ primitiveObjectAt(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveObjectAtPut */
-static void
+static sqInt
 primitiveObjectAtPut(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt index;
@@ -22470,7 +22588,7 @@ primitiveObjectAtPut(void)
 	 && ((newValue & 1) == 0))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	index = (index >> 1);
 	thisReceiver = longAt(GIV(stackPointer) + (2 * BytesPerWord));
@@ -22484,13 +22602,13 @@ primitiveObjectAtPut(void)
 		) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrNoModification;
-		return;
+		return 2;
 	}
 	if (!((index > 0)
 		 && (index <= ((literalCountOfMethodHeader(methodHeaderOf(thisReceiver))) + LiteralStart)))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadIndex;
-		return;
+		return 3;
 	}
 	/* begin storePointer:ofObject:withValue: */
 	assert(!(isForwarded(thisReceiver)));
@@ -22510,6 +22628,7 @@ primitiveObjectAtPut(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((2) * BytesPerWord)), newValue);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -22815,7 +22934,7 @@ primitivePathToUsing(void)
 }
 
 	/* InterpreterPrimitives>>#primitivePerformInSuperclass */
-static void
+static sqInt
 primitivePerformInSuperclass(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt argumentArray;
@@ -22863,7 +22982,7 @@ primitivePerformInSuperclass(void)
 		if (GIV(argumentCount) != 4) {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = PrimErrBadNumArgs;
-			return;
+			return 1;
 		}
 		if (((!(rcvr & (tagMask()))))
 		 && ((!((longAt(rcvr)) & ((classIndexMask()) - (isForwardedObjectClassIndexPun())))))) {
@@ -22871,7 +22990,7 @@ primitivePerformInSuperclass(void)
 			if (!GIV(primFailCode)) {
 				GIV(primFailCode) = 1;
 			}
-			return;
+			return 2;
 		}
 	}
 	if (((tagBits = rcvr & (tagMask()))) != 0) {
@@ -22892,7 +23011,7 @@ primitivePerformInSuperclass(void)
 		if (currentClass == GIV(nilObj)) {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = PrimErrBadArgument;
-			return;
+			return 3;
 		}
 	}
 	/* begin primitiveObject:perform:withArguments:lookedUpIn: */
@@ -23084,10 +23203,11 @@ primitivePerformInSuperclass(void)
 	/* begin initPrimCall */
 	GIV(primFailCode) = 0;
 	l20:	/* end primitiveObject:perform:withArguments:lookedUpIn: */;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitivePerformWithArgs */
-static void
+static sqInt
 primitivePerformWithArgs(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt actualReceiver;
@@ -23298,10 +23418,11 @@ primitivePerformWithArgs(void)
 	/* begin initPrimCall */
 	GIV(primFailCode) = 0;
 	l15:	/* end primitiveObject:perform:withArguments:lookedUpIn: */;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitivePinnedNew */
-static void
+static sqInt
 primitivePinnedNew(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt classFormat;
@@ -23375,6 +23496,7 @@ primitivePinnedNew(void)
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), obj);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -23383,7 +23505,7 @@ primitivePinnedNew(void)
  */
 
 	/* InterpreterPrimitives>>#primitivePinnedNewWithArg */
-static void
+static sqInt
 primitivePinnedNewWithArg(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bs;
@@ -23471,7 +23593,7 @@ primitivePinnedNewWithArg(void)
 		/* positiveMachineIntegerValueOf: succeeds only for non-negative integers. */
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	/* begin inOldSpaceInstantiatePinnedClass:indexableSize: */
 	classObj = longAt(GIV(stackPointer) + (1 * BytesPerWord));
@@ -23590,6 +23712,7 @@ primitivePinnedNewWithArg(void)
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), obj);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -23693,19 +23816,20 @@ primitiveProfileStart(void)
 }
 
 	/* InterpreterPrimitives>>#primitiveQuit */
-static void
+static sqInt
 primitiveQuit(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
 	ioExitWithErrorCode((GIV(argumentCount) == 1
 		? ((longAt(GIV(stackPointer))) >> 1)
 		: 0));
+	return 0;
 }
 
 
 /*	Rounds negative results towards zero. */
 
 	/* InterpreterPrimitives>>#primitiveQuo */
-static void
+static sqInt
 primitiveQuo(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerArg;
@@ -23781,13 +23905,14 @@ primitiveQuo(void)
 			}
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive arithmetic operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveQuoLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveQuoLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong a;
@@ -23813,7 +23938,7 @@ primitiveQuoLargeIntegers(void)
 		}
 	}
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	result = a / b;
 	oopResult = magnitude64BitIntegerForneg(result, bIsNegative != aIsNegative);
@@ -23822,6 +23947,7 @@ primitiveQuoLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -23830,7 +23956,7 @@ primitiveQuoLargeIntegers(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveRelinquishProcessor */
-static void
+static sqInt
 primitiveRelinquishProcessor(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerPointer;
@@ -23864,13 +23990,14 @@ primitiveRelinquishProcessor(void)
 		/* begin pop: */
 		GIV(stackPointer) += 1 * BytesPerWord;
 	}
+	return 0;
 }
 
 
 /*	Primitive arithmetic operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveRemLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveRemLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong a;
@@ -23894,7 +24021,7 @@ primitiveRemLargeIntegers(void)
 		}
 	}
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	result = a % b;
 	oopResult = magnitude64BitIntegerForneg(result, aIsNegative);
@@ -23903,6 +24030,7 @@ primitiveRemLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -23915,7 +24043,7 @@ primitiveRemLargeIntegers(void)
 	is higher than the current process, preempt the current process. */
 
 	/* InterpreterPrimitives>>#primitiveResume */
-static void
+static sqInt
 primitiveResume(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt ctxt;
@@ -23937,16 +24065,17 @@ primitiveResume(void)
 		 && (((longAt(ctxt)) & (classIndexMask())) == ClassMethodContextCompactIndex))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadReceiver;
-		return;
+		return 1;
 	}
 	resumepreemptedYieldingIf(proc, GIV(preemptionYields));
+	return 0;
 }
 
 
 /*	The character scanner primitive. */
 
 	/* InterpreterPrimitives>>#primitiveScanCharacters */
-static void
+static sqInt
 primitiveScanCharacters(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt ascii;
@@ -23981,7 +24110,7 @@ primitiveScanCharacters(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin stackIntegerValue: */
 	integerPointer = longAt(GIV(stackPointer) + (0 * BytesPerWord));
@@ -24051,7 +24180,7 @@ primitiveScanCharacters(void)
 	l12:	/* end stackIntegerValue: */;
 	rcvr = longAt(GIV(stackPointer) + (6 * BytesPerWord));
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	if (!((((!(stops & (tagMask()))))
 		 && (((((usqInt)((longAt(stops)))) >> (formatShift())) & (formatMask())) == 2 /* arrayFormat */))
@@ -24068,7 +24197,7 @@ primitiveScanCharacters(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 	scanDestX = fetchIntegerofObject(0, rcvr);
 	scanLastIndex = fetchIntegerofObject(1, rcvr);
@@ -24084,7 +24213,7 @@ primitiveScanCharacters(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 3;
 	}
 
 	/* Okay, here we go. We have eliminated nearly all failure
@@ -24106,7 +24235,7 @@ primitiveScanCharacters(void)
 				if (!GIV(primFailCode)) {
 					GIV(primFailCode) = 1;
 				}
-				return;
+				return 4;
 			}
 			/* begin storeInteger:ofObject:withValue: */
 			if ((((sqInt)((((usqInt)scanDestX)) ^ ((((usqInt)scanDestX)) << 1)))) >= 0) {
@@ -24135,7 +24264,7 @@ primitiveScanCharacters(void)
 			/* begin pop:thenPush: */
 			longAtput((sp = GIV(stackPointer) + ((6) * BytesPerWord)), stopReason);
 			GIV(stackPointer) = sp;
-			return;
+			return 0;
 		}
 
 		/* fail if the glyphIndex is out of range */
@@ -24147,14 +24276,14 @@ primitiveScanCharacters(void)
 			if (!GIV(primFailCode)) {
 				GIV(primFailCode) = 1;
 			}
-			return;
+			return 5;
 		}
 		sourceX = fetchIntegerofObject(glyphIndex, scanXTable);
 
 		/* Above may fail if non-integer entries in scanXTable */
 		sourceX2 = fetchIntegerofObject(glyphIndex + 1, scanXTable);
 		if (GIV(primFailCode)) {
-			return;
+			return 6;
 		}
 		nextDestX = (scanDestX + sourceX2) - sourceX;
 		if (nextDestX > scanRightX) {
@@ -24165,7 +24294,7 @@ primitiveScanCharacters(void)
 				if (!GIV(primFailCode)) {
 					GIV(primFailCode) = 1;
 				}
-				return;
+				return 7;
 			}
 			/* begin storeInteger:ofObject:withValue: */
 			if ((((sqInt)((((usqInt)scanDestX)) ^ ((((usqInt)scanDestX)) << 1)))) >= 0) {
@@ -24194,7 +24323,7 @@ primitiveScanCharacters(void)
 			/* begin pop:thenPush: */
 			longAtput((sp1 = GIV(stackPointer) + ((6) * BytesPerWord)), longAt((stops + BaseHeaderSize) + (((int)((usqInt)((CrossedX - 1)) << (shiftForWord()))))));
 			GIV(stackPointer) = sp1;
-			return;
+			return 8;
 		}
 		scanDestX = nextDestX + kernDelta;
 		scanLastIndex += 1;
@@ -24204,7 +24333,7 @@ primitiveScanCharacters(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 9;
 	}
 	/* begin storeInteger:ofObject:withValue: */
 	if ((((sqInt)((((usqInt)scanDestX)) ^ ((((usqInt)scanDestX)) << 1)))) >= 0) {
@@ -24233,6 +24362,7 @@ primitiveScanCharacters(void)
 	/* begin pop:thenPush: */
 	longAtput((sp2 = GIV(stackPointer) + ((6) * BytesPerWord)), longAt((stops + BaseHeaderSize) + (((int)((usqInt)((EndOfRun - 1)) << (shiftForWord()))))));
 	GIV(stackPointer) = sp2;
+	return 0;
 }
 
 
@@ -24299,7 +24429,7 @@ primitiveScreenScaleFactor(void)
 	This might well become a problem one day */
 
 	/* InterpreterPrimitives>>#primitiveScreenSize */
-static void
+static sqInt
 primitiveScreenSize(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt classObj;
@@ -24361,13 +24491,14 @@ primitiveScreenSize(void)
 	oop = pointResult;
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), oop);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
 /*	Return the number of seconds since January 1, 1901 as an integer. */
 
 	/* InterpreterPrimitives>>#primitiveSecondsClock */
-static void
+static sqInt
 primitiveSecondsClock(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     unsigned int integerValue;
@@ -24426,6 +24557,7 @@ primitiveSecondsClock(void)
 	l5:	/* end positive32BitIntegerFor: */;
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), oop);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -24433,7 +24565,7 @@ primitiveSecondsClock(void)
 	See DisplayScreen class depth:width:height:fullscreen: */
 
 	/* InterpreterPrimitives>>#primitiveSetDisplayMode */
-static void
+static sqInt
 primitiveSetDisplayMode(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt d;
@@ -24514,13 +24646,13 @@ primitiveSetDisplayMode(void)
 	if (GIV(primFailCode)) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	okay = ioSetDisplayMode(w, h, d, fsFlag);
 	if (GIV(primFailCode)) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrOperationFailed;
-		return;
+		return 1;
 	}
 	/* begin methodReturnBool: */
 	assert(!((failed())));
@@ -24529,6 +24661,7 @@ primitiveSetDisplayMode(void)
 		? GIV(trueObj)
 		: GIV(falseObj)));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -24537,7 +24670,7 @@ primitiveSetDisplayMode(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveSetFullScreen */
-static void
+static sqInt
 primitiveSetFullScreen(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt argOop;
@@ -24565,11 +24698,12 @@ primitiveSetFullScreen(void)
 		/* begin pop: */
 		GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveSetImmutability */
 #if IMMUTABILITY
-static void
+static sqInt
 primitiveSetImmutability(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt rcvr;
@@ -24580,7 +24714,7 @@ primitiveSetImmutability(void)
 	if (((rcvr & (tagMask())) != 0)) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadReceiver;
-		return;
+		return 1;
 	}
 	wasImmutable = 
 #  if IMMUTABILITY
@@ -24594,7 +24728,7 @@ primitiveSetImmutability(void)
 		if (!(canBeImmutable(rcvr))) {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = PrimErrInappropriate;
-			return;
+			return 2;
 		}
 		/* begin setIsImmutableOf:to: */
 		longAtput(rcvr, (longAt(rcvr)) | (1U << (immutableBitShift())));
@@ -24607,7 +24741,7 @@ primitiveSetImmutability(void)
 		else {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = PrimErrBadArgument;
-			return;
+			return 3;
 		}
 	}
 	/* begin pop:thenPushBool: */
@@ -24615,6 +24749,7 @@ primitiveSetImmutability(void)
 		? GIV(trueObj)
 		: GIV(falseObj)));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 #endif /* IMMUTABILITY */
 
@@ -24624,7 +24759,7 @@ primitiveSetImmutability(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveSetInterruptKey */
-static void
+static sqInt
 primitiveSetInterruptKey(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerPointer;
@@ -24652,6 +24787,7 @@ primitiveSetInterruptKey(void)
 		/* begin pop: */
 		GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
 	}
+	return 0;
 }
 
 
@@ -24717,7 +24853,7 @@ primitiveSetLogDirectory(void)
 }
 
 	/* InterpreterPrimitives>>#primitiveSetOrHasIdentityHash */
-static void
+static sqInt
 primitiveSetOrHasIdentityHash(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt hasHash;
@@ -24742,7 +24878,7 @@ primitiveSetOrHasIdentityHash(void)
 			? GIV(trueObj)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
-		return;
+		return 0;
 	}
 	isReceiverAClass = 0;
 	if (GIV(argumentCount) == 2) {
@@ -24765,7 +24901,7 @@ primitiveSetOrHasIdentityHash(void)
 				if (!(lastArg == GIV(falseObj))) {
 					/* begin primitiveFailFor: */
 					GIV(primFailCode) = PrimErrBadArgument;
-					return;
+					return 1;
 				}
 			}
 		}
@@ -24783,7 +24919,7 @@ primitiveSetOrHasIdentityHash(void)
 		(hash & (identityHashHalfWordMask())) == hash)))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 2;
 	}
 	if (!((!(thisReceiver & (tagMask()))))) {
 		/* begin primitiveFailFor: */
@@ -24791,7 +24927,7 @@ primitiveSetOrHasIdentityHash(void)
 			? PrimErrBadReceiver
 			: PrimErrBadArgument);
 		GIV(primFailCode) = reasonCode;
-		return;
+		return 3;
 	}
 	/* begin hashBitsOf: */
 	hash2 = (long32At(thisReceiver + 4)) & (identityHashHalfWordMask());
@@ -24825,6 +24961,7 @@ primitiveSetOrHasIdentityHash(void)
 	/* begin pop:thenPushInteger: */
 	longAtput((sp1 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), ((oldHash << 1) | 1));
 	GIV(stackPointer) = sp1;
+	return 0;
 }
 
 
@@ -24948,7 +25085,7 @@ primitiveSetWindowSize(void)
 	word.  */
 
 	/* InterpreterPrimitives>>#primitiveShortAt */
-static void
+static sqInt
 primitiveShortAt(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt index;
@@ -24960,26 +25097,27 @@ primitiveShortAt(void)
 	if (!((index & 1))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	rcvr = longAt(GIV(stackPointer) + (1 * BytesPerWord));
 	if (!(((!(rcvr & (tagMask()))))
 		 && (isWordsOrBytesNonImm(rcvr)))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrInappropriate;
-		return;
+		return 2;
 	}
 	index = (index >> 1);
 	if (!((index >= 1)
 		 && (index <= (((usqInt)((numBytesOf(rcvr)))) >> 1)))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadIndex;
-		return;
+		return 3;
 	}
 	value = shortAt((rcvr + BaseHeaderSize) + (((sqInt)((usqInt)((index - 1)) << 1))));
 	/* begin pop:thenPushInteger: */
 	longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), (((usqInt)value << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -24991,7 +25129,7 @@ primitiveShortAt(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveShortAtPut */
-static void
+static sqInt
 primitiveShortAtPut(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt index;
@@ -25008,14 +25146,14 @@ primitiveShortAtPut(void)
 			 && (value <= 0x7FFF)))))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	rcvr = longAt(GIV(stackPointer) + (2 * BytesPerWord));
 	if (!(((!(rcvr & (tagMask()))))
 		 && (isWordsOrBytesNonImm(rcvr)))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrInappropriate;
-		return;
+		return 2;
 	}
 	if (
 #  if IMMUTABILITY
@@ -25027,19 +25165,20 @@ primitiveShortAtPut(void)
 		) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrNoModification;
-		return;
+		return 3;
 	}
 	index = (index >> 1);
 	if (!((index >= 1)
 		 && (index <= (((usqInt)((numBytesOf(rcvr)))) >> 1)))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadIndex;
-		return;
+		return 4;
 	}
 	shortAtput((rcvr + BaseHeaderSize) + (((sqInt)((usqInt)((index - 1)) << 1))), value);
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((2) * BytesPerWord)), (((usqInt)value << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -25047,7 +25186,7 @@ primitiveShortAtPut(void)
 	copied to the screen. */
 
 	/* InterpreterPrimitives>>#primitiveShowDisplayRect */
-static void
+static sqInt
 primitiveShowDisplayRect(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bottom;
@@ -25129,6 +25268,7 @@ primitiveShowDisplayRect(void)
 		/* begin pop: */
 		GIV(stackPointer) += 4 * BytesPerWord;
 	}
+	return 0;
 }
 
 
@@ -25136,10 +25276,11 @@ primitiveShowDisplayRect(void)
 	This may change the active process as a result. */
 
 	/* InterpreterPrimitives>>#primitiveSignal */
-static void
+static sqInt
 primitiveSignal(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
 	synchronousSignal(longAt(GIV(stackPointer)));
+	return 0;
 }
 
 
@@ -25149,7 +25290,7 @@ primitiveSignal(void)
 	semaphore (if one is registered) to be signalled. */
 
 	/* InterpreterPrimitives>>#primitiveSignalAtBytesLeft */
-static void
+static sqInt
 primitiveSignalAtBytesLeft(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bytes;
@@ -25175,6 +25316,7 @@ primitiveSignalAtBytesLeft(void)
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
 	}
+	return 0;
 }
 
 
@@ -25183,7 +25325,7 @@ primitiveSignalAtBytesLeft(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveSine */
-static void
+static sqInt
 primitiveSine(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aValue;
@@ -25212,10 +25354,11 @@ primitiveSine(void)
 		aValue = floatObjectOf(sin(rcvr));
 		longAtPointerput(GIV(stackPointer), aValue);
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveSize */
-static void
+static sqInt
 primitiveSize(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt class;
@@ -25238,12 +25381,12 @@ primitiveSize(void)
 		/* And if Spur, this is a forwarder. */
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadReceiver;
-		return;
+		return 1;
 	}
 	if ((fmt == (indexablePointersFormat()))
 	 && ((hdr & (classIndexMask())) == ClassMethodContextCompactIndex)) {
 		primitiveContextSize();
-		return;
+		return 2;
 	}
 	/* begin lengthOf:format: */
 	numSlots1 = byteAt(rcvr + 7);
@@ -25294,10 +25437,11 @@ primitiveSize(void)
 	/* begin pop:thenPushInteger: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)(totalLength - fixedFields) << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveSizeInBytes */
-static void
+static sqInt
 primitiveSizeInBytes(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong byteSize;
@@ -25311,6 +25455,7 @@ primitiveSizeInBytes(void)
 	oop = positive64BitIntegerFor(byteSize);
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), oop);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -25319,7 +25464,7 @@ primitiveSizeInBytes(void)
 	size of an instance of the receiver with that many indexable elements. */
 
 	/* InterpreterPrimitives>>#primitiveSizeInBytesOfInstance */
-static void
+static sqInt
 primitiveSizeInBytesOfInstance(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqInt byteSize;
@@ -25339,14 +25484,14 @@ primitiveSizeInBytesOfInstance(void)
 	if (GIV(argumentCount) > 1) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadNumArgs;
-		return;
+		return 1;
 	}
 	err = -1;
 	if (GIV(argumentCount) >= 1) {
 		if (!(((longAt(GIV(stackPointer))) & 1))) {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = PrimErrBadArgument;
-			return;
+			return 2;
 		}
 		/* begin byteSizeOfInstanceOf:withIndexableSlots:errInto: */
 		nElements = ((longAt(GIV(stackPointer))) >> 1);
@@ -25394,13 +25539,13 @@ primitiveSizeInBytesOfInstance(void)
 		if (err >= 0) {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = err;
-			return;
+			return 3;
 		}
 		/* begin pop:thenPush: */
 		oop = positive64BitIntegerFor(byteSize);
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), oop);
 		GIV(stackPointer) = sp;
-		return;
+		return 4;
 	}
 	/* begin byteSizeOfInstanceOf:errInto: */
 	classFormat1 = ((longAt(((longAt(GIV(stackPointer) + (0 * BytesPerWord))) + BaseHeaderSize) + (((int)((usqInt)(InstanceSpecificationIndex) << (shiftForWord())))))) >> 1);
@@ -25420,11 +25565,12 @@ primitiveSizeInBytesOfInstance(void)
 	if (err >= 0) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = err;
-		return;
+		return 5;
 	}
 	/* begin pop:thenPushInteger: */
 	longAtput((sp1 = GIV(stackPointer) + ((0) * BytesPerWord)), ((byteSize << 1) | 1));
 	GIV(stackPointer) = sp1;
+	return 0;
 }
 
 
@@ -25433,24 +25579,26 @@ primitiveSizeInBytesOfInstance(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveSnapshot */
-static void
+static sqInt
 primitiveSnapshot(void)
 {
 	snapshot(0);
+	return 0;
 }
 
 
 /*	save an embedded snapshot */
 
 	/* InterpreterPrimitives>>#primitiveSnapshotEmbedded */
-static void
+static sqInt
 primitiveSnapshotEmbedded(void)
 {
 	snapshot(1);
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveSomeInstance */
-static void
+static sqInt
 primitiveSomeInstance(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt class;
@@ -25470,13 +25618,14 @@ primitiveSomeInstance(void)
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), instance);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
 /*	Return the first object in the heap. */
 
 	/* InterpreterPrimitives>>#primitiveSomeObject */
-static void
+static sqInt
 primitiveSomeObject(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt object;
@@ -25488,13 +25637,14 @@ primitiveSomeObject(void)
 	object = firstAccessibleObject();
 	longAtput((sp = GIV(stackPointer) - BytesPerWord), object);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
 /*	Return the oop of the SpecialObjectsArray. */
 
 	/* InterpreterPrimitives>>#primitiveSpecialObjectsOop */
-static void
+static sqInt
 primitiveSpecialObjectsOop(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     char *sp;
@@ -25502,6 +25652,7 @@ primitiveSpecialObjectsOop(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), GIV(specialObjectsOop));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -25510,7 +25661,7 @@ primitiveSpecialObjectsOop(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveSquareRoot */
-static void
+static sqInt
 primitiveSquareRoot(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aValue;
@@ -25546,6 +25697,7 @@ primitiveSquareRoot(void)
 			GIV(primFailCode) = 1;
 		}
 	}
+	return 0;
 }
 
 
@@ -25583,7 +25735,7 @@ primitiveSquareRoot(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveStoreImageSegment */
-static void
+static sqInt
 primitiveStoreImageSegment(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arrayOfRoots;
@@ -25608,7 +25760,7 @@ primitiveStoreImageSegment(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	ecode = storeImageSegmentIntooutPointersroots(segmentWordArray, outPointerArray, arrayOfRoots);
 	if (ecode == PrimErrNeedCompaction) {
@@ -25626,10 +25778,11 @@ primitiveStoreImageSegment(void)
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = ecode;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveStringAt */
-static void
+static sqInt
 primitiveStringAt(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt class;
@@ -25838,10 +25991,11 @@ primitiveStringAt(void)
 		GIV(stackPointer) = sp;
 	}
 	l15:	/* end commonAt: */;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveStringAtPut */
-static void
+static sqInt
 primitiveStringAtPut(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt class;
@@ -26057,6 +26211,7 @@ primitiveStringAtPut(void)
 		GIV(stackPointer) = sp;
 	}
 	l32:	/* end commonAtPut: */;
+	return 0;
 }
 
 
@@ -26065,7 +26220,7 @@ primitiveStringAtPut(void)
 	<primitive: 105> */
 
 	/* InterpreterPrimitives>>#primitiveStringReplace */
-static void
+static sqInt
 primitiveStringReplace(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt array;
@@ -26379,10 +26534,11 @@ primitiveStringReplace(void)
 	/* begin pop: */
 	GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
 	l17:	/* end primitiveSpurStringReplace */;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveSubtract */
-static void
+static sqInt
 primitiveSubtract(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerResult;
@@ -26405,13 +26561,14 @@ primitiveSubtract(void)
 			}
 		}
 	}
+	return 0;
 }
 
 
 /*	Primitive arithmetic operations for large integers in 64 bit range */
 
 	/* InterpreterPrimitives>>#primitiveSubtractLargeIntegers */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveSubtractLargeIntegers(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong a;
@@ -26432,7 +26589,7 @@ primitiveSubtractLargeIntegers(void)
 	a = magnitude64BitValueOf(oopRcvr);
 	b = magnitude64BitValueOf(oopArg);
 	if (GIV(primFailCode)) {
-		return;
+		return 1;
 	}
 	if (aIsNegative != bIsNegative) {
 
@@ -26442,7 +26599,7 @@ primitiveSubtractLargeIntegers(void)
 			if (!GIV(primFailCode)) {
 				GIV(primFailCode) = 1;
 			}
-			return;
+			return 2;
 		}
 		result = a + b;
 		resultIsNegative = aIsNegative;
@@ -26463,6 +26620,7 @@ primitiveSubtractLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -26474,7 +26632,7 @@ primitiveSubtractLargeIntegers(void)
 	(see Process>>effectiveProcess). */
 
 	/* InterpreterPrimitives>>#primitiveTestAndSetOwnershipOfCriticalSection */
-static void
+static sqInt
 primitiveTestAndSetOwnershipOfCriticalSection(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt activeProc;
@@ -26532,7 +26690,7 @@ primitiveTestAndSetOwnershipOfCriticalSection(void)
 		/* begin pop:thenPush: */
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), GIV(falseObj));
 		GIV(stackPointer) = sp;
-		return;
+		return 0;
 	}
 	if (owningProcess == activeProc) {
 		/* begin methodReturnValue: */
@@ -26540,20 +26698,21 @@ primitiveTestAndSetOwnershipOfCriticalSection(void)
 		/* begin pop:thenPush: */
 		longAtput((sp1 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), GIV(trueObj));
 		GIV(stackPointer) = sp1;
-		return;
+		return 0;
 	}
 	/* begin methodReturnValue: */
 	assert(!((failed())));
 	/* begin pop:thenPush: */
 	longAtput((sp2 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), GIV(nilObj));
 	GIV(stackPointer) = sp2;
+	return 0;
 }
 
 
 /*	Return true if the host OS does support the given display depth. */
 
 	/* InterpreterPrimitives>>#primitiveTestDisplayDepth */
-static void
+static sqInt
 primitiveTestDisplayDepth(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bitsPerPixel;
@@ -26588,6 +26747,7 @@ primitiveTestDisplayDepth(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -26636,7 +26796,7 @@ primitiveTestShortenIndexableSize(void)
 /*	Multiply the receiver by the power of the argument. */
 
 	/* InterpreterPrimitives>>#primitiveTimesTwoPower */
-static void
+static sqInt
 primitiveTimesTwoPower(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -26651,7 +26811,7 @@ primitiveTimesTwoPower(void)
 	if (!((arg & 1))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	arg = (arg >> 1);
 	/* begin floatValueOf: */
@@ -26673,6 +26833,7 @@ primitiveTimesTwoPower(void)
 	/* begin pop:thenPushFloat: */
 	longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), floatObjectOf(result));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -26681,7 +26842,7 @@ primitiveTimesTwoPower(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveTruncated */
-static void
+static sqInt
 primitiveTruncated(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt isFloat;
@@ -26717,6 +26878,7 @@ primitiveTruncated(void)
 			}
 		}
 	}
+	return 0;
 }
 
 
@@ -26725,7 +26887,7 @@ primitiveTruncated(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveUninitializedNewWithArg */
-static void
+static sqInt
 primitiveUninitializedNewWithArg(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bs;
@@ -26813,7 +26975,7 @@ primitiveUninitializedNewWithArg(void)
 		/* positiveMachineIntegerValueOf: succeeds only for non-negative integers. */
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	/* begin instantiateUninitializedClass:indexableSize: */
 	classObj = longAt(GIV(stackPointer) + (1 * BytesPerWord));
@@ -26947,6 +27109,7 @@ primitiveUninitializedNewWithArg(void)
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), obj);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -26955,10 +27118,11 @@ primitiveUninitializedNewWithArg(void)
 	up-to-date arrange to invoke this primitive periodically. */
 
 	/* InterpreterPrimitives>>#primitiveUpdateTimezone */
-static void
+static sqInt
 primitiveUpdateTimezone(void)
 {
 	ioUpdateVMTimezone();
+	return 0;
 }
 
 
@@ -26970,7 +27134,7 @@ primitiveUpdateTimezone(void)
 	primitive accesses the time as answered by the OS. */
 
 	/* InterpreterPrimitives>>#primitiveUTCMicrosecondClock */
-static void
+static sqInt
 primitiveUTCMicrosecondClock(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt oop;
@@ -26980,6 +27144,7 @@ primitiveUTCMicrosecondClock(void)
 	oop = positive64BitIntegerFor(ioUTCMicrosecondsNow());
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), oop);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -26988,7 +27153,7 @@ primitiveUTCMicrosecondClock(void)
 	with two or more slots) may be supplied as a parameter. */
 
 	/* InterpreterPrimitives>>#primitiveUtcAndTimezoneOffset */
-static void
+static sqInt
 primitiveUtcAndTimezoneOffset(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt resultArray;
@@ -27000,7 +27165,7 @@ primitiveUtcAndTimezoneOffset(void)
 		if (GIV(argumentCount) > 1) {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = PrimErrBadNumArgs;
-			return;
+			return 1;
 		}
 		resultArray = longAt(GIV(stackPointer));
 		if (!((((!(resultArray & (tagMask()))))
@@ -27008,7 +27173,7 @@ primitiveUtcAndTimezoneOffset(void)
 			 && ((lengthOfformat(resultArray, (((usqInt)((longAt(resultArray)))) >> (formatShift())) & (formatMask()))) >= 2))) {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = PrimErrBadArgument;
-			return;
+			return 2;
 		}
 	}
 	else {
@@ -27037,6 +27202,7 @@ primitiveUtcAndTimezoneOffset(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), resultArray);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -27102,7 +27268,7 @@ primitiveUtcWithOffset(void)
 /*	Return a string containing the path name of VM's directory. */
 
 	/* InterpreterPrimitives>>#primitiveVMPath */
-static void
+static sqInt
 primitiveVMPath(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt s;
@@ -27115,6 +27281,7 @@ primitiveVMPath(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), s);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -27125,7 +27292,7 @@ primitiveVMPath(void)
 	buffer.  */
 
 	/* InterpreterPrimitives>>#primitiveVMProfileSamplesInto */
-static void
+static sqInt
 primitiveVMProfileSamplesInto(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     long bufferSize;
@@ -27144,12 +27311,12 @@ primitiveVMProfileSamplesInto(void)
 			? GIV(trueObj)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
-		return;
+		return 0;
 	}
 	if (!(GIV(argumentCount) == 1)) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadNumArgs;
-		return;
+		return 1;
 	}
 	sampleBuffer = longAt(GIV(stackPointer) + (0 * BytesPerWord));
 	if (!(((!(sampleBuffer & (tagMask()))))
@@ -27157,16 +27324,17 @@ primitiveVMProfileSamplesInto(void)
 		 && ((numBytesOf(sampleBuffer)) >= (bufferSize * BytesPerWord))))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 2;
 	}
 	numSamples = ioNewProfileSamplesInto(firstFixedField(sampleBuffer));
 	/* begin pop:thenPushInteger: */
 	longAtput((sp1 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)numSamples << 1) | 1));
 	GIV(stackPointer) = sp1;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveWait */
-static void
+static sqInt
 primitiveWait(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt activeProc;
@@ -27201,6 +27369,7 @@ primitiveWait(void)
 		addLastLinktoList(activeProc, sema);
 		transferTo(wakeHighestPriority());
 	}
+	return 0;
 }
 
 
@@ -27209,7 +27378,7 @@ primitiveWait(void)
  */
 
 	/* InterpreterPrimitives>>#primitiveYield */
-static void
+static sqInt
 primitiveYield(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt activeProc;
@@ -27235,6 +27404,7 @@ primitiveYield(void)
 		addLastLinktoList(activeProc, processList);
 		transferTo(wakeHighestPriority());
 	}
+	return 0;
 }
 
 
@@ -33032,10 +33202,11 @@ characterObjectOf(sqInt characterCode)
 }
 
 	/* SpurMemoryManager>>#characterTable */
-void
+sqInt
 characterTable(void)
 {
 	error("shouldNotImplement");
+	return 1;
 }
 
 
@@ -49937,7 +50108,7 @@ addNewMethodToCache(sqInt classObj)
 			primitiveIndex = 0;
 		}
 		/* begin functionPointerFor:inClass: */
-		primitiveFunctionPointer = ((void (*)(void)) ((primitiveIndex > MaxPrimitiveIndex
+		primitiveFunctionPointer = ((sqInt (*)(void)) ((primitiveIndex > MaxPrimitiveIndex
 	? 0
 	: primitiveTable[primitiveIndex])));
 	}
@@ -53479,7 +53650,7 @@ fullDisplayUpdate(void)
 	example). Default for now is simply the entry in the base primitiveTable. */
 
 	/* StackInterpreter>>#functionPointerFor:inClass: */
-void (*functionPointerForinClass(sqInt primIdx,sqInt theClass))(void)
+sqInt (*functionPointerForinClass(sqInt primIdx,sqInt theClass))(void)
 {
 	return (primIdx > MaxPrimitiveIndex
 		? 0
@@ -55234,7 +55405,7 @@ lookupInMethodCacheSelclassTag(sqInt selector, sqInt classTag)
 	if (((GIV(methodCache)[probe + MethodCacheSelector]) == selector)
 	 && ((GIV(methodCache)[probe + MethodCacheClass]) == classTag)) {
 		GIV(newMethod) = GIV(methodCache)[probe + MethodCacheMethod];
-		primitiveFunctionPointer = ((void (*)()) (GIV(methodCache)[probe + MethodCachePrimFunction]));
+		primitiveFunctionPointer = ((sqInt (*)(void)) (GIV(methodCache)[probe + MethodCachePrimFunction]));
 		return 1;
 	}
 
@@ -55243,14 +55414,14 @@ lookupInMethodCacheSelclassTag(sqInt selector, sqInt classTag)
 	if (((GIV(methodCache)[probe + MethodCacheSelector]) == selector)
 	 && ((GIV(methodCache)[probe + MethodCacheClass]) == classTag)) {
 		GIV(newMethod) = GIV(methodCache)[probe + MethodCacheMethod];
-		primitiveFunctionPointer = ((void (*)()) (GIV(methodCache)[probe + MethodCachePrimFunction]));
+		primitiveFunctionPointer = ((sqInt (*)(void)) (GIV(methodCache)[probe + MethodCachePrimFunction]));
 		return 1;
 	}
 	probe = (((usqInt)(hash)) >> 2) & MethodCacheMask;
 	if (((GIV(methodCache)[probe + MethodCacheSelector]) == selector)
 	 && ((GIV(methodCache)[probe + MethodCacheClass]) == classTag)) {
 		GIV(newMethod) = GIV(methodCache)[probe + MethodCacheMethod];
-		primitiveFunctionPointer = ((void (*)()) (GIV(methodCache)[probe + MethodCachePrimFunction]));
+		primitiveFunctionPointer = ((sqInt (*)(void)) (GIV(methodCache)[probe + MethodCachePrimFunction]));
 		return 1;
 	}
 	return 0;
@@ -57595,7 +57766,7 @@ postGCUpdateDisplayBits(void)
 	disable it if false, answering its previous state. */
 
 	/* StackInterpreter>>#primitiveEventProcessingControl */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveEventProcessingControl(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     int enabled;
@@ -57609,7 +57780,7 @@ primitiveEventProcessingControl(void)
 			? GIV(trueObj)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
-		return;
+		return 0;
 	}
 	if (GIV(argumentCount) == 1) {
 		if ((longAt(GIV(stackPointer))) == GIV(trueObj)) {
@@ -57624,7 +57795,7 @@ primitiveEventProcessingControl(void)
 			else {
 				/* begin primitiveFailFor: */
 				GIV(primFailCode) = PrimErrBadArgument;
-				return;
+				return 1;
 			}
 		}
 		/* begin pop:thenPushBool: */
@@ -57632,10 +57803,11 @@ primitiveEventProcessingControl(void)
 			? GIV(trueObj)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp1;
-		return;
+		return 0;
 	}
 	/* begin primitiveFailFor: */
 	GIV(primFailCode) = PrimErrBadNumArgs;
+	return 2;
 }
 
 	/* StackInterpreter>>#primitiveFloatEqual:toArg: */
@@ -61695,7 +61867,7 @@ reverseDisplayFromto(sqInt startIndex, sqInt endIndex)
 
 	/* StackInterpreter>>#rewriteMethodCacheEntryForExternalPrimitiveToFunction: */
 static void NoDbgRegParms
-rewriteMethodCacheEntryForExternalPrimitiveToFunction(void (*localPrimAddress)())
+rewriteMethodCacheEntryForExternalPrimitiveToFunction(sqInt (*localPrimAddress)())
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
 	if ((GIV(methodCache)[GIV(lastMethodCacheProbeWrite) + MethodCacheMethod]) == GIV(newMethod)) {
 		GIV(methodCache)[GIV(lastMethodCacheProbeWrite) + MethodCachePrimFunction] = (((sqIntptr_t) localPrimAddress));
@@ -61791,10 +61963,10 @@ safeMethodClassOf(sqInt methodPointer)
 static sqInt NoDbgRegParms
 saneFunctionPointerForFailureOfPrimIndex(sqInt primIndex)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
-    void (*basePrimitive)(void);
+    sqInt (*basePrimitive)(void);
 
 	/* begin functionPointerFor:inClass: */
-	basePrimitive = ((void (*)(void)) ((primIndex > MaxPrimitiveIndex
+	basePrimitive = ((sqInt (*)(void)) ((primIndex > MaxPrimitiveIndex
 	? 0
 	: primitiveTable[primIndex])));
 	return (primitiveFunctionPointer == basePrimitive)
@@ -62250,7 +62422,7 @@ shortPrintFrame(char *theFP)
 	}
 	/* begin frameReceiver: */
 	rcvr = longAt(theFP + FoxReceiver);
-	printHex(theFP);
+	printHex((usqInt)theFP);
 	/* begin space */
 	printChar(' ');
 	printActivationNameForreceiverisBlockfirstTemporary(longAt(theFP + FoxMethod), rcvr, (byteAt((theFP + FoxFrameFlags) + 3)) != 0, (0 < ((frameNumArgs = byteAt((theFP + FoxFrameFlags) + 1)))
@@ -65075,9 +65247,9 @@ isAppropriateForCopyObject(sqInt oop)
 /*	The function has not been loaded yet. Fetch module and function name. */
 
 	/* StackInterpreterPrimitives>>#linkExternalCall:errInto: */
-static void (*linkExternalCallerrInto(sqInt externalCallLiteral, sqInt *failPtr))()
+static sqInt (*linkExternalCallerrInto(sqInt externalCallLiteral, sqInt *failPtr))()
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
-    void (*addr)();
+    sqInt (*addr)();
     sqInt fmt;
     sqInt fmt1;
     sqInt functionLength;
@@ -65184,7 +65356,7 @@ noInlineLoadFloatOrIntFrom(sqInt floatOrInt)
 /*	because of cloneContext: below */
 
 	/* StackInterpreterPrimitives>>#primitiveClone */
-static void
+static sqInt
 primitiveClone(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqInt newCopy;
@@ -65212,7 +65384,7 @@ primitiveClone(void)
 		if (newCopy == 0) {
 			/* begin primitiveFailFor: */
 			(GIV(primFailCode) = PrimErrNoMemory);
-			return;
+			return 1;
 		}
 	}
 	/* begin methodReturnValue: */
@@ -65220,10 +65392,11 @@ primitiveClone(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), newCopy);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 	/* StackInterpreterPrimitives>>#primitiveClosureCopyWithCopiedValues */
-static void
+static sqInt
 primitiveClosureCopyWithCopiedValues(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt copiedValues;
@@ -65263,7 +65436,7 @@ primitiveClosureCopyWithCopiedValues(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin closureIn:numArgs:instructionPointer:copiedValues: */
 	initialIP = (GIV(instructionPointer) + 2) - (GIV(method) + BaseHeaderSize);
@@ -65325,6 +65498,7 @@ primitiveClosureCopyWithCopiedValues(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((2) * BytesPerWord)), newClosure);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -65332,7 +65506,7 @@ primitiveClosureCopyWithCopiedValues(void)
 	Written to be varargs for use from mirror primitives. */
 
 	/* StackInterpreterPrimitives>>#primitiveContextAt */
-static void
+static sqInt
 primitiveContextAt(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aContext;
@@ -65382,7 +65556,7 @@ primitiveContextAt(void)
 	if (!((index & 1))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	index = (index >> 1);
 	/* begin stackValue: */
@@ -65550,7 +65724,7 @@ primitiveContextAt(void)
 			longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), value);
 			GIV(stackPointer) = sp;
 		}
-		return;
+		return 2;
 	}
 	/* begin externalWriteBackHeadFramePointers */
 	assert((GIV(framePointer) - GIV(stackPointer)) < (LargeContextSlots * BytesPerOop));
@@ -65625,7 +65799,7 @@ primitiveContextAt(void)
 		if (!(((index >= 1) && (index <= stSize)))) {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = PrimErrBadIndex;
-			return;
+			return 3;
 		}
 		/* begin subscript:with:format: */
 		if (fmt <= 5 /* lastPointerFormat */) {
@@ -65694,7 +65868,7 @@ primitiveContextAt(void)
 		/* begin pop:thenPush: */
 		longAtput((sp2 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), value);
 		GIV(stackPointer) = sp2;
-		return;
+		return 0;
 	}
 	/* begin frameOfMarriedContext: */
 	senderOop = longAt((aContext + BaseHeaderSize) + (((int)((usqInt)(SenderIndex) << (shiftForWord())))));
@@ -65703,7 +65877,7 @@ primitiveContextAt(void)
 	if (!(((index >= 1) && (index <= (stackPointerIndexForFrame(spouseFP)))))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadIndex;
-		return;
+		return 4;
 	}
 	/* begin temporary:in: */
 	value = ((index - 1) < ((frameNumArgs = byteAt((spouseFP + FoxFrameFlags) + 1)))
@@ -65712,6 +65886,7 @@ primitiveContextAt(void)
 	/* begin pop:thenPush: */
 	longAtput((sp3 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), value);
 	GIV(stackPointer) = sp3;
+	return 0;
 }
 
 
@@ -65719,7 +65894,7 @@ primitiveContextAt(void)
 	Written to be varargs for use from mirror primitives. */
 
 	/* StackInterpreterPrimitives>>#primitiveContextAtPut */
-static void
+static sqInt
 primitiveContextAtPut(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aContext;
@@ -65769,7 +65944,7 @@ primitiveContextAtPut(void)
 	if (!((index & 1))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	/* begin baseHeader: */
 	hdr = long64At(aContext);
@@ -65936,7 +66111,7 @@ primitiveContextAtPut(void)
 			longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), value);
 			GIV(stackPointer) = sp;
 		}
-		return;
+		return 2;
 	}
 	/* begin externalWriteBackHeadFramePointers */
 	assert((GIV(framePointer) - GIV(stackPointer)) < (LargeContextSlots * BytesPerOop));
@@ -66011,7 +66186,7 @@ primitiveContextAtPut(void)
 		if (!(((index >= 1) && (index <= stSize)))) {
 			/* begin primitiveFailFor: */
 			GIV(primFailCode) = PrimErrBadIndex;
-			return;
+			return 3;
 		}
 		/* begin subscript:with:storing:format: */
 		if (fmt <= 5 /* lastPointerFormat */) {
@@ -66079,7 +66254,7 @@ primitiveContextAtPut(void)
 		/* begin pop:thenPush: */
 		longAtput((sp2 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), value);
 		GIV(stackPointer) = sp2;
-		return;
+		return 0;
 	}
 	/* begin frameOfMarriedContext: */
 	senderOop = longAt((aContext + BaseHeaderSize) + (((int)((usqInt)(SenderIndex) << (shiftForWord())))));
@@ -66088,7 +66263,7 @@ primitiveContextAtPut(void)
 	if (!(((index >= 1) && (index <= (stackPointerIndexForFrame(spouseFP)))))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadIndex;
-		return;
+		return 1;
 	}
 	/* begin temporary:in:put: */
 	if ((index - 1) < ((frameNumArgs = byteAt((spouseFP + FoxFrameFlags) + 1)))) {
@@ -66100,6 +66275,7 @@ primitiveContextAtPut(void)
 	/* begin pop:thenPush: */
 	longAtput((sp3 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), value);
 	GIV(stackPointer) = sp3;
+	return 0;
 }
 
 
@@ -66107,7 +66283,7 @@ primitiveContextAtPut(void)
 	Written to be varargs for use from mirror primitives. */
 
 	/* StackInterpreterPrimitives>>#primitiveContextSize */
-static void
+static sqInt
 primitiveContextSize(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt class;
@@ -66214,6 +66390,7 @@ primitiveContextSize(void)
 	/* begin pop:thenPushInteger: */
 	longAtput((sp2 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)sz << 1) | 1));
 	GIV(stackPointer) = sp2;
+	return 0;
 }
 
 
@@ -66228,7 +66405,7 @@ primitiveContextSize(void)
 	Bit 4 = method is currently compiled to machine code */
 
 	/* StackInterpreterPrimitives>>#primitiveContextXray */
-static void
+static sqInt
 primitiveContextXray(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt context;
@@ -66251,6 +66428,7 @@ primitiveContextXray(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), (((usqInt)flags << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -66259,7 +66437,7 @@ primitiveContextXray(void)
 	platform's screen. */
 
 	/* StackInterpreterPrimitives>>#primitiveDeferDisplayUpdates */
-static void
+static sqInt
 primitiveDeferDisplayUpdates(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt flag;
@@ -66269,7 +66447,7 @@ primitiveDeferDisplayUpdates(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin stackTop */
 	flag = longAt(GIV(stackPointer));
@@ -66285,11 +66463,12 @@ primitiveDeferDisplayUpdates(void)
 			if (!GIV(primFailCode)) {
 				GIV(primFailCode) = 1;
 			}
-			return;
+			return 1;
 		}
 	}
 	/* begin pop: */
 	GIV(stackPointer) += 1 * BytesPerWord;
+	return 0;
 }
 
 
@@ -66299,10 +66478,10 @@ primitiveDeferDisplayUpdates(void)
 	withArgs: arguments */
 
 	/* StackInterpreterPrimitives>>#primitiveDoNamedPrimitiveWithArgs */
-static void
+static sqInt
 primitiveDoNamedPrimitiveWithArgs(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
-    void (*addr)();
+    sqInt (*addr)();
     sqInt argumentArray;
     usqInt arraySize;
     sqInt ccIndex;
@@ -66353,7 +66532,7 @@ primitiveDoNamedPrimitiveWithArgs(void)
 		 && (((((usqInt)((longAt(methodArg)))) >> (formatShift())) & (formatMask())) >= (firstCompiledMethodFormat()))))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = -2);
-		return;
+		return 1;
 	}
 	/* begin numSlotsOf: */
 	assert((classIndexOf(argumentArray)) > (isForwardedObjectClassIndexPun()));
@@ -66364,7 +66543,7 @@ primitiveDoNamedPrimitiveWithArgs(void)
 	if (!(roomToPushNArgs(arraySize))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = -2);
-		return;
+		return 2;
 	}
 	/* begin methodHeaderOf: */
 	assert(isCompiledMethod(methodArg));
@@ -66374,7 +66553,7 @@ primitiveDoNamedPrimitiveWithArgs(void)
 		((methodHeader >> 1)) & AlternateHeaderNumLiteralsMask)) > 2)) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = -3);
-		return;
+		return 3;
 	}
 	/* begin fetchPointer:ofObject: */
 	spec = longAt((methodArg + BaseHeaderSize) + (1U << (shiftForWord())));
@@ -66399,12 +66578,12 @@ primitiveDoNamedPrimitiveWithArgs(void)
 			: 0)) == PrimNumberExternalCall)))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = -3);
-		return;
+		return 4;
 	}
 	if (!(((((usqInt)(methodHeader)) >> MethodHeaderArgCountShift) & 15) == arraySize)) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = -2);
-		return;
+		return 5;
 	}
 	/* begin fetchPointer:ofObject: */
 	moduleName = longAt((spec + BaseHeaderSize) + (0U << (shiftForWord())));
@@ -66446,7 +66625,7 @@ primitiveDoNamedPrimitiveWithArgs(void)
 	if (GIV(primFailCode)) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = -3);
-		return;
+		return 6;
 	}
 	
 	/* N.B. the accessor depth is the second byte of the primitive's metadata;
@@ -66458,7 +66637,7 @@ primitiveDoNamedPrimitiveWithArgs(void)
 	if (addr == 0) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = -1);
-		return;
+		return 7;
 	}
 	/* begin eeInstantiateClassIndex:format:numSlots: */
 	assert((knownClassAtIndex(ClassArrayCompactIndex)) != GIV(nilObj));
@@ -66496,7 +66675,7 @@ primitiveDoNamedPrimitiveWithArgs(void)
 	}
 	/* begin callExternalPrimitive: */
 	primitiveFunctionPointer = addr;
-	dispatchFunctionPointer(addr);
+	dispatchFunctionPointer(primitiveFunctionPointer);
 	if (GIV(primFailCode)) {
 
 		/* If primitive failed, then restore state for failure code */
@@ -66526,6 +66705,7 @@ primitiveDoNamedPrimitiveWithArgs(void)
 			GIV(primFailCode) = -1;
 		}
 	}
+	return 0;
 }
 
 
@@ -66536,7 +66716,7 @@ primitiveDoNamedPrimitiveWithArgs(void)
 	distinguish between this failing and the primitive it invokes failing. */
 
 	/* StackInterpreterPrimitives>>#primitiveDoPrimitiveWithArgs */
-static void
+static sqInt
 primitiveDoPrimitiveWithArgs(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt argumentArray;
@@ -66560,7 +66740,7 @@ primitiveDoPrimitiveWithArgs(void)
 	if (!(((GIV(argumentCount) >= 2) && (GIV(argumentCount) <= 3)))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = -PrimErrUnsupported);
-		return;
+		return 1;
 	}
 	/* begin stackTop */
 	argumentArray = longAt(GIV(stackPointer));
@@ -66571,7 +66751,7 @@ primitiveDoPrimitiveWithArgs(void)
 		 && ((primIdx & 1)))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = -PrimErrBadArgument);
-		return;
+		return 2;
 	}
 	/* begin numSlotsOf: */
 	assert((classIndexOf(argumentArray)) > (isForwardedObjectClassIndexPun()));
@@ -66582,18 +66762,18 @@ primitiveDoPrimitiveWithArgs(void)
 	if (!(roomToPushNArgs(arraySize))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = -PrimErrLimitExceeded);
-		return;
+		return 3;
 	}
 	primIdx = (primIdx >> 1);
 	/* begin functionPointerFor:inClass: */
-	primitiveFunctionPointer = ((void (*)(void)) ((primIdx > MaxPrimitiveIndex
+	primitiveFunctionPointer = ((sqInt (*)(void)) ((primIdx > MaxPrimitiveIndex
 	? 0
 	: primitiveTable[primIdx])));
 	if (primitiveFunctionPointer == 0) {
 		primitiveFunctionPointer = primitiveDoPrimitiveWithArgs;
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = -PrimErrBadIndex);
-		return;
+		return 4;
 	}
 	if (((savedNumArgs = GIV(argumentCount))) == 3) {
 
@@ -66637,7 +66817,7 @@ primitiveDoPrimitiveWithArgs(void)
 	if ((((usqIntptr_t) primitiveFunctionPointer)) <= MaxQuickPrimitiveIndex) {
 		externalQuickPrimitiveResponse();
 		GIV(tempOop2) = 0;
-		return;
+		return 0;
 	}
 
 	/* prim might alloc/gc */
@@ -66652,6 +66832,7 @@ primitiveDoPrimitiveWithArgs(void)
 	assert((remapBufferCount()) == 0);
 	/* begin initPrimCall */
 	GIV(primFailCode) = 0;
+	printCallStack();
 	dispatchFunctionPointer(primitiveFunctionPointer);
 	assert(maybeLeakCheckExternalPrimCall(GIV(newMethod)));
 	/* begin maybeRetryPrimitiveOnFailure */
@@ -66668,7 +66849,7 @@ primitiveDoPrimitiveWithArgs(void)
 		if (GIV(tempOop) == 0) {
 
 			/* the primitive failed in a recursive invocation.  can't fix things with no value... */
-			return;
+			return 0;
 		}
 		/* begin pop: */
 		GIV(stackPointer) += arraySize * BytesPerWord;
@@ -66691,6 +66872,7 @@ primitiveDoPrimitiveWithArgs(void)
 		GIV(argumentCount) = savedNumArgs;
 	}
 	GIV(tempOop) = (GIV(tempOop2) = 0);
+	return 0;
 }
 
 
@@ -66701,7 +66883,7 @@ primitiveDoPrimitiveWithArgs(void)
 	hence primitiveFunctionPointer is stale. */
 
 	/* StackInterpreterPrimitives>>#primitiveExecuteMethod */
-static void
+static sqInt
 primitiveExecuteMethod(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt firstBytecode;
@@ -66730,12 +66912,12 @@ primitiveExecuteMethod(void)
 		 && (((((usqInt)((longAt(methodArgument)))) >> (formatShift())) & (formatMask())) >= (firstCompiledMethodFormat())))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadArgument);
-		return;
+		return 1;
 	}
 	if (!((GIV(argumentCount) - 1) == (argumentCountOf(methodArgument)))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadNumArgs);
-		return;
+		return 2;
 	}
 	/* begin popStack */
 	top = longAt(GIV(stackPointer));
@@ -66754,7 +66936,7 @@ primitiveExecuteMethod(void)
 		primitiveIndex = 0;
 	}
 	/* begin functionPointerFor:inClass: */
-	primitiveFunctionPointer = ((void (*)(void)) ((primitiveIndex > MaxPrimitiveIndex
+	primitiveFunctionPointer = ((sqInt (*)(void)) ((primitiveIndex > MaxPrimitiveIndex
 	? 0
 	: primitiveTable[primitiveIndex])));
 	GIV(argumentCount) -= 1;
@@ -66851,6 +67033,7 @@ primitiveExecuteMethod(void)
 	l14:	/* end executeNewMethod */;
 	/* begin initPrimCall */
 	GIV(primFailCode) = 0;
+	return 0;
 }
 
 
@@ -66861,7 +67044,7 @@ primitiveExecuteMethod(void)
 	method, and hence primitiveFunctionPointer is stale. */
 
 	/* StackInterpreterPrimitives>>#primitiveExecuteMethodArgsArray */
-static void
+static sqInt
 primitiveExecuteMethodArgsArray(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt argCnt;
@@ -66900,7 +67083,7 @@ primitiveExecuteMethodArgsArray(void)
 		 && (((((usqInt)((longAt(argumentArray)))) >> (formatShift())) & (formatMask())) == 2 /* arrayFormat */)))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadArgument);
-		return;
+		return 1;
 	}
 	/* begin argumentCountOf: */
 	assert(isCompiledMethod(methodArgument));
@@ -66910,7 +67093,7 @@ primitiveExecuteMethodArgsArray(void)
 	if (!(argCnt == (numSlotsOf(argumentArray)))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadNumArgs);
-		return;
+		return 2;
 	}
 	if (GIV(argumentCount) > 2) {
 
@@ -66924,7 +67107,7 @@ primitiveExecuteMethodArgsArray(void)
 		 && ((!((longAt(rcvr)) & ((classIndexMask()) - (isForwardedObjectClassIndexPun()))))))) {
 			/* begin primitiveFailFor: */
 			(GIV(primFailCode) = PrimErrUnsupported);
-			return;
+			return 3;
 		}
 		/* begin stackValue:put: */
 		longAtput(GIV(stackPointer) + (GIV(argumentCount) * BytesPerWord), rcvr);
@@ -66951,7 +67134,7 @@ primitiveExecuteMethodArgsArray(void)
 		primitiveIndex = 0;
 	}
 	/* begin functionPointerFor:inClass: */
-	primitiveFunctionPointer = ((void (*)(void)) ((primitiveIndex > MaxPrimitiveIndex
+	primitiveFunctionPointer = ((sqInt (*)(void)) ((primitiveIndex > MaxPrimitiveIndex
 	? 0
 	: primitiveTable[primitiveIndex])));
 	GIV(argumentCount) = argCnt;
@@ -67048,6 +67231,7 @@ primitiveExecuteMethodArgsArray(void)
 	l19:	/* end executeNewMethod */;
 	/* begin initPrimCall */
 	GIV(primFailCode) = 0;
+	return 0;
 }
 
 
@@ -67083,10 +67267,10 @@ primitiveExecuteMethodArgsArray(void)
 /*	since external primitive linkage is in first literal... */
 
 	/* StackInterpreterPrimitives>>#primitiveExternalCall */
-static void
+static sqInt
 primitiveExternalCall(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
-    void (*addr)();
+    sqInt (*addr)();
     sqInt index;
     sqInt lit;
     sqInt reasonCode;
@@ -67106,7 +67290,7 @@ primitiveExternalCall(void)
 			(index & 1))))))))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadMethod);
-		return;
+		return 1;
 	}
 
 	/* Check if we have already looked up the function and failed. */
@@ -67118,7 +67302,7 @@ primitiveExternalCall(void)
 		rewriteMethodCacheEntryForExternalPrimitiveToFunction(0);
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrNotFound);
-		return;
+		return 2;
 	}
 	if ((index > 0)
 	 && (index <= MaxExternalPrimitiveTableSize)) {
@@ -67127,16 +67311,16 @@ primitiveExternalCall(void)
 			rewriteMethodCacheEntryForExternalPrimitiveToFunction(addr);
 			/* begin callExternalPrimitive: */
 			primitiveFunctionPointer = addr;
-			dispatchFunctionPointer(addr);
+			dispatchFunctionPointer(primitiveFunctionPointer);
 			/* begin maybeRetryPrimitiveOnFailure */
 			if (GIV(primFailCode)) {
 				retryPrimitiveOnFailure();
 			}
-			return;
+			return 0;
 		}
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrNamedInternal);
-		return;
+		return 3;
 	}
 	/* begin storePointerUnchecked:ofObject:withValue: */
 	assert(!(isOopForwarded(lit)));
@@ -67152,7 +67336,7 @@ primitiveExternalCall(void)
 			? PrimErrNotFound
 			: GIV(primFailCode));
 		(GIV(primFailCode) = reasonCode);
-		return;
+		return 4;
 	}
 	/* begin callExternalPrimitive: */
 	primitiveFunctionPointer = addr;
@@ -67161,6 +67345,7 @@ primitiveExternalCall(void)
 	if (GIV(primFailCode)) {
 		retryPrimitiveOnFailure();
 	}
+	return 0;
 }
 
 
@@ -67168,7 +67353,7 @@ primitiveExternalCall(void)
 	for exception handling starting at the receiver. Return nil if none found */
 
 	/* StackInterpreterPrimitives>>#primitiveFindHandlerContext */
-static void
+static sqInt
 primitiveFindHandlerContext(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt handlerOrNilOrZero;
@@ -67195,6 +67380,7 @@ primitiveFindHandlerContext(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), handlerOrNilOrZero);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -67205,7 +67391,7 @@ primitiveFindHandlerContext(void)
  */
 
 	/* StackInterpreterPrimitives>>#primitiveFindNextUnwindContext */
-static void
+static sqInt
 primitiveFindNextUnwindContext(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt calleeContext;
@@ -67233,7 +67419,7 @@ primitiveFindNextUnwindContext(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	assert(stopContext != calleeContext);
 	/* begin externalWriteBackHeadFramePointers */
@@ -67321,6 +67507,7 @@ primitiveFindNextUnwindContext(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), handlerOrNilOrZero);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -67330,7 +67517,7 @@ primitiveFindNextUnwindContext(void)
  */
 
 	/* StackInterpreterPrimitives>>#primitiveFlushCacheByMethod */
-static void
+static sqInt
 primitiveFlushCacheByMethod(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt i;
@@ -67352,6 +67539,7 @@ primitiveFlushCacheByMethod(void)
 	for (i1 = 1; i1 <= AtCacheTotalSize; i1 += 1) {
 		GIV(atCache)[i1] = 0;
 	}
+	return 0;
 }
 
 
@@ -67360,7 +67548,7 @@ primitiveFlushCacheByMethod(void)
 	redefined.  */
 
 	/* StackInterpreterPrimitives>>#primitiveFlushCacheBySelector */
-static void
+static sqInt
 primitiveFlushCacheBySelector(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt i;
@@ -67384,6 +67572,7 @@ primitiveFlushCacheBySelector(void)
 			GIV(atCache)[i1] = 0;
 		}
 	}
+	return 0;
 }
 
 
@@ -67395,7 +67584,7 @@ primitiveFlushCacheBySelector(void)
 	supported). In Spur, answer the size of the largest free chunk. */
 
 	/* StackInterpreterPrimitives>>#primitiveFullGC */
-static void
+static sqInt
 primitiveFullGC(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integer;
@@ -67422,7 +67611,7 @@ primitiveFullGC(void)
 	/* begin pop:thenPushInteger: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)integer << 1) | 1));
 	GIV(stackPointer) = sp;
-	return;
+	return 0;
 	/* begin incrementalGC */
 	error("shouldNotImplement");
 	fullGC();
@@ -67432,10 +67621,11 @@ primitiveFullGC(void)
 	/* begin pop:thenPushInteger: */
 	longAtput((sp1 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)integer1 << 1) | 1));
 	GIV(stackPointer) = sp1;
+	return 0;
 }
 
 	/* StackInterpreterPrimitives>>#primitiveGetSetFFIExceptionHandling */
-static void
+static sqInt
 primitiveGetSetFFIExceptionHandling(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arg;
@@ -67451,17 +67641,17 @@ primitiveGetSetFFIExceptionHandling(void)
 		/* begin pop:thenPushInteger: */
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)integer << 1) | 1));
 		GIV(stackPointer) = sp;
-		return;
+		return 0;
 	}
 	if (!(ioCanCatchFFIExceptions())) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrUnsupported);
-		return;
+		return 1;
 	}
 	if (!(GIV(argumentCount) == 1)) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadNumArgs);
-		return;
+		return 2;
 	}
 	/* begin stackTop */
 	arg = longAt(GIV(stackPointer));
@@ -67469,13 +67659,14 @@ primitiveGetSetFFIExceptionHandling(void)
 		 && (((((arg = (arg >> 1))) >= -1) && (arg <= 1))))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadArgument);
-		return;
+		return 3;
 	}
 	ffiExceptionResponse = arg;
 	/* begin methodReturnReceiver */
 	assert(!((failed())));
 	/* begin pop: */
 	GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
+	return 0;
 }
 
 
@@ -67491,7 +67682,7 @@ primitiveGetSetFFIExceptionHandling(void)
  */
 
 	/* StackInterpreterPrimitives>>#primitiveIncrementalGC */
-static void
+static sqInt
 primitiveIncrementalGC(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt integerVal;
@@ -67516,13 +67707,14 @@ primitiveIncrementalGC(void)
 	integerVal = (((GIV(totalFreeOldSpace) + ((((eden()).limit)) - GIV(freeStart))) + ((((pastSpace()).limit)) - GIV(pastSpaceStart))) + ((((futureSpace()).limit)) - (((futureSpace()).limit)))) - (interpreterAllocationReserveBytes());
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), (((usqInt)integerVal << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
 /*	because of externalInstVar:ofContext: below */
 
 	/* StackInterpreterPrimitives>>#primitiveInstVarAt */
-static void
+static sqInt
 primitiveInstVarAt(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt class;
@@ -67553,12 +67745,12 @@ primitiveInstVarAt(void)
 	 && ((!((longAt(rcvr)) & ((classIndexMask()) - (isForwardedObjectClassIndexPun())))))))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadArgument);
-		return;
+		return 1;
 	}
 	if (((rcvr & (tagMask())) != 0)) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrInappropriate);
-		return;
+		return 2;
 	}
 	index = (index >> 1);
 	/* begin baseHeader: */
@@ -67613,7 +67805,7 @@ primitiveInstVarAt(void)
 		 && (index <= fixedFields))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 3;
 	}
 	if ((fmt == (indexablePointersFormat()))
 	 && ((hdr & (classIndexMask())) == ClassMethodContextCompactIndex)) {
@@ -67688,10 +67880,11 @@ primitiveInstVarAt(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), value);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 	/* StackInterpreterPrimitives>>#primitiveInstVarAtPut */
-static void
+static sqInt
 primitiveInstVarAtPut(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt class;
@@ -67722,12 +67915,12 @@ primitiveInstVarAtPut(void)
 	 && ((!((longAt(rcvr)) & ((classIndexMask()) - (isForwardedObjectClassIndexPun())))))))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadArgument);
-		return;
+		return 1;
 	}
 	if (((rcvr & (tagMask())) != 0)) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadReceiver);
-		return;
+		return 2;
 	}
 	if (
 #  if IMMUTABILITY
@@ -67739,7 +67932,7 @@ primitiveInstVarAtPut(void)
 		) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrNoModification);
-		return;
+		return 3;
 	}
 	index = (index >> 1);
 	/* begin baseHeader: */
@@ -67794,7 +67987,7 @@ primitiveInstVarAtPut(void)
 		 && (index <= fixedFields))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 4;
 	}
 	if ((fmt == (indexablePointersFormat()))
 	 && ((hdr & (classIndexMask())) == ClassMethodContextCompactIndex)) {
@@ -67868,6 +68061,7 @@ primitiveInstVarAtPut(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), newValue);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -67879,7 +68073,7 @@ primitiveInstVarAtPut(void)
 
 	/* StackInterpreterPrimitives>>#primitiveLongRunningPrimitive */
 #if LRPCheck
-EXPORT(void)
+EXPORT(sqInt)
 primitiveLongRunningPrimitive(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt gcms;
@@ -67928,6 +68122,7 @@ primitiveLongRunningPrimitive(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), result);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 #endif /* LRPCheck */
 
@@ -67974,7 +68169,7 @@ primitiveLongRunningPrimitiveSemaphore(void)
 	N.B. Works correctly for cogged methods too. */
 
 	/* StackInterpreterPrimitives>>#primitiveObjectPointsTo */
-static void
+static sqInt
 primitiveObjectPointsTo(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     usqLong fmt;
@@ -68001,7 +68196,7 @@ primitiveObjectPointsTo(void)
 		/* begin pop:thenPushBool: */
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), GIV(falseObj));
 		GIV(stackPointer) = sp;
-		return;
+		return 0;
 	}
 	/* begin baseHeader: */
 	header = long64At(rcvr);
@@ -68032,7 +68227,7 @@ primitiveObjectPointsTo(void)
 						? GIV(trueObj)
 						: GIV(falseObj)));
 					GIV(stackPointer) = sp1;
-					return;
+					return 0;
 				}
 			}
 			numSlots = CtxtTempFrameStart + (fetchStackPointerOf(rcvr));
@@ -68053,7 +68248,7 @@ primitiveObjectPointsTo(void)
 			/* begin pop:thenPushBool: */
 			longAtput((sp2 = GIV(stackPointer) + ((1) * BytesPerWord)), GIV(falseObj));
 			GIV(stackPointer) = sp2;
-			return;
+			return 0;
 		}
 		/* begin methodHeaderOf: */
 		assert(isCompiledMethod(rcvr));
@@ -68063,7 +68258,7 @@ primitiveObjectPointsTo(void)
 			/* begin pop:thenPushBool: */
 			longAtput((sp3 = GIV(stackPointer) + ((1) * BytesPerWord)), GIV(trueObj));
 			GIV(stackPointer) = sp3;
-			return;
+			return 0;
 		}
 		numSlots = ((assert((methodHeader & 1)),
 ((methodHeader >> 1)) & AlternateHeaderNumLiteralsMask)) + LiteralStart;
@@ -68074,16 +68269,17 @@ primitiveObjectPointsTo(void)
 			/* begin pop:thenPushBool: */
 			longAtput((sp4 = GIV(stackPointer) + ((1) * BytesPerWord)), GIV(trueObj));
 			GIV(stackPointer) = sp4;
-			return;
+			return 0;
 		}
 	}
 	/* begin pop:thenPushBool: */
 	longAtput((sp5 = GIV(stackPointer) + ((1) * BytesPerWord)), GIV(falseObj));
 	GIV(stackPointer) = sp5;
+	return 0;
 }
 
 	/* StackInterpreterPrimitives>>#primitivePerform */
-static void
+static sqInt
 primitivePerform(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt i;
@@ -68149,7 +68345,7 @@ primitivePerform(void)
 		primitiveFunctionPointer = primitivePerform;
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadNumArgs;
-		return;
+		return 1;
 	}
 	/* begin executeNewMethod */
 	if (primitiveFunctionPointer != 0) {
@@ -68244,6 +68440,7 @@ primitivePerform(void)
 	l12:	/* end executeNewMethod */;
 	/* begin initPrimCall */
 	GIV(primFailCode) = 0;
+	return 0;
 }
 
 
@@ -68253,7 +68450,7 @@ primitivePerform(void)
 	an object from being garbage collected. */
 
 	/* StackInterpreterPrimitives>>#primitivePin */
-static void
+static sqInt
 primitivePin(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt boolean;
@@ -68267,7 +68464,7 @@ primitivePin(void)
 	 || ((!((longAt(obj)) & ((classIndexMask()) - (isForwardedObjectClassIndexPun())))))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadReceiver);
-		return;
+		return 1;
 	}
 	/* begin stackTop */
 	boolean = longAt(GIV(stackPointer));
@@ -68275,7 +68472,7 @@ primitivePin(void)
 		 || (boolean == GIV(trueObj)))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadArgument);
-		return;
+		return 2;
 	}
 	if (((((usqInt)((longAt(obj)))) >> (pinnedBitShift())) & 1) != 0) {
 		/* begin trueObject */
@@ -68295,18 +68492,19 @@ primitivePin(void)
 			 && (!(isWidowedContext(obj))))) {
 				/* begin primitiveFailFor: */
 				(GIV(primFailCode) = PrimErrBadReceiver);
-				return;
+				return 3;
 			}
 			if ((pinObject(obj)) == 0) {
 				/* begin primitiveFailFor: */
 				(GIV(primFailCode) = PrimErrNoMemory);
-				return;
+				return 4;
 			}
 		}
 	}
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), wasPinned);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -68315,7 +68513,7 @@ primitivePin(void)
  */
 
 	/* StackInterpreterPrimitives>>#primitiveSetGCSemaphore */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveSetGCSemaphore(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt index;
@@ -68342,6 +68540,7 @@ primitiveSetGCSemaphore(void)
 		/* begin pop: */
 		GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
 	}
+	return 0;
 }
 
 
@@ -68350,7 +68549,7 @@ primitiveSetGCSemaphore(void)
 	the given tick value. A tick value of zero turns off timer interrupts. */
 
 	/* StackInterpreterPrimitives>>#primitiveSignalAtMilliseconds */
-static void
+static sqInt
 primitiveSignalAtMilliseconds(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqLong deltaMsecs;
@@ -68400,7 +68599,7 @@ primitiveSignalAtMilliseconds(void)
 				: ioUTCMicroseconds());
 			/* begin pop: */
 			GIV(stackPointer) += 2 * BytesPerWord;
-			return;
+			return 0;
 		}
 		if (sema == GIV(nilObj)) {
 			/* begin storePointerUnchecked:ofObject:withValue: */
@@ -68411,11 +68610,12 @@ primitiveSignalAtMilliseconds(void)
 			GIV(nextWakeupUsecs) = 0;
 			/* begin pop: */
 			GIV(stackPointer) += 2 * BytesPerWord;
-			return;
+			return 0;
 		}
 	}
 	/* begin primitiveFailFor: */
 	GIV(primFailCode) = PrimErrBadArgument;
+	return 1;
 }
 
 
@@ -68424,7 +68624,7 @@ primitiveSignalAtMilliseconds(void)
 	the given tick value. A tick value of zero turns off timer interrupts. */
 
 	/* StackInterpreterPrimitives>>#primitiveSignalAtUTCMicroseconds */
-static void
+static sqInt
 primitiveSignalAtUTCMicroseconds(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt objOop;
@@ -68461,7 +68661,7 @@ primitiveSignalAtUTCMicroseconds(void)
 			GIV(nextWakeupUsecs) = usecs;
 			/* begin pop: */
 			GIV(stackPointer) += 2 * BytesPerWord;
-			return;
+			return 0;
 		}
 		if (sema == GIV(nilObj)) {
 			/* begin storePointerUnchecked:ofObject:withValue: */
@@ -68472,11 +68672,12 @@ primitiveSignalAtUTCMicroseconds(void)
 			GIV(nextWakeupUsecs) = 0;
 			/* begin pop: */
 			GIV(stackPointer) += 2 * BytesPerWord;
-			return;
+			return 0;
 		}
 	}
 	/* begin primitiveFailFor: */
 	GIV(primFailCode) = PrimErrBadArgument;
+	return 1;
 }
 
 
@@ -68493,7 +68694,7 @@ primitiveSignalAtUTCMicroseconds(void)
 /*	because of externalInstVar:ofContext: below */
 
 	/* StackInterpreterPrimitives>>#primitiveSlotAt */
-static void
+static sqInt
 primitiveSlotAt(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt fmt;
@@ -68526,12 +68727,12 @@ primitiveSlotAt(void)
 	if (!((index & 1))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadArgument);
-		return;
+		return 1;
 	}
 	if (((rcvr & (tagMask())) != 0)) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadReceiver);
-		return;
+		return 2;
 	}
 	/* begin formatOf: */
 	fmt = (((usqInt)((longAt(rcvr)))) >> (formatShift())) & (formatMask());
@@ -68574,17 +68775,17 @@ primitiveSlotAt(void)
 			/* begin pop:thenPush: */
 			longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), value);
 			GIV(stackPointer) = sp;
-			return;
+			return 0;
 		}
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 3;
 	}
 	if (fmt >= (firstByteFormat())) {
 		if (fmt >= (firstCompiledMethodFormat())) {
 			/* begin primitiveFailFor: */
 			(GIV(primFailCode) = PrimErrUnsupported);
-			return;
+			return 4;
 		}
 		/* begin numBytesOfBytes: */
 		fmt1 = (((usqInt)((longAt(rcvr)))) >> (formatShift())) & (formatMask());
@@ -68595,11 +68796,11 @@ primitiveSlotAt(void)
 			integerVal = byteAt((rcvr + BaseHeaderSize) + index);
 			longAtput((sp1 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)integerVal << 1) | 1));
 			GIV(stackPointer) = sp1;
-			return;
+			return 0;
 		}
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 5;
 	}
 	if (fmt >= (firstShortFormat())) {
 		numSlots = ((usqInt)((numBytesOf(rcvr)))) >> 1;
@@ -68608,11 +68809,11 @@ primitiveSlotAt(void)
 			integerVal1 = ((unsigned short) (shortAt((rcvr + BaseHeaderSize) + (((sqInt)((usqInt)(index) << 1))))));
 			longAtput((sp2 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)integerVal1 << 1) | 1));
 			GIV(stackPointer) = sp2;
-			return;
+			return 0;
 		}
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 6;
 	}
 	if (fmt == (sixtyFourBitIndexableFormat())) {
 		numSlots = ((usqInt)((numBytesOf(rcvr)))) >> 3;
@@ -68621,11 +68822,11 @@ primitiveSlotAt(void)
 			oop = positive64BitIntegerFor(long64At((rcvr + BaseHeaderSize) + (((sqInt)((usqInt)(index) << 3)))));
 			longAtput((sp3 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), oop);
 			GIV(stackPointer) = sp3;
-			return;
+			return 0;
 		}
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 7;
 	}
 	if (fmt >= (firstLongFormat())) {
 		numSlots = ((usqInt)((numBytesOf(rcvr)))) >> 2;
@@ -68678,15 +68879,15 @@ primitiveSlotAt(void)
 	l13:	/* end positive32BitIntegerFor: */;
 			longAtput((sp4 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), oop1);
 			GIV(stackPointer) = sp4;
-			return;
+			return 0;
 		}
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 8;
 	}
 	/* begin primitiveFailFor: */
 	(GIV(primFailCode) = PrimErrBadReceiver);
-	return;
+	return 9;
 }
 
 
@@ -68700,7 +68901,7 @@ primitiveSlotAt(void)
 	at each slot. */
 
 	/* StackInterpreterPrimitives>>#primitiveSlotAtPut */
-static void
+static sqInt
 primitiveSlotAtPut(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt bs;
@@ -68730,12 +68931,12 @@ primitiveSlotAtPut(void)
 	if (!((index & 1))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadArgument);
-		return;
+		return 1;
 	}
 	if (((rcvr & (tagMask())) != 0)) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadReceiver);
-		return;
+		return 2;
 	}
 	if (
 #  if IMMUTABILITY
@@ -68747,7 +68948,7 @@ primitiveSlotAtPut(void)
 		) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrNoModification);
-		return;
+		return 3;
 	}
 	/* begin formatOf: */
 	fmt = (((usqInt)((longAt(rcvr)))) >> (formatShift())) & (formatMask());
@@ -68783,11 +68984,11 @@ primitiveSlotAtPut(void)
 			/* begin pop:thenPush: */
 			longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), newValue);
 			GIV(stackPointer) = sp;
-			return;
+			return 0;
 		}
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 4;
 	}
 	/* begin positiveMachineIntegerValueOf: */
 	if ((newValue & 1)) {
@@ -68847,18 +69048,18 @@ primitiveSlotAtPut(void)
 	l18:	/* end positiveMachineIntegerValueOf: */;
 	if (GIV(primFailCode)) {
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 5;
 	}
 	if (fmt >= (firstByteFormat())) {
 		if (fmt >= (firstCompiledMethodFormat())) {
 			/* begin primitiveFailFor: */
 			(GIV(primFailCode) = PrimErrUnsupported);
-			return;
+			return 6;
 		}
 		if ((((usqInt)value)) > 0xFF) {
 			/* begin primitiveFailFor: */
 			(GIV(primFailCode) = PrimErrBadArgument);
-			return;
+			return 7;
 		}
 		/* begin numBytesOfBytes: */
 		fmt1 = (((usqInt)((longAt(rcvr)))) >> (formatShift())) & (formatMask());
@@ -68870,17 +69071,17 @@ primitiveSlotAtPut(void)
 			/* begin pop:thenPush: */
 			longAtput((sp1 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), newValue);
 			GIV(stackPointer) = sp1;
-			return;
+			return 0;
 		}
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 8;
 	}
 	if (fmt >= (firstShortFormat())) {
 		if ((((usqInt)value)) > 0xFFFF) {
 			/* begin primitiveFailFor: */
 			(GIV(primFailCode) = PrimErrBadArgument);
-			return;
+			return 9;
 		}
 		numSlots = ((usqInt)((numBytesOf(rcvr)))) >> 1;
 		if ((((usqInt)index)) < numSlots) {
@@ -68889,11 +69090,11 @@ primitiveSlotAtPut(void)
 			/* begin pop:thenPush: */
 			longAtput((sp2 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), newValue);
 			GIV(stackPointer) = sp2;
-			return;
+			return 0;
 		}
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 10;
 	}
 	if (fmt >= (firstLongFormat())) {
 		numSlots = ((usqInt)((numBytesOf(rcvr)))) >> 2;
@@ -68903,15 +69104,15 @@ primitiveSlotAtPut(void)
 			/* begin pop:thenPush: */
 			longAtput((sp4 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), newValue);
 			GIV(stackPointer) = sp4;
-			return;
+			return 0;
 		}
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 11;
 	}
 	/* begin primitiveFailFor: */
 	(GIV(primFailCode) = PrimErrBadReceiver);
-	return;
+	return 12;
 }
 
 
@@ -68919,7 +69120,7 @@ primitiveSlotAtPut(void)
 	Also ensures that any newly accessible cells are initialized to nil */
 
 	/* StackInterpreterPrimitives>>#primitiveStoreStackp */
-static void
+static sqInt
 primitiveStoreStackp(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt ctxt;
@@ -68958,7 +69159,7 @@ primitiveStoreStackp(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin externalWriteBackHeadFramePointers */
 	assert((GIV(framePointer) - GIV(stackPointer)) < (LargeContextSlots * BytesPerOop));
@@ -68987,7 +69188,7 @@ primitiveStoreStackp(void)
 			if (!GIV(primFailCode)) {
 				GIV(primFailCode) = 1;
 			}
-			return;
+			return 2;
 		}
 		externalDivorceFrameandContext(theFP, ctxt);
 		if (onCurrentPage) {
@@ -69022,6 +69223,7 @@ primitiveStoreStackp(void)
 	longAtput((ctxt + BaseHeaderSize) + (((int)((usqInt)(StackPointerIndex) << (shiftForWord())))), (((usqInt)newStackp << 1) | 1));
 	/* begin pop: */
 	GIV(stackPointer) += 1 * BytesPerWord;
+	return 0;
 }
 
 
@@ -69034,7 +69236,7 @@ primitiveStoreStackp(void)
 	c.f. primitiveSuspendBackingUpV1,#568 & primitiveSuspendBackingUpV2,#578 */
 
 	/* StackInterpreterPrimitives>>#primitiveSuspend */
-static void
+static sqInt
 primitiveSuspend(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aValue;
@@ -69051,7 +69253,7 @@ primitiveSuspend(void)
 		aValue = GIV(nilObj);
 		longAtPointerput(GIV(stackPointer), aValue);
 		transferTo(wakeHighestPriority());
-		return;
+		return 0;
 	}
 	/* begin fetchPointer:ofObject: */
 	myList = longAt((process + BaseHeaderSize) + (((int)((usqInt)(MyListIndex) << (shiftForWord())))));
@@ -69066,13 +69268,13 @@ primitiveSuspend(void)
 		((longAt((myContext + BaseHeaderSize) + (((int)((usqInt)(InstructionPointerIndex) << (shiftForWord())))))) & 1))))))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadReceiver);
-		return;
+		return 1;
 	}
 	ok = removeProcessfromList(process, myList);
 	if (!ok) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrOperationFailed);
-		return;
+		return 2;
 	}
 	/* begin storePointerUnchecked:ofObject:withValue: */
 	valuePointer = GIV(nilObj);
@@ -69080,6 +69282,7 @@ primitiveSuspend(void)
 	longAtput((process + BaseHeaderSize) + (((int)((usqInt)(MyListIndex) << (shiftForWord())))), valuePointer);
 	/* begin stackTopPut: */
 	longAtPointerput(GIV(stackPointer), myList);
+	return 0;
 }
 
 
@@ -69096,7 +69299,7 @@ primitiveSuspend(void)
 	c.f. primitiveSuspend,#88 & primitiveSuspendBackingUpV2,#578 */
 
 	/* StackInterpreterPrimitives>>#primitiveSuspendBackingUpV1 */
-static void
+static sqInt
 primitiveSuspendBackingUpV1(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aValue;
@@ -69113,7 +69316,7 @@ primitiveSuspendBackingUpV1(void)
 		aValue = GIV(nilObj);
 		longAtPointerput(GIV(stackPointer), aValue);
 		transferTo(wakeHighestPriority());
-		return;
+		return 0;
 	}
 	/* begin fetchPointer:ofObject: */
 	myList = longAt((process + BaseHeaderSize) + (((int)((usqInt)(MyListIndex) << (shiftForWord())))));
@@ -69128,13 +69331,13 @@ primitiveSuspendBackingUpV1(void)
 		((longAt((myContext + BaseHeaderSize) + (((int)((usqInt)(InstructionPointerIndex) << (shiftForWord())))))) & 1))))))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadReceiver);
-		return;
+		return 1;
 	}
 	ok = removeProcessfromList(process, myList);
 	if (!ok) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrOperationFailed);
-		return;
+		return 2;
 	}
 	/* begin storePointerUnchecked:ofObject:withValue: */
 	valuePointer = GIV(nilObj);
@@ -69145,6 +69348,7 @@ primitiveSuspendBackingUpV1(void)
 	}
 	/* begin stackTopPut: */
 	longAtPointerput(GIV(stackPointer), myList);
+	return 0;
 }
 
 
@@ -69162,7 +69366,7 @@ primitiveSuspendBackingUpV1(void)
 	which always answer the list the process was on, even if blocked. */
 
 	/* StackInterpreterPrimitives>>#primitiveSuspendBackingUpV2 */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveSuspendBackingUpV2(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aValue;
@@ -69180,7 +69384,7 @@ primitiveSuspendBackingUpV2(void)
 		aValue = GIV(nilObj);
 		longAtPointerput(GIV(stackPointer), aValue);
 		transferTo(wakeHighestPriority());
-		return;
+		return 0;
 	}
 	/* begin fetchPointer:ofObject: */
 	myList = longAt((process + BaseHeaderSize) + (((int)((usqInt)(MyListIndex) << (shiftForWord())))));
@@ -69195,13 +69399,13 @@ primitiveSuspendBackingUpV2(void)
 		((longAt((myContext + BaseHeaderSize) + (((int)((usqInt)(InstructionPointerIndex) << (shiftForWord())))))) & 1))))))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadReceiver);
-		return;
+		return 1;
 	}
 	ok = removeProcessfromList(process, myList);
 	if (!ok) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrOperationFailed);
-		return;
+		return 2;
 	}
 	/* begin storePointerUnchecked:ofObject:withValue: */
 	valuePointer = GIV(nilObj);
@@ -69217,6 +69421,7 @@ primitiveSuspendBackingUpV2(void)
 		/* begin stackTopPut: */
 		longAtPointerput(GIV(stackPointer), myList);
 	}
+	return 0;
 }
 
 
@@ -69228,7 +69433,7 @@ primitiveSuspendBackingUpV2(void)
  */
 
 	/* StackInterpreterPrimitives>>#primitiveTerminateTo */
-static void
+static sqInt
 primitiveTerminateTo(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aContextOrNil;
@@ -69275,7 +69480,7 @@ primitiveTerminateTo(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin stackValue: */
 	thisCtx = longAt(GIV(stackPointer) + (1 * BytesPerWord));
@@ -69284,7 +69489,7 @@ primitiveTerminateTo(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 	/* begin externalWriteBackHeadFramePointers */
 	assert((GIV(framePointer) - GIV(stackPointer)) < (LargeContextSlots * BytesPerOop));
@@ -69367,7 +69572,7 @@ primitiveTerminateTo(void)
 			/* begin pop: */
 			GIV(stackPointer) += 1 * BytesPerWord;
 			assert(GIV(stackPage) == (mostRecentlyUsedPage()));
-			return;
+			return 0;
 		}
 
 		/* May cause a GC!! */
@@ -69537,6 +69742,7 @@ primitiveTerminateTo(void)
 	/* begin pop: */
 	GIV(stackPointer) += 1 * BytesPerWord;
 	assert(GIV(stackPage) == (mostRecentlyUsedPage()));
+	return 0;
 }
 
 
@@ -69548,7 +69754,7 @@ primitiveTerminateTo(void)
 	about performance. */
 
 	/* StackInterpreterPrimitives>>#primitiveUnloadModule */
-static void
+static sqInt
 primitiveUnloadModule(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt address;
@@ -69572,7 +69778,7 @@ primitiveUnloadModule(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 1;
 	}
 	/* begin numBytesOfBytes: */
 	fmt = (((usqInt)((longAt(moduleName)))) >> (formatShift())) & (formatMask());
@@ -69583,7 +69789,7 @@ primitiveUnloadModule(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 2;
 	}
 	if ((((!(moduleName & (tagMask()))))
 	 && (((((usqInt)((longAt(moduleName)))) >> (formatShift())) & (formatMask())) >= (firstByteFormat())))
@@ -69644,6 +69850,7 @@ primitiveUnloadModule(void)
 	GIV(externalPrimitiveTableFirstFreeIndex) = 0;
 	/* begin pop: */
 	GIV(stackPointer) += 1 * BytesPerWord;
+	return 0;
 }
 
 
@@ -69751,7 +69958,7 @@ primitiveUnloadModule(void)
 	Note: Thanks to Ian Piumarta for this primitive. */
 
 	/* StackInterpreterPrimitives>>#primitiveVMParameter */
-static void
+static sqInt
 primitiveVMParameter(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt aBool;
@@ -70160,12 +70367,12 @@ primitiveVMParameter(void)
 		/* begin pop:thenPush: */
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), result1);
 		GIV(stackPointer) = sp;
-		return;
+		return 0;
 	}
 	if (GIV(argumentCount) > 2) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadNumArgs);
-		return;
+		return 1;
 	}
 	/* begin stackValue: */
 	offset = (GIV(argumentCount) == 1
@@ -70175,14 +70382,14 @@ primitiveVMParameter(void)
 	if (!((index & 1))) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadArgument);
-		return;
+		return 2;
 	}
 	index = (index >> 1);
 	if ((index < 1)
 	 || (index > paramsArraySize)) {
 		/* begin primitiveFailFor: */
 		(GIV(primFailCode) = PrimErrBadIndex);
-		return;
+		return 3;
 	}
 	if (GIV(argumentCount) == 1) {
 
@@ -70521,7 +70728,7 @@ primitiveVMParameter(void)
 		/* begin pop:thenPush: */
 		longAtput((sp1 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), oop);
 		GIV(stackPointer) = sp1;
-		return;
+		return 0;
 	}
 	/* begin primitiveSetVMParameter:arg: */
 	argOop = longAt(GIV(stackPointer));
@@ -70851,6 +71058,7 @@ primitiveVMParameter(void)
 		GIV(primFailCode) = PrimErrInappropriate;
 	}
 	l109:	/* end primitiveSetVMParameter:arg: */;
+	return 0;
 }
 
 
@@ -70858,17 +71066,18 @@ primitiveVMParameter(void)
 	access in the caller's frame should indirect through a null pointer. */
 
 	/* StackInterpreterPrimitives>>#primitiveVoidReceiver */
-EXPORT(void)
+EXPORT(sqInt)
 primitiveVoidReceiver(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
 	longAtPointerput(GIV(framePointer) + FoxReceiver, 0);
+	return 0;
 }
 
 
 /*	Void all internal VM state in the stack and machine code zones */
 
 	/* StackInterpreterPrimitives>>#primitiveVoidVMState */
-static void
+static sqInt
 primitiveVoidVMState(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt activeContext;
@@ -70880,6 +71089,7 @@ primitiveVoidVMState(void)
 	activeContext = voidVMStateForSnapshotFlushingExternalPrimitivesIf(0);
 	flushMethodCache();
 	marryContextInNewStackPageAndInitializeInterpreterRegisters(activeContext);
+	return 0;
 }
 
 

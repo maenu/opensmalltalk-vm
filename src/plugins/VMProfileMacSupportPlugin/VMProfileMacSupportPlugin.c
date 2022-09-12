@@ -96,7 +96,7 @@ extern sqInt positive32BitIntegerFor(unsigned int integerValue);
 extern sqInt positive64BitIntegerFor(usqLong integerValue);
 extern sqInt primitiveFail(void);
 extern sqInt primitiveFailFor(sqInt reasonCode);
-extern sqInt pushRemappableOop(sqInt oop);
+extern void pushRemappableOop(sqInt oop);
 extern sqInt signed32BitIntegerFor(sqInt integerValue);
 extern sqInt signed64BitIntegerFor(sqLong integerValue);
 extern sqInt stackValue(sqInt offset);

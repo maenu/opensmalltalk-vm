@@ -212,8 +212,8 @@ AtomicGet(__int64 *target)
 #elif defined(EMSCRIPTEN)
 
 #include <emscripten/atomic.h>
-# define get64(variable) emscripten_atomic_load_u64((uint64_t)&(variable))
-# define set64(variable,value) emscripten_atomic_store_u64((uint64_t)&(variable),value)
+# define get64(variable) emscripten_atomic_load_u64(&(variable))
+# define set64(variable,value) emscripten_atomic_store_u64(&(variable),value)
 
 #else
 

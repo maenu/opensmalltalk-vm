@@ -23,12 +23,7 @@
 # include <sys/ucontext.h>
 #endif
 
-#if EMSCRIPTEN
-/* not around in wasm */
-#	define _PC_IN_UCONTEXT uc_mcontext->__ss.__eip
-#	define _FP_IN_UCONTEXT uc_mcontext->__ss.__ebp
-#	define _SP_IN_UCONTEXT uc_mcontext->__ss.__esp
-#elif __APPLE__ && __MACH__ && __DARWIN_UNIX03
+#if __APPLE__ && __MACH__ && __DARWIN_UNIX03
 # if __i386__
 #	define _PC_IN_UCONTEXT uc_mcontext->__ss.__eip
 #	define _FP_IN_UCONTEXT uc_mcontext->__ss.__ebp
@@ -110,6 +105,10 @@
 # define _PC_IN_UCONTEXT sc_rip
 # define _FP_IN_UCONTEXT sc_rbp
 # define _SP_IN_UCONTEXT sc_rsp
+#elif EMSCRIPTEN
+# define _PC_IN_UCONTEXT uc_mcontext.gregs[REG_EIP]
+# define _FP_IN_UCONTEXT uc_mcontext.gregs[REG_EBP]
+# define _SP_IN_UCONTEXT uc_mcontext.gregs[REG_ESP]
 #endif
 #if !defined(_PC_IN_UCONTEXT)
 # error need to implement extracting pc from a ucontext_t on this system

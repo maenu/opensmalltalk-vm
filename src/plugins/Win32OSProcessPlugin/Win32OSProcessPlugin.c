@@ -226,7 +226,7 @@ extern sqInt primitiveFail(void);
 extern sqInt primitiveFailFor(sqInt reasonCode);
 extern sqInt push(sqInt object);
 extern sqInt pushInteger(sqInt integerValue);
-extern sqInt pushRemappableOop(sqInt oop);
+extern void pushRemappableOop(sqInt oop);
 extern sqInt signalSemaphoreWithIndex(sqInt semaIndex);
 extern sqInt sizeOfSTArrayFromCPrimitive(void *cPtr);
 extern sqInt stObjectatput(sqInt array, sqInt index, sqInt value);
