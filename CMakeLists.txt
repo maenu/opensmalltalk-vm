@@ -35,8 +35,8 @@ if (EMSCRIPTEN)
 	set(CMAKE_VERBOSE_MAKEFILE on)
 	SET_PROPERTY(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 	# <O2 yields too many locals in interpret and other async errors
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DPRODUCTION")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DPRODUCTION")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG -DDEBUGVM")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG -DDEBUGVM")
 	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")
 	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")
 endif()
@@ -162,8 +162,8 @@ if(OSVM_PLATFORM_X86_32)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:SSE2")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /arch:SSE2")
 	elseif(EMSCRIPTEN)
-		#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32 -msse2 -msimd128")
-		#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32 -msse2 -msimd128")
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32 -msse2 -msimd128")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32 -msse2 -msimd128")
     else()
         set(CMAKE_ASM-ATT_FLAGS "--32")
 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32 -msse2")
@@ -841,13 +841,14 @@ if(NOT ONLY_CONFIG_H)
 		target_link_libraries(${VM_EXECUTABLE_NAME} ${VM_LIBRARY_NAME} ${Foundation_LIBRARY} ${AppKit_LIBRARY})
 	elseif(EMSCRIPTEN)
 		#  -sASYNCIFY  -sASYNCIFY_DEBUG=1 -sSAFE_HEAP=1 -sEMULATE_FUNCTION_POINTER_CASTS  -DDEBUG -sPROXY_TO_PTHREAD=1 -fsanitize=alignment -sDYLINK_DEBUG -sGL_DEBUG=1 -sLEGACY_GL_EMULATION=1 -sGL_UNSAFE_OPTS=0 \
-    	# ASSERTIONS=2 yield duplicate symbols, use 1 instead (https://github.com/emscripten-core/emscripten/issues/13040)
+    	#  -sASSERTIONS ASSERTIONS=2 yield duplicate symbols, use 1 instead (https://github.com/emscripten-core/emscripten/issues/13040)
 		#   -sINITIAL_MEMORY=128MB -sALLOW_MEMORY_GROWTH	-sPROXY_TO_PTHREAD -sOFFSCREENCANVAS_SUPPORT -sOFFSCREENCANVASES_TO_PTHREAD='#canvas'
 		#-sASYNCIFY -sASYNCIFY_ONLY='[\"main\", \"call_path_to_your_main_loop\", \"SDL_WaitEvent\", \"SDL_WaitEventTimeout\", \"SDL_Delay\", \"SDL_RenderPresent\", \"GLES2_RenderPresent\", \"SDL_GL_SwapWindow\", \"Emscripten_GLES_SwapWindow\", \"byn$$fpcast-emu$$Emscripten_GLES_SwapWindow\", \"SDL_UpdateWindowSurface\", \"SDL_UpdateWindowSurfaceRects\", \"Emscripten_UpdateWindowFramebuffer\"]' \
+		set(CMAKE_EXECUTABLE_SUFFIX ".html")
 		add_executable(${VM_EXECUTABLE_NAME} platforms/minheadless/common/sqMain.c)
 		SET_TARGET_PROPERTIES(${VM_EXECUTABLE_NAME} PROPERTIES LINK_FLAGS " \
 			 -lGL -sUSE_SDL=2 \
-			-sMAIN_MODULE -sASSERTIONS \
+			-sMAIN_MODULE -sASYNCIFY \
 			-sUSE_PTHREADS -sPTHREAD_POOL_SIZE=1 -sALLOW_MEMORY_GROWTH -sEXIT_RUNTIME -sLLD_REPORT_UNDEFINED -sERROR_ON_UNDEFINED_SYMBOLS=0 \
 			--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/pre.js \
 			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image-new@/ \

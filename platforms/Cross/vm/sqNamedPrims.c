@@ -25,7 +25,7 @@ typedef struct {
 #undef DPRINTF
 // In practice these reasons are too important to hide. So if VM compiled with
 // -DPRINT_DL_ERRORS=1 always print dlopen errors
-#if defined(DEBUG) || defined(EMSCRIPTEN)
+#if defined(DEBUG)
 # define DPRINTF(what) printf what
 # define DERRPRINTF(what) printf what
 #else
