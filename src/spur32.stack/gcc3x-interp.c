@@ -611,7 +611,7 @@ extern sqInt headerIndicatesAlternateBytecodeSet(sqInt methodHeader);
 static sqInt NoDbgRegParms initFreeChunkWithBytesat(usqLong numBytes, sqInt address);
 static void NoDbgRegParms initSegmentBridgeWithBytesat(usqLong numBytes, sqInt address);
 extern sqInt inOldSpaceInstantiatePinnedClassindexableSize(sqInt classObj, usqInt nElements);
-extern sqInt instantiateClassindexableSize(sqInt classObj, usqInt nElements);
+extern sqInt instantiateClassindexableSize(sqInt classObj, sqInt nElements);
 extern sqInt instantiateUninitializedClassindexableSize(sqInt classObj, usqInt nElements);
 extern sqInt integerObjectOf(sqInt value);
 extern sqInt integerValueOf(sqInt oop);
@@ -28656,7 +28656,7 @@ inOldSpaceInstantiatePinnedClassindexableSize(sqInt classObj, usqInt nElements)
 
 	/* Spur32BitMemoryManager>>#instantiateClass:indexableSize: */
 sqInt
-instantiateClassindexableSize(sqInt classObj, usqInt nElements)
+instantiateClassindexableSize(sqInt classObj, sqInt nElements)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt classFormat;
     sqInt classIndex;

@@ -1,8 +1,10 @@
 //Module.arguments = ['Pharo.image', '--logLevel=5'];
 //Module.arguments = ['Pharo.image', 'eval', '1+2'];
 //Module.arguments = ['trunk6.image'];
-//Module.arguments = ['Pharo10-SNAPSHOT-32bit-84d4913.image', '--interactive'];
-Module.arguments = ['Pharo10-SNAPSHOT-32bit-84d4913.image', '--disabledAccessMode', 'eval', 'Transcript show: (1 + 41) asString; cr'];
+Module.arguments = ['pharo.image'];
+//Module.arguments = ['pharo.image'];
+//Module.arguments = ['Pharo10-SNAPSHOT-32bit-84d4913.image'];
+//Module.arguments = ['Pharo10-SNAPSHOT-32bit-84d4913.image', '--disabledAccessMode', 'eval', 'Transcript show: (1 + 41) asString; cr'];
 //Module.arguments = ['Pharo8.0-SNAPSHOT-metacello-32bit-6b47e52.image', '--interactive'];
 //Module.arguments = ['Pharo8.0-SNAPSHOT-metacello-32bit-6b47e52.image', 'eval', '1+2'];
 //Module.arguments = ['Pharo8.0-SNAPSHOT-metacello-32bit-6b47e52.image', 'eval', 'Transcript show: (1 + 41) asString; cr'];

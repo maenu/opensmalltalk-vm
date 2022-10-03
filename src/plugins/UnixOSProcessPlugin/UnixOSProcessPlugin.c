@@ -202,7 +202,7 @@ EXPORT(sqInt) primitiveUnlockFileRegion(void);
 EXPORT(sqInt) primitiveUnsetEnv(void);
 EXPORT(sqInt) primitiveVersionString(void);
 static sqInt realpathAsType(sqInt classIdentifier);
-static void reapChildProcess(int sigNum);
+static void reapChildProcess(int sigNum, siginfo_t * i, void *  c);
 static sqInt resendSignal(int sigNum);
 static void restoreDefaultSignalHandlers(void);
 static sqInt sandboxSecurity(void);
@@ -283,7 +283,7 @@ static void (*popthenPush)(sqInt nItems, sqInt oop);
 static sqInt (*popRemappableOop)(void);
 static sqInt (*primitiveFail)(void);
 static sqInt (*primitiveFailFor)(sqInt reasonCode);
-static sqInt (*push)(sqInt object);
+static void (*push)(sqInt object);
 static sqInt (*pushInteger)(sqInt integerValue);
 static void (*pushRemappableOop)(sqInt oop);
 static sqInt (*signalSemaphoreWithIndex)(sqInt semaIndex);
@@ -327,7 +327,7 @@ extern void popthenPush(sqInt nItems, sqInt oop);
 extern sqInt popRemappableOop(void);
 extern sqInt primitiveFail(void);
 extern sqInt primitiveFailFor(sqInt reasonCode);
-extern sqInt push(sqInt object);
+extern void push(sqInt object);
 extern sqInt pushInteger(sqInt integerValue);
 extern void pushRemappableOop(sqInt oop);
 extern sqInt signalSemaphoreWithIndex(sqInt semaIndex);
@@ -1719,24 +1719,25 @@ primitiveConfstr(void)
 
 	if (!((methodArgumentCount()) == 1)) {
 		primitiveFailFor(PrimErrBadNumArgs);
-		return;
+		return 1;
 	}
 	optionIndex = stackIntegerValue(0);
 	if (failed()) {
 		primitiveFailFor(PrimErrBadArgument);
-		return;
+		return 1;
 	}
 
 	/* Find required buffer size */
 	bufferSize = confstr(optionIndex, 0, 0);
 	if (bufferSize == 0) {
 		popthenPush(2, nilObject());
-		return;
+		return 0;
 	}
 	bufferString = instantiateClassindexableSize(classString(), bufferSize);
 	buffer = firstIndexableField(bufferString);
 	result = confstr(optionIndex, buffer, bufferSize);
 	popthenPush(2, cStringasCollection(buffer, classString()));
+	return 0;
 }
 
 
@@ -4537,8 +4538,8 @@ realpathAsType(sqInt classIdentifier)
  */
 
 	/* UnixOSProcessPlugin>>#reapChildProcess: */
-static void
-reapChildProcess(int sigNum)
+static void 
+reapChildProcess(int sigNum, siginfo_t * i, void *  c)
 {
 
 #if !defined(SA_NOCLDSTOP)

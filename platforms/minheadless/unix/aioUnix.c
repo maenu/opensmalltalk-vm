@@ -243,8 +243,11 @@ aioPoll(long microSeconds)
 	 * cpu
 	 */
 
+	
 #ifdef EMSCRIPTEN
+	//select fails sometimes
 	if (1)
+		emscripten_sleep(microSeconds);
 		return 0;
 #endif
 #ifdef TARGET_OS_IS_IPHONE
@@ -308,7 +311,7 @@ long
 aioSleepForUsecs(long microSeconds)
 {
 #ifdef EMSCRIPTEN
-	emscripten_sleep(microSeconds);
+	emscripten_sleep(microSeconds / 1000);
 	microSeconds = 0;	/* poll but don't block */
 #elif defined(HAVE_NANOSLEEP)
 	//#if defined(HAVE_NANOSLEEP)

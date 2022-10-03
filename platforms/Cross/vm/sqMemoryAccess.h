@@ -148,11 +148,7 @@ typedef unsigned long long usqIntptr_t;
   static inline sqInt shortAtPointerput(char *ptr, int val)	{ return (sqInt)(*((short *)ptr)= (short)val); }
   static inline sqInt intAtPointer(char *ptr)			{ return (sqInt)(*((int *)ptr)); }
   static inline sqInt intAtPointerput(char *ptr, int val)	{ return (sqInt)(*((int *)ptr)= val); }
-  static inline sqInt longAtPointer(char *ptr)			{ 
-	  if ((int)ptr == 0x03204000){
-		  printf("%p\n", ptr);
-	  }
-	  return *(sqInt *)ptr; }
+  static inline sqInt longAtPointer(char *ptr)			{ return *(sqInt *)ptr; }
   static inline sqInt longAtPointerput(char *ptr, sqInt val)	{ return *(sqInt *)ptr= val; }
   static inline sqLong long64AtPointer(char *ptr)			{ return *(sqLong *)ptr; }
   static inline sqLong long64AtPointerput(char *ptr, sqLong val)	{ return *(sqLong *)ptr= val; }

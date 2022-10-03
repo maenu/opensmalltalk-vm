@@ -46,6 +46,9 @@ extern char *squeakPlugins;
 extern char squeakExtraPluginsPath[];
 
 static const char *moduleNamePatterns[] = {
+#if defined(EMSCRIPTEN)
+    "%slib%s.so",
+#else
     "%s%s",
 #if defined(_WIN32)
     "%s%s.dll",
@@ -58,11 +61,16 @@ static const char *moduleNamePatterns[] = {
     "%s%s.so",
     "%slib%s.so",
 #endif
+#endif
     NULL
 };
 
 static const char *additionalModuleSearchPaths[] = {
-#if defined(_WIN32) || defined(EMSCRIPTEN)
+#if defined(_WIN32)
+#elif defined(EMSCRIPTEN)
+	"./",
+	"/",
+	"",
 #endif
 #if defined(__linux__) || defined(unix) || defined(__APPLE__)
     "/usr/local/lib/",
@@ -112,14 +120,13 @@ ioLoadModule(char *pluginName)
     if(moduleHandle)
         return moduleHandle;
 
+		//#ifndef EMSCRIPTEN
     moduleHandle = tryToLoadModuleInPath(squeakExtraPluginsPath, pluginName);
     if(moduleHandle)
         return moduleHandle;
-#ifndef EMSCRIPTEN
     moduleHandle = tryToLoadModuleInPath("", pluginName);
     if(moduleHandle)
         return moduleHandle;
-#endif
     const char **currentPath = additionalModuleSearchPaths;
     for(; *currentPath; ++currentPath)
     {
@@ -127,6 +134,7 @@ ioLoadModule(char *pluginName)
         if(moduleHandle)
             return moduleHandle;
     }
+		//#endif
 
     if(sqVMOptionTraceModuleLoading)
         fprintf(stderr, "Failed to load module: %s\n", pluginName);

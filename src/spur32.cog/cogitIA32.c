@@ -3682,9 +3682,7 @@ detectFeatures(AbstractInstruction * self_in_detectFeatures)
 #  if !DUAL_MAPPED_CODE_ZONE
 	
 #  endif
-#ifndef EMSCRIPTEN
 	setCpuidWord0(self_in_detectFeatures, cpuid(1));
-#endif
 	zeroOpcodeIndexForNewOpcodes();
 	genoperand(PushR, EDX);
 	genoperand(PushR, ECX);
@@ -3700,9 +3698,7 @@ detectFeatures(AbstractInstruction * self_in_detectFeatures)
 	outputInstructionsForGeneratedRuntimeAt(startAddress);
 	/* begin resetMethodZoneBase: */
 	methodZoneBase = startAddress;
-#ifndef EMSCRIPTEN
 	setCpuidWord1(self_in_detectFeatures, cpuid(0x80000001));
-#endif
 }
 
 
@@ -11961,7 +11957,6 @@ generateStackPointerCapture(void)
 	assertCStackWellAligned();
 	oldMethodZoneBase = methodZoneBase;
 	oldTrampolineTableIndex = trampolineTableIndex;
-#ifndef EMSCRIPTEN
 	generateCaptureCStackPointers(1);
 	ceCaptureCStackPointers();
 	if (!((cFramePointerInUse = checkIfCFramePointerInUse()))) {
@@ -11969,7 +11964,6 @@ generateStackPointerCapture(void)
 		trampolineTableIndex = oldTrampolineTableIndex;
 		generateCaptureCStackPointers(0);
 	}
-#endif
 #  endif // defined(cFramePointerInUse)
 	/* begin ensureWritableCodeZone */
 #  if !DUAL_MAPPED_CODE_ZONE

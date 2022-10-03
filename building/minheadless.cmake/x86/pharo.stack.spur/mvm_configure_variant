@@ -2,7 +2,9 @@
 if ../../../../scripts/checkSCCSversion ; then exit 1; fi
 . ../common/configure_variant.sh
 
-cmake ../../../.. -G "$GENERATOR_NAME" -DCMAKE_BUILD_TYPE="$VARIANT_NAME" $CMAKE_EXTRA_ARGS \
+cmake ../../../../.. -G "$GENERATOR_NAME" -DCMAKE_BUILD_TYPE="$VARIANT_NAME" $CMAKE_EXTRA_ARGS \
     -DBUILD_I386_VERSION=On -DPHARO_BRANDING=On -DSPUR_OBJECT_MODEL=On -DCOG_JIT=Off \
     -DSUPPORT_TRADITIONAL_DISPLAY=Off -DALLOW_SDL2=Off \
-    -DCMAKE_INSTALL_PREFIX=install-dist
+    -DCMAKE_INSTALL_PREFIX=install-dist \
+ -DCMAKE_C_FLAGS='-DNO_FFI_TEST=1' \
+ -DCMAKE_CXX_FLAGS='-DNO_FFI_TEST=1'

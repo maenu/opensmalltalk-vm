@@ -9,7 +9,7 @@ if ../../../../scripts/checkSCCSversion ; then exit 1; fi
 # -sERROR_ON_WASM_CHANGES_AFTER_LINK -gdwarf-5 -gsplit-dwarf -gpubnames -sSAFE_HEAP_LOG=1
 emcmake cmake ../../../../.. \
 	-DCMAKE_BUILD_TYPE="$VARIANT_NAME" $CMAKE_EXTRA_ARGS \
-    -DCMAKE_INSTALL_PREFIX=install-dist \
+	-DCMAKE_INSTALL_PREFIX=install-dist \
 	-G "$GENERATOR_NAME" \
 	-DMINIMAL_PLUGIN_SET=Off \
 	-DPHARO_BRANDING=On \
@@ -17,6 +17,6 @@ emcmake cmake ../../../../.. \
 	-DSPUR_OBJECT_MODEL=On \
 	-DCOG_JIT=Off \
 	-DGENERATE_TOP_LEVEL_RUN_SCRIPT=Off \
-    -DSUPPORT_TRADITIONAL_DISPLAY=On \
+	-DSUPPORT_TRADITIONAL_DISPLAY=On \
 	-DALLOW_SDL2=On \
 	-DHAVE_SDL2=On

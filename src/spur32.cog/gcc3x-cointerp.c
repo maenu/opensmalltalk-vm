@@ -16391,9 +16391,7 @@ static sqInt
 enterSmalltalkExecutiveImplementation(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
 	assertCStackWellAligned();
-#ifndef EMSCRIPTEN
 	ceCaptureCStackPointers();
-#endif
 	if ((((usqInt)(longAt(GIV(framePointer) + FoxMethod)))) < (startOfMemory())) {
 		returnToExecutivepostContextSwitch(0, 1);
 	}
