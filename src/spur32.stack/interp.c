@@ -66868,7 +66868,6 @@ primitiveDoPrimitiveWithArgs(void)
 	assert((remapBufferCount()) == 0);
 	/* begin initPrimCall */
 	GIV(primFailCode) = 0;
-	printCallStack();
 	dispatchFunctionPointer(primitiveFunctionPointer);
 	assert(maybeLeakCheckExternalPrimCall(GIV(newMethod)));
 	/* begin maybeRetryPrimitiveOnFailure */
