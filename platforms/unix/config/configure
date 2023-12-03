@@ -12422,9 +12422,8 @@ if [ "$VM_CFLAGS" != "" ]; then
 		CFLAGS="-g -O2 -D__ARM_ARCH_ISA_A64 -DARM64 -D__arm__ -D__arm64__ -D__aarch64__"
 		;;
 
-	riscv64)
-		TARGET_ARCH="-march=rv64gcv -mabi=lp64d"
-		CFLAGS="-g -O2 -D__linux__ -D__riscv64__"
+		riscv64) TARGET_ARCH="-march=rv64gcv -mabi=lp64d"
+			CFLAGS="-g -O2 -D__riscv64__"
 		;;
 
 	*)
@@ -14698,7 +14697,7 @@ else
 int
 main ()
 {
-tzet();
+tzset();
   ;
   return 0;
 }
@@ -19705,11 +19704,28 @@ if test -f ../../bochsx64/cpu/libcpu.a \
 else
 	echo "../../bochsx64 libraries have not been built; not building BochsX64Plugin"
 
-	{
-		$as_echo "$as_me:${as_lineno-$LINENO}: result: ******** disabling ${plugin}" >&5
-		$as_echo "******** disabling ${plugin}" >&6
-	}
-	disabled_plugins="${disabled_plugins} ${plugin}"
+
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: ******** disabling ${plugin}" >&5
+$as_echo "******** disabling ${plugin}" >&6; }
+  disabled_plugins="${disabled_plugins} ${plugin}"
+fi
+if test "${plibs}"; then
+  llibs="${LIBS}"
+  for l in ${plibs}; do
+  llibs="${llibs} -l${l}"
+  done
+  echo ${llibs} > ${plugin}.lib
+fi
+plugin="ClipboardExtendedPlugin"
+plibs=""
+rm -f ClipboardExtendedPlugin.sub ClipboardExtendedPlugin.lib
+# Require X11
+if test "${have_x}" != "yes"; then
+
+
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: ******** disabling ${plugin}" >&5
+$as_echo "******** disabling ${plugin}" >&6; }
+  disabled_plugins="${disabled_plugins} ${plugin}"
 fi
 if test "${plibs}"; then
 	llibs="${LIBS}"
@@ -20034,6 +20050,37 @@ rm -f IA32ABI.sub IA32ABI.lib
 ia32abi_objs="IA32ABI.o AlienSUnitTestProcedures.o xabicc.o"
 
 IA32ABI_OBJS=$ia32abi_objs
+
+if test "${plibs}"; then
+  llibs="${LIBS}"
+  for l in ${plibs}; do
+  llibs="${llibs} -l${l}"
+  done
+  echo ${llibs} > ${plugin}.lib
+fi
+plugin="JoystickTabletPlugin"
+plibs=""
+rm -f JoystickTabletPlugin.sub JoystickTabletPlugin.lib
+# -*- sh -*-
+
+# Currently, the plugin is Linux-specific.
+ac_fn_c_check_header_mongrel "$LINENO" "linux/input.h" "ac_cv_header_linux_input_h" "$ac_includes_default"
+if test "x$ac_cv_header_linux_input_h" = xyes; then :
+
+
+$as_echo "#define HAVE_LINUX_INPUT_H 1" >>confdefs.h
+
+
+else
+
+
+
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: ******** disabling ${plugin}" >&5
+$as_echo "******** disabling ${plugin}" >&6; }
+  disabled_plugins="${disabled_plugins} ${plugin}"
+
+fi
+
 
 if test "${plibs}"; then
 	llibs="${LIBS}"

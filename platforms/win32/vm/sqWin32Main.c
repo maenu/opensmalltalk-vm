@@ -38,18 +38,6 @@
 #include "sqAssert.h"
 #include "sqWin32Backtrace.h"
 #include "sqSCCSVersion.h"
-#if COGVM
-# include "cogmethod.h"
-# if COGMTVM
-#	include "cointerpmt.h"
-# else
-#	include "cointerp.h"
-# endif
-#else
-#  if SPURVM
-     extern usqInt maxOldSpaceSize;
-#  endif
-#endif
 
 
 /************************************************************************************************************/
@@ -113,7 +101,7 @@ extern void printPhaseTime(int);
 LONG CALLBACK sqExceptionFilter(PEXCEPTION_POINTERS exp);
 
 /* Import from sqWin32Window.c */
-char * GetAttributeString(sqInt id);
+const char *getAttributeString(sqInt id);
 void ShowSplashScreen(void);
 void HideSplashScreen(void);
 
@@ -367,7 +355,7 @@ crashDumpFile( /* OUT */ WCHAR fileName[])
 	else
 	// fall through to dump to vmLogDir
 # endif
-	wsprintf(fileName,L"%s%s",vmLogDirW,L"crash.dmp");
+	wsprintfW(fileName,L"%s%s",vmLogDirW,L"crash.dmp");
 #endif
 	return fopen_for_append(fileName);
 }
@@ -533,18 +521,16 @@ void SetSystemTrayIcon(BOOL on)
 
 char *GetVMOption(int id)
 {
-  if (id < numOptionsVM)
+  if (id >= 0 && id < numOptionsVM)
     return vmOptions[id];
-  else
-    return NULL;
+  return NULL;
 }
 
 char *GetImageOption(int id)
 {
-  if (id < numOptionsImage)
+  if (id >= 0 && id < numOptionsImage)
     return imageOptions[id];
-  else
-    return NULL;
+  return NULL;
 }
 
 char *ioGetLogDirectory(void) {
@@ -949,10 +935,8 @@ getVersionInfo(int verbose)
 #else
 # define INTERP_BUILD interpreterVersion
 #endif
-  char processor[32];
   char *info = (char *)malloc(4096);
   info[0] = '\0';
-  getAttributeIntoLength(1003,processor,sizeof(processor));
 
 #if SPURVM
 # if BytesPerOop == 8
@@ -971,14 +955,14 @@ getVersionInfo(int verbose)
 # define BuildVariant "Assert" ObjectMemory
 #endif
 
-  sprintf(info+strlen(info), "%s [" BuildVariant " %s VM]\n", vmBuildString, processor);
+  sprintf(info+strlen(info), "%s [" BuildVariant " %s VM]\n", vmBuildString, getAttributeString(1003)); // 1003 == processor
   if (verbose)
     sprintf(info+strlen(info), "Built from: ");
   sprintf(info+strlen(info), "%s\n", INTERP_BUILD);
 #if COGVM
   if (verbose)
     sprintf(info+strlen(info), "With: ");
-  sprintf(info+strlen(info), "%s\n", GetAttributeString(1008)); /* __cogitBuildInfo */
+  sprintf(info+strlen(info), "%s\n", getAttributeString(1008)); /* __cogitBuildInfo */
 #endif
   if (verbose)
     sprintf(info+strlen(info), "Revision: ");
@@ -1256,7 +1240,7 @@ error(const char *msg) {
   if (f) {
     time_t crashTime = time(NULL);
     fprintf(f,"---------------------------------------------------------------------\n");
-    fprintf(f,"%s %s\n\n", ctime(&crashTime), GetAttributeString(0));
+    fprintf(f,"%s %s\n\n", ctime(&crashTime), getAttributeString(0));
 
 	fprintf(f,
 			"Error in %s thread\nReason: %s\n\n",
@@ -1947,12 +1931,16 @@ strtobkmg(const char *str)
 static int
 parseVMArgument(int argc, char *argv[])
 {
+#if SPURVM
+	extern usqInt maxOldSpaceSize;
+#endif
+
 	/* flags */
-	if      (!strcmp(argv[0], VMOPTION("help")))		{
+	if      (!strcmp(argv[0], VMOPTION("help"))) {
 		printUsage(1);
 		return 1;
 	}
-	else if (!strcmp(argv[0], VMOPTION("version")))	{ versionInfo();	return 1; }
+	else if (!strcmp(argv[0], VMOPTION("version"))) { versionInfo();	return 1; }
 	else if (!strcmp(argv[0], VMOPTION("headless"))) { fHeadlessImage = true; return 1; }
 	else if (!strcmp(argv[0], VMOPTION("headfull"))) { fHeadlessImage = false; return 1;}
 	else if (!strcmp(argv[0], VMOPTION("timephases"))) {
@@ -2068,6 +2056,14 @@ parseVMArgument(int argc, char *argv[])
 		return 1; }
 	else if (!strcmp(argv[0], VMOPTION("debugfailonffiexception"))) {
 		debugBreakOnException = true;
+		return 1; }
+	else if (argc > 1 && !strcmp(argv[0], VMOPTION("eventtrace"))) {
+		extern sqInt eventTraceMask;
+		eventTraceMask = atoi(argv[1]);
+		return 2; }
+	else if (!strncmp(argv[0], VMOPTION("eventtrace:"), strlen(VMOPTION("eventtrace:")))) {
+		extern sqInt eventTraceMask;
+		eventTraceMask = atoi(argv[0]+strlen(VMOPTION("leakcheck:")));
 		return 1; }
 #endif /* STACKVM */
 #if COGVM

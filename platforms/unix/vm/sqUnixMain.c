@@ -74,8 +74,12 @@
 #undef	DEBUG_MODULES
 
 #ifdef MUSL
-void pushOutputFile(char *fileNameOrStdioIndex) {;}
-void popOutputFile() {;}
+void
+pushOutputFile(char *fileNameOrStdioIndex)
+{;}
+void
+popOutputFile()
+{;}
 #endif
 
 #undef	IMAGE_DUMP				/* define to enable SIGHUP and SIGQUIT handling */
@@ -98,7 +102,7 @@ static char   vmLogDirA[PATH_MAX+1];	/* where to write crash.dmp */
        char **argVec=		0;
        char **envVec=		0;
 
-static int    vmArgCnt=		0;	/* for getAttributeIntoLength() */
+static int    vmArgCnt=		0;	/* for getAttributeString() */
 static char **vmArgVec=		0;
 static int    squeakArgCnt=	0;
 static char **squeakArgVec=	0;
@@ -164,7 +168,8 @@ void (*ioProcessEventsHandler) (void) = ioProcessEventsDefault;
 static unsigned int   lowResMSecs= 0;
 static struct timeval startUpTime;
 
-static void sigalrm(int signum)
+static void
+sigalrm(int signum)
 {
   lowResMSecs+= LOW_RES_TICK_MSECS;
   forceInterruptCheck();
@@ -232,7 +237,8 @@ time_t convertToSqueakTime(time_t unixTime);
 sqLong convertToLongSqueakTime(time_t unixTime);
 
 /* returns the local wall clock time */
-sqInt ioSeconds(void)
+sqInt
+ioSeconds(void)
 {
   return convertToSqueakTime(time(0));
 }
@@ -246,7 +252,7 @@ sqInt ioSeconds(void)
 #define MicrosecondsPerMillisecond 1000ULL
 /* Compute the current VM time basis, the number of microseconds from 1901. */
 
-static unsigned long long
+static usqLong
 currentUTCMicroseconds()
 {
 	struct timeval utcNow;
@@ -257,13 +263,15 @@ currentUTCMicroseconds()
 }
 
 usqLong
-ioUTCMicroseconds() { return currentUTCMicroseconds(); }
+ioUTCMicroseconds()
+{ return currentUTCMicroseconds(); }
 
 /* This is an expensive interface for use by profiling code that wants the time
  * now rather than as of the last heartbeat.
  */
 usqLong
-ioUTCMicrosecondsNow() { return currentUTCMicroseconds(); }
+ioUTCMicrosecondsNow()
+{ return currentUTCMicroseconds(); }
 #endif /* STACKVM */
 
 
@@ -280,7 +288,8 @@ ioUTCMicrosecondsNow() { return currentUTCMicroseconds(); }
  * convertToLongSqueakTime.
  *
  */
-time_t convertToSqueakTime(time_t unixTime)
+time_t
+convertToSqueakTime(time_t unixTime)
 {
 #ifdef HAVE_TM_GMTOFF
   unixTime+= localtime(&unixTime)->tm_gmtoff;
@@ -305,7 +314,8 @@ time_t convertToSqueakTime(time_t unixTime)
  *
  * Answer an sqLong which is guaranteed to be 64 bits on all platforms.
  */
-sqLong convertToLongSqueakTime(time_t unixTime)
+sqLong
+convertToLongSqueakTime(time_t unixTime)
 {
 sqLong result;
 
@@ -332,7 +342,8 @@ sqLong result;
 /* copy src filename to target, if src is not an absolute filename,
  * prepend the cwd to make target absolute
   */
-static void pathCopyAbs(char *target, const char *src, size_t targetSize)
+static void
+pathCopyAbs(char *target, const char *src, size_t targetSize)
 {
   if (src[0] == '/')
     strcpy(target, src);
@@ -407,9 +418,12 @@ recordFullPathForImageName(const char *localImageName)
 
 /* vm access */
 
-sqInt imageNameSize(void) { return strlen(imageName); }
+sqInt
+imageNameSize(void)
+{ return strlen(imageName); }
 
-sqInt imageNameGetLength(sqInt sqImageNameIndex, sqInt length)
+sqInt
+imageNameGetLength(sqInt sqImageNameIndex, sqInt length)
 {
   char *sqImageName= pointerForOop(sqImageNameIndex);
   int count, i;
@@ -425,7 +439,8 @@ sqInt imageNameGetLength(sqInt sqImageNameIndex, sqInt length)
 }
 
 
-sqInt imageNamePutLength(sqInt sqImageNameIndex, sqInt length)
+sqInt
+imageNamePutLength(sqInt sqImageNameIndex, sqInt length)
 {
   char *sqImageName= pointerForOop(sqImageNameIndex);
   int count, i;
@@ -443,14 +458,19 @@ sqInt imageNamePutLength(sqInt sqImageNameIndex, sqInt length)
 }
 
 
-char *getImageName(void) { return imageName; }
+char *
+getImageName(void)
+{ return imageName; }
 
 
 /*** VM Home Directory Path ***/
 
-sqInt vmPathSize(void) { return strlen(vmPath); }
+sqInt
+vmPathSize(void)
+{ return strlen(vmPath); }
 
-sqInt vmPathGetLength(sqInt sqVMPathIndex, sqInt length)
+sqInt
+vmPathGetLength(sqInt sqVMPathIndex, sqInt length)
 {
   char *stVMPath= pointerForOop(sqVMPathIndex);
   int count, i;
@@ -465,17 +485,20 @@ sqInt vmPathGetLength(sqInt sqVMPathIndex, sqInt length)
   return count;
 }
 
-char* ioGetLogDirectory(void) { return ""; };
-sqInt ioSetLogDirectoryOfSize(void* lblIndex, sqInt sz){ return 1; }
+char *
+ioGetLogDirectory(void)
+{ return ""; };
+sqInt
+ioSetLogDirectoryOfSize(void* lblIndex, sqInt sz)
+{ return 1; }
 
 
 /*** power management ***/
 
 
-sqInt ioDisablePowerManager(sqInt disableIfNonZero)
-{
-  return true;
-}
+sqInt
+ioDisablePowerManager(sqInt disableIfNonZero)
+{ return true; }
 
 
 /*** Access to system attributes and command-line arguments ***/
@@ -491,75 +514,52 @@ sqInt ioDisablePowerManager(sqInt disableIfNonZero)
 # endif
 #endif
 
-char *
-GetAttributeString(sqInt id)
+const char *
+getAttributeString(sqInt id)
 {
-  if (id < 0)	/* VM argument */
-    {
-      if (-id  < vmArgCnt)
-	return vmArgVec[-id];
-    }
-  else
-    switch (id)
-      {
-      case 0:
-	return vmName[0] ? vmName : vmArgVec[0];
-      case 1:
-	return imageName;
-      case 1001:
-	/* OS type: "unix", "win32", "mac", ... */
-	return OS_TYPE;
-      case 1002:
-	/* OS name: e.g. "solaris2.5" on unix, "win95" on win32, ... */
-	return VM_TARGET_OS;
-      case 1003:
-	/* processor architecture: e.g. "68k", "x86", "PowerPC", ...  */
-	return VM_TARGET_CPU;
-      case 1004:
-	/* Interpreter version string */
-	return  (char *)interpreterVersion;
-      case 1005:
-	/* window system name */
-	return  dpy->winSystemName();
-      case 1006:
-	/* vm build string */
-	return VM_BUILD_STRING;
+	if (id < 0) { // VM command-line argument
+		if (-id  < vmArgCnt)
+			return vmArgVec[-id];
+		return 0;
+	}
+    switch (id) {
+	case 0: // VM name
+		return vmName[0] ? vmName : vmArgVec[0];
+	case 1: // image name
+		return imageName;
+	case 1001: // OS type: "unix", "win32", "mac", ...
+		return OS_TYPE;
+	case 1002: // OS name: e.g. "solaris2.5" on unix, "win95" on win32, ...
+		return VM_TARGET_OS;
+	case 1003: // processor architecture: e.g. "68k", "x86", "PowerPC", ...
+		return VM_TARGET_CPU;
+	case 1004: // Interpreter version string
+		return  (const char *)interpreterVersion;
+	case 1005: // window system name
+		return  (const char *)dpy->winSystemName();
+	case 1006: // vm build string
+		return VM_BUILD_STRING;
 #if STACKVM
-      case 1007: { /* interpreter build info */
+	case 1007: { // interpreter build info
 		extern char *__interpBuildInfo;
-		return __interpBuildInfo;
-      }
+		return (const char *)__interpBuildInfo;
+	}
 # if COGVM
-      case 1008: { /* cogit build info */
+	case 1008: { // cogit build info
 		extern char *__cogitBuildInfo;
-		return __cogitBuildInfo;
-      }
+		return (const char *)__cogitBuildInfo;
+	}
 # endif
 #endif
+	case 1009: // source tree version info
+		return (const char *)sourceVersionString(' ');
 
-	  case 1009: /* source tree version info */
-		return sourceVersionString(' ');
-
-      default:
-	if ((id - 2) < squeakArgCnt)
-	  return squeakArgVec[id - 2];
-      }
-  success(false);
-  return "";
+	default:
+		if ((id - 2) < squeakArgCnt)
+			return squeakArgVec[id - 2];
+	}
+	return 0;
 }
-
-sqInt attributeSize(sqInt id)
-{
-  return strlen(GetAttributeString(id));
-}
-
-sqInt getAttributeIntoLength(sqInt id, sqInt byteArrayIndex, sqInt length)
-{
-  if (length > 0)
-    strncpy(pointerForOop(byteArrayIndex), GetAttributeString(id), length);
-  return 0;
-}
-
 
 /*** event handling ***/
 
@@ -569,7 +569,8 @@ sqInt inputEventSemaIndex= 0;
 
 /* set asynchronous input event semaphore  */
 
-sqInt ioSetInputSemaphore(sqInt semaIndex)
+sqInt
+ioSetInputSemaphore(sqInt semaIndex)
 {
   if ((semaIndex == 0) || (noEvents == 1))
     success(false);
@@ -581,13 +582,15 @@ sqInt ioSetInputSemaphore(sqInt semaIndex)
 
 /*** display functions ***/
 
-sqInt ioFormPrint(sqInt bitsAddr, sqInt width, sqInt height, sqInt depth, double hScale, double vScale, sqInt landscapeFlag)
+sqInt
+ioFormPrint(sqInt bitsAddr, sqInt width, sqInt height, sqInt depth, double hScale, double vScale, sqInt landscapeFlag)
 {
   return dpy->ioFormPrint(bitsAddr, width, height, depth, hScale, vScale, landscapeFlag);
 }
 
 #if STACKVM
-sqInt ioRelinquishProcessorForMicroseconds(sqInt us)
+sqInt
+ioRelinquishProcessorForMicroseconds(sqInt us)
 {
 # if ITIMER_HEARTBEAT
   extern void checkHeartStillBeats();
@@ -600,7 +603,8 @@ sqInt ioRelinquishProcessorForMicroseconds(sqInt us)
 #else /* STACKVM */
 static int lastInterruptCheck= 0;
 
-sqInt ioRelinquishProcessorForMicroseconds(sqInt us)
+sqInt
+ioRelinquishProcessorForMicroseconds(sqInt us)
 {
   int now;
   dpy->ioRelinquishProcessorForMicroseconds(us);
@@ -614,17 +618,22 @@ sqInt ioRelinquishProcessorForMicroseconds(sqInt us)
 }
 #endif /* STACKVM */
 
-sqInt ioBeep(void)				 { return dpy->ioBeep(); }
+sqInt
+ioBeep(void)
+{ return dpy->ioBeep(); }
 
 /* Right now this funciton isn't responded to so we simply provide a dummy
  * definition here.  If any of the display subsystems do need it then it will
  * have to be reimplemented as per the functions above.
  */
-void  ioNoteDisplayChangedwidthheightdepth(void *b, int w, int h, int d) {}
+void
+ioNoteDisplayChangedwidthheightdepth(void *b, int w, int h, int d)
+{}
 
 #if defined(IMAGE_DUMP)
 
-static void emergencyDump(int quit)
+static void
+emergencyDump(int quit)
 {
   extern sqInt preSnapshot(void);
   extern sqInt postSnapshot(void);
@@ -668,17 +677,18 @@ static void emergencyDump(int quit)
 
 #ifdef PharoVM
 
-void ioProcessEventsDefault(void)
+void
+ioProcessEventsDefault(void)
 {
 	sqInt result;
 	extern sqInt inIOProcessEvents;
 
-#if defined(IMAGE_DUMP)
+# if defined(IMAGE_DUMP)
 	if (dumpImageFile) {
 		emergencyDump(0);
 		dumpImageFile= 0;
 	}
-#endif
+# endif
 	/* inIOProcessEvents controls ioProcessEvents.  If negative then
 	 * ioProcessEvents is disabled.  If >= 0 inIOProcessEvents is incremented
 	 * to avoid reentrancy (i.e. for native GUIs).
@@ -692,30 +702,33 @@ void ioProcessEventsDefault(void)
 		inIOProcessEvents -= 1;
 }
 
-extern void setIoProcessEventsHandler(void * handler) {
-    ioProcessEventsHandler = (void(*)()) handler;
-}
+void
+setIoProcessEventsHandler(void * handler)
+{ ioProcessEventsHandler = (void(*)()) handler; }
 
-sqInt ioProcessEvents(void) {
+sqInt
+ioProcessEvents(void)
+{
     aioPoll(0);
     if(ioProcessEventsHandler)
         ioProcessEventsHandler();
     return 0;
 }
 
-#else
+#else // PharoVM
 
-sqInt ioProcessEvents(void)
+sqInt
+ioProcessEvents(void)
 {
 	sqInt result;
 	extern sqInt inIOProcessEvents;
 
-#if defined(IMAGE_DUMP)
+# if defined(IMAGE_DUMP)
 	if (dumpImageFile) {
 		emergencyDump(0);
 		dumpImageFile= 0;
 	}
-#endif
+# endif
 	/* inIOProcessEvents controls ioProcessEvents.  If negative then
 	 * ioProcessEvents is disabled.  If >= 0 inIOProcessEvents is incremented
 	 * to avoid reentrancy (i.e. for native GUIs).
@@ -729,147 +742,200 @@ sqInt ioProcessEvents(void)
 		inIOProcessEvents -= 1;
 
 	return result;
-}
-
+} // PharoVM
 #endif
 
-void	ioDrainEventQueue() {}
+void
+ioDrainEventQueue()
+{}
 
-double ioScreenScaleFactor(void)	 { return dpy->ioScreenScaleFactor(); }
-sqInt ioScreenDepth(void)		 { return dpy->ioScreenDepth(); }
-sqInt ioScreenSize(void)		 { return dpy->ioScreenSize(); }
+double
+ioScreenScaleFactor(void)
+{ return dpy->ioScreenScaleFactor(); }
+sqInt
+ioScreenDepth(void)
+{ return dpy->ioScreenDepth(); }
+sqInt
+ioScreenSize(void)
+{ return dpy->ioScreenSize(); }
 
-sqInt ioSetCursorWithMask(sqInt cursorBitsIndex, sqInt cursorMaskIndex, sqInt offsetX, sqInt offsetY)
+sqInt
+ioSetCursorWithMask(sqInt cursorBitsIndex, sqInt cursorMaskIndex, sqInt offsetX, sqInt offsetY)
 {
   return dpy->ioSetCursorWithMask(cursorBitsIndex, cursorMaskIndex, offsetX, offsetY);
 }
 
-sqInt ioSetCursorARGB(sqInt cursorBitsIndex, sqInt extentX, sqInt extentY, sqInt offsetX, sqInt offsetY)
+sqInt
+ioSetCursorARGB(sqInt cursorBitsIndex, sqInt extentX, sqInt extentY, sqInt offsetX, sqInt offsetY)
 {
   return dpy->ioSetCursorARGB(cursorBitsIndex, extentX, extentY, offsetX, offsetY);
 }
 
-sqInt ioSetCursor(sqInt cursorBitsIndex, sqInt offsetX, sqInt offsetY)
-{
-  return ioSetCursorWithMask(cursorBitsIndex, 0, offsetX, offsetY);
-}
+sqInt
+ioSetCursor(sqInt cursorBitsIndex, sqInt offsetX, sqInt offsetY)
+{ return ioSetCursorWithMask(cursorBitsIndex, 0, offsetX, offsetY); }
 
-sqInt ioSetFullScreen(sqInt fullScreen)	{ return dpy->ioSetFullScreen(fullScreen); }
-sqInt ioForceDisplayUpdate(void)	{ return dpy->ioForceDisplayUpdate(); }
+sqInt
+ioSetFullScreen(sqInt fullScreen)
+{ return dpy->ioSetFullScreen(fullScreen); }
+sqInt
+ioForceDisplayUpdate(void)
+{ return dpy->ioForceDisplayUpdate(); }
 
-sqInt ioShowDisplay(sqInt dispBitsIndex, sqInt width, sqInt height, sqInt depth, sqInt l, sqInt r, sqInt t, sqInt b)
-{
-  return dpy->ioShowDisplay(dispBitsIndex, width, height, depth, l, r, t, b);
-}
+sqInt
+ioShowDisplay(sqInt dispBitsIndex, sqInt width, sqInt height, sqInt depth, sqInt l, sqInt r, sqInt t, sqInt b)
+{ return dpy->ioShowDisplay(dispBitsIndex, width, height, depth, l, r, t, b); }
 
-sqInt ioHasDisplayDepth(sqInt i) { return dpy->ioHasDisplayDepth(i); }
+sqInt
+ioHasDisplayDepth(sqInt i)
+{ return dpy->ioHasDisplayDepth(i); }
 
-sqInt ioSetDisplayMode(sqInt width, sqInt height, sqInt depth, sqInt fullscreenFlag)
-{
-  return dpy->ioSetDisplayMode(width, height, depth, fullscreenFlag);
-}
+sqInt
+ioSetDisplayMode(sqInt width, sqInt height, sqInt depth, sqInt fullscreenFlag)
+{ return dpy->ioSetDisplayMode(width, height, depth, fullscreenFlag); }
 
-sqInt clipboardSize(void)
-{
-  return dpy->clipboardSize();
-}
+sqInt
+clipboardSize(void)
+{ return dpy->clipboardSize(); }
 
-sqInt clipboardWriteFromAt(sqInt count, sqInt byteArrayIndex, sqInt startIndex)
-{
-  return dpy->clipboardWriteFromAt(count, byteArrayIndex, startIndex);
-}
+sqInt
+clipboardWriteFromAt(sqInt count, sqInt byteArrayIndex, sqInt startIndex)
+{ return dpy->clipboardWriteFromAt(count, byteArrayIndex, startIndex); }
 
-sqInt clipboardReadIntoAt(sqInt count, sqInt byteArrayIndex, sqInt startIndex)
-{
-  return dpy->clipboardReadIntoAt(count, byteArrayIndex, startIndex);
-}
+sqInt
+clipboardReadIntoAt(sqInt count, sqInt byteArrayIndex, sqInt startIndex)
+{ return dpy->clipboardReadIntoAt(count, byteArrayIndex, startIndex); }
 
-char **clipboardGetTypeNames(void)
-{
-  return dpy->clipboardGetTypeNames();
-}
+char **
+clipboardGetTypeNames(void)
+{ return dpy->clipboardGetTypeNames(); }
 
-sqInt clipboardSizeWithType(char *typeName, int ntypeName)
-{
-  return dpy->clipboardSizeWithType(typeName, ntypeName);
-}
+sqInt
+clipboardSizeWithType(char *typeName, int ntypeName)
+{ return dpy->clipboardSizeWithType(typeName, ntypeName); }
 
-void clipboardWriteWithType(char *data, size_t nData, char *typeName, size_t nTypeNames, int isDnd, int isClaiming)
+void
+clipboardWriteWithType(char *data, size_t nData, char *typeName, size_t nTypeNames, int isDnd, int isClaiming)
 {
   dpy->clipboardWriteWithType(data, nData, typeName, nTypeNames, isDnd, isClaiming);
 }
 
-sqInt ioGetNextEvent(sqInputEvent *evt)	{ return dpy->ioGetNextEvent(evt); }
+sqInt
+ioGetNextEvent(sqInputEvent *evt)
+{ return dpy->ioGetNextEvent(evt); }
 
 /*** Window labeling ***/
-char* ioGetWindowLabel(void) {return "";}
+char *
+ioGetWindowLabel(void)
+{ return ""; }
 
-sqInt ioSetWindowLabelOfSize(void* lbl, sqInt size)
+sqInt
+ioSetWindowLabelOfSize(void* lbl, sqInt size)
 { return dpy->hostWindowSetTitle((long)dpy->ioGetWindowHandle(), lbl, size); }
 
-sqInt ioIsWindowObscured(void) {return false;}
+sqInt
+ioIsWindowObscured(void)
+{ return false; }
 
 /** Misplaced Window-Size stubs, so the VM will link. **/
-sqInt ioGetWindowWidth()
+sqInt
+ioGetWindowWidth()
 { int wh = dpy->hostWindowGetSize((long)dpy->ioGetWindowHandle());
   return wh >> 16; } 
 
-sqInt ioGetWindowHeight()
+sqInt
+ioGetWindowHeight()
 { int wh = dpy->hostWindowGetSize((long)dpy->ioGetWindowHandle());
   return (short)wh; } 
 
-void* ioGetWindowHandle(void) { return dpy->ioGetWindowHandle(); }
+void *
+ioGetWindowHandle(void)
+{ return dpy->ioGetWindowHandle(); }
 
-sqInt ioSetWindowWidthHeight(sqInt w, sqInt h)
+sqInt
+ioSetWindowWidthHeight(sqInt w, sqInt h)
 { return dpy->hostWindowSetSize((long)dpy->ioGetWindowHandle(),w,h); }
 
 /*** Drag and Drop ***/
 
-sqInt dndOutStart(char *types, int ntypes)	{ return dpy->dndOutStart(types, ntypes); }
-sqInt dndOutAcceptedType(char *type, int ntype)	{ return dpy->dndOutAcceptedType(type, ntype); }
-void  dndOutSend(char *bytes, int nbytes)	{        dpy->dndOutSend(bytes, nbytes); }
-void  dndReceived(char *fileName)			{        dpy->dndReceived(fileName); }
+sqInt
+dndOutStart(char *types, int ntypes)
+{ return dpy->dndOutStart(types, ntypes); }
+sqInt
+dndOutAcceptedType(char *type, int ntype)
+{ return dpy->dndOutAcceptedType(type, ntype); }
+void
+dndOutSend(char *bytes, int nbytes)
+{ dpy->dndOutSend(bytes, nbytes); }
+void
+dndReceived(char *fileName)
+{ dpy->dndReceived(fileName); }
 
 /*** OpenGL ***/
 
 int verboseLevel= 1;
 
-struct SqDisplay *ioGetDisplayModule(void)	{ return dpy; }
+struct SqDisplay *
+ioGetDisplayModule(void)
+{ return dpy; }
 
-void *ioGetDisplay(void)			{ return dpy->ioGetDisplay(); }
-void *ioGetWindow(void)				{ return dpy->ioGetWindow(); }
-sqInt ioGLinitialise(void)			{ return dpy->ioGLinitialise(); }
+void *
+ioGetDisplay(void)
+{ return dpy->ioGetDisplay(); }
+void *
+ioGetWindow(void)
+{ return dpy->ioGetWindow(); }
+sqInt
+ioGLinitialise(void)
+{ return dpy->ioGLinitialise(); }
 
-sqInt  ioGLcreateRenderer(glRenderer *r, sqInt x, sqInt y, sqInt w, sqInt h, sqInt flags)
-{
-  return dpy->ioGLcreateRenderer(r, x, y, w, h, flags);
-}
+sqInt
+ioGLcreateRenderer(glRenderer *r, sqInt x, sqInt y, sqInt w, sqInt h, sqInt flags)
+{ return dpy->ioGLcreateRenderer(r, x, y, w, h, flags); }
 
-sqInt ioGLmakeCurrentRenderer(glRenderer *r)	{ return dpy->ioGLmakeCurrentRenderer(r); }
-void  ioGLdestroyRenderer(glRenderer *r)	{	 dpy->ioGLdestroyRenderer(r); }
-void  ioGLswapBuffers(glRenderer *r)		{	 dpy->ioGLswapBuffers(r); }
+sqInt
+ioGLmakeCurrentRenderer(glRenderer *r)
+{ return dpy->ioGLmakeCurrentRenderer(r); }
+void
+ioGLdestroyRenderer(glRenderer *r)
+{	 dpy->ioGLdestroyRenderer(r); }
+void
+ioGLswapBuffers(glRenderer *r)
+{	 dpy->ioGLswapBuffers(r); }
 
-void  ioGLsetBufferRect(glRenderer *r, sqInt x, sqInt y, sqInt w, sqInt h)
-{
-  dpy->ioGLsetBufferRect(r, x, y, w, h);
-}
+void
+ioGLsetBufferRect(glRenderer *r, sqInt x, sqInt y, sqInt w, sqInt h)
+{ dpy->ioGLsetBufferRect(r, x, y, w, h); }
 
 
-sqInt  primitivePluginBrowserReady(void)	{ return dpy->primitivePluginBrowserReady(); }
-sqInt  primitivePluginRequestURLStream(void)	{ return dpy->primitivePluginRequestURLStream(); }
-sqInt  primitivePluginRequestURL(void)		{ return dpy->primitivePluginRequestURL(); }
-sqInt  primitivePluginPostURL(void)		{ return dpy->primitivePluginPostURL(); }
-sqInt  primitivePluginRequestFileHandle(void)	{ return dpy->primitivePluginRequestFileHandle(); }
-sqInt  primitivePluginDestroyRequest(void)	{ return dpy->primitivePluginDestroyRequest(); }
-sqInt  primitivePluginRequestState(void)	{ return dpy->primitivePluginRequestState(); }
+sqInt
+primitivePluginBrowserReady(void)
+{ return dpy->primitivePluginBrowserReady(); }
+sqInt
+primitivePluginRequestURLStream(void)
+{ return dpy->primitivePluginRequestURLStream(); }
+sqInt
+primitivePluginRequestURL(void)
+{ return dpy->primitivePluginRequestURL(); }
+sqInt
+primitivePluginPostURL(void)
+{ return dpy->primitivePluginPostURL(); }
+sqInt
+primitivePluginRequestFileHandle(void)
+{ return dpy->primitivePluginRequestFileHandle(); }
+sqInt
+primitivePluginDestroyRequest(void)
+{ return dpy->primitivePluginDestroyRequest(); }
+sqInt
+primitivePluginRequestState(void)
+{ return dpy->primitivePluginRequestState(); }
 
 
 /*** errors ***/
 
-static void outOfMemory(void)
-{
-  error("out of memory\n");
-}
+static void
+outOfMemory(void)
+{ error("out of memory\n"); }
 
 /* Print an error message, possibly a stack trace, do /not/ exit.
  * Allows e.g. writing to a log file and stderr.
@@ -893,7 +959,7 @@ reportStackState(FILE *file,const char *msg, char *date, int printAll, ucontext_
 #endif
 
 	fprintf(file,"\n%s%s%s\n\n", msg, date ? " " : "", date ? date : "");
-	fprintf(file,"%s\n%s\n\n", GetAttributeString(0), getVersionInfo(1));
+	fprintf(file,"%s\n%s\n\n", getAttributeString(0), getVersionInfo(1));
 
 #if COGVM
 	/* Do not attempt to report the stack until the VM is initialized!! */
@@ -976,7 +1042,7 @@ printRegisterState(FILE *file,ucontext_t *uap)
 			regs[REG_EIP]);
 	return v(regs[REG_EIP]);
 #elif __FreeBSD__ && __i386__
-	struct mcontext *regs = &uap->uc_mcontext;
+	mcontext_t *regs = &uap->uc_mcontext;
 	fprintf(file,
 			"\teax 0x%08x ebx 0x%08x ecx 0x%08x edx 0x%08x\n"
 			"\tedi 0x%08x esi 0x%08x ebp 0x%08x esp 0x%08x\n"
@@ -1044,6 +1110,20 @@ printRegisterState(FILE *file,ucontext_t *uap)
 	        regs->arm_r8,regs->arm_r9,regs->arm_r10,regs->arm_fp,
 	        regs->arm_ip, regs->arm_sp, regs->arm_lr, regs->arm_pc);
 	return v(uap->uc_mcontext.arm_pc);
+# elif __linux__ && __riscv64__
+	struct sigcontext *regs = &uap->uc_mcontext.__gregs;
+	fprintf(file,
+		"\t PC =%14p   SP =%14p   RA =%14p \n"
+	        "\t a0 =%14p   a1 =%14p   a2 =%14p   a3 =%14p \n"
+	        "\t a4 =%14p   a5 =%14p   a6 =%14p   a7 =%14p \n"
+	        "\t t0 =%14p   t1 =%14p   t2 =%14p   t3 =%14p \n"
+		"\ts0/fp =%14p s1 =%14p   s2 =%14p   s3 =%14p \n",
+	        regs[0], regs[2], regs[1],
+		regs[10], regs[11], regs[12], regs[13],
+		regs[14], regs[15], regs[16], regs[17],
+		regs[5], regs[6], regs[28], regs[29],
+		regs[8], regs[9], regs[18], regs[19]);
+	return v(uap->uc_mcontext.__gregs[0]);
 #else
 	fprintf(file,"don't know how to derive register state from a ucontext_t on this platform\n");
 	return v(0);
@@ -1161,10 +1241,12 @@ sigsegv(int sig, siginfo_t *info, ucontext_t *uap)
 
 #if defined(IMAGE_DUMP)
 static void
-sighup(int ignore) { dumpImageFile= 1; }
+sighup(int ignore)
+{ dumpImageFile = 1; }
 
 static void
-sigquit(int ignore) { emergencyDump(1); }
+sigquit(int ignore)
+{ emergencyDump(1); }
 #endif
 
 
@@ -1209,7 +1291,8 @@ static struct moduleDescription moduleDescriptions[]=
 static struct moduleDescription *defaultModules= moduleDescriptions + 4;
 
 
-struct SqModule *queryLoadModule(char *type, char *name, int query)
+struct SqModule *
+queryLoadModule(char *type, char *name, int query)
 {
   char modName[MAXPATHLEN], itfName[32];
   struct SqModule *module= 0;
@@ -1256,17 +1339,16 @@ struct SqModule *queryLoadModule(char *type, char *name, int query)
 }
 
 
-struct SqModule *queryModule(char *type, char *name)
-{
-  return queryLoadModule(type, name, 1);
-}
+struct SqModule *
+queryModule(char *type, char *name)
+{ return queryLoadModule(type, name, 1); }
 
-struct SqModule *loadModule(char *type, char *name)
-{
-  return queryLoadModule(type, name, 0);
-}
+struct SqModule *
+loadModule(char *type, char *name)
+{ return queryLoadModule(type, name, 0); }
 
-struct SqModule *requireModule(char *type, char *name)
+struct SqModule *
+requireModule(char *type, char *name)
 {
   struct SqModule *m= loadModule(type, name);
   if (!m) abort();
@@ -1274,7 +1356,8 @@ struct SqModule *requireModule(char *type, char *name)
 }
 
 
-static char *canonicalModuleName(char *name)
+static char *
+canonicalModuleName(char *name)
 {
   struct moduleDescription *md;
 
@@ -1287,7 +1370,8 @@ static char *canonicalModuleName(char *name)
 }
 
 
-static void requireModuleNamed(char *type)	/*** NOTE: MODIFIES THE ARGUMENT! ***/
+static void
+requireModuleNamed(char *type)	/*** NOTE: MODIFIES THE ARGUMENT! ***/
 {
   if      (!strncmp(type,  "vm-", 3)) type+= 3;
   else if (!strncmp(type, "-vm-", 4)) type+= 4;
@@ -1320,7 +1404,8 @@ static void requireModuleNamed(char *type)	/*** NOTE: MODIFIES THE ARGUMENT! ***
   }
 }
 
-static void requireModulesNamed(char *specs)
+static void
+requireModulesNamed(char *specs)
 {
   char *vec= strdup(specs);
   char *pos= vec;
@@ -1338,7 +1423,8 @@ static void requireModulesNamed(char *specs)
 }
 
 
-static void checkModuleVersion(struct SqModule *module, int required, int actual)
+static void
+checkModuleVersion(struct SqModule *module, int required, int actual)
 {
   if (required != actual)
     {
@@ -1349,7 +1435,8 @@ static void checkModuleVersion(struct SqModule *module, int required, int actual
 }
 
 
-static void loadImplicit(struct SqModule **addr, char *evar, char *type, char *name)
+static void
+loadImplicit(struct SqModule **addr, char *evar, char *type, char *name)
 {
   if ((!*addr) && getenv(evar) && !(*addr= queryModule(type, name)))
     {
@@ -1361,7 +1448,8 @@ static void loadImplicit(struct SqModule **addr, char *evar, char *type, char *n
     }
 }
 
-static void loadModules(void)
+static void
+loadModules(void)
 {
   loadImplicit(&displayModule, "DISPLAY",     "display", "X11");
   loadImplicit(&soundModule,   "AUDIOSERVER", "sound",   "NAS");
@@ -1424,7 +1512,8 @@ strtobkmg(const char *str)
 }
 
 #if !STACKVM && !COGVM
-static int jitArgs(char *str)
+static int
+jitArgs(char *str)
 {
   char *endptr= str;
   int  args= 3;				/* default JIT mode = fast compiler */
@@ -1441,7 +1530,8 @@ static int jitArgs(char *str)
 /* ----------------- built-in main vm module */
 
 # include <locale.h>
-static void vm_parseEnvironment(void)
+static void
+vm_parseEnvironment(void)
 {
   char *ev= setlocale(LC_CTYPE, "");
   if (ev)
@@ -1480,7 +1570,8 @@ static void usage();
 static void versionInfo(void);
 
 
-static int parseModuleArgument(int argc, char **argv, struct SqModule **addr, char *type, char *name)
+static int
+parseModuleArgument(int argc, char **argv, struct SqModule **addr, char *type, char *name)
 {
   if (*addr)
     {
@@ -1492,7 +1583,8 @@ static int parseModuleArgument(int argc, char **argv, struct SqModule **addr, ch
 }
 
 
-static int vm_parseArgument(int argc, char **argv)
+static int
+vm_parseArgument(int argc, char **argv)
 {
   // parse arguments for main vm module including those that
   // implicitly load modules.
@@ -1631,6 +1723,10 @@ static int vm_parseArgument(int argc, char **argv)
     extern sqInt pollpip;
     pollpip = atoi(argv[1]);	 
     return 2; }
+  else if (argc > 1 && !strcmp(argv[0], VMOPTION("eventtrace"))) { 
+	extern sqInt eventTraceMask;
+	eventTraceMask = atoi(argv[1]);		 
+    return 2; }
   else if (!strcmp(argv[0], VMOPTION("failonffiexception"))) {
 		extern sqInt ffiExceptionResponse;
 		ffiExceptionResponse = 1;
@@ -1710,81 +1806,144 @@ static int vm_parseArgument(int argc, char **argv)
 }
 
 
-static void vm_printUsage(void)
+static char **optionStrings = 0;
+static int count = 0;
+
+// exported for modules to use
+void
+option(char *optionString)
 {
-  printf("\nCommon <option>s:\n");
-  printf("  "VMOPTION("encoding")" <enc>       set the internal character encoding (default: MacRoman)\n");
-  printf("  "VMOPTION("help")"                 print this help message, then exit\n");
-  printf("  "VMOPTION("memory")" <size>[kmg]   use fixed heap size (added to image size)\n");
+	// This is used at start-up, so no need to check.
+	optionStrings = realloc(optionStrings, sizeof(char *) * ++count);
+	optionStrings[count - 1] = optionString;
+}
+
+void
+extendOption(const char *extension)
+{
+	char *opt = optionStrings[count - 1];
+	int len = strlen(opt);
+	char *newopt = malloc(len + strlen(extension) + 1);
+	strcpy(newopt, opt);
+	strcpy(newopt + len, extension);
+	optionStrings[count - 1] = newopt;
+}
+
+static int
+sortStrings(const char **a, const char **b)
+{ return strcmp(*b,*a); } // N.B. reversed sort
+
+void
+printOptionStrings()
+{
+	qsort(optionStrings,
+			count,
+			sizeof(char *),
+			(int (*)(const void*,const void*))sortStrings);
+	while (--count >= 0)
+		printf(optionStrings[count]);
+}
+
+void
+resetOptions()
+{
+	free(optionStrings);
+	optionStrings = 0;
+	count = 0;
+}
+
+static void
+vm_printUsage(void)
+{
+	int i;
+	resetOptions();
+	option("\nCommon <option>s:\n");
+	option("  "VMOPTION("encoding")" <enc>       set the internal character encoding (default: MacRoman)\n");
+	option("  "VMOPTION("help")"                 print this help message, then exit\n");
+	option("  "VMOPTION("memory")" <size>[kmg]   use fixed heap size (added to image size)\n");
 #if !SPURVM
-  printf("  "VMOPTION("mmap")" <size>[kmg]     limit dynamic heap size (default: %dm)\n", DefaultMmapSize);
+	option("  "VMOPTION("mmap")" <size>[kmg]     limit dynamic heap size (default: 1024m)\n");
 #endif
-  printf("  "VMOPTION("timephases")"           print start load and run times\n");
+	option("  "VMOPTION("timephases")"           print start load and run times\n");
 #if STACKVM || NewspeakVM
-  printf("  "VMOPTION("breaksel")" selector    set breakpoint on send of selector\n");
+	option("  "VMOPTION("breaksel")" selector    set breakpoint on send of selector\n");
 #endif
 #if STACKVM
-  printf("  "VMOPTION("failonffiexception")"   when in an FFI callout primitive catch exceptions and fail the primitive\n");
-  printf("  "VMOPTION("breakmnu")" selector    set breakpoint on MNU of selector\n");
-  printf("  "VMOPTION("eden")" <size>[kmg]     use given eden size\n");
-  printf("  "VMOPTION("leakcheck")" num        check for leaks in the heap\n");
-  printf("  "VMOPTION("stackpages")" <num>     use given number of stack pages\n");
+	option("  "VMOPTION("failonffiexception")"   when in an FFI callout primitive catch exceptions and fail the primitive\n");
+	option("  "VMOPTION("breakmnu")" selector    set breakpoint on MNU of selector\n");
+	option("  "VMOPTION("eden")" <size>[kmg]     use given eden size\n");
+	option("  "VMOPTION("leakcheck")" num        check for leaks in the heap\n");
+	option("  "VMOPTION("stackpages")" <num>     use given number of stack pages\n");
 #endif
-  printf("  "VMOPTION("noevents")"             disable event-driven input support\n");
-  printf("  "VMOPTION("nohandlers")"           disable sigsegv & sigusr1 handlers\n");
+	option("  "VMOPTION("noevents")"             disable event-driven input support\n");
+	option("  "VMOPTION("nohandlers")"           disable sigsegv & sigusr1 handlers\n");
 #if defined(AIO_DEBUG)
-  printf("  "VMOPTION("aiolog")"               output async io logging info\n");
+	option("  "VMOPTION("aiolog")"               output async io logging info\n");
 #endif
-  printf("  "VMOPTION("plugins")" <path>       specify alternative plugin location (see manpage)\n");
-  printf("  "VMOPTION("textenc")" <enc>        set encoding for external text (default: UTF-8)\n");
-  printf("  "VMOPTION("version")"              print version information, then exit\n");
-  printf("  -vm-<sys>-<dev>       use the <dev> driver for <sys> (see below)\n");
+	option("  "VMOPTION("plugins")" <path>       specify alternative plugin location (see manpage)\n");
+	option("  "VMOPTION("textenc")" <enc>        set encoding for external text (default: UTF-8)\n");
+	option("  "VMOPTION("version")"              print version information, then exit\n");
+	option("  -vm-<sys>-<dev>       use the <dev> driver for <sys> (see below)\n");
 #if STACKVM || NewspeakVM
+	option("  "VMOPTION("pollpip")" (0|1)        output on each poll for input\n");
+	option("  "VMOPTION("eventtrace")" mask      print input events with types in mask to stderr\n");
+	{ const char *eventtraceFlagsMeanings[] = EVENT_TYPE_MASKS_INIT;
+		i = 0;
+		while (eventtraceFlagsMeanings[i]) {
+			extendOption("    ");
+			extendOption(eventtraceFlagsMeanings[i++]);
+			extendOption("\n");
+		}
+	}
 # if COGVM
-  printf("  "VMOPTION("logplugin")" name       only log primitives in plugin\n");
-  printf("  "VMOPTION("trace")"[=flags]        enable tracing (optionally to a specific value)\n");
-  {
-	extern const char *traceFlagsMeanings[];
-	int i = 0;
-	while (traceFlagsMeanings[i])
-		printf("    %s\n", traceFlagsMeanings[i++]);
-  }
+	option("  "VMOPTION("logplugin")" name       only log primitives in plugin\n");
+	option("  "VMOPTION("trace")"[=flags]        enable tracing (optionally to a specific value)\n");
+	{ extern const char *traceFlagsMeanings[];
+		i = 0;
+		while (traceFlagsMeanings[i]) {
+			extendOption("    ");
+			extendOption(traceFlagsMeanings[i++]);
+			extendOption("\n");
+		}
+	}
 # else
-  printf("  "VMOPTION("sendtrace")"            enable send tracing\n");
+	option("  "VMOPTION("sendtrace")"            enable send tracing\n");
 # endif
-  printf("  "VMOPTION("warnpid")"              print pid in warnings\n");
+	option("  "VMOPTION("warnpid")"              print pid in warnings\n");
 #endif
 #if COGVM
-  printf("  "VMOPTION("codesize")" <size>[mk]  set machine code memory to bytes\n");
-  printf("  "VMOPTION("tracestores")"          enable store tracing (assert check stores)\n");
-  printf("  "VMOPTION("cogmaxlits")" <n>       set max number of literals for methods compiled to machine code\n");
-  printf("  "VMOPTION("cogminjumps")" <n>      set min number of backward jumps for interpreted methods to be considered for compilation to machine code\n");
-  printf("  "VMOPTION("reportheadroom")"       report unused stack headroom on exit\n");
+	option("  "VMOPTION("codesize")" <size>[mk]  set machine code memory to bytes\n");
+	option("  "VMOPTION("tracestores")"          enable store tracing (assert check stores)\n");
+	option("  "VMOPTION("cogmaxlits")" <n>       set max number of literals for methods compiled to machine code\n");
+	option("  "VMOPTION("cogminjumps")" <n>      set min number of backward jumps for interpreted methods to be considered for compilation to machine code\n");
+	option("  "VMOPTION("reportheadroom")"       report unused stack headroom on exit\n");
 #endif
 #if SPURVM
-  printf("  "VMOPTION("maxoldspace")" <size>[kmg] set max size of old space memory to bytes\n");
-  printf("  "VMOPTION("logscavenge")"          log scavenging to scavenge.log\n");
+	option("  "VMOPTION("maxoldspace")" <size>[kmg] set max size of old space memory to bytes\n");
+	option("  "VMOPTION("logscavenge")"          log scavenging to scavenge.log\n");
 #endif
-  printf("  "VMOPTION("blockonerror")"         on error or segv block, not exit.  useful for attaching gdb\n");
-  printf("  "VMOPTION("blockonwarn")"          on warning block, don't warn.  useful for attaching gdb\n");
-  printf("  "VMOPTION("exitonwarn")"           treat warnings as errors, exiting on warn\n");
+	option("  "VMOPTION("blockonerror")"         on error or segv block, not exit.  useful for attaching gdb\n");
+	option("  "VMOPTION("blockonwarn")"          on warning block, don't warn.  useful for attaching gdb\n");
+	option("  "VMOPTION("exitonwarn")"           treat warnings as errors, exiting on warn\n");
+	printOptionStrings();
 #if 1
-  printf("Deprecated:\n");
+	printf("Deprecated:\n");
+	printf("  "VMOPTION("display")" <dpy>        equivalent to '-vm-display-X11 "VMOPTION("display")" <dpy>'\n");
+	printf("  "VMOPTION("headless")"             equivalent to '-vm-display-X11 "VMOPTION("headless")"'\n");
 # if !STACKVM
-  printf("  "VMOPTION("jit")"                  enable the dynamic compiler (if available)\n");
+	printf("  "VMOPTION("jit")"                  enable the dynamic compiler (if available)\n");
 # endif
-  printf("  "VMOPTION("notimer")"              disable interval timer for low-res clock\n");
-  printf("  "VMOPTION("display")" <dpy>        equivalent to '-vm-display-X11 "VMOPTION("display")" <dpy>'\n");
-  printf("  "VMOPTION("headless")"             equivalent to '-vm-display-X11 "VMOPTION("headless")"'\n");
-  printf("  "VMOPTION("nodisplay")"            equivalent to '-vm-display-null'\n");
-  printf("  "VMOPTION("nomixer")"              disable modification of mixer settings\n");
-  printf("  "VMOPTION("nosound")"              equivalent to '-vm-sound-null'\n");
-  printf("  "VMOPTION("quartz")"               equivalent to '-vm-display-Quartz'\n");
+	printf("  "VMOPTION("nodisplay")"            equivalent to '-vm-display-null'\n");
+	printf("  "VMOPTION("nomixer")"              disable modification of mixer settings\n");
+	printf("  "VMOPTION("nosound")"              equivalent to '-vm-sound-null'\n");
+	printf("  "VMOPTION("notimer")"              disable interval timer for low-res clock\n");
+	printf("  "VMOPTION("quartz")"               equivalent to '-vm-display-Quartz'\n");
 #endif
 }
 
 
-static void vm_printUsageNotes(void)
+static void
+vm_printUsageNotes(void)
 {
 #if SPURVM
 	printf("  If '"VMOPTION("memory")"' or '"VMOPTION("maxoldspace")"' are not specified then the heap will grow dynamically.\n");
@@ -1797,7 +1956,8 @@ static void vm_printUsageNotes(void)
 }
 
 
-static void *vm_makeInterface(void)
+static void *
+vm_makeInterface(void)
 {
   fprintf(stderr, "this cannot happen\n");
   abort();
@@ -1810,7 +1970,8 @@ SqModuleDefine(vm, Module);
 /*** options processing ***/
 
 
-static void usage()
+static void
+usage()
 {
   struct SqModule *m= 0;
   printf("Usage: %s [<option>...] [<imageName> [<argument>...]]\n", argVec[0]);
@@ -1843,7 +2004,8 @@ static void usage()
 }
 
 
-char *getVersionInfo(int verbose)
+char *
+getVersionInfo(int verbose)
 {
 #if STACKVM
   extern char *__interpBuildInfo;
@@ -1856,10 +2018,8 @@ char *getVersionInfo(int verbose)
 #endif
   extern char *revisionAsString();
   extern char *vm_date, *cc_version, *ux_version;
-  char processor[32];
-  char *info = (char *)malloc(4096);
+  char *info = (char *)malloc(8192);
   info[0] = '\0';
-  getAttributeIntoLength(1003,(sqInt)processor,sizeof(processor));
 
 #if SPURVM
 # if BytesPerOop == 8
@@ -1890,14 +2050,14 @@ char *getVersionInfo(int verbose)
 #if defined(USE_XSHM)
   sprintf(info+strlen(info), " XShm");
 #endif
-  sprintf(info+strlen(info), " %s %s [" BuildVariant HBID " %s VM]\n", vm_date, cc_version, processor);
+  sprintf(info+strlen(info), " %s %s [" BuildVariant HBID " %s VM]\n", vm_date, cc_version, getAttributeString(1003)); // 1003 == processor
   if (verbose)
     sprintf(info+strlen(info), "Built from: ");
   sprintf(info+strlen(info), "%s\n", INTERP_BUILD);
 #if COGVM
   if (verbose)
     sprintf(info+strlen(info), "With: ");
-  sprintf(info+strlen(info), "%s\n", GetAttributeString(1008)); /* __cogitBuildInfo */
+  sprintf(info+strlen(info), "%s\n", getAttributeString(1008)); /* __cogitBuildInfo */
 #endif
   if (verbose)
     sprintf(info+strlen(info), "Revision: ");
@@ -1910,14 +2070,16 @@ char *getVersionInfo(int verbose)
 }
 
 
-static void versionInfo(void)
+static void
+versionInfo(void)
 {
   printf("%s", getVersionInfo(0));
   exit(0);
 }
 
 
-static void parseArguments(int argc, char **argv)
+static void
+parseArguments(int argc, char **argv)
 {
 # define skipArg()	(--argc, argv++)
 # define saveArg()	(vmArgVec[vmArgCnt++]= *skipArg())
@@ -2040,7 +2202,7 @@ imgInit(void)
 
 #if defined(__GNUC__) && ( defined(ppc) || defined(__ppc) || defined(__ppc__)  \
 			|| defined(POWERPC) || defined(__POWERPC) || defined (__POWERPC__) )
-  void mtfsfi(unsigned long long fpscr)
+  void mtfsfi(usqLong fpscr)
   {
     __asm__("lfd   f0, %0" :: "m"(fpscr));
     __asm__("mtfsf 0xff, f0");
@@ -2079,7 +2241,7 @@ main(int argc, char **argv, char **envp)
 #endif
 
  /* Allocate arrays to store copies of pointers to command line
-     arguments.  Used by getAttributeIntoLength(). */
+     arguments.  Used by getAttributeString(). */
 
   if ((vmArgVec= calloc(argc + 1, sizeof(char *))) == 0)
     outOfMemory();
@@ -2203,7 +2365,9 @@ main(int argc, char **argv, char **envp)
   return 0;
 }
 
-sqInt ioExit(void) { return ioExitWithErrorCode(0); }
+sqInt
+ioExit(void)
+{ return ioExitWithErrorCode(0); }
 
 sqInt
 ioExitWithErrorCode(int ec)
@@ -2232,7 +2396,8 @@ extern sqInt reportStackHeadroom;
    on the (potentially unlimited) number of symlinks allowed in a
    path, but calling sysconf() seems like overkill. */
 
-sqInt sqGetFilenameFromString(char *aCharBuffer, char *aFilenameString, sqInt filenameLength, sqInt resolveAlias)
+sqInt
+sqGetFilenameFromString(char *aCharBuffer, char *aFilenameString, sqInt filenameLength, sqInt resolveAlias)
 {
   int numLinks= 0;
   struct stat st;
@@ -2283,7 +2448,8 @@ sqInt sqGetFilenameFromString(char *aCharBuffer, char *aFilenameString, sqInt fi
 }
 
 
-sqInt ioGatherEntropy(char *buffer, sqInt bufSize)
+sqInt
+ioGatherEntropy(char *buffer, sqInt bufSize)
 {
   int fd, count= 0;
 
@@ -2336,7 +2502,8 @@ isCFramePointerInUse(usqIntptr_t *cFrmPtrPtr, usqIntptr_t *cStkPtrPtr)
 static char * volatile p = 0;
 
 static void
-sighandler(int sig, siginfo_t *info, void *uap) { p = (char *)&sig; }
+sighandler(int sig, siginfo_t *info, void *uap)
+{ p = (char *)&sig; }
 
 static int
 getRedzoneSize()

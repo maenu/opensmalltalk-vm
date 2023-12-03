@@ -50,6 +50,9 @@ export APP
 
 default:	$(APP)
 
+.PHONY: assert debug cleanbundles installFrameworkDylibs pathapp
+.PHONY: signFrameworks signapp touchapp
+
 include ../common/Makefile.vm
 include ../common/Makefile.lib.extra
 include ../common/Makefile.sources
@@ -174,9 +177,9 @@ $(APP)/Contents/Resources/%.icns: $(OSXDIR)/%.icns
 # If Frameworks does not exist still add an rpath for it, allowing someone to
 # repackage the VM at a later date.
 pathapp:
-	install_name_tool -add_rpath @executable_path/../$(APPPLUGINDIR) $(VMEXE)
-	install_name_tool -add_rpath @executable_path/Contents/$(APPPLUGINDIR) $(VMEXE)
-	install_name_tool -add_rpath @executable_path/Contents/Frameworks $(VMEXE)
+	-install_name_tool -add_rpath @executable_path/../$(APPPLUGINDIR) $(VMEXE)
+	-install_name_tool -add_rpath @executable_path/Contents/$(APPPLUGINDIR) $(VMEXE)
+	-install_name_tool -add_rpath @executable_path/Contents/Frameworks $(VMEXE)
 	if [ -d "$(APP)/Contents/Frameworks" ]; then \
 		for d in `cd "$(APP)/Contents" >/dev/null; find Frameworks -type d | fgrep -v .dSYM`; do \
 			echo install_name_tool -add_rpath @executable_path/../$$d $(VMEXE); \

@@ -137,7 +137,7 @@ sqAllocateMemory(usqInt minHeapSize, usqInt desiredHeapSize)
 	address = (char *)(((usqInt)hint + alignment - 1) & ~(alignment - 1));
 
 	alloc = sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto
-				(roundUpToPage(desiredHeapSize), address, &allocBytes);
+				(roundUpToPage(desiredHeapSize), address, (sqInt*)&allocBytes);
 	if (!alloc) {
 		fprintf(stderr, "sqAllocateMemory: initial alloc failed!\n");
 		exit(errno);

@@ -137,7 +137,7 @@ sqAllocateMemory(usqInt minHeapSize, usqInt desiredHeapSize)
 	address = (char *)(((usqInt)hint + alignment - 1) & ~(alignment - 1));
 
 	alloc = sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto
-				(roundUpToPage(desiredHeapSize), address, &allocBytes);
+				(roundUpToPage(desiredHeapSize), address, (usqInt)&allocBytes);
 	if (!alloc) {
 		fprintf(stderr, "sqAllocateMemory: initial alloc failed!\n");
 		exit(errno);
@@ -150,10 +150,10 @@ sqAllocateMemory(usqInt minHeapSize, usqInt desiredHeapSize)
  * start of the region and assign its size through allocatedSizePointer.
  */
 void *
-sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(sqInt size, void *minAddress, sqInt *allocatedSizePointer)
+sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(usqInt size, void *minAddress, usqInt *allocatedSizePointer)
 {
 	char *address, *alloc;
-	long bytes, delta;
+	unsigned long bytes, delta;
 
 	address = (char *)roundUpToPage((unsigned long)minAddress);
 	bytes = roundUpToPage(size);
