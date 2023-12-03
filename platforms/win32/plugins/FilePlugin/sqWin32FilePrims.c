@@ -32,6 +32,15 @@
 
 extern struct VirtualMachine *interpreterProxy;
 
+/* Import from sqWin32Main.c */
+sqInt isFileHandleATTY(HANDLE fdHandle);
+sqInt fileHandleType(HANDLE fdHandle);
+
+#if defined(__MINGW32__) || defined(__MINGW64__)
+# include <io.h> // for _get_osfhandle
+#endif
+
+
 #define true  1
 #define false 0
 
@@ -105,8 +114,8 @@ sqFileClose(SQFile *f)
 
   if (!sqFileValid(f))
     FAIL();
-  if(!CloseHandle(FILE_HANDLE(f)))
-    FAIL();
+  if (!CloseHandle(FILE_HANDLE(f)))
+	return interpreterProxy->primitiveFailForOSError(GetLastError());
   RemoveHandleFromTable(win32Files, FILE_HANDLE(f));
   f->file = NULL;
   f->sessionID = 0;
@@ -115,14 +124,14 @@ sqFileClose(SQFile *f)
 }
 
 sqInt
-sqFileDeleteNameSize(char* fileNameIndex, sqInt fileNameSize)
+sqFileDeleteNameSize(char *fileNameIndex, sqInt fileNameSize)
 {
   WCHAR *win32Path = NULL;
 
   /* convert the file name into a null-terminated C string */
   ALLOC_WIN32_PATH(win32Path, fileNameIndex, fileNameSize);
 
-  if(hasCaseSensitiveDuplicate(win32Path))
+  if (hasCaseSensitiveDuplicate(win32Path))
     FAIL();
 
   /* DeleteFile will not delete a file with the read-only attribute set
@@ -138,7 +147,7 @@ sqFileDeleteNameSize(char* fileNameIndex, sqInt fileNameSize)
   the parent directory wont be empty. */
   SetFileAttributesW(win32Path, FILE_ATTRIBUTE_NORMAL);
 
-  if(!DeleteFileW(win32Path))
+  if (!DeleteFileW(win32Path))
     FAIL();
   
   return 1;
@@ -177,7 +186,7 @@ sqFileInit(void)
 sqInt sqFileShutdown(void) { return 1; }
 
 sqInt
-sqFileOpen(SQFile *f, char* fileNameIndex, sqInt fileNameSize, sqInt writeFlag)
+sqFileOpen(SQFile *f, char *fileNameIndex, sqInt fileNameSize, sqInt writeFlag)
 {
   /* Opens the given file using the supplied sqFile structure
      to record its state. Fails with no side effects if f is
@@ -219,7 +228,7 @@ sqFileOpen(SQFile *f, char* fileNameIndex, sqInt fileNameSize, sqInt writeFlag)
 }
 
 sqInt
-sqFileOpenNew(SQFile *f, char* fileNameIndex, sqInt fileNameSize, sqInt* exists)
+sqFileOpenNew(SQFile *f, char *fileNameIndex, sqInt fileNameSize, sqInt *exists)
 {
   HANDLE h;
   WCHAR *win32Path = NULL;
@@ -233,7 +242,7 @@ sqFileOpenNew(SQFile *f, char* fileNameIndex, sqInt fileNameSize, sqInt* exists)
      hasCaseSensitiveDuplicate() treats some paths as duplicates that
      CreateFileW() doesn't, sqFileOpenNew() will fail like sqFileOpen() would
    */
-  if(hasCaseSensitiveDuplicate(win32Path)) {
+  if (hasCaseSensitiveDuplicate(win32Path)) {
     f->sessionID = 0;
     FAIL();
   }
@@ -244,12 +253,13 @@ sqFileOpenNew(SQFile *f, char* fileNameIndex, sqInt fileNameSize, sqInt* exists)
 		  CREATE_NEW, /* Only create and open if it doesn't exist */
 		  FILE_ATTRIBUTE_NORMAL | FILE_FLAG_SEQUENTIAL_SCAN,
 		  NULL /* No template */);
-  if(h == INVALID_HANDLE_VALUE) {
+  if (h == INVALID_HANDLE_VALUE) {
     f->sessionID = 0;
     if (GetLastError() == ERROR_FILE_EXISTS)
       *exists = true;
     FAIL();
-  } else {
+  }
+  else {
     f->sessionID = thisSession;
     f->file = (HANDLE)h;
     f->writable = true;
@@ -350,11 +360,11 @@ int	status = 0;
 sqInt
 sqFileDescriptorType(int fdNum)
 {
-	return fileHandleType(_get_osfhandle(fdNum));
+	return fileHandleType((HANDLE)_get_osfhandle(fdNum));
 }
 
 size_t
-sqFileReadIntoAt(SQFile *f, size_t count, char* byteArrayIndex, size_t startIndex)
+sqFileReadIntoAt(SQFile *f, size_t count, char *byteArrayIndex, size_t startIndex)
 {
   /* Read count bytes from the given file into byteArray starting at
      startIndex. byteArray is the address of the first byte of a
@@ -376,7 +386,7 @@ sqFileReadIntoAt(SQFile *f, size_t count, char* byteArrayIndex, size_t startInde
 }
 
 sqInt
-sqFileRenameOldSizeNewSize(char* oldNameIndex, sqInt oldNameSize, char* newNameIndex, sqInt newNameSize)
+sqFileRenameOldSizeNewSize(char *oldNameIndex, sqInt oldNameSize, char *newNameIndex, sqInt newNameSize)
 {
   WCHAR *oldPath = NULL;
   WCHAR *newPath = NULL;
@@ -385,9 +395,9 @@ sqFileRenameOldSizeNewSize(char* oldNameIndex, sqInt oldNameSize, char* newNameI
   ALLOC_WIN32_PATH(oldPath, oldNameIndex, oldNameSize);
   ALLOC_WIN32_PATH(newPath, newNameIndex, newNameSize);
 
-  if(hasCaseSensitiveDuplicate(oldPath))
+  if (hasCaseSensitiveDuplicate(oldPath))
     FAIL();
-  if(!MoveFileW(oldPath, newPath))
+  if (!MoveFileW(oldPath, newPath))
     FAIL();
   
   return 1;
@@ -445,8 +455,7 @@ sqFileTruncate(SQFile *f, squeakFileOffsetType offset)
   if (!sqFileValid(f))
     FAIL();
   SetFilePointer(FILE_HANDLE(f), ofs.dwLow, &ofs.dwHigh, FILE_BEGIN);
-  if(!SetEndOfFile(FILE_HANDLE(f))) return 0;
-  return 1;
+  return SetEndOfFile(FILE_HANDLE(f));
 }
 
 sqInt
@@ -462,7 +471,7 @@ sqFileValid(SQFile *f)
 }
 
 size_t
-sqFileWriteFromAt(SQFile *f, size_t count, char* byteArrayIndex, size_t startIndex)
+sqFileWriteFromAt(SQFile *f, size_t count, char *byteArrayIndex, size_t startIndex)
 {
   /* Write count bytes to the given writable file starting at startIndex
      in the given byteArray. (See comment in sqFileReadIntoAt for interpretation
@@ -486,7 +495,8 @@ sqFileWriteFromAt(SQFile *f, size_t count, char* byteArrayIndex, size_t startInd
 /***************************************************************************/
 /* Image file functions                                                    */
 /***************************************************************************/
-int sqImageFileClose(sqImageFile h)
+int
+sqImageFileClose(sqImageFile h)
 {
   SetEndOfFile((HANDLE)(h-1));
   return CloseHandle((HANDLE)(h-1));
@@ -499,19 +509,19 @@ sqImageFileOpen(const char *fileName, const char *mode)
   WCHAR *win32Path = NULL;
   HANDLE h;
 
-  if(!mode) return 0;
+  if (!mode)
+	return 0;
   modePtr = mode;
-  while(*modePtr)
-    {
-      if(*modePtr == 'w') writeFlag = 1;
+  while (*modePtr) {
+      if (*modePtr == 'w') writeFlag = 1;
 	  /* Note: We cannot append here */
-	  if(*modePtr == 'a') return 0;
+	  if (*modePtr == 'a') return 0;
       modePtr++;
-    }
+  }
   /* convert the file name into a null-terminated C string */
   ALLOC_WIN32_PATH(win32Path, fileName, -1);
 
-  if(hasCaseSensitiveDuplicate(win32Path))
+  if (hasCaseSensitiveDuplicate(win32Path))
     return 0;
   
   h = CreateFileW(win32Path,
@@ -522,7 +532,7 @@ sqImageFileOpen(const char *fileName, const char *mode)
 		  FILE_ATTRIBUTE_NORMAL,
 		  NULL /* No template */);
 
-  if(h == INVALID_HANDLE_VALUE)
+  if (h == INVALID_HANDLE_VALUE)
     return 0;
  
   return (usqIntptr_t)h+1;
@@ -554,13 +564,13 @@ sqImageFileRead(void *ptr, size_t sz, size_t count, sqImageFile h)
     if (!ret || dwReallyRead != toRead) {
       DWORD err = GetLastError();
       if (sqMessageBox(MB_ABORTRETRYIGNORE, TEXT("VM Warning"), TEXT("Image file read problem (%d out of %d bytes read)"), dwReallyRead, toRead)
-        == IDABORT) return (size_t)(reallyRead / sz);
+        == IDABORT)
+		return reallyRead / sz;
       sqImageFileSeek(h, position);
       reallyRead = 0;
     }
-
   }
-  return (reallyRead / sz);
+  return reallyRead / sz;
 }
 
 squeakFileOffsetType
@@ -598,12 +608,13 @@ sqImageFileWrite(const void *ptr, size_t sz, size_t count, sqImageFile h)
     if (!ret || dwReallyWritten != toWrite) {
       DWORD err = GetLastError();
       if (sqMessageBox(MB_ABORTRETRYIGNORE, TEXT("VM Warning"), TEXT("Image file read problem (%d out of %d bytes read)"), dwReallyWritten, toWrite)
-        == IDABORT) return (size_t)(reallyWritten / sz);
+        == IDABORT)
+		return reallyWritten / sz;
       sqImageFileSeek(h, position);
       reallyWritten = 0;
     }
   }
-  return (size_t) (reallyWritten / sz);
+  return reallyWritten / sz;
 }
 
 squeakFileOffsetType
