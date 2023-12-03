@@ -5,6 +5,11 @@ Emscripten can be used as a drop-in replacement for gcc/clang and cmake.
 Based on MinHeadless Linux 32bit sources, as Emscripten provides Linux-like environment (pthreads, nanosleep, dlopen, file system).
 Check the latest few commits of maenu to see changed files.
 
+## Limitations
+
+Does not work with Emscripten SDK (EMSDK) version *3.1.(45,50+?]*.
+```emsdk install 3.1.45 & emsdk activate 3.1.45 & source "$EMSDK/emsdk_env.sh"```
+
 ## Build & Run
 
 ### 1. Install Emscripten
