@@ -846,12 +846,13 @@ if(NOT ONLY_CONFIG_H)
 		#-sASYNCIFY -sASYNCIFY_ONLY='[\"main\", \"call_path_to_your_main_loop\", \"SDL_WaitEvent\", \"SDL_WaitEventTimeout\", \"SDL_Delay\", \"SDL_RenderPresent\", \"GLES2_RenderPresent\", \"SDL_GL_SwapWindow\", \"Emscripten_GLES_SwapWindow\", \"byn$$fpcast-emu$$Emscripten_GLES_SwapWindow\", \"SDL_UpdateWindowSurface\", \"SDL_UpdateWindowSurfaceRects\", \"Emscripten_UpdateWindowFramebuffer\"]' \
 		set(CMAKE_EXECUTABLE_SUFFIX ".html")
 		add_executable(${VM_EXECUTABLE_NAME} platforms/minheadless/common/sqMain.c)
+		# IMPORTANT paths need to be changed for different builds
 		SET_TARGET_PROPERTIES(${VM_EXECUTABLE_NAME} PROPERTIES LINK_FLAGS " \
 			 -lGL -sUSE_SDL=2 \
 			-sMAIN_MODULE -sASYNCIFY \
 			-sUSE_PTHREADS -sPTHREAD_POOL_SIZE=1 -sALLOW_MEMORY_GROWTH -sEXIT_RUNTIME -sLLD_REPORT_UNDEFINED -sERROR_ON_UNDEFINED_SYMBOLS=0 \
-			--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/pre.js \
-			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/pharo.stack.spur.wasm/image-new@/ \
+			--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/squeak.stack.spur.wasm/pre.js \
+			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/squeak.stack.spur.wasm/image@/ \
 			")
 	    target_link_libraries(${VM_EXECUTABLE_NAME} ${VM_LIBRARY_NAME})
 	else()

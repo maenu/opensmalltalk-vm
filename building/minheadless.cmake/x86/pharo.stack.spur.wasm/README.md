@@ -5,33 +5,6 @@ Emscripten can be used as a drop-in replacement for gcc/clang and cmake.
 Based on MinHeadless Linux 32bit sources, as Emscripten provides Linux-like environment (pthreads, nanosleep, dlopen, file system).
 Check the latest few commits of maenu to see changed files.
 
-## Current issues
-
-* Most adjustments are just putting EMSCRIPTEN in a macro or script.
-Should be fine, but should be tested to not interfere with other builds.
-
-* Compiles and runs, but seems to be stuck in initial GC and Heartbeat.
-Those could be related to incorrect get/set64() implementation.
-
-* Removed mmap address hint, as it caused errors.
-
-* Using argv `eval '1 + 3'` to do a simple eval does not terminate.
-
-* Interpreter repeats these bytecodes forever (what is this?):
-
-```
-332
-384
-​385
-​348
-​501
-​339
-320
-401
-272
-380
-```
-
 ## Build & Run
 
 ### 1. Install Emscripten
@@ -51,7 +24,7 @@ curl https://get.pharo.org/32/90 | bash
 
 ### 3. Build VM
 
-```./mvm_configure_variant debug Debug && make -C debug install```
+```./mvm_configure_variant release Release && make -C release install```
 
 ### 4. Run a web server
 
@@ -59,7 +32,7 @@ curl https://get.pharo.org/32/90 | bash
 
 ### 5. Launch VM
 
-[http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist/squeak.html](http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/debug/dist/squeak.html)
+[http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/release/dist/pharo.html](http://localhost:9090/building/minheadless.cmake/x86/pharo.stack.spur.wasm/release/dist/pharo.html)
 
 ### 6. Inspect running VM
 
