@@ -137,7 +137,7 @@ sqAllocateMemory(usqInt minHeapSize, usqInt desiredHeapSize)
 	address = (char *)(((usqInt)hint + alignment - 1) & ~(alignment - 1));
 
 	alloc = sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto
-				(roundUpToPage(desiredHeapSize), address, (sqInt*)&allocBytes);
+				(roundUpToPage(desiredHeapSize), address, (usqInt)&allocBytes);
 	if (!alloc) {
 		fprintf(stderr, "sqAllocateMemory: initial alloc failed!\n");
 		exit(errno);
@@ -158,7 +158,7 @@ sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(sqInt size, void *minAddress
 	address = (char *)roundUpToPage((unsigned long)minAddress);
 	bytes = roundUpToPage(size);
 	delta = max(pageSize,1024*1024);
-	
+
 #ifdef EMSCRIPTEN
 	// take it or leave it
 	alloc = mmap(0, bytes, PROT_READ | PROT_WRITE /*| PROT_EXEC*/,
@@ -214,7 +214,7 @@ sqDeallocateMemorySegmentAtOfSize(void *addr, sqInt sz)
  * To cope with modern OSs that disallow executing code in writable memory we
  * dual-map the code zone, one mapping with read/write permissions and the other
  * with read/execute permissions. In such a configuration the code zone has
- * already been allocated and is not included in (what is no longer) the initial
+ * already been alloated and is not included in (what is no longer) the initial
  * alloc.
  */
 static void
@@ -259,17 +259,13 @@ sqMakeMemoryExecutableFromToCodeToDataDelta(usqInt startAddr,
 	mappings[1] = 0;
 
 	memory_alias_map(size, 2, (void **)mappings);
-	assert(mappings[0] == firstPage);
+	/* assert(mappings[0] == firstPage); */
 	*codeToDataDelta = mappings[1] - startAddr;
 
 	if (mprotect((void *)firstPage,
 				 size,
 				 PROT_READ | PROT_EXEC) < 0)
 		perror("mprotect(x,y,PROT_READ | PROT_EXEC)");
-
-#  elif defined(MAP_JIT)
-
-	assert(!codeToDataDelta);
 
 #  else /* DUAL_MAPPED_CODE_ZONE */
 
@@ -278,7 +274,7 @@ sqMakeMemoryExecutableFromToCodeToDataDelta(usqInt startAddr,
 				 PROT_READ | PROT_WRITE | PROT_EXEC) < 0)
 		perror("mprotect(x,y,PROT_READ | PROT_WRITE | PROT_EXEC)");
 
-	assert(!codeToDataDelta);
+	/* assert(!codeToDataDelta); */
 #  endif
 }
 

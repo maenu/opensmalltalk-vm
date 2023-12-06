@@ -108,7 +108,7 @@ static sqInt (*positive32BitIntegerFor)(unsigned int integerValue);
 static usqInt (*positive32BitValueOf)(sqInt oop);
 static sqInt (*primitiveFail)(void);
 static void (*pushBool)(sqInt trueOrFalse);
-static sqInt (*pushInteger)(sqInt integerValue);
+static void (*pushInteger)(sqInt integerValue);
 static void (*pushRemappableOop)(sqInt oop);
 static sqInt (*slotSizeOf)(sqInt oop);
 static sqInt (*stackIntegerValue)(sqInt offset);
@@ -135,7 +135,7 @@ extern sqInt positive32BitIntegerFor(unsigned int integerValue);
 extern usqInt positive32BitValueOf(sqInt oop);
 extern sqInt primitiveFail(void);
 extern void pushBool(sqInt trueOrFalse);
-extern sqInt pushInteger(sqInt integerValue);
+extern void pushInteger(sqInt integerValue);
 extern void pushRemappableOop(sqInt oop);
 extern sqInt slotSizeOf(sqInt oop);
 extern sqInt stackIntegerValue(sqInt offset);
@@ -314,7 +314,8 @@ primitiveAllocateTexture(void)
 		return primitiveFail();
 	}
 	pop(5);
-	return pushInteger(result);
+    pushInteger(result);
+    return 0;
 }
 
 	/* B3DAcceleratorPlugin>>#primitiveClearDepthBuffer */
@@ -878,7 +879,8 @@ primitiveGetRendererSurfaceDepth(void)
 		return primitiveFail();
 	}
 	pop(2);
-	return pushInteger(result);
+    pushInteger(result);
+    return 0;
 }
 
 	/* B3DAcceleratorPlugin>>#primitiveGetRendererSurfaceHandle */
@@ -900,7 +902,8 @@ primitiveGetRendererSurfaceHandle(void)
 		return primitiveFail();
 	}
 	pop(2);
-	return pushInteger(result);
+    pushInteger(result);
+    return 0;
 }
 
 	/* B3DAcceleratorPlugin>>#primitiveGetRendererSurfaceHeight */
@@ -922,7 +925,8 @@ primitiveGetRendererSurfaceHeight(void)
 		return primitiveFail();
 	}
 	pop(2);
-	return pushInteger(result);
+    pushInteger(result);
+    return 0;
 }
 
 	/* B3DAcceleratorPlugin>>#primitiveGetRendererSurfaceWidth */
@@ -944,7 +948,8 @@ primitiveGetRendererSurfaceWidth(void)
 		return primitiveFail();
 	}
 	pop(2);
-	return pushInteger(result);
+    pushInteger(result);
+    return 0;
 }
 
 	/* B3DAcceleratorPlugin>>#primitiveIsOverlayRenderer */
@@ -975,7 +980,8 @@ primitiveRendererVersion(void)
 		return primitiveFail();
 	}
 	pop(1);
-	return pushInteger(1);
+    pushInteger(1);
+    return 0;
 }
 
 	/* B3DAcceleratorPlugin>>#primitiveRenderVertexBuffer */
@@ -1324,7 +1330,8 @@ primitiveTextureDepth(void)
 		return primitiveFail();
 	}
 	pop(3);
-	return pushInteger(result);
+    pushInteger(result);
+    return 0;
 }
 
 	/* B3DAcceleratorPlugin>>#primitiveTextureGetColorMasks */
@@ -1380,7 +1387,8 @@ primitiveTextureSurfaceHandle(void)
 		return primitiveFail();
 	}
 	pop(3);
-	return pushInteger(result);
+    pushInteger(result);
+    return 0;
 }
 
 	/* B3DAcceleratorPlugin>>#primitiveTextureUpload */

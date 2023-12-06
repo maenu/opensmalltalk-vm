@@ -1361,7 +1361,7 @@ extern void print(char *s);
 extern void pushBool(sqInt trueOrFalse);
 static sqInt NoDbgRegParms pushedReceiverOrClosureOfFrame(char *theFP);
 extern void pushFloat(double f);
-extern sqInt pushInteger(sqInt integerValue);
+extern void pushInteger(sqInt integerValue);
 extern void push(sqInt object);
 static void NoDbgRegParms putLongtoFile(sqInt aLong, sqImageFile aFile);
 static void NoDbgRegParms putShorttoFile(short aShort, sqImageFile aFile);
@@ -60871,7 +60871,7 @@ pushFloat(double f)
 }
 
 	/* StackInterpreter>>#pushInteger: */
-sqInt
+void
 pushInteger(sqInt integerValue)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     char *sp;
@@ -60879,7 +60879,6 @@ pushInteger(sqInt integerValue)
 	/* begin push: */
 	longAtput((sp = GIV(stackPointer) - BytesPerWord), (((usqInt)integerValue << 3) | 1));
 	GIV(stackPointer) = sp;
-	return null;
 }
 
 

@@ -81,7 +81,7 @@
 	(GIV(method) == iframeMethod(localFP) \
 	 && validInstructionPointerinMethod((usqInt)localIP, GIV(method)))
 #endif
-				 
+
 #if PRODUCTION
 # define bytecodeDispatchDebugHook() 0
 

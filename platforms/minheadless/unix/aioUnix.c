@@ -243,7 +243,6 @@ aioPoll(long microSeconds)
 	 * cpu
 	 */
 
-	
 #ifdef EMSCRIPTEN
 	//select fails sometimes
 	if (1)
@@ -313,8 +312,8 @@ aioSleepForUsecs(long microSeconds)
 #ifdef EMSCRIPTEN
 	emscripten_sleep(microSeconds / 1000);
 	microSeconds = 0;	/* poll but don't block */
-#elif defined(HAVE_NANOSLEEP)
-	//#if defined(HAVE_NANOSLEEP)
+#endif
+#if defined(HAVE_NANOSLEEP)
 	if (microSeconds < (1000000 / 60)) {	/* < 1 timeslice? */
 		if (!aioPoll(0)) {
 			struct timespec rqtp = {0, microSeconds * 1000};

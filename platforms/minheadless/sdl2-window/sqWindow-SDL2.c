@@ -654,6 +654,7 @@ handleEvents()
     SDL_Event event;
     while(SDL_PollEvent(&event))
         handleEvent(&event);
+
     if(newDisplayEvent)
         ioSignalInputEvent();
     if(newSDLEvent)

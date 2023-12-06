@@ -205,7 +205,7 @@ ioSetLogDirectoryOfSize(void* lblIndex, sqInt sz)
 
 /* OS_TYPE may be set in configure.in and passed via the Makefile */
 
-char *
+const char *
 getAttributeString(sqInt id)
 {
     if (id < 0)	{ // VM argument
@@ -819,7 +819,6 @@ static int
 osvm_doRunInterpreter(void *userdata)
 {
     (void)userdata;
-
     interpret();
     return OSVM_SUCCESS;
 }

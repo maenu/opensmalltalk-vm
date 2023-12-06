@@ -21,7 +21,6 @@
 #define __sqMemoryAccess_h
 
 #include "config.h"
-#include <stdio.h>
 #include "interp.h"
 
 #define true	1
@@ -398,7 +397,7 @@ extern void heapMapAtWordPut(void *wordPointer, int bit);
  * If the attempt fails, answer null.  If the attempt succeeds, answer the
  * start of the region and assign its size through asp.
  */
-extern void *sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(sqInt sz, void *minAddr, sqInt *asp);
+extern void *sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(usqInt sz, void *minAddr, usqInt *asp);
 extern void sqDeallocateMemorySegmentAtOfSize(void *addr, sqInt sz);
 
 #else /* SPURVM */

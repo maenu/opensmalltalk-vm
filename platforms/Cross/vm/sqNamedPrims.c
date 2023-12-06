@@ -22,6 +22,8 @@ typedef struct {
 
 #include "sqNamedPrims.h"
 
+#undef DEBUG
+
 #undef DPRINTF
 // In practice these reasons are too important to hide. So if VM compiled with
 // -DPRINT_DL_ERRORS=1 always print dlopen errors
@@ -301,16 +303,16 @@ findAndLoadModule(char *pluginName, sqInt ffiLoad)
 	void *handle;
 	ModuleEntry *module;
 
-#ifdef PharoVM 
+#ifdef PharoVM
 	if (!moduleLoadingEnabled)
 		return NULL;
 #endif
 	DPRINTF(("Looking for plugin %s\n", (pluginName ? pluginName : "<intrinsic>")));
 	if (breakSelectorLength > 0
 	 && !strncmp(pluginName, breakSelector, breakSelectorLength)
-	 && strlen(pluginName) == breakSelectorLength) {
+	 && strlen(pluginName) == breakSelectorLength)
 		warning("plugin load");
-	}
+
 	/* Try to load the module externally */
 	handle = ioLoadModule(pluginName);
 	if (ffiLoad) {

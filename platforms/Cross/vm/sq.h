@@ -576,7 +576,7 @@ sqInt clipboardWriteFromAt(sqInt count, sqInt byteArrayIndex, sqInt startIndex);
 
 
 /* System attributes. */
-char *getAttributeString(sqInt indexNumber);
+const char *getAttributeString(sqInt indexNumber);
 
 /*** Pluggable primitive support. ***/
 

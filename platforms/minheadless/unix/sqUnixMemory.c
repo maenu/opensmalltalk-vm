@@ -36,7 +36,6 @@
 
 #include "sq.h"
 #include "sqMemoryAccess.h"
-#include "sqAssert.h"
 #include "config.h"
 #include "debug.h"
 

@@ -37,8 +37,8 @@ if (EMSCRIPTEN)
 	# <O2 yields too many locals in interpret and other async errors
 	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG -DDEBUGVM")
 	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG -DDEBUGVM")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DSPURVM=1")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DSPURVM=1")
 endif()
 
 # Turn on warnings
@@ -311,7 +311,7 @@ if(COG_JIT)
 	#add_definitions(CogVM=1)
 endif()
 
-add_definitions(-DCOGMTVM=0)
+add_definitions(-DCOGMTVM=1)
 
 set(PluginsSourceFolderName "src/plugins")
 

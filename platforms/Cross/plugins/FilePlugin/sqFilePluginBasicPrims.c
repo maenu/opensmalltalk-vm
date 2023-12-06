@@ -341,7 +341,10 @@ sqFileOpen(SQFile *f, char *sqFileName, sqInt sqFileNameSize, sqInt writeFlag) {
 	/* copy the file name into a null-terminated C string */
 	if (sqFileNameSize >= sizeof(cFileName))
 		return interpreterProxy->success(false);
-	interpreterProxy->ioFilenamefromStringofLengthresolveAliases(cFileName, sqFileName, sqFileNameSize, true);
+	/* can fail when alias resolution is enabled */
+	if (interpreterProxy->ioFilenamefromStringofLengthresolveAliases(cFileName, sqFileName, sqFileNameSize, true) != 0)
+		return interpreterProxy->success(false);
+
 	if (writeFlag) {
 		int retried = 0;
 		do {
@@ -453,7 +456,8 @@ sqFileOpenNew(SQFile *f, char *sqFileName, sqInt sqFileNameSize, sqInt *exists) 
 	if (sqFileNameSize >= sizeof(cFileName))
 		return interpreterProxy->success(false);
 	/* can fail when alias resolution is enabled */
-	interpreterProxy->ioFilenamefromStringofLengthresolveAliases(cFileName, sqFileName, sqFileNameSize, true);
+	if (interpreterProxy->ioFilenamefromStringofLengthresolveAliases(cFileName, sqFileName, sqFileNameSize, true) != 0)
+		return interpreterProxy->success(false);
 
 	mode = "r+b";
 	fd = openFileWithFlagsInMode(
