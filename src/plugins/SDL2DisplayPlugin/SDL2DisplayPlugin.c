@@ -6,20 +6,21 @@
 static char __buildInfo[] = "SDL2DisplayPlugin SDL2DisplayPlugin-RonieSalgado.1 uuid: c606cec6-dc4b-4a7a-b88b-23bae31b229f " __DATE__ ;
 
 
-
+#include "config.h"
 #include <math.h>
+#include "sqMathShim.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
-/* Default EXPORT macro that does nothing (see comment in sq.h): */
-#define EXPORT(returnType) returnType
-
 /* Do not include the entire sq.h file but just those parts needed. */
 #include "sqConfig.h"			/* Configuration options */
 #include "sqVirtualMachine.h"	/*  The virtual machine proxy definition */
 #include "sqPlatformSpecific.h"	/* Platform specific definitions */
+
+#include "SDL2DisplayPlugin.h"
+#include "sqMemoryAccess.h"
 
 #define true 1
 #define false 0
@@ -27,11 +28,12 @@ static char __buildInfo[] = "SDL2DisplayPlugin SDL2DisplayPlugin-RonieSalgado.1 
 #ifdef SQUEAK_BUILTIN_PLUGIN
 # undef EXPORT
 # define EXPORT(returnType) static returnType
+# define INT_EXT "(i)"
+#else
+# define INT_EXT "(e)"
 #endif
 
 #include "SDL2DisplayPlugin.h"
-#include "sqMemoryAccess.h"
-
 
 /*** Function Prototypes ***/
 EXPORT(const char*) getModuleName(void);

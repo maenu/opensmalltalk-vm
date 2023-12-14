@@ -151,7 +151,11 @@ test "x$prefix" = xNONE && prefix=$ac_default_prefix
 test "x$exec_prefix" = xNONE && exec_prefix='${prefix}'
 imgdir=`eval echo ${libdir}/squeak`
 expanded_relative_imgdir=`eval echo lib/squeak/${VM_VERSION}`
+#ifdef EMSCRIPTEN
+plgdir='${imgdir}'
+#else
 plgdir='${imgdir}/`${blddir}/getversion VERSION_TAG`'
+#endif
 
 AC_SUBST(imgdir)
 AC_SUBST(expanded_relative_imgdir)

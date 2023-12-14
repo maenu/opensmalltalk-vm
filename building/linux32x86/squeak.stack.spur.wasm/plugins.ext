@@ -12,6 +12,7 @@ DESPlugin \
 MD5Plugin \
 SHA2Plugin \
 VectorEnginePlugin \
+SDL2WindowPlugin \
 #B3DAcceleratorPlugin \
 #Squeak3D \
 #UnixOSProcessPlugin \

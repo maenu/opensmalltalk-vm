@@ -137,7 +137,7 @@ sqAllocateMemory(usqInt minHeapSize, usqInt desiredHeapSize)
 	address = (char *)(((usqInt)hint + alignment - 1) & ~(alignment - 1));
 
 	alloc = sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto
-				(roundUpToPage(desiredHeapSize), address, (usqInt)&allocBytes);
+				(roundUpToPage(desiredHeapSize), address, &allocBytes);
 	if (!alloc) {
 		fprintf(stderr, "sqAllocateMemory: initial alloc failed!\n");
 		exit(errno);
@@ -150,7 +150,7 @@ sqAllocateMemory(usqInt minHeapSize, usqInt desiredHeapSize)
  * start of the region and assign its size through allocatedSizePointer.
  */
 void *
-sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(usqInt size, void *minAddress, usqInt *allocatedSizePointer)
+sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(usqInt size, void *minAddress, sqInt *allocatedSizePointer)
 {
 	char *address, *alloc;
 	unsigned long bytes, delta;
@@ -159,6 +159,18 @@ sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(usqInt size, void *minAddres
 	bytes = roundUpToPage(size);
 	delta = max(pageSize,1024*1024);
 
+#ifdef EMSCRIPTEN
+	// take it or leave it
+	alloc = mmap(0, bytes, PROT_READ | PROT_WRITE /*| PROT_EXEC*/,
+				 MAP_FLAGS, -1, 0);
+	if (alloc == MAP_FAILED) {
+		mmapErrno = errno;
+		perror("sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto mmap");
+		return 0;
+	}
+	*allocatedSizePointer = bytes;
+	return alloc;
+#else
 	while ((unsigned long)(address + bytes) > (unsigned long)address) {
 		alloc = mmap(address, bytes, PROT_READ | PROT_WRITE /*| PROT_EXEC*/,
 					 MAP_FLAGS, -1, 0);
@@ -178,6 +190,7 @@ sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(usqInt size, void *minAddres
 			perror("sqAllocateMemorySegment... munmap");
 		address += delta;
 	}
+#endif
 	return 0;
 }
 
@@ -286,6 +299,9 @@ allocateJITMemory(usqInt *desiredSize)
 #endif
 
 	*desiredSize = roundUpToPage(*desiredSize);
+#if EMSCRIPTEN
+	hint = 0;
+#endif
 	result =   mmap(hint, *desiredSize,
 #if DUAL_MAPPED_CODE_ZONE
 					PROT_READ | PROT_EXEC,
@@ -325,7 +341,7 @@ main()
 					 MAP_FLAGS, -1, 0));
 	for (;;) {
 		sqInt segsz = 0;
-		char *seg = sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(32 MBytes, mem + 16 MBytes, &segsz);
+		char *seg = sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(32 MBytes, mem + 16 MBytes,  &segsz);
 		if (!seg)
 			return 0;
 		t += segsz;

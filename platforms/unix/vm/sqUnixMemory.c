@@ -328,12 +328,71 @@ sqInt sqMemoryExtraBytesLeft(sqInt includingSwap)			{ return uxMemoryExtraBytesL
 #define roundUpToPage(v) (((v)+pageSize-1)&pageMask)
 
 #if COGVM
+#   if DUAL_MAPPED_CODE_ZONE
+/* We are indebted to Chris Wellons who designed this elegant API for dual
+ * mapping which we depend on for fine-grained code modification (classical
+ * Deutsch/Schiffman style inline cacheing and derivatives).  Chris's code is:
+	https://nullprogram.com/blog/2016/04/10/
+ *
+ * To cope with modern OSs that disallow executing code in writable memory we
+ * dual-map the code zone, one mapping with read/write permissions and the other
+ * with read/execute permissions. In such a configuration the code zone has
+ * already been alloated and is not included in (what is no longer) the initial
+ * alloc.
+ */
+static void
+memory_alias_map(size_t size, size_t naddr, void **addrs)
+{
+extern char  *exeName;
+	char path[128];
+	snprintf(path, sizeof(path), "/%s(%lu,%p)",
+			 exeName ? exeName : __FUNCTION__, (long)getpid(), addrs);
+	int fd = shm_open(path, O_RDWR | O_CREAT | O_EXCL, 0600);
+	if (fd == -1) {
+		perror("memory_alias_map: shm_open");
+		exit(0666);
+	}
+	shm_unlink(path);
+	ftruncate(fd, size);
+	for (size_t i = 0; i < naddr; i++) {
+		addrs[i] = mmap(addrs[i], size, PROT_READ | PROT_WRITE,
+								addrs[i] ? MAP_FIXED | MAP_SHARED : MAP_SHARED,
+								fd, 0);
+		if (addrs[i] == MAP_FAILED) {
+			perror("memory_alias_map: mmap(addrs[i]...");
+			exit(0667);
+		}
+	}
+	close(fd);
+	return;
+}
+#   endif /* DUAL_MAPPED_CODE_ZONE */
+
 void
 sqMakeMemoryExecutableFromToCodeToDataDelta(usqInt startAddr,
 											usqInt endAddr,
 											sqInt *codeToDataDelta)
 {
 	usqInt firstPage = roundDownToPage(startAddr);
+	usqInt size = endAddr - firstPage;
+
+#  if DUAL_MAPPED_CODE_ZONE
+	usqInt mappings[2];
+
+	mappings[0] = firstPage;
+	mappings[1] = 0;
+
+	memory_alias_map(size, 2, (void **)mappings);
+	assert(mappings[0] == firstPage);
+	*codeToDataDelta = mappings[1] - startAddr;
+
+	if (mprotect((void *)firstPage,
+				 size,
+				 PROT_READ | PROT_EXEC) < 0)
+		perror("mprotect(x,y,PROT_READ | PROT_EXEC)");
+
+#  else /* DUAL_MAPPED_CODE_ZONE */
+
 	if (mprotect((void *)firstPage,
 				 endAddr - firstPage + 1,
 				 PROT_READ | PROT_WRITE | PROT_EXEC) < 0)
@@ -342,20 +401,38 @@ sqMakeMemoryExecutableFromToCodeToDataDelta(usqInt startAddr,
 		*codeToDataDelta = 0;
 }
 
-void
-sqMakeMemoryNotExecutableFromTo(usqInt startAddr, usqInt endAddr)
-{
-# if 0
-	unsigned long firstPage = roundDownToPage(startAddr);
-	/* Arguably this is pointless since allocated memory always does include
-	 * write permission.  Annoyingly the mprotect call fails on both linux &
-	 * mac os x.  So make the whole thing a nop.
-	 */
-	if (mprotect((void *)firstPage,
-				 endAddr - firstPage + 1,
-				 PROT_READ | PROT_WRITE) < 0)
-		perror("mprotect(x,y,PROT_READ | PROT_WRITE)");
+	assert(!codeToDataDelta);
 # endif
+}
+
+// Allocate memory for the code zone, which must be executable, and is
+// perferably writable.  Since the code zone lies below the heap, allocate at
+// as low an address as possible, to allow maximal space for heap growth.
+void *
+allocateJITMemory(usqInt *desiredSize)
+{
+	void *hint = sbrk(0); // a hint of the lowest possible address for mmap
+	void *result;
+
+	pageSize = getpagesize();
+	pageMask = ~(pageSize - 1);
+
+#if !defined(MAP_JIT)
+# define MAP_JIT 0
+#endif
+
+	*desiredSize = roundUpToPage(*desiredSize);
+	result =   mmap(hint, *desiredSize,
+					PROT_READ | PROT_WRITE | PROT_EXEC,
+					MAP_FLAGS | MAP_JIT, -1, 0);
+	if (result == MAP_FAILED) {
+		perror("Could not allocate JIT memory");
+		exit(1);
+	}
+	// Note the address for sqAllocateMemory above
+	// endOfJITZone = (char *)result + *desiredSize;
+
+	return result;
 }
 #endif /* COGVM */
 

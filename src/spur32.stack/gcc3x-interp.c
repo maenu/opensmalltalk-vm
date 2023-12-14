@@ -611,7 +611,7 @@ static sqInt hasSixtyFourBitImmediates(void);
 extern sqInt headerIndicatesAlternateBytecodeSet(sqInt methodHeader);
 static sqInt NoDbgRegParms initFreeChunkWithBytesat(usqLong numBytes, sqInt address);
 static void NoDbgRegParms initSegmentBridgeWithBytesat(usqLong numBytes, sqInt address);
-extern sqInt instantiateClassindexableSize(sqInt classObj, usqInt nElements);
+extern sqInt instantiateClassindexableSize(sqInt classObj, sqInt nElements);
 extern sqInt integerObjectOf(sqInt value);
 extern sqInt integerValueOf(sqInt oop);
 static sqInt NoDbgRegParms isFloatInstance(sqInt oop);
@@ -19406,7 +19406,7 @@ primitiveGetAttribute(void)
 	if (!((attr & 1))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 1;
 	}
 	attributeString = getAttributeString((attr >> 1));
 	if (attributeString == null) {
@@ -22494,7 +22494,7 @@ primitiveObjectAtPut(void)
 	used only to debug that primitive. */
 
 	/* InterpreterPrimitives>>#primitiveObjectsAccessibleFromRoots */
-static void
+static sqInt
 primitiveObjectsAccessibleFromRoots(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arrayOfRoots;
@@ -22512,7 +22512,7 @@ primitiveObjectsAccessibleFromRoots(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 0;
 	}
 	result = objectsAccessibleFromRoots(arrayOfRoots);
 	if (((result & 1))
@@ -22532,6 +22532,7 @@ primitiveObjectsAccessibleFromRoots(void)
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), result);
 		GIV(stackPointer) = sp;
 	}
+    return 0;
 }
 
 

@@ -6,10 +6,6 @@
 
 o		= .lo
 a		= .la
-ifdef $(EMSCRIPTEN)
-o		= .o
-a		= .so
-endif
 
 COMPILE		= $(LIBTOOL) --mode=compile \
 		  $(CC) $(CFLAGS) $(CPPFLAGS) $(XCFLAGS) $(DEFS) $(XDEFS) \

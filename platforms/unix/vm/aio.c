@@ -447,7 +447,7 @@ aioPoll(long microSeconds)
 	usqLong us;
 # if AIO_DEBUG
 	struct  sigaction current_sigio_action;
-	extern void forceInterruptCheck(int);	/* not really, but hey */
+	extern sqInt forceInterruptCheck(int);	/* not really, but hey */
 # endif
 
 	DO_TICK(SHOULD_TICK());

@@ -29,7 +29,7 @@
  */
 
 /* If one really wants debugging output use e.g. -DDEBUG=2 */
-#if DEBUG <= 1
+#if DEBUG <= 0
 # undef DEBUG
 # define DEBUG 0
 #endif
@@ -229,8 +229,13 @@ void *ioLoadModule(char *pluginName)
 static void *
 tryLoading(char *dirName, char *moduleName)
 {
+#ifdef EMSCRIPTEN
+  static char *prefixes[]= { "", 0 };
+  static char *suffixes[]= { ".so", 0 };
+#else
   static char *prefixes[]= { "", "lib", 0 };
   static char *suffixes[]= { "", ".so", ".dylib", 0 };
+#endif
   void        *handle= 0;
   char	     **prefix= 0, **suffix= 0;
   struct stat  buf;
@@ -353,8 +358,10 @@ ioLoadModule(char *pluginName)
 		*out= '\0';
 		DPRINTF((stderr, "%s %d ioLoadModule plugins = %s path = %s\n",
 				__FILE__, __LINE__, squeakPlugins, path));
+#ifndef EMSCRIPTEN
 		if ((handle= tryLoading("", path)))
 			return handle;
+#endif
 		if (!(out > path && *(out - 1) == '/')) {
 			*out++= '/';
 			*out= '\0';
@@ -506,7 +513,14 @@ void *ioLoadModule(char *pluginName)
   return 0;
 }
 
-void *ioFindExternalFunctionIn(char *lookupName, void *moduleHandle)
+#if SPURVM
+void *
+ioFindExternalFunctionInMetadataInto(char *lookupName, void *moduleHandle,
+											sqInt *metadataPtr)
+#else
+void *
+ioFindExternalFunctionIn(char *lookupName, void *moduleHandle)
+#endif
 {
   return 0;
 }

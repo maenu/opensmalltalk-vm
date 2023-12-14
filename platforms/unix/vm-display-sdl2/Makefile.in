@@ -1,0 +1,19 @@
+# Makefile for custom window support				-*- makefile -*-
+# 
+# Last edited: 2005-04-06 05:20:50 by piumarta on pauillac.hpl.hp.com
+
+[make_cfg]
+[make_plg]
+
+TARGET		= vm-display-sdl2$a
+OBJS		= sqUnixSDL2Window$o
+
+XINCLUDES	= [includes]
+
+$(TARGET) : $(OBJS) Makefile
+	$(LINK) $(TARGET) $(OBJS) -lGL -sUSE_SDL=2 ## put additional libraries here
+	$(RANLIB) $(TARGET)
+
+[make_targets]
+
+.force :

@@ -1270,11 +1270,16 @@ struct moduleDescription
 
 static struct moduleDescription moduleDescriptions[]=
 {
+#ifdef EMSCRIPTEN
+  { &displayModule, "display", "sdl2"    },
+  { &soundModule,   "sound",   "null" },
+#else
   { &displayModule, "display", "X11"    },      /*** Implicit   ***/
   { &displayModule, "display", "custom" },	/*** NO DEFAULT ***/
   { &soundModule,   "sound",   "NAS"    },	/*** Implicit   ***/
   { &soundModule,   "sound",   "custom" },	/*** NO DEFAULT ***/
   /* when adding an entry above be sure to change the defaultModules offset below */
+  { &displayModule, "display", "sdl2"   },
   { &displayModule, "display", "Quartz" },	/* defaults... */
   { &displayModule, "display", "fbdev"  },
   { &displayModule, "display", "null"   },
@@ -1285,10 +1290,14 @@ static struct moduleDescription moduleDescriptions[]=
   { &soundModule,   "sound",   "ALSA"   },
   { &soundModule,   "sound",   "sndio"  },
   { &soundModule,   "sound",   "null"   },
+#endif
   { 0,              0,         0	}
 };
-
+#ifdef EMSCRIPTEN
+static struct moduleDescription *defaultModules= moduleDescriptions + 2;
+#else
 static struct moduleDescription *defaultModules= moduleDescriptions + 4;
+#endif
 
 
 struct SqModule *
@@ -1438,7 +1447,7 @@ checkModuleVersion(struct SqModule *module, int required, int actual)
 static void
 loadImplicit(struct SqModule **addr, char *evar, char *type, char *name)
 {
-  if ((!*addr) && getenv(evar) && !(*addr= queryModule(type, name)))
+  if ((!*addr)  && !(*addr= queryModule(type, name)))
     {
       fprintf(stderr, "could not find %s driver vm-%s-%s; either:\n", type, type, name);
       fprintf(stderr, "  - check that %s/vm-%s-%s.so exists, or\n", vmPath, type, name);
@@ -1451,8 +1460,13 @@ loadImplicit(struct SqModule **addr, char *evar, char *type, char *name)
 static void
 loadModules(void)
 {
+#ifdef EMSCRIPTEN
+  loadImplicit(&displayModule, "DISPLAY",     "display", "sdl2");
+  loadImplicit(&soundModule,   "AUDIOSERVER", "sound",   "null");
+#else
   loadImplicit(&displayModule, "DISPLAY",     "display", "X11");
   loadImplicit(&soundModule,   "AUDIOSERVER", "sound",   "NAS");
+#endif
   {
     struct moduleDescription *md;
 
@@ -1591,7 +1605,7 @@ vm_parseArgument(int argc, char **argv)
 
   if (!strncmp(argv[0], "-psn_", 5))
     {
-      displayModule= requireModule("display", "Quartz");
+      displayModule= requireModule("display", "sdl2");
       return displayModule->parseArgument(argc, argv);
     }
 

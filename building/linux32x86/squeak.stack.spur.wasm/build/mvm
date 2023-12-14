@@ -15,23 +15,23 @@ case $a in
 n|no|N|NO)	echo "ok but this isn't safe!!";;
 *)			rm -f config.h; test -f Makefile && make reallyclean
 esac
-test -f plugins.int || (test -f ../plugins.int && cp -p ../plugins.int . || cp -p ../../plugins.int .)
-test -f plugins.ext || (test -f ../plugins.ext && cp -p ../plugins.ext . || cp -p ../../plugins.ext .)
+../../../../scripts/copylinuxpluginspecfiles
 test -f config.h || emconfigure ../../../../platforms/unix/config/configure \
 		--with-vmversion=5.0 \
 		--with-src=src/spur32.stack \
 		--with-scriptname=spur32 \
 		--disable-cogit \
+		--enable-static \
+		--with-vm-display-sdl2 \
 		--without-vm-display-fbdev \
 		--without-quartz \
 		--without-x \
 		--without-npsqueak \
 	HOST_OS="wasm32" \
 	TARGET_ARCH="-m32" \
-	CFLAGS="$OPT -msse2 -msimd128 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1"
+	CFLAGS="$OPT -msse2 -msimd128 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG_MODULES=1 -DDEBUG_IMAGE=1"
 rm -f vm/sqUnixMain.o # nuke version info
 rm -rf ../../../../products/$INSTALLDIR
 # prefer make install prefix=`readlink -f \`pwd\`/../../../../products/$INSTALLDIR`
 # but older linux readlinks lack the -f flag
-
-emmake make wasmsqueak prefix=`(cd ../../../../;pwd)`/products/$INSTALLDIR 2>&1 | tee LOG ; test ${PIPESTATUS[0]} -eq 0
+emmake make install-plugins install-wasmsqueak prefix=`(cd ../../../../;pwd)`/products/$INSTALLDIR 2>&1 | tee LOG ; test ${PIPESTATUS[0]} -eq 0
