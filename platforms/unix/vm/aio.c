@@ -55,7 +55,7 @@
 # include <fcntl.h>
 # include <sys/ioctl.h>
 
-# ifdef HAVE_SYS_TIME_H
+# if defined(HAVE_SYS_TIME_H) && !defined(EMSCRIPTEN)
 #   include <sys/time.h>
 # else
 #   include <time.h>
@@ -102,6 +102,10 @@
 # include <fcntl.h>
 
 #endif /* !HAVE_CONFIG_H */
+
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
 
 /* function to inform the VM about idle time */
 extern void addIdleUsecs(long idleUsecs);
@@ -389,6 +393,12 @@ aioPoll(long microSeconds)
 	 * cpu
 	 */
 
+#ifdef EMSCRIPTEN
+	//select fails sometimes
+	if (1)
+		emscripten_sleep(microSeconds);
+		return 0;
+#endif
 	if (epollEventsDescriptorCount == 0 && microSeconds == 0)
 		return 0;
 
@@ -535,6 +545,10 @@ aioSleepForUsecs(long microSeconds)
 	 * Hence if there is pending i/o it will prevent responding to that i/o for
 	 * the requested sleep.  Not a good idea. eem May 2017.
 	 */
+#ifdef EMSCRIPTEN
+    emscripten_sleep(microSeconds / 1000);
+	microSeconds = 0;	/* poll but don't block */
+#endif
 #if defined(HAVE_NANOSLEEP) && 0
 	if (microSeconds < (1000000 / 60)) {	/* < 1 timeslice? */
 		if (!aioPoll(0)) {

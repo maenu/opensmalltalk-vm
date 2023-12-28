@@ -27,7 +27,8 @@ void warning(const char *);
 void warningat(const char *,int);
 # else
 #   if !defined(EXPORT)
-#	  define EXPORT(returnType) returnType
+#include <emscripten.h>
+# define EXPORT(returnType) returnType EMSCRIPTEN_KEEPALIVE
 #   endif
 EXPORT(void) error(const char *);
 EXPORT(void) warning(const char *);

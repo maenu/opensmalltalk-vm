@@ -232,6 +232,7 @@ tryLoading(char *dirName, char *moduleName)
 #ifdef EMSCRIPTEN
   static char *prefixes[]= { "", 0 };
   static char *suffixes[]= { ".so", 0 };
+  dirName = "";
 #else
   static char *prefixes[]= { "", "lib", 0 };
   static char *suffixes[]= { "", ".so", ".dylib", 0 };
@@ -343,8 +344,10 @@ ioLoadModule(char *pluginName)
 		return handle;
 	}
 
+#ifndef EMSCRIPTEN
 	if (squeakPlugins) {
 		char path[NAME_MAX];
+		char libName[NAME_MAX + 3];	/* headroom for prefix/suffix */
 		char c, *in= squeakPlugins, *out= path;
 		while ((c= *in++)) {
 			if (c == '%' && ((*in == 'n') || (*in == 'N'))) {
@@ -356,12 +359,8 @@ ioLoadModule(char *pluginName)
 				*out++= c;
 		}
 		*out= '\0';
-		DPRINTF((stderr, "%s %d ioLoadModule plugins = %s path = %s\n",
-				__FILE__, __LINE__, squeakPlugins, path));
-#ifndef EMSCRIPTEN
-		if ((handle= tryLoading("", path)))
-			return handle;
-#endif
+		DPRINTF((stderr, "%s %d ioLoadModule plugins = %s path = %s plugin = %s\n",
+				__FILE__, __LINE__, squeakPlugins, path, pluginName));
 		if (!(out > path && *(out - 1) == '/')) {
 			*out++= '/';
 			*out= '\0';
@@ -369,6 +368,7 @@ ioLoadModule(char *pluginName)
 		if ((handle= tryLoading(path, pluginName)))
 			return handle;
 	}
+#endif
 
     if (   (handle= tryLoadingLinked(				pluginName)) 	// Try linked/referenced libs (Pharo only)
         || (handle= tryLoading(    "./",			pluginName))	// Try local dir

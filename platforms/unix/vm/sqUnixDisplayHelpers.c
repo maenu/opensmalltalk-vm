@@ -10,8 +10,8 @@
 
 /* If one really wants debugging output use e.g. -DDEBUG=2 */
 #if DEBUG <= 1
-# undef DEBUG
-# define DEBUG 0
+//# undef DEBUG
+//# define DEBUG 0
 #endif
 
 #include "sq.h"

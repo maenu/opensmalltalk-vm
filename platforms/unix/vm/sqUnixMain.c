@@ -1271,7 +1271,7 @@ struct moduleDescription
 static struct moduleDescription moduleDescriptions[]=
 {
 #ifdef EMSCRIPTEN
-  { &displayModule, "display", "sdl2"    },
+  { &displayModule, "display", "sdl2"    }, // sdl2
   { &soundModule,   "sound",   "null" },
 #else
   { &displayModule, "display", "X11"    },      /*** Implicit   ***/
@@ -1314,7 +1314,7 @@ queryLoadModule(char *type, char *name, int query)
     if (!strcmp(module->name, modName))
       return module;
   snprintf(itfName, sizeof(itfName), "%s_%s", type, name);
-  itf= ioFindExternalFunctionIn(itfName, ioLoadModule(0));
+  itf= ioLoadFunctionFrom(itfName, modName);
   if (!itf)
     {
       void *handle= ioLoadModule(modName);
@@ -2225,9 +2225,16 @@ imgInit(void)
 # define mtfsfi(fpscr)
 #endif
 
+#ifdef EMSCRIPTEN
+#include <SDL2/SDL.h>
+#endif
+
 int
 main(int argc, char **argv, char **envp)
 {
+#ifdef EMSCRIPTEN
+    SDL_SetHint(SDL_HINT_NO_SIGNAL_HANDLERS, "1");
+#endif
   /* check the interpreter's size assumptions for basic data types */
   if (sizeof(int) != 4) error("This C compiler's integers are not 32 bits.");
   if (sizeof(double) != 8) error("This C compiler's floats are not 64 bits.");

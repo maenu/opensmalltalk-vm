@@ -30,12 +30,9 @@
 # 
 # Last edited: Mon Aug 30 21:50:00 EST 2021 by phil
 
-AC_PREREQ([2.69])
+AC_PREREQ([2.71])
 
-AC_INIT([OpenSmalltalk VM],[devel],
-        [vm-dev@lists.squeakfoundation.org],
-        [],
-        [http://opensmalltalk.org/])
+AC_INIT([OpenSmalltalk VM],[devel],[vm-dev@lists.squeakfoundation.org],[],[http://opensmalltalk.org/])
 
 
 AC_CONFIG_SRCDIR([config.h.in])
@@ -296,11 +293,14 @@ AX_COMPILER_VENDOR
 
 AC_PROG_MAKE_SET
 AC_PROG_CC([clang icc gcc cc])
-AC_PROG_CC_C99
+m4_warn([obsolete],
+[AC_PROG_CC_C99 is obsolete; use AC_PROG_CC
+])dnl
+AC_REQUIRE(AC_PROG_CC)
 AX_CFLAGS_WARN_ALL
 AC_PROG_AS_GNU
 AC_PROG_INSTALL
-AC_PROG_NM
+LT_PATH_NM
 
 
 if test "$GCC" = "yes"; then
@@ -330,7 +330,7 @@ AC_CHECK_SIZEOF(void *)
 # libtool configuration
 
 AC_DISABLE_STATIC
-AC_PROG_LIBTOOL
+LT_INIT
 
 # Configured headers (pretty much everybody needs blddir and vm)
 
@@ -366,13 +366,34 @@ esac
 
 AC_NEED_SUNOS_H
 
-AC_HEADER_STDC
+m4_warn([obsolete],
+[The preprocessor macro `STDC_HEADERS' is obsolete.
+  Except in unusual embedded environments, you can safely include all
+  ISO C90 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 AC_CHECK_HEADERS_ONCE([unistd.h string.h fcntl.h sys/file.h sys/param.h])
 AC_CHECK_HEADERS_ONCE([sys/time.h sys/filio.h sys/select.h])
 AC_CHECK_HEADERS_ONCE([features.h])
 AC_CHECK_HEADERS_ONCE([ifaddrs.h]) # sqUnixSocket.c
 AC_CHECK_HEADERS_ONCE([alloca.h]) # SunOS5
-AC_HEADER_TIME
+m4_warn([obsolete],
+[Update your code to rely only on HAVE_SYS_TIME_H,
+then remove this warning and the obsolete code below it.
+All current systems provide time.h; it need not be checked for.
+Not all systems provide sys/time.h, but those that do, all allow
+you to include it and time.h simultaneously.])dnl
+AC_CHECK_HEADERS_ONCE([sys/time.h])
+# Obsolete code to be removed.
+if test $ac_cv_header_sys_time_h = yes; then
+  AC_DEFINE([TIME_WITH_SYS_TIME],[1],[Define to 1 if you can safely include both <sys/time.h>
+	     and <time.h>.  This macro is obsolete.])
+fi
+# End of obsolete code.
+
 AC_HEADER_DIRENT
 
 if test -f "${vmmdir}/interp.h"; then
@@ -381,7 +402,15 @@ fi
 AC_SUBST(HAVE_INTERP_H)
 
 AC_STRUCT_TIMEZONE
-AC_STRUCT_ST_BLKSIZE
+m4_warn([obsolete],
+[your code should no longer depend upon `HAVE_ST_BLKSIZE', but
+`HAVE_STRUCT_STAT_ST_BLKSIZE'.  Remove this warning and
+the `AC_DEFINE' when you adjust the code.])dnl
+AC_CHECK_MEMBERS([struct stat.st_blksize],[AC_DEFINE(HAVE_ST_BLKSIZE, 1,
+			    [Define to 1 if your `struct stat' has
+			     `st_blksize'.  Deprecated, use
+			     `HAVE_STRUCT_STAT_ST_BLKSIZE' instead.])])
+
 
 AC_CHECK_SOCKLEN_T
 AC_CHECK_ATEXIT
@@ -514,8 +543,8 @@ AC_SUBST_FILE(Makefile_deb)
 
 # Configure VM modules xxx MAKE INTERNAL WORK
 
-int_modules="vm"
-ext_modules="`cd ${topdir}/platforms/unix; echo vm-*`"
+int_modules="`cd ${topdir}/platforms/unix; echo vm*`"
+ext_modules=""
 
 AC_SUBST(int_modules)
 AC_SUBST(ext_modules)

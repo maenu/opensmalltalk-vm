@@ -1184,14 +1184,14 @@ do
   | --sbi=* | --sb=*)
     sbindir=$ac_optarg ;;
 
-  -sSIDE_MODULEstatedir | --sSIDE_MODULEstatedir | --sSIDE_MODULEstatedi \
-  | --sSIDE_MODULEstated | --sSIDE_MODULEstate | --sSIDE_MODULEstat | --sSIDE_MODULEsta \
-  | --sSIDE_MODULEst | --sSIDE_MODULEs | --sSIDE_MODULE | --share | --shar \
+  -sharedstatedir | --sharedstatedir | --sharedstatedi \
+  | --sharedstated | --sharedstate | --sharedstat | --sharedsta \
+  | --sharedst | --shareds | --shared | --share | --shar \
   | --sha | --sh)
     ac_prev=sharedstatedir ;;
-  -sSIDE_MODULEstatedir=* | --sSIDE_MODULEstatedir=* | --sSIDE_MODULEstatedi=* \
-  | --sSIDE_MODULEstated=* | --sSIDE_MODULEstate=* | --sSIDE_MODULEstat=* | --sSIDE_MODULEsta=* \
-  | --sSIDE_MODULEst=* | --sSIDE_MODULEs=* | --sSIDE_MODULE=* | --share=* | --shar=* \
+  -sharedstatedir=* | --sharedstatedir=* | --sharedstatedi=* \
+  | --sharedstated=* | --sharedstate=* | --sharedstat=* | --sharedsta=* \
+  | --sharedst=* | --shareds=* | --shared=* | --share=* | --shar=* \
   | --sha=* | --sh=*)
     sharedstatedir=$ac_optarg ;;
 
@@ -1466,7 +1466,7 @@ Fine tuning of the installation directories:
   --sbindir=DIR           system admin executables [EPREFIX/sbin]
   --libexecdir=DIR        program executables [EPREFIX/libexec]
   --sysconfdir=DIR        read-only single-machine data [PREFIX/etc]
-  --sSIDE_MODULEstatedir=DIR    modifiable architecture-independent data [PREFIX/com]
+  --sharedstatedir=DIR    modifiable architecture-independent data [PREFIX/com]
   --localstatedir=DIR     modifiable single-machine data [PREFIX/var]
   --runstatedir=DIR       modifiable per-process data [LOCALSTATEDIR/run]
   --libdir=DIR            object code libraries [EPREFIX/lib]
@@ -1509,7 +1509,7 @@ Optional Features:
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --enable-static[=PKGS]  build static libraries [default=no]
-  --enable-sSIDE_MODULE[=PKGS]  build shared libraries [default=yes]
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
   --enable-fast-install[=PKGS]
                           optimize for fast installation [default=yes]
   --disable-libtool-lock  avoid locking (might break parallel builds)
@@ -8137,7 +8137,7 @@ fi
   enable_win32_dll=no
 
 
-            # Check whether --enable-sSIDE_MODULE was given.
+            # Check whether --enable-shared was given.
 if test ${enable_shared+y}
 then :
   enableval=$enable_shared; p=${PACKAGE-default}
@@ -8761,9 +8761,9 @@ lt_prog_compiler_static=
       ;;
 
     *nto* | *qnx*)
-      # QNX uses GNU C++, but need to define -sSIDE_MODULE option too, otherwise
+      # QNX uses GNU C++, but need to define -shared option too, otherwise
       # it will coredump.
-      lt_prog_compiler_pic='-fPIC -sSIDE_MODULE'
+      lt_prog_compiler_pic='-fPIC -shared'
       ;;
 
     sysv4*MP*)
@@ -8863,7 +8863,7 @@ lt_prog_compiler_static=
       # Lahey Fortran 8.1.
       lf95*)
 	lt_prog_compiler_wl='-Wl,'
-	lt_prog_compiler_pic='--sSIDE_MODULE'
+	lt_prog_compiler_pic='--shared'
 	lt_prog_compiler_static='--static'
 	;;
       nagfor*)
@@ -8936,9 +8936,9 @@ lt_prog_compiler_static=
       ;;
 
     *nto* | *qnx*)
-      # QNX uses GNU C++, but need to define -sSIDE_MODULE option too, otherwise
+      # QNX uses GNU C++, but need to define -shared option too, otherwise
       # it will coredump.
-      lt_prog_compiler_pic='-fPIC -sSIDE_MODULE'
+      lt_prog_compiler_pic='-fPIC -shared'
       ;;
 
     osf3* | osf4* | osf5*)
@@ -9412,7 +9412,7 @@ _LT_EOF
       case $host_cpu in
       powerpc)
             # see comment about AmigaOS4 .so support
-            archive_cmds='$CC -sSIDE_MODULE $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
+            archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
             archive_expsym_cmds=''
         ;;
       m68k)
@@ -9446,7 +9446,7 @@ _LT_EOF
       exclude_expsyms='[_]+GLOBAL_OFFSET_TABLE_|[_]+GLOBAL__[FID]_.*|[_]+head_[A-Za-z0-9_]+_dll|[A-Za-z0-9_]+_dll_iname'
 
       if $LD --help 2>&1 | $GREP 'auto-import' > /dev/null; then
-        archive_cmds='$CC -sSIDE_MODULE $libobjs $deplibs $compiler_flags -o $output_objdir/$soname $wl--enable-auto-image-base -Xlinker --out-implib -Xlinker $lib'
+        archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags -o $output_objdir/$soname $wl--enable-auto-image-base -Xlinker --out-implib -Xlinker $lib'
 	# If the export-symbols file already is a .def file, use it as
 	# is; otherwise, prepend EXPORTS...
 	archive_expsym_cmds='if   test DEF = "`$SED -n     -e '\''s/^[	 ]*//'\''     -e '\''/^\(;.*\)*$/d'\''     -e '\''s/^\(EXPORTS\|LIBRARY\)\([	 ].*\)*$/DEF/p'\''     -e q     $export_symbols`" ; then
@@ -9455,14 +9455,14 @@ _LT_EOF
           echo EXPORTS > $output_objdir/$soname.def;
           cat $export_symbols >> $output_objdir/$soname.def;
         fi~
-        $CC -sSIDE_MODULE $output_objdir/$soname.def $libobjs $deplibs $compiler_flags -o $output_objdir/$soname $wl--enable-auto-image-base -Xlinker --out-implib -Xlinker $lib'
+        $CC -shared $output_objdir/$soname.def $libobjs $deplibs $compiler_flags -o $output_objdir/$soname $wl--enable-auto-image-base -Xlinker --out-implib -Xlinker $lib'
       else
 	ld_shlibs=no
       fi
       ;;
 
     haiku*)
-      archive_cmds='$CC -sSIDE_MODULE $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
+      archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
       link_all_deplibs=yes
       ;;
 
@@ -9506,8 +9506,8 @@ _LT_EOF
       # consuming and fragmenting process.  To avoid this, we pick a random,
       # 256 KiB-aligned image base between 0x50000000 and 0x6FFC0000 at link
       # time.  Moving up from 0x10000000 also allows more sbrk(2) space.
-      archive_cmds='$CC -sSIDE_MODULE $pic_flag $libobjs $deplibs $compiler_flags $wl-h,$soname $wl--image-base,`expr ${RANDOM-$$} % 4096 / 2 \* 262144 + 1342177280` -o $lib'
-      archive_expsym_cmds='$SED "s|^|_|" $export_symbols >$output_objdir/$soname.expsym~$CC -sSIDE_MODULE $pic_flag $libobjs $deplibs $compiler_flags $wl-h,$soname $wl--retain-symbols-file,$output_objdir/$soname.expsym $wl--image-base,`expr ${RANDOM-$$} % 4096 / 2 \* 262144 + 1342177280` -o $lib'
+      archive_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-h,$soname $wl--image-base,`expr ${RANDOM-$$} % 4096 / 2 \* 262144 + 1342177280` -o $lib'
+      archive_expsym_cmds='$SED "s|^|_|" $export_symbols >$output_objdir/$soname.expsym~$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-h,$soname $wl--retain-symbols-file,$output_objdir/$soname.expsym $wl--image-base,`expr ${RANDOM-$$} % 4096 / 2 \* 262144 + 1342177280` -o $lib'
       ;;
 
     gnu* | linux* | tpf* | k*bsd*-gnu | kopensolaris*-gnu)
@@ -9521,6 +9521,7 @@ _LT_EOF
 	 && test no = "$tmp_diet"
       then
 	tmp_addflag=' $pic_flag'
+	tmp_sharedflag='-shared'
 	case $cc_basename,$host_cpu in
         pgcc*)				# Portland Group C compiler
 	  whole_archive_flag_spec='$wl--whole-archive`for conv in $convenience\"\"; do test  -n \"$conv\" && new_convenience=\"$new_convenience,$conv\"; done; func_echo_all \"$new_convenience\"` $wl--no-whole-archive'
@@ -9538,9 +9539,9 @@ _LT_EOF
 	  tmp_addflag=' -nofor_main' ;;
 	lf95*)				# Lahey Fortran 8.1
 	  whole_archive_flag_spec=
-	  tmp_sharedflag='--sSIDE_MODULE' ;;
+	  tmp_sharedflag='--shared' ;;
         nagfor*)                        # NAGFOR 5.3
-          tmp_sharedflag='-Wl,-sSIDE_MODULE' ;;
+          tmp_sharedflag='-Wl,-shared' ;;
 	xl[cC]* | bgxl[cC]* | mpixl[cC]*) # IBM XL C 8.0 on PPC (deal with xlf below)
 	  tmp_sharedflag='-qmkshrobj'
 	  tmp_addflag= ;;
@@ -9574,12 +9575,12 @@ _LT_EOF
 	  # IBM XL Fortran 10.1 on PPC cannot create shared libs itself
 	  whole_archive_flag_spec='--whole-archive$convenience --no-whole-archive'
 	  hardcode_libdir_flag_spec='$wl-rpath $wl$libdir'
-	  archive_cmds='$LD -sSIDE_MODULE $libobjs $deplibs $linker_flags -soname $soname -o $lib'
+	  archive_cmds='$LD -shared $libobjs $deplibs $linker_flags -soname $soname -o $lib'
 	  if test yes = "$supports_anon_versioning"; then
 	    archive_expsym_cmds='echo "{ global:" > $output_objdir/$libname.ver~
               cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $output_objdir/$libname.ver~
               echo "local: *; };" >> $output_objdir/$libname.ver~
-              $LD -sSIDE_MODULE $libobjs $deplibs $linker_flags -soname $soname -version-script $output_objdir/$libname.ver -o $lib'
+              $LD -shared $libobjs $deplibs $linker_flags -soname $soname -version-script $output_objdir/$libname.ver -o $lib'
 	  fi
 	  ;;
 	esac
@@ -9593,8 +9594,8 @@ _LT_EOF
 	archive_cmds='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
 	wlarc=
       else
-	archive_cmds='$CC -sSIDE_MODULE $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
-	archive_expsym_cmds='$CC -sSIDE_MODULE $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname $wl-retain-symbols-file $wl$export_symbols -o $lib'
+	archive_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
+	archive_expsym_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname $wl-retain-symbols-file $wl$export_symbols -o $lib'
       fi
       ;;
 
@@ -9612,8 +9613,8 @@ _LT_EOF
 
 _LT_EOF
       elif $LD --help 2>&1 | $GREP ': supported targets:.* elf' > /dev/null; then
-	archive_cmds='$CC -sSIDE_MODULE $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
-	archive_expsym_cmds='$CC -sSIDE_MODULE $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname $wl-retain-symbols-file $wl$export_symbols -o $lib'
+	archive_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
+	archive_expsym_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname $wl-retain-symbols-file $wl$export_symbols -o $lib'
       else
 	ld_shlibs=no
       fi
@@ -9641,8 +9642,8 @@ _LT_EOF
 	  # requires that you compile everything twice, which is a pain.
 	  if $LD --help 2>&1 | $GREP ': supported targets:.* elf' > /dev/null; then
 	    hardcode_libdir_flag_spec='$wl-rpath $wl$libdir'
-	    archive_cmds='$CC -sSIDE_MODULE $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
-	    archive_expsym_cmds='$CC -sSIDE_MODULE $libobjs $deplibs $compiler_flags $wl-soname $wl$soname $wl-retain-symbols-file $wl$export_symbols -o $lib'
+	    archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
+	    archive_expsym_cmds='$CC -shared $libobjs $deplibs $compiler_flags $wl-soname $wl$soname $wl-retain-symbols-file $wl$export_symbols -o $lib'
 	  else
 	    ld_shlibs=no
 	  fi
@@ -9659,8 +9660,8 @@ _LT_EOF
 
     *)
       if $LD --help 2>&1 | $GREP ': supported targets:.* elf' > /dev/null; then
-	archive_cmds='$CC -sSIDE_MODULE $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
-	archive_expsym_cmds='$CC -sSIDE_MODULE $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname $wl-retain-symbols-file $wl$export_symbols -o $lib'
+	archive_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
+	archive_expsym_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname $wl-retain-symbols-file $wl$export_symbols -o $lib'
       else
 	ld_shlibs=no
       fi
@@ -9792,15 +9793,15 @@ _LT_EOF
 	  fi
 	  ;;
 	esac
-	shared_flag='-sSIDE_MODULE'
+	shared_flag='-shared'
 	if test yes = "$aix_use_runtimelinking"; then
 	  shared_flag="$shared_flag "'$wl-G'
 	fi
 	# Need to ensure runtime linking is disabled for the traditional
 	# shared library, or the linker may eventually find shared libraries
 	# /with/ Import File - we do not want to mix them.
-	shared_flag_aix='-sSIDE_MODULE'
-	shared_flag_svr4='-sSIDE_MODULE $wl-G'
+	shared_flag_aix='-shared'
+	shared_flag_svr4='-shared $wl-G'
       else
 	# not using gcc
 	if test ia64 = "$host_cpu"; then
@@ -9963,7 +9964,7 @@ fi
       case $host_cpu in
       powerpc)
             # see comment about AmigaOS4 .so support
-            archive_cmds='$CC -sSIDE_MODULE $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
+            archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags $wl-soname $wl$soname -o $lib'
             archive_expsym_cmds=''
         ;;
       m68k)
@@ -10101,9 +10102,9 @@ fi
       hardcode_shlibpath_var=no
       ;;
 
-    # FreeBSD 3 and greater uses gcc -sSIDE_MODULE to do shared libraries.
+    # FreeBSD 3 and greater uses gcc -shared to do shared libraries.
     freebsd* | dragonfly* | midnightbsd*)
-      archive_cmds='$CC -sSIDE_MODULE $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
+      archive_cmds='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
       hardcode_libdir_flag_spec='-R$libdir'
       hardcode_direct=yes
       hardcode_shlibpath_var=no
@@ -10111,7 +10112,7 @@ fi
 
     hpux9*)
       if test yes = "$GCC"; then
-	archive_cmds='$RM $output_objdir/$soname~$CC -sSIDE_MODULE $pic_flag $wl+b $wl$install_libdir -o $output_objdir/$soname $libobjs $deplibs $compiler_flags~test "x$output_objdir/$soname" = "x$lib" || mv $output_objdir/$soname $lib'
+	archive_cmds='$RM $output_objdir/$soname~$CC -shared $pic_flag $wl+b $wl$install_libdir -o $output_objdir/$soname $libobjs $deplibs $compiler_flags~test "x$output_objdir/$soname" = "x$lib" || mv $output_objdir/$soname $lib'
       else
 	archive_cmds='$RM $output_objdir/$soname~$LD -b +b $install_libdir -o $output_objdir/$soname $libobjs $deplibs $linker_flags~test "x$output_objdir/$soname" = "x$lib" || mv $output_objdir/$soname $lib'
       fi
@@ -10127,7 +10128,7 @@ fi
 
     hpux10*)
       if test yes,no = "$GCC,$with_gnu_ld"; then
-	archive_cmds='$CC -sSIDE_MODULE $pic_flag $wl+h $wl$soname $wl+b $wl$install_libdir -o $lib $libobjs $deplibs $compiler_flags'
+	archive_cmds='$CC -shared $pic_flag $wl+h $wl$soname $wl+b $wl$install_libdir -o $lib $libobjs $deplibs $compiler_flags'
       else
 	archive_cmds='$LD -b +h $soname +b $install_libdir -o $lib $libobjs $deplibs $linker_flags'
       fi
@@ -10147,13 +10148,13 @@ fi
       if test yes,no = "$GCC,$with_gnu_ld"; then
 	case $host_cpu in
 	hppa*64*)
-	  archive_cmds='$CC -sSIDE_MODULE $wl+h $wl$soname -o $lib $libobjs $deplibs $compiler_flags'
+	  archive_cmds='$CC -shared $wl+h $wl$soname -o $lib $libobjs $deplibs $compiler_flags'
 	  ;;
 	ia64*)
-	  archive_cmds='$CC -sSIDE_MODULE $pic_flag $wl+h $wl$soname $wl+nodefaultrpath -o $lib $libobjs $deplibs $compiler_flags'
+	  archive_cmds='$CC -shared $pic_flag $wl+h $wl$soname $wl+nodefaultrpath -o $lib $libobjs $deplibs $compiler_flags'
 	  ;;
 	*)
-	  archive_cmds='$CC -sSIDE_MODULE $pic_flag $wl+h $wl$soname $wl+b $wl$install_libdir -o $lib $libobjs $deplibs $compiler_flags'
+	  archive_cmds='$CC -shared $pic_flag $wl+h $wl$soname $wl+b $wl$install_libdir -o $lib $libobjs $deplibs $compiler_flags'
 	  ;;
 	esac
       else
@@ -10233,7 +10234,7 @@ fi
 
     irix5* | irix6* | nonstopux*)
       if test yes = "$GCC"; then
-	archive_cmds='$CC -sSIDE_MODULE $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname `test -n "$verstring" && func_echo_all "$wl-set_version $wl$verstring"` $wl-update_registry $wl$output_objdir/so_locations -o $lib'
+	archive_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname `test -n "$verstring" && func_echo_all "$wl-set_version $wl$verstring"` $wl-update_registry $wl$output_objdir/so_locations -o $lib'
 	# Try to use the -exported_symbol ld option, if it does not
 	# work, assume that -exports_file does not work either and
 	# implicitly export all symbols.
@@ -10245,7 +10246,7 @@ then :
   printf %s "(cached) " >&6
 else $as_nop
   save_LDFLAGS=$LDFLAGS
-	   LDFLAGS="$LDFLAGS -sSIDE_MODULE $wl-exported_symbol ${wl}foo $wl-update_registry $wl/dev/null"
+	   LDFLAGS="$LDFLAGS -shared $wl-exported_symbol ${wl}foo $wl-update_registry $wl/dev/null"
 	   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 int foo (void) { return 0; }
@@ -10263,11 +10264,11 @@ fi
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $lt_cv_irix_exported_symbol" >&5
 printf "%s\n" "$lt_cv_irix_exported_symbol" >&6; }
 	if test yes = "$lt_cv_irix_exported_symbol"; then
-          archive_expsym_cmds='$CC -sSIDE_MODULE $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname `test -n "$verstring" && func_echo_all "$wl-set_version $wl$verstring"` $wl-update_registry $wl$output_objdir/so_locations $wl-exports_file $wl$export_symbols -o $lib'
+          archive_expsym_cmds='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname `test -n "$verstring" && func_echo_all "$wl-set_version $wl$verstring"` $wl-update_registry $wl$output_objdir/so_locations $wl-exports_file $wl$export_symbols -o $lib'
 	fi
       else
-	archive_cmds='$CC -sSIDE_MODULE $libobjs $deplibs $compiler_flags -soname $soname `test -n "$verstring" && func_echo_all "-set_version $verstring"` -update_registry $output_objdir/so_locations -o $lib'
-	archive_expsym_cmds='$CC -sSIDE_MODULE $libobjs $deplibs $compiler_flags -soname $soname `test -n "$verstring" && func_echo_all "-set_version $verstring"` -update_registry $output_objdir/so_locations -exports_file $export_symbols -o $lib'
+	archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags -soname $soname `test -n "$verstring" && func_echo_all "-set_version $verstring"` -update_registry $output_objdir/so_locations -o $lib'
+	archive_expsym_cmds='$CC -shared $libobjs $deplibs $compiler_flags -soname $soname `test -n "$verstring" && func_echo_all "-set_version $verstring"` -update_registry $output_objdir/so_locations -exports_file $export_symbols -o $lib'
       fi
       archive_cmds_need_lc='no'
       hardcode_libdir_flag_spec='$wl-rpath $wl$libdir'
@@ -10281,7 +10282,7 @@ printf "%s\n" "$lt_cv_irix_exported_symbol" >&6; }
       tcc*)
 	# Fabrice Bellard et al's Tiny C Compiler
 	ld_shlibs=yes
-	archive_cmds='$CC -sSIDE_MODULE $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
+	archive_cmds='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
 	;;
       esac
       ;;
@@ -10290,7 +10291,7 @@ printf "%s\n" "$lt_cv_irix_exported_symbol" >&6; }
       if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
 	archive_cmds='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
       else
-	archive_cmds='$LD -sSIDE_MODULE -o $lib $libobjs $deplibs $linker_flags'      # ELF
+	archive_cmds='$LD -shared -o $lib $libobjs $deplibs $linker_flags'      # ELF
       fi
       hardcode_libdir_flag_spec='-R$libdir'
       hardcode_direct=yes
@@ -10314,12 +10315,12 @@ printf "%s\n" "$lt_cv_irix_exported_symbol" >&6; }
 	hardcode_shlibpath_var=no
 	hardcode_direct_absolute=yes
 	if test -z "`echo __ELF__ | $CC -E - | $GREP __ELF__`"; then
-	  archive_cmds='$CC -sSIDE_MODULE $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
-	  archive_expsym_cmds='$CC -sSIDE_MODULE $pic_flag -o $lib $libobjs $deplibs $compiler_flags $wl-retain-symbols-file,$export_symbols'
+	  archive_cmds='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
+	  archive_expsym_cmds='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags $wl-retain-symbols-file,$export_symbols'
 	  hardcode_libdir_flag_spec='$wl-rpath,$libdir'
 	  export_dynamic_flag_spec='$wl-E'
 	else
-	  archive_cmds='$CC -sSIDE_MODULE $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
+	  archive_cmds='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
 	  hardcode_libdir_flag_spec='$wl-rpath,$libdir'
 	fi
       else
@@ -10359,10 +10360,10 @@ printf "%s\n" "$lt_cv_irix_exported_symbol" >&6; }
     osf3*)
       if test yes = "$GCC"; then
 	allow_undefined_flag=' $wl-expect_unresolved $wl\*'
-	archive_cmds='$CC -sSIDE_MODULE$allow_undefined_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname `test -n "$verstring" && func_echo_all "$wl-set_version $wl$verstring"` $wl-update_registry $wl$output_objdir/so_locations -o $lib'
+	archive_cmds='$CC -shared$allow_undefined_flag $libobjs $deplibs $compiler_flags $wl-soname $wl$soname `test -n "$verstring" && func_echo_all "$wl-set_version $wl$verstring"` $wl-update_registry $wl$output_objdir/so_locations -o $lib'
       else
 	allow_undefined_flag=' -expect_unresolved \*'
-	archive_cmds='$CC -sSIDE_MODULE$allow_undefined_flag $libobjs $deplibs $compiler_flags -soname $soname `test -n "$verstring" && func_echo_all "-set_version $verstring"` -update_registry $output_objdir/so_locations -o $lib'
+	archive_cmds='$CC -shared$allow_undefined_flag $libobjs $deplibs $compiler_flags -soname $soname `test -n "$verstring" && func_echo_all "-set_version $verstring"` -update_registry $output_objdir/so_locations -o $lib'
       fi
       archive_cmds_need_lc='no'
       hardcode_libdir_flag_spec='$wl-rpath $wl$libdir'
@@ -10372,13 +10373,13 @@ printf "%s\n" "$lt_cv_irix_exported_symbol" >&6; }
     osf4* | osf5*)	# as osf3* with the addition of -msym flag
       if test yes = "$GCC"; then
 	allow_undefined_flag=' $wl-expect_unresolved $wl\*'
-	archive_cmds='$CC -sSIDE_MODULE$allow_undefined_flag $pic_flag $libobjs $deplibs $compiler_flags $wl-msym $wl-soname $wl$soname `test -n "$verstring" && func_echo_all "$wl-set_version $wl$verstring"` $wl-update_registry $wl$output_objdir/so_locations -o $lib'
+	archive_cmds='$CC -shared$allow_undefined_flag $pic_flag $libobjs $deplibs $compiler_flags $wl-msym $wl-soname $wl$soname `test -n "$verstring" && func_echo_all "$wl-set_version $wl$verstring"` $wl-update_registry $wl$output_objdir/so_locations -o $lib'
 	hardcode_libdir_flag_spec='$wl-rpath $wl$libdir'
       else
 	allow_undefined_flag=' -expect_unresolved \*'
-	archive_cmds='$CC -sSIDE_MODULE$allow_undefined_flag $libobjs $deplibs $compiler_flags -msym -soname $soname `test -n "$verstring" && func_echo_all "-set_version $verstring"` -update_registry $output_objdir/so_locations -o $lib'
+	archive_cmds='$CC -shared$allow_undefined_flag $libobjs $deplibs $compiler_flags -msym -soname $soname `test -n "$verstring" && func_echo_all "-set_version $verstring"` -update_registry $output_objdir/so_locations -o $lib'
 	archive_expsym_cmds='for i in `cat $export_symbols`; do printf "%s %s\\n" -exported_symbol "\$i" >> $lib.exp; done; printf "%s\\n" "-hidden">> $lib.exp~
-          $CC -sSIDE_MODULE$allow_undefined_flag $wl-input $wl$lib.exp $compiler_flags $libobjs $deplibs -soname $soname `test -n "$verstring" && $ECHO "-set_version $verstring"` -update_registry $output_objdir/so_locations -o $lib~$RM $lib.exp'
+          $CC -shared$allow_undefined_flag $wl-input $wl$lib.exp $compiler_flags $libobjs $deplibs -soname $soname `test -n "$verstring" && $ECHO "-set_version $verstring"` -update_registry $output_objdir/so_locations -o $lib~$RM $lib.exp'
 
 	# Both c and cxx compiler support -rpath directly
 	hardcode_libdir_flag_spec='-rpath $libdir'
@@ -10391,9 +10392,9 @@ printf "%s\n" "$lt_cv_irix_exported_symbol" >&6; }
       no_undefined_flag=' -z defs'
       if test yes = "$GCC"; then
 	wlarc='$wl'
-	archive_cmds='$CC -sSIDE_MODULE $pic_flag $wl-z ${wl}text $wl-h $wl$soname -o $lib $libobjs $deplibs $compiler_flags'
+	archive_cmds='$CC -shared $pic_flag $wl-z ${wl}text $wl-h $wl$soname -o $lib $libobjs $deplibs $compiler_flags'
 	archive_expsym_cmds='echo "{ global:" > $lib.exp~cat $export_symbols | $SED -e "s/\(.*\)/\1;/" >> $lib.exp~echo "local: *; };" >> $lib.exp~
-          $CC -sSIDE_MODULE $pic_flag $wl-z ${wl}text $wl-M $wl$lib.exp $wl-h $wl$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
+          $CC -shared $pic_flag $wl-z ${wl}text $wl-M $wl$lib.exp $wl-h $wl$soname -o $lib $libobjs $deplibs $compiler_flags~$RM $lib.exp'
       else
 	case `$CC -V 2>&1` in
 	*"Compilers 5.0"*)
@@ -10488,8 +10489,8 @@ printf "%s\n" "$lt_cv_irix_exported_symbol" >&6; }
       runpath_var='LD_RUN_PATH'
 
       if test yes = "$GCC"; then
-	archive_cmds='$CC -sSIDE_MODULE $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
-	archive_expsym_cmds='$CC -sSIDE_MODULE $wl-Bexport:$export_symbols $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
+	archive_cmds='$CC -shared $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
+	archive_expsym_cmds='$CC -shared $wl-Bexport:$export_symbols $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
       else
 	archive_cmds='$CC -G $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
 	archive_expsym_cmds='$CC -G $wl-Bexport:$export_symbols $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
@@ -10514,8 +10515,8 @@ printf "%s\n" "$lt_cv_irix_exported_symbol" >&6; }
       runpath_var='LD_RUN_PATH'
 
       if test yes = "$GCC"; then
-	archive_cmds='$CC -sSIDE_MODULE $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
-	archive_expsym_cmds='$CC -sSIDE_MODULE $wl-Bexport:$export_symbols $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
+	archive_cmds='$CC -shared $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
+	archive_expsym_cmds='$CC -shared $wl-Bexport:$export_symbols $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
       else
 	archive_cmds='$CC -G $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
 	archive_expsym_cmds='$CC -G $wl-Bexport:$export_symbols $wl-h,$soname -o $lib $libobjs $deplibs $compiler_flags'
@@ -11401,7 +11402,7 @@ fi
   # powerpc, because MkLinux only supported shared libraries with the
   # GNU dynamic linker.  Since this was broken with cross compilers,
   # most powerpc-linux boxes support dynamic linking these days and
-  # people can always --disable-sSIDE_MODULE, the test was removed, and we
+  # people can always --disable-shared, the test was removed, and we
   # assume the GNU/Linux dynamic linker is in use.
   dynamic_linker='GNU/Linux ld.so'
   ;;
@@ -12616,7 +12617,11 @@ test "x$prefix" = xNONE && prefix=$ac_default_prefix
 test "x$exec_prefix" = xNONE && exec_prefix='${prefix}'
 imgdir=`eval echo ${libdir}/squeak`
 expanded_relative_imgdir=`eval echo lib/squeak/${VM_VERSION}`
+#ifdef EMSCRIPTEN
+plgdir='${imgdir}'
+#else
 plgdir='${imgdir}/`${blddir}/getversion VERSION_TAG`'
+#endif
 
 
 
@@ -17268,8 +17273,8 @@ Makefile_deb=${topdir}/util/Makefile.deb
 
 # Configure VM modules xxx MAKE INTERNAL WORK
 
-int_modules="vm"
-ext_modules="`cd ${topdir}/platforms/unix; echo vm-*`"
+int_modules="`cd ${topdir}/platforms/unix; echo vm*`"
+ext_modules=""
 
 
 

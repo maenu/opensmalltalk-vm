@@ -22,9 +22,9 @@ typedef struct {
 
 #include "sqNamedPrims.h"
 
-#undef DEBUG
+//#undef DEBUG
 
-#undef DPRINTF
+//#undef DPRINTF
 // In practice these reasons are too important to hide. So if VM compiled with
 // -DPRINT_DL_ERRORS=1 always print dlopen errors
 #if defined(DEBUG)
@@ -298,43 +298,42 @@ extern char *breakSelector;
 extern sqInt breakSelectorLength;
 
 static ModuleEntry *
-findAndLoadModule(char *pluginName, sqInt ffiLoad)
-{
-	void *handle;
-	ModuleEntry *module;
+findAndLoadModule(char *pluginName, sqInt ffiLoad) {
+    void *handle;
+    ModuleEntry *module;
 
 #ifdef PharoVM
-	if (!moduleLoadingEnabled)
-		return NULL;
+    if (!moduleLoadingEnabled)
+        return NULL;
 #endif
-	DPRINTF(("Looking for plugin %s\n", (pluginName ? pluginName : "<intrinsic>")));
-	if (breakSelectorLength > 0
-	 && !strncmp(pluginName, breakSelector, breakSelectorLength)
-	 && strlen(pluginName) == breakSelectorLength)
-		warning("plugin load");
-
-	/* Try to load the module externally */
-	handle = ioLoadModule(pluginName);
-	if (ffiLoad) {
-		/* When dealing with the FFI, don't attempt to mess around internally */
+    DPRINTF(("Looking for plugin %s\n", (pluginName ? pluginName : "<intrinsic>")));
+    if (breakSelectorLength > 0
+        && !strncmp(pluginName, breakSelector, breakSelectorLength)
+	 && strlen(pluginName) == breakSelectorLength) {
+        warning("plugin load");
+    }
+    if (ffiLoad) {
+        /* When dealing with the FFI, don't attempt to mess around internally */
+        handle = ioLoadModule(pluginName);
 		if (!handle)
 			return NULL;
-		return addToModuleList(pluginName, handle, ffiLoad);
-	}
+        return addToModuleList(pluginName, handle, ffiLoad);
+    }
 	/* NOT ffiLoad */
-	if (!handle) {
-		/* might be internal, so go looking for setInterpreter() */
-		if (!findInternalFunctionIn("setInterpreter", pluginName NADA))
-			return NULL; /* PluginName_setInterpreter() not found */
-		handle = squeakModule->handle;
-	}
-	module = addToModuleList(pluginName, handle, ffiLoad);
+    /* might be internal, so go looking for setInterpreter() */
+    if (findInternalFunctionIn("setInterpreter", pluginName NADA)) {
+        handle = squeakModule->handle;
+    } else {
+        /* Try to load the module externally */
+        handle = ioLoadModule(pluginName);
+    }
+    module = addToModuleList(pluginName, handle, ffiLoad);
 	if (!callInitializersIn(module)) {
-		/* Initializers failed */
+    /* Initializers failed */
 		if (handle != squeakModule->handle) /* physically unload module */
-			ioFreeModule(handle);
-		removeFromList(module); /* remove list entry */
-		free(module); /* give back space */
+            ioFreeModule(handle);
+        removeFromList(module); /* remove list entry */
+        free(module); /* give back space */
 		module = NULL;
 	}
 	return module;

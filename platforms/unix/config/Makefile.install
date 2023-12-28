@@ -26,7 +26,8 @@ install-squeak : $(squeak) $(squeaksh) $(binsqueaksh) getversion
 	fi
 
 install-wasmsqueak : install-plugins wasmsqueak
-	cp wasmsqueak* $(ROOT)$(imgdir)
+	$(MKINSTALLDIRS) $(ROOT)$(plgdir)
+	cp wasmsqueak* $(ROOT)$(plgdir)
 
 uninstall-squeak : getversion .force
 	if test -n "$(VM_APP_ICONS)"; then \

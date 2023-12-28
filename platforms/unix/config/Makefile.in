@@ -81,7 +81,7 @@ bin.squeak.sh: ${cfgdir}/bin.squeak.sh.in getversion
 # WASM
 
 wasmsqueak : config.sh $(SQLIBS) plugins version.o
-	$(LINK) wasmsqueak.html $(SQLIBS) version.o $(LIBS) [plibs] -Wl,-whole-archive,vm/vm.a,-no-whole-archive -sLLD_REPORT_UNDEFINED -lGL -sUSE_SDL=2 -sMAIN_MODULE -sASSERTIONS=1 -sUSE_PTHREADS -sPTHREAD_POOL_SIZE=4 -sASYNCIFY -sLLD_REPORT_UNDEFINED -sERROR_ON_UNDEFINED_SYMBOLS=0 -sINITIAL_MEMORY=512MB -sEXIT_RUNTIME --pre-js ../pre.js --preload-file ../image@/
+	$(LINK) wasmsqueak.html $(SQLIBS) version.o $(LIBS) [plibs] -Wl,-whole-archive,vm/vm.a,-no-whole-archive -DEMCC_FORCE_STDLIBS=1 -DPRINT_DL_ERRORS=1 -lSDL -lGL -sUSE_SDL=2 -sFULL_ES2 -sLLD_REPORT_UNDEFINED -sMAIN_MODULE -sASSERTIONS=1 -sASYNCIFY -sPTHREAD_POOL_SIZE=4 -sPTHREAD_POOL_SIZE_STRICT=2 -sSTACK_SIZE=2MB -sALLOW_BLOCKING_ON_MAIN_THREAD=0 -sLLD_REPORT_UNDEFINED -sERROR_ON_UNDEFINED_SYMBOLS=0 -sINITIAL_MEMORY=512MB -sEXIT_RUNTIME --pre-js ../pre.js --preload-file ../image@/
 
 # npsqueak
 

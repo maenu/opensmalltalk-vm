@@ -452,7 +452,8 @@ extern void *allocateJITMemory(usqInt *desiredSize);
    VM_EXPORT macros can be redefined.
 */
 #if !defined(EXPORT)
-# define EXPORT(returnType) returnType
+#include <emscripten.h>
+# define EXPORT(returnType) returnType EMSCRIPTEN_KEEPALIVE
 #endif
 #if !defined(VM_EXPORT)
 # define VM_EXPORT

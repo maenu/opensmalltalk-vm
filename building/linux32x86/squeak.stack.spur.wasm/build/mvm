@@ -3,7 +3,11 @@ set -e
 # Stack Spur VM with VM profiler and threaded heartbeat
 INSTALLDIR=sqstkspur32wasmht
 # Some gcc versions create a broken VM using -O2
-OPT="-g -O2 -DDEBUG=2 -DDEBUGVM=1"
+# -O0 yields wasmsqueak.js:1296 Aborted(CompileError: WebAssembly.instantiate(): Compiling function #95:"interpret" failed: local count too large @+216059)
+#OPT="-g -O3 -DDEBUG=2 -DDEBUGVM=1 -DDEBUG_MODULES=1 -DDEBUG_IMAGE=1  -msse2 -msimd128 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1"
+#OPT="-g -O2 -DNDEBUG -DDEBUGVM=0"
+#OPT="-g -O1 -msse2 -msimd128 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DNDEBUG -DDEBUGVM=0"
+OPT="-g -O2 -msse2 -msimd128 -fPIC -sLINKABLE=1 -sASYNCIFY -sASYNCIFY_IMPORTS=__main_argc_argv,dlopen,dlsym -DEMCC_FORCE_STDLIBS=1 -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG=5 -DDEBUGVM=1 -DDEBUG_MODULES=1 -DDEBUG_IMAGE=1 -DPRINT_DL_ERRORS=1"
 
 if [ $# -ge 1 ]; then
 	INSTALLDIR="$1"; shift
@@ -21,7 +25,6 @@ test -f config.h || emconfigure ../../../../platforms/unix/config/configure \
 		--with-src=src/spur32.stack \
 		--with-scriptname=spur32 \
 		--disable-cogit \
-		--enable-static \
 		--with-vm-display-sdl2 \
 		--without-vm-display-fbdev \
 		--without-quartz \
@@ -29,7 +32,7 @@ test -f config.h || emconfigure ../../../../platforms/unix/config/configure \
 		--without-npsqueak \
 	HOST_OS="wasm32" \
 	TARGET_ARCH="-m32" \
-	CFLAGS="$OPT -msse2 -msimd128 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG_MODULES=1 -DDEBUG_IMAGE=1"
+	CFLAGS="$OPT"
 rm -f vm/sqUnixMain.o # nuke version info
 rm -rf ../../../../products/$INSTALLDIR
 # prefer make install prefix=`readlink -f \`pwd\`/../../../../products/$INSTALLDIR`

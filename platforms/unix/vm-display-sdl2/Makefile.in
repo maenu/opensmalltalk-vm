@@ -11,7 +11,7 @@ OBJS		= sqUnixSDL2Window$o
 XINCLUDES	= [includes]
 
 $(TARGET) : $(OBJS) Makefile
-	$(LINK) $(TARGET) $(OBJS) -lGL -sUSE_SDL=2 ## put additional libraries here
+	$(LINK) $(TARGET) $(OBJS) -lSDL -lGL -sUSE_SDL=2 -sFULL_ES2
 	$(RANLIB) $(TARGET)
 
 [make_targets]
