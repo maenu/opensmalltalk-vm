@@ -311,7 +311,7 @@ if(COG_JIT)
 	#add_definitions(CogVM=1)
 endif()
 
-add_definitions(-DCOGMTVM=1)
+#add_definitions(-DCOGMTVM=1)
 
 set(PluginsSourceFolderName "src/plugins")
 

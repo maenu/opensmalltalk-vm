@@ -106,7 +106,7 @@ extern char **argVec;
 static int inFault = 0;
 static char crashdump[FILENAME_MAX+1];
 
-extern char *getAttributeString(sqInt id);
+extern const char *getAttributeString(sqInt id);
 extern const char *getVersionInfo(int verbose);
 extern void getCrashDumpFilenameInto(char *buf);
 
