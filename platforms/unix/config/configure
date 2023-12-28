@@ -17273,8 +17273,8 @@ Makefile_deb=${topdir}/util/Makefile.deb
 
 # Configure VM modules xxx MAKE INTERNAL WORK
 
-int_modules="`cd ${topdir}/platforms/unix; echo vm*`"
-ext_modules=""
+int_modules="vm"
+ext_modules="`cd ${topdir}/platforms/unix; echo vm-*`"
 
 
 

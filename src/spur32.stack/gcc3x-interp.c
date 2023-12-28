@@ -7697,8 +7697,8 @@ GIV(bytecodeSetSelector) = (methodUsesAlternateBytecodeSet(GIV(method))
                                 fprintf(stderr, "%d\n", localPrimIndex);
                                 shortPrintOop(rcvr);
                                 fprintf(stderr, "%s\n", cStringOrNullFor(messageSelector));
-                                //printCallStack();
-                                //exit(1);
+                                printCallStack();
+                                exit(1);
                             }
 							if (localPrimIndex >= 264) {
 								/* begin internalStackTopPut: */

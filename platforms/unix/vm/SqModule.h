@@ -29,14 +29,7 @@ struct SqModule TYPE##_##NAME= {		\
   TYPE##_printUsageNotes,			\
   TYPE##_makeInterface,				\
   0						\
-}                                   \
-static char _m[] = "TYPE##_##NAME";\
-void* TYPE##_##NAMEPlugin_exports[][3] = {\
-	{(void*)_m, "getModuleName", (void*)getModuleName},\
-	{(void*)_m, "setInterpreter", (void*)setInterpreter},\
-	{NULL, NULL, NULL}\
-};
-
+}
 
 // Interface for sorting and printing options for usage
 
