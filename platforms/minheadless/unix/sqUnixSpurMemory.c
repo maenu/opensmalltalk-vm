@@ -137,7 +137,7 @@ sqAllocateMemory(usqInt minHeapSize, usqInt desiredHeapSize)
 	address = (char *)(((usqInt)hint + alignment - 1) & ~(alignment - 1));
 
 	alloc = sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto
-				(roundUpToPage(desiredHeapSize), address, (usqInt)&allocBytes);
+				(roundUpToPage(desiredHeapSize), address, &allocBytes);
 	if (!alloc) {
 		fprintf(stderr, "sqAllocateMemory: initial alloc failed!\n");
 		exit(errno);
@@ -153,7 +153,7 @@ void *
 sqAllocateMemorySegmentOfSizeAboveAllocatedSizeInto(usqInt size, void *minAddress, sqInt *allocatedSizePointer)
 {
 	char *address, *alloc;
-	long bytes, delta;
+	unsigned long bytes, delta;
 
 	address = (char *)roundUpToPage((unsigned long)minAddress);
 	bytes = roundUpToPage(size);
@@ -259,22 +259,30 @@ sqMakeMemoryExecutableFromToCodeToDataDelta(usqInt startAddr,
 	mappings[1] = 0;
 
 	memory_alias_map(size, 2, (void **)mappings);
-	/* assert(mappings[0] == firstPage); */
+	assert(mappings[0] == firstPage);
 	*codeToDataDelta = mappings[1] - startAddr;
 
+#ifndef EMSCRIPTEN
 	if (mprotect((void *)firstPage,
 				 size,
 				 PROT_READ | PROT_EXEC) < 0)
 		perror("mprotect(x,y,PROT_READ | PROT_EXEC)");
+#endif
+
+#  elif defined(MAP_JIT)
+
+	assert(!codeToDataDelta);
 
 #  else /* DUAL_MAPPED_CODE_ZONE */
 
+#ifndef EMSCRIPTEN
 	if (mprotect((void *)firstPage,
 				 size,
 				 PROT_READ | PROT_WRITE | PROT_EXEC) < 0)
 		perror("mprotect(x,y,PROT_READ | PROT_WRITE | PROT_EXEC)");
+#endif
 
-	/* assert(!codeToDataDelta); */
+	assert(!codeToDataDelta);
 #  endif
 }
 
@@ -308,7 +316,7 @@ allocateJITMemory(usqInt *desiredSize)
 	if (result == MAP_FAILED) {
 		perror("Could not allocate JIT memory");
 		exit(1);
-	}
+}
 	// Note the address for sqAllocateMemory above
 	endOfJITZone = (char *)result + *desiredSize;
 

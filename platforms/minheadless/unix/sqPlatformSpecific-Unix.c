@@ -395,8 +395,6 @@ findExecutablePath(const char *localVmName, char *dest, size_t destSize)
  */
 static void *printRegisterState(ucontext_t *uap);
 
-//TODO the new exception handling code from platforms/unix/vm/sqUnixMain.c needs to be integrated here. eem 2021/9/28
-
 static void
 reportStackState(const char *msg, char *date, int printAll, ucontext_t *uap)
 {
@@ -524,72 +522,64 @@ printRegisterState(ucontext_t *uap)
 			regs[REG_EAX], regs[REG_EBX], regs[REG_ECX], regs[REG_EDX],
 			regs[REG_EDI], regs[REG_EDI], regs[REG_EBP], regs[REG_ESP],
 			regs[REG_EIP]);
-	return (void *)regs[REG_EIP];
-#elif __APPLE__ && __DARWIN_UNIX03 && __i386__
-	_STRUCT_X86_THREAD_STATE32 *regs = &uap->uc_mcontext->__ss;
-	printf(	"\teax 0x%08x ebx 0x%08x ecx 0x%08x edx 0x%08x\n"
-			"\tedi 0x%08x esi 0x%08x ebp 0x%08x esp 0x%08x\n"
-			"\teip 0x%08x\n",
-			regs->__eax, regs->__ebx, regs->__ecx, regs->__edx,
-			regs->__edi, regs->__edi, regs->__ebp, regs->__esp,
-			regs->__eip);
-	return (void *)(regs->__eip);
-#elif __APPLE__ && __i386__
-	_STRUCT_X86_THREAD_STATE32 *regs = &uap->uc_mcontext->ss;
-	printf(	"\teax 0x%08x ebx 0x%08x ecx 0x%08x edx 0x%08x\n"
-			"\tedi 0x%08x esi 0x%08x ebp 0x%08x esp 0x%08x\n"
-			"\teip 0x%08x\n",
-			regs->eax, regs->ebx, regs->ecx, regs->edx,
-			regs->edi, regs->edi, regs->ebp, regs->esp,
-			regs->eip);
-	return (void *)(regs->eip);
-#elif __APPLE__ && __x86_64__
-	_STRUCT_X86_THREAD_STATE64 *regs = &uap->uc_mcontext->__ss;
-	printf(	"\trax 0x%016llx rbx 0x%016llx rcx 0x%016llx rdx 0x%016llx\n"
-			"\trdi 0x%016llx rsi 0x%016llx rbp 0x%016llx rsp 0x%016llx\n"
-			"\tr8  0x%016llx r9  0x%016llx r10 0x%016llx r11 0x%016llx\n"
-			"\tr12 0x%016llx r13 0x%016llx r14 0x%016llx r15 0x%016llx\n"
-			"\trip 0x%016llx\n",
-			regs->__rax, regs->__rbx, regs->__rcx, regs->__rdx,
-			regs->__rdi, regs->__rsi, regs->__rbp, regs->__rsp,
-			regs->__r8 , regs->__r9 , regs->__r10, regs->__r11,
-			regs->__r12, regs->__r13, regs->__r14, regs->__r15,
-			regs->__rip);
-	return (void *)(regs->__rip);
-# elif __APPLE__ && (defined(__arm__) || defined(__arm32__))
-	_STRUCT_ARM_THREAD_STATE *regs = &uap->uc_mcontext->ss;
-	printf(	"\t r0 0x%08x r1 0x%08x r2 0x%08x r3 0x%08x\n"
-	        "\t r4 0x%08x r5 0x%08x r6 0x%08x r7 0x%08x\n"
-	        "\t r8 0x%08x r9 0x%08x r10 0x%08x fp 0x%08x\n"
-	        "\t ip 0x%08x sp 0x%08x lr 0x%08x pc 0x%08x\n"
-			"\tcpsr 0x%08x\n",
-	        regs->r[0],regs->r[1],regs->r[2],regs->r[3],
-	        regs->r[4],regs->r[5],regs->r[6],regs->r[7],
-	        regs->r[8],regs->r[9],regs->r[10],regs->r[11],
-	        regs->r[12], regs->sp, regs->lr, regs->pc, regs->cpsr);
-	return (void *)(regs->pc);
+	return v(regs[REG_EIP]);
 #elif __FreeBSD__ && __i386__
-	struct mcontext *regs = &uap->uc_mcontext;
-	printf(	"\teax 0x%08x ebx 0x%08x ecx 0x%08x edx 0x%08x\n"
+	mcontext_t *regs = &uap->uc_mcontext;
+	fprintf(file,
+			"\teax 0x%08x ebx 0x%08x ecx 0x%08x edx 0x%08x\n"
 			"\tedi 0x%08x esi 0x%08x ebp 0x%08x esp 0x%08x\n"
 			"\teip 0x%08x\n",
 			regs->mc_eax, regs->mc_ebx, regs->mc_ecx, regs->mc_edx,
 			regs->mc_edi, regs->mc_edi, regs->mc_ebp, regs->mc_esp,
 			regs->mc_eip);
-	return regs->mc_eip;
+	return v(regs->mc_eip);
 #elif __linux__ && __x86_64__
-	greg_t *regs = uap->uc_mcontext.gregs;
-	printf(	"\trax 0x%08x rbx 0x%08x rcx 0x%08x rdx 0x%08x\n"
-			"\trdi 0x%08x rsi 0x%08x rbp 0x%08x rsp 0x%08x\n"
-			"\tr8  0x%08x r9  0x%08x r10 0x%08x r11 0x%08x\n"
-			"\tr12 0x%08x r13 0x%08x r14 0x%08x r15 0x%08x\n"
-			"\trip 0x%08x\n",
-			regs[REG_RAX], regs[REG_RBX], regs[REG_RCX], regs[REG_RDX],
-			regs[REG_RDI], regs[REG_RSI], regs[REG_RBP], regs[REG_RSP],
-			regs[REG_R8 ], regs[REG_R9 ], regs[REG_R10], regs[REG_R11],
-			regs[REG_R12], regs[REG_R13], regs[REG_R14], regs[REG_R15],
-			regs[REG_RIP]);
-	return regs[REG_RIP];
+	greg_t *regs = (greg_t *)&uap->uc_mcontext.gregs;
+	fprintf(file,
+			"    rax %14p rbx %14p rcx %14p rdx %14p\n"
+			"    rdi %14p rsi %14p rbp %14p rsp %14p\n"
+			"    r8  %14p r9  %14p r10 %14p r11 %14p\n"
+			"    r12 %14p r13 %14p r14 %14p r15 %14p\n"
+			"    rip %14p\n",
+			v(regs[REG_RAX]),v(regs[REG_RBX]),v(regs[REG_RCX]),v(regs[REG_RDX]),
+			v(regs[REG_RDI]),v(regs[REG_RSI]),v(regs[REG_RBP]),v(regs[REG_RSP]),
+			v(regs[REG_R8 ]),v(regs[REG_R9 ]),v(regs[REG_R10]),v(regs[REG_R11]),
+			v(regs[REG_R12]),v(regs[REG_R13]),v(regs[REG_R14]),v(regs[REG_R15]),
+			v(regs[REG_RIP]));
+	return v(regs[REG_RIP]);
+# elif __OpenBSD__ && __x86_64__
+	fprintf(file,
+			"    rax %14p rbx %14p rcx %14p rdx %14p\n"
+			"    rdi %14p rsi %14p rbp %14p rsp %14p\n"
+			"    r8  %14p r9  %14p r10 %14p r11 %14p\n"
+			"    r12 %14p r13 %14p r14 %14p r15 %14p\n"
+			"    rip %14p\n",
+			v(uap->sc_rax),v(uap->sc_rbx),v(uap->sc_rcx),v(uap->sc_rdx),
+			v(uap->sc_rdi),v(uap->sc_rsi),v(uap->sc_rbp),v(uap->sc_rsp),
+			v(uap->sc_r8),v(uap->sc_r9),v(uap->sc_r10),v(uap->sc_r11),
+			v(uap->sc_r12),v(uap->sc_r13),v(uap->sc_r14),v(uap->sc_r15),
+			v(uap->sc_rip));
+	return v(uap->sc_rip);
+# elif __linux__ && (defined(__arm64__) || defined(__aarch64__))
+	void **regs = (void **)&uap->uc_mcontext.regs[0];
+	fprintf(file,
+			"     x0 %14p  x1 %14p  x2 %14p  x3 %14p\n"
+			"     x4 %14p  x5 %14p  x6 %14p  x7 %14p\n"
+			"     x8 %14p  x9 %14p x10 %14p x11 %14p\n"
+			"    x12 %14p x13 %14p x14 %14p x15 %14p\n"
+			"    x16 %14p x17 %14p x18 %14p x19 %14p\n"
+			"    x20 %14p x21 %14p x22 %14p x23 %14p\n"
+			"    x24 %14p x25 %14p x26 %14p x27 %14p\n"
+			"    x29 %14p  fp %14p  lr %14p  sp %14p\n",
+			regs[0], regs[1], regs[2], regs[3],
+			regs[4], regs[5], regs[6], regs[7],
+			regs[8], regs[9], regs[10], regs[11],
+			regs[12], regs[13], regs[14], regs[15],
+			regs[16], regs[17], regs[18], regs[19],
+			regs[20], regs[21], regs[22], regs[23],
+			regs[24], regs[25], regs[26], regs[27],
+			regs[28], regs[29], regs[30], (void *)(uap->uc_mcontext.sp));
+	return v(uap->uc_mcontext.pc);
 # elif __linux__ && (defined(__arm__) || defined(__arm32__) || defined(ARM32))
 	struct sigcontext *regs = &uap->uc_mcontext;
 	printf(	"\t r0 0x%08x r1 0x%08x r2 0x%08x r3 0x%08x\n"
@@ -600,6 +590,21 @@ printRegisterState(ucontext_t *uap)
 	        regs->arm_r4,regs->arm_r5,regs->arm_r6,regs->arm_r7,
 	        regs->arm_r8,regs->arm_r9,regs->arm_r10,regs->arm_fp,
 	        regs->arm_ip, regs->arm_sp, regs->arm_lr, regs->arm_pc);
+	return v(uap->uc_mcontext.arm_pc);
+# elif __linux__ && __riscv64__
+	struct sigcontext *regs = &uap->uc_mcontext.__gregs;
+	fprintf(file,
+		"\t PC =%14p   SP =%14p   RA =%14p \n"
+	        "\t a0 =%14p   a1 =%14p   a2 =%14p   a3 =%14p \n"
+	        "\t a4 =%14p   a5 =%14p   a6 =%14p   a7 =%14p \n"
+	        "\t t0 =%14p   t1 =%14p   t2 =%14p   t3 =%14p \n"
+		"\ts0/fp =%14p s1 =%14p   s2 =%14p   s3 =%14p \n",
+	        regs[0], regs[2], regs[1],
+		regs[10], regs[11], regs[12], regs[13],
+		regs[14], regs[15], regs[16], regs[17],
+		regs[5], regs[6], regs[28], regs[29],
+		regs[8], regs[9], regs[18], regs[19]);
+	return v(uap->uc_mcontext.__gregs[0]);
 #else
 	printf("don't know how to derive register state from a ucontext_t on this platform\n");
 	return 0;
@@ -681,9 +686,9 @@ int sqExecuteFunctionWithCrashExceptionCatching(sqFunctionThatCouldCrash functio
         sigsegv_handler_action.sa_sigaction = sigsegv;
         sigsegv_handler_action.sa_flags = SA_NODEFER | SA_SIGINFO;
         sigemptyset(&sigsegv_handler_action.sa_mask);
-        (void)sigaction(SIGSEGV, &sigsegv_handler_action, 0);
         (void)sigaction(SIGBUS, &sigsegv_handler_action, 0);
         (void)sigaction(SIGILL, &sigsegv_handler_action, 0);
+        (void)sigaction(SIGSEGV, &sigsegv_handler_action, 0);
 
         sigusr1_handler_action.sa_sigaction = sigusr1;
         sigusr1_handler_action.sa_flags = SA_NODEFER | SA_SIGINFO;

@@ -32,13 +32,15 @@ if (CMAKE_BUILD_TYPE STREQUAL "")
 endif ()
 
 if (EMSCRIPTEN)
+	set(COG_JIT on)
 	set(CMAKE_VERBOSE_MAKEFILE on)
 	SET_PROPERTY(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 	# <O2 yields too many locals in interpret and other async errors
-	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG -DDEBUGVM")
-	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DDEBUG -DDEBUGVM")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DSPURVM=1")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DSPURVM=1")
+	set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DSTACKVM=1 -DCOGVM=1 -I/Users/maenu/Documents/feenk/binaryen/src")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DSTACKVM=1 -DCOGVM=1 -I/Users/maenu/Documents/feenk/binaryen/src")
+	# -I/Users/maenu/Documents/feenk/binaryen-build/src -L/Users/maenu/Documents/feenk/binaryen-build/lib -lbinaryen -DDEBUG -DDEBUGVM
+	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")
+	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")
 endif()
 
 # Turn on warnings
@@ -55,6 +57,7 @@ else()
 		-Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow
 		-Wno-conversion -Wno-int-conversion -Wno-sign-conversion -Wpointer-sign
 		-Wno-trigraphs -Wdeprecated-declarations
+		-Wbad-function-cast -Wcast-function-type
 
         # -Wunused-variable -Wunused-value -Wunused-but-set-variable
         # Supress these warning to reduce the side of the Travius log and avoid
@@ -80,7 +83,7 @@ else()
 
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99 ${WARNING_FLAGS}")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNING_FLAGS}")
-    if(UNIX)
+    if(UNIX OR EMSCRIPTEN)
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
     endif()
 
@@ -306,12 +309,7 @@ elseif(SQUEAK_VM)
 endif()
 
 
-# Cog JIT
-if(COG_JIT)
-	#add_definitions(CogVM=1)
-endif()
 
-#add_definitions(-DCOGMTVM=1)
 
 set(PluginsSourceFolderName "src/plugins")
 
@@ -673,7 +671,7 @@ if(UNIX)
 	endif()
 
 	set(VM_DEPENDENCIES_LIBRARIES pthread ${VM_DEPENDENCIES_LIBRARIES})
-	if(APPLE)
+	if(APPLE AND NOT EMSCRIPTEN)
 		add_definitions(-DBUILD_FOR_OSX=1)
 	else()
 		add_definitions(-D_GNU_SOURCE)
@@ -844,15 +842,17 @@ if(NOT ONLY_CONFIG_H)
     	#  -sASSERTIONS ASSERTIONS=2 yield duplicate symbols, use 1 instead (https://github.com/emscripten-core/emscripten/issues/13040)
 		#   -sINITIAL_MEMORY=128MB -sALLOW_MEMORY_GROWTH	-sPROXY_TO_PTHREAD -sOFFSCREENCANVAS_SUPPORT -sOFFSCREENCANVASES_TO_PTHREAD='#canvas'
 		#-sASYNCIFY -sASYNCIFY_ONLY='[\"main\", \"call_path_to_your_main_loop\", \"SDL_WaitEvent\", \"SDL_WaitEventTimeout\", \"SDL_Delay\", \"SDL_RenderPresent\", \"GLES2_RenderPresent\", \"SDL_GL_SwapWindow\", \"Emscripten_GLES_SwapWindow\", \"byn$$fpcast-emu$$Emscripten_GLES_SwapWindow\", \"SDL_UpdateWindowSurface\", \"SDL_UpdateWindowSurfaceRects\", \"Emscripten_UpdateWindowFramebuffer\"]' \
+		# -sASYNCIFY -sEMULATE_FUNCTION_POINTER_CASTS
 		set(CMAKE_EXECUTABLE_SUFFIX ".html")
 		add_executable(${VM_EXECUTABLE_NAME} platforms/minheadless/common/sqMain.c)
 		# IMPORTANT paths need to be changed for different builds
 		SET_TARGET_PROPERTIES(${VM_EXECUTABLE_NAME} PROPERTIES LINK_FLAGS " \
-			 -lGL -sUSE_SDL=2 \
-			-sMAIN_MODULE -sASYNCIFY \
-			-sUSE_PTHREADS -sPTHREAD_POOL_SIZE=1 -sALLOW_MEMORY_GROWTH -sEXIT_RUNTIME -sLLD_REPORT_UNDEFINED -sERROR_ON_UNDEFINED_SYMBOLS=0 \
-			--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/squeak.stack.spur.wasm/pre.js \
-			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/squeak.stack.spur.wasm/image@/ \
+			-lGL -sUSE_SDL=2 \
+			-L/Users/maenu/Documents/feenk/binaryen-build/lib -lbinaryen \
+			-sMAIN_MODULE \
+    		-sASYNCIFY -sASSERTIONS=2 -sSTACK_SIZE=2MB -sPTHREAD_POOL_SIZE=1 -sALLOW_MEMORY_GROWTH  -sALLOW_TABLE_GROWTH -sEXIT_RUNTIME -sLLD_REPORT_UNDEFINED -sERROR_ON_UNDEFINED_SYMBOLS=0 \
+			--pre-js /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/squeak.cog.spur.wasm/pre.js \
+			--preload-file /Users/maenu/Documents/feenk/opensmalltalk-vm/building/minheadless.cmake/x86/squeak.cog.spur.wasm/image@/ \
 			")
 	    target_link_libraries(${VM_EXECUTABLE_NAME} ${VM_LIBRARY_NAME})
 	else()

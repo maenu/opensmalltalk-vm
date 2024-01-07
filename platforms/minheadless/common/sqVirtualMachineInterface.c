@@ -842,7 +842,9 @@ osvm_initializeVM(OSVMInstanceHandle vmHandle)
     ioInitWindowSystem(headlessMode);
     ioInitTime();
     ioInitThreads();
+#if !COGMTVM
     ioVMThread = ioCurrentOSThread();
+#endif
     aioInit();
 
     return OSVM_SUCCESS;

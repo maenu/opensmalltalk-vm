@@ -1711,7 +1711,7 @@ register struct foo * foo asm(fooxstr(USE_GLOBAL_STRUCT_REG));
 static struct foo * foo = &fum;
 # endif
 #endif
-static sqInt *primitiveCalloutPointer = (void *)-1;
+static sqInt *primitiveCalloutPointer = (sqInt *)-1;
 static signed char primitiveAccessorDepthTable[MaxPrimitiveIndex + 2 /* 584 */] = {
 //       0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19
 /*0*/	-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,-1,

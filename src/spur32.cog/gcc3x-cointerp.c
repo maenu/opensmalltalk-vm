@@ -1487,7 +1487,7 @@ static sqInt NoDbgRegParms frameStackedReceiverOffset(char *theFP);
 static sqInt NoDbgRegParms frameStackedReceivernumArgs(char *theFP, sqInt numArgs);
 static void freeUntracedStackPages(void);
 extern sqInt fullDisplayUpdate(void);
-static void (*functionPointerForinClass(sqInt primIdx,sqInt theClass))(void);
+static sqInt (*functionPointerForinClass(sqInt primIdx,sqInt theClass))(void);
 static sqInt getCogVMFeatureFlags(void);
 static sqInt getErrorObjectFromPrimFailCode(void);
 extern sqInt getFullScreenFlag(void);
@@ -1645,7 +1645,7 @@ extern void print(char *s);
 extern void pushBool(sqInt trueOrFalse);
 static sqInt NoDbgRegParms pushedReceiverOrClosureOfFrame(char *theFP);
 extern void pushFloat(double f);
-extern sqInt pushInteger(sqInt integerValue);
+extern void pushInteger(sqInt integerValue);
 extern void push(sqInt object);
 static void NoDbgRegParms putLongtoFile(sqInt aLong, sqImageFile aFile);
 static void NoDbgRegParms putShorttoFile(short aShort, sqImageFile aFile);
@@ -17564,7 +17564,7 @@ sqInt (*functionPointerForCompiledMethodprimitiveIndexprimitivePropertyFlagsInto
 				flagsPtr[0] = (flags | PrimCallIsExternalCall);
 			}
 		}
-		return primitiveCalloutPointer;
+		return (sqInt) primitiveCalloutPointer;
 	}
 	if (primitiveIndex == PrimNumberExternalCall) {
 		/* begin attemptToLinkExternalPrimitive: */
@@ -21183,6 +21183,7 @@ readImageFromFileHeapSizeStartingAt(sqImageFile f, usqInt desiredHeapSize, squea
 
 	/* allocate a contiguous block of memory for the Squeak heap and ancilliary data structures */
 	cogCodeBase = ((sqInt)(allocateJITMemory((&GIV(cogCodeSize)))));
+	fprintf(stderr, "%d\n", cogCodeBase);
 	mem = ((usqInt)(pointerForOop(allocateMemoryMinimumImageFileHeaderSize(heapSize, minimumMemory, f, headerSize))));
 	if (mem == null) {
 		insufficientMemoryAvailableError();
@@ -23030,7 +23031,7 @@ frameIsMarked(sqInt theFPInt)
 
 	/* CoInterpreterPrimitives>>#primitiveBenchmarkFollowForwardersInStackZone */
 #if VMBenchmarks
-EXPORT(void)
+EXPORT(sqInt)
 primitiveBenchmarkFollowForwardersInStackZone(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt oop;
@@ -23051,7 +23052,7 @@ primitiveBenchmarkFollowForwardersInStackZone(void)
 
 	/* CoInterpreterPrimitives>>#primitiveBenchmarkFollowForwardersOfReceiverAndTemporariesInStackZone */
 #if VMBenchmarks
-EXPORT(void)
+EXPORT(sqInt)
 primitiveBenchmarkFollowForwardersOfReceiverAndTemporariesInStackZone(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt oop;
@@ -23111,7 +23112,7 @@ primitiveBenchmarkJITReceiver(void)
 
 	/* CoInterpreterPrimitives>>#primitiveBenchmarkScavenge */
 #if VMBenchmarks
-EXPORT(void)
+EXPORT(sqInt)
 primitiveBenchmarkScavenge(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt oop;
@@ -23144,6 +23145,7 @@ primitiveClosureCopyWithCopiedValues(void)
 	if (!GIV(primFailCode)) {
 		GIV(primFailCode) = 1;
 	}
+	return 0;
 }
 
 
@@ -23390,6 +23392,7 @@ primitiveExternalCallNoOp(void)
 	assert(!((failed())));
 	/* begin pop: */
 	GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
+	return 0;
 }
 
 
@@ -23403,6 +23406,7 @@ primitiveFastCNoOp(void)
 	assert(!((failed())));
 	/* begin pop: */
 	GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
+	return 0;
 }
 
 
@@ -23418,6 +23422,7 @@ primitiveFastCNoOpAlignedForFloats(void)
 	assert(!((failed())));
 	/* begin pop: */
 	GIV(stackPointer) += GIV(argumentCount) * BytesPerWord;
+	return 0;
 }
 
 
@@ -23437,6 +23442,7 @@ primitiveFlushCacheByMethod(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
 	flushMethodCacheForMethod(longAt(GIV(stackPointer)));
 	unlinkSendsToandFreeIf(longAt(GIV(stackPointer)), 0);
+	return 0;
 }
 
 
@@ -23464,6 +23470,7 @@ primitiveFlushCacheBySelector(void)
 	 || (selector == (fetchPointerofObject(34, splObj(SpecialSelectors))))) {
 	}
 	unlinkSendsOfisMNUSelector(selector, selector == (longAt((GIV(specialObjectsOop) + BaseHeaderSize) + (((int)((usqInt)(SelectorDoesNotUnderstand) << (shiftForWord())))))));
+	return 0;
 }
 
 	/* CoInterpreterPrimitives>>#primitiveFunctionPointerAddress */
@@ -23664,6 +23671,7 @@ primitiveMethodXray(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((0) * BytesPerWord)), (((usqInt)flags << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 	/* CoInterpreterPrimitives>>#primitiveMinimumUnusedHeadroom */
@@ -23679,6 +23687,7 @@ primitiveMinimumUnusedHeadroom(void)
 	/* begin pop:thenPushInteger: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)integer << 1) | 1));
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -24605,7 +24614,7 @@ primitiveUnloadModule(void)
 	 && (((((usqInt)((longAt(moduleName)))) >> (formatShift())) & (formatMask())) >= (firstByteFormat())))
 	 && (((numBytesOfBytes(moduleName)) == moduleLength)
 	 && ((strncmp("SqueakFFIPrims", firstIndexableField(moduleName), moduleLength)) == 0))) {
-		primitiveCalloutPointer = ((sqInt *) -1);
+		primitiveCalloutPointer = (sqInt *) -1;
 	}
 	forceInterruptCheck();
 	flushExternalPrimitives();
@@ -28421,6 +28430,7 @@ GIV(bytecodeSetSelector) = ((((int) methodHeader)) < 0
 	}
 	returnToExecutivepostContextSwitch(inInterpreter, switched);
 	l8:	/* end activateNewClosure:outer:method:numArgs:mayContextSwitch: */;
+	return 0;
 }
 
 
@@ -28683,6 +28693,7 @@ GIV(bytecodeSetSelector) = ((((int) methodHeader)) < 0
 	}
 	returnToExecutivepostContextSwitch(inInterpreter, switched);
 	l8:	/* end activateNewClosure:outer:method:numArgs:mayContextSwitch: */;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveClosureValueWithArgs */
@@ -28977,6 +28988,7 @@ GIV(bytecodeSetSelector) = ((((int) methodHeader)) < 0
 	}
 	returnToExecutivepostContextSwitch(inInterpreter, switched);
 	l10:	/* end activateNewClosure:outer:method:numArgs:mayContextSwitch: */;
+	return 0;
 }
 
 
@@ -29734,6 +29746,7 @@ primitiveDivLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveEqual */
@@ -30939,6 +30952,7 @@ static sqInt
 primitiveFlushExternalPrimitives(void)
 {
 	flushExternalPrimitives();
+	return 0;
 }
 
 
@@ -31430,6 +31444,7 @@ GIV(bytecodeSetSelector) = (headerIndicatesAlternateBytecodeSet(methodHeaderOf(G
 	}
 	returnToExecutivepostContextSwitch(inInterpreter, switched);
 	l7:	/* end activateNewFullClosure:method:numArgs:mayContextSwitch: */;
+	return 0;
 }
 
 
@@ -31701,6 +31716,7 @@ GIV(bytecodeSetSelector) = (headerIndicatesAlternateBytecodeSet(methodHeaderOf(G
 	}
 	returnToExecutivepostContextSwitch(inInterpreter, switched);
 	l7:	/* end activateNewFullClosure:method:numArgs:mayContextSwitch: */;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveFullClosureValueWithArgs */
@@ -32004,6 +32020,7 @@ GIV(bytecodeSetSelector) = (headerIndicatesAlternateBytecodeSet(methodHeaderOf(G
 	}
 	returnToExecutivepostContextSwitch(inInterpreter, switched);
 	l9:	/* end activateNewFullClosure:method:numArgs:mayContextSwitch: */;
+	return 0;
 }
 
 
@@ -32023,7 +32040,7 @@ primitiveGetAttribute(void)
 	if (!((attr & 1))) {
 		/* begin primitiveFailFor: */
 		GIV(primFailCode) = PrimErrBadArgument;
-		return;
+		return 0;
 	}
 	attributeString = getAttributeString((attr >> 1));
 	if (attributeString == null) {
@@ -34886,6 +34903,7 @@ primitiveNotIdentical(void)
 			: GIV(falseObj)));
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -34900,7 +34918,7 @@ primitiveNotIdentical(void)
 	used only to debug that primitive. */
 
 	/* InterpreterPrimitives>>#primitiveObjectsAccessibleFromRoots */
-static void
+static sqInt
 primitiveObjectsAccessibleFromRoots(void)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     sqInt arrayOfRoots;
@@ -34918,7 +34936,7 @@ primitiveObjectsAccessibleFromRoots(void)
 		if (!GIV(primFailCode)) {
 			GIV(primFailCode) = 1;
 		}
-		return;
+		return 0;
 	}
 	result = objectsAccessibleFromRoots(arrayOfRoots);
 	if (((result & 1))
@@ -34938,6 +34956,7 @@ primitiveObjectsAccessibleFromRoots(void)
 		longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), result);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -35427,6 +35446,7 @@ primitivePerformInSuperclass(void)
 	/* begin initPrimCall */
 	GIV(primFailCode) = 0;
 	l13:	/* end primitiveObject:perform:withArguments:lookedUpIn: */;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitivePerformWithArgs */
@@ -35545,6 +35565,7 @@ primitivePerformWithArgs(void)
 	/* begin initPrimCall */
 	GIV(primFailCode) = 0;
 	l8:	/* end primitiveObject:perform:withArguments:lookedUpIn: */;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitivePinnedNew */
@@ -36127,6 +36148,7 @@ primitiveRemLargeIntegers(void)
 		longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), oopResult);
 		GIV(stackPointer) = sp;
 	}
+	return 0;
 }
 
 
@@ -37326,6 +37348,7 @@ primitiveShowDisplayRect(void)
 		/* begin pop: */
 		GIV(stackPointer) += 4 * BytesPerWord;
 	}
+	return 0;
 }
 
 
@@ -37615,6 +37638,7 @@ primitiveSizeInBytesOfInstance(void)
 	/* begin pop:thenPushInteger: */
 	longAtput((sp1 = GIV(stackPointer) + ((0) * BytesPerWord)), ((byteSize << 1) | 1));
 	GIV(stackPointer) = sp1;
+	return 0;
 }
 
 	/* InterpreterPrimitives>>#primitiveSomeInstance */
@@ -39349,6 +39373,7 @@ primitiveVMProfileSamplesInto(void)
 	/* begin pop:thenPushInteger: */
 	longAtput((sp1 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)numSamples << 1) | 1));
 	GIV(stackPointer) = sp1;
+	return 0;
 }
 
 
@@ -70444,7 +70469,7 @@ printMethodCache(void)
 						"%p %.*s\n",
 						((void *)s),
 						((int) (numBytesOfBytes(s))),
-						firstIndexableField(s));
+						(char *)firstIndexableField(s));
 			}
 			else {
 				shortPrintOop(s);
@@ -71486,7 +71511,7 @@ pushFloat(double f)
 }
 
 	/* StackInterpreter>>#pushInteger: */
-sqInt
+void
 pushInteger(sqInt integerValue)
 {   DECL_MAYBE_SQ_GLOBAL_STRUCT
     char *sp;
@@ -71494,7 +71519,6 @@ pushInteger(sqInt integerValue)
 	/* begin push: */
 	longAtput((sp = GIV(stackPointer) - BytesPerWord), (((usqInt)integerValue << 1) | 1));
 	GIV(stackPointer) = sp;
-	return null;
 }
 
 
@@ -75325,6 +75349,7 @@ primitiveClone(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), newCopy);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -76232,6 +76257,7 @@ primitiveContextSize(void)
 	/* begin pop:thenPushInteger: */
 	longAtput((sp2 = GIV(stackPointer) + (((GIV(argumentCount) + 1) - 1) * BytesPerWord)), (((usqInt)sz << 1) | 1));
 	GIV(stackPointer) = sp2;
+	return 0;
 }
 
 
@@ -76706,6 +76732,7 @@ primitiveDoPrimitiveWithArgs(void)
 		GIV(argumentCount) = savedNumArgs;
 	}
 	GIV(tempOop) = (GIV(tempOop2) = 0);
+	return 0;
 }
 
 
@@ -77000,6 +77027,7 @@ primitiveFindNextUnwindContext(void)
 	/* begin pop:thenPush: */
 	longAtput((sp = GIV(stackPointer) + ((1) * BytesPerWord)), handlerOrNilOrZero);
 	GIV(stackPointer) = sp;
+	return 0;
 }
 
 
@@ -79809,6 +79837,7 @@ GIV(totalHeapSizeIncludingBridges))));
 		GIV(primFailCode) = PrimErrInappropriate;
 	}
 	l110:	/* end primitiveSetVMParameter:arg: */;
+	return 0;
 }
 
 
@@ -79822,6 +79851,7 @@ primitiveVoidReceiver(void)
 	longAtPointerput(((((usqInt)(longAt(GIV(framePointer) + FoxMethod)))) < (startOfMemory())
 		? GIV(framePointer) + FoxMFReceiver
 		: GIV(framePointer) + FoxIFReceiver), 0);
+	return 0;
 }
 
 

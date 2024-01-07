@@ -1335,8 +1335,7 @@ ffiArgumentSpecClassin(sqInt oop, sqInt argSpec, sqInt argClass, CalloutState *c
 			if ((!isExternalAddress)
 			 && ((((((calloutState->callFlags)) & FFICallFlagThreaded) != 0))
 			 && (((!isAlienObj)
-			 || ((assert(isAlien(oop)),
-			(longAt(oop + BaseHeaderSize)) > 0)))
+			 || (((longAt(oop + BaseHeaderSize)) > 0)))
 			 && (
 #      if SPURVM
 				!(isPinned(oop))
@@ -1995,8 +1994,7 @@ ffiPushPointerContentsOfin(sqInt oop, CalloutState *calloutState)
 	if (includesBehaviorThatOf(ptrClass, classAlien())) {
 #    if COGMTVM
 		if ((((((calloutState->callFlags)) & FFICallFlagThreaded) != 0))
-		 && (((assert(isAlien(oop)),
-		(longAt(oop + BaseHeaderSize)) > 0))
+		 && ((((longAt(oop + BaseHeaderSize)) > 0))
 		 && (isYoung(oop)))) {
 			return -PrimErrObjectMayMove;
 		}

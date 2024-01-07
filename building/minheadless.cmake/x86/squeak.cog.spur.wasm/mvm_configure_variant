@@ -1,0 +1,22 @@
+#!/bin/sh
+
+if ../../../../scripts/checkSCCSversion ; then exit 1; fi
+. ./configure_variant.sh
+
+# --debug-trycompile \
+# -DCMAKE_TOOLCHAIN_FILE="$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" \
+# -DCMAKE_CROSSCOMPILING_EMULATOR="$(which node);--experimental-wasm-threads" \
+# -sERROR_ON_WASM_CHANGES_AFTER_LINK -gdwarf-5 -gsplit-dwarf -gpubnames -sSAFE_HEAP_LOG=1
+emcmake cmake ../../../../.. \
+	-DCMAKE_BUILD_TYPE="$VARIANT_NAME" $CMAKE_EXTRA_ARGS \
+	-DCMAKE_INSTALL_PREFIX=install-dist \
+	-G "$GENERATOR_NAME" \
+	-DMINIMAL_PLUGIN_SET=Off \
+	-DSQUEAK_BRANDING=On \
+	-DHAVE_KQUEUE=Off \
+	-DSPUR_OBJECT_MODEL=On \
+	-DCOG_JIT=On \
+	-DGENERATE_TOP_LEVEL_RUN_SCRIPT=Off \
+	-DSUPPORT_TRADITIONAL_DISPLAY=On \
+	-DALLOW_SDL2=On \
+	-DHAVE_SDL2=On

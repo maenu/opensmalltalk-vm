@@ -29,7 +29,6 @@
 #ifndef _SQ_PLATFORM_SPECIFIC_H
 #define _SQ_PLATFORM_SPECIFIC_H
 
-#include "sqMemoryAccess.h"
 #include "sqPlatformSpecificCommon.h"
 
 #if defined(_WIN32)

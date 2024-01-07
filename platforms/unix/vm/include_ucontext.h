@@ -106,7 +106,7 @@
 # define _FP_IN_UCONTEXT sc_rbp
 # define _SP_IN_UCONTEXT sc_rsp
 #elif EMSCRIPTEN
-# define _PC_IN_UCONTEXT uc_mcontext.gregs[REG_EIP]
+# define _PC_IN_UCONTEXT uc_mcontext.gregs[EIP]
 # define _FP_IN_UCONTEXT uc_mcontext.gregs[REG_EBP]
 # define _SP_IN_UCONTEXT uc_mcontext.gregs[REG_ESP]
 #endif

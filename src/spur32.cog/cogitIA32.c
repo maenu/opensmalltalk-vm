@@ -359,6 +359,9 @@ char *__cogitBuildInfo = __buildInfo;
 #define ZeroExtend16RR 155
 #define ZeroExtend8RR 154
 
+#include <binaryen-c.h>
+#include <emscripten.h>
+
 typedef struct _AbstractInstruction {
 	unsigned char	opcode;
 	unsigned char	machineCodeSize;
@@ -367,7 +370,7 @@ typedef struct _AbstractInstruction {
 	usqInt		operands[3];
 	usqInt	address;
 	struct _AbstractInstruction *dependent;
-	unsigned char		machineCode[10];
+    BinaryenOp		machineCode[10];
  } AbstractInstruction;
 
 #define CogIA32Compiler AbstractInstruction
@@ -2546,8 +2549,8 @@ void (*ceCallCogCodePopReceiverArg1Arg0Regs)(void);
 void (*ceCallCogCodePopReceiverReg)(void);
 sqInt (*ceCaptureCStackPointers)(void);
 void (*ceEnterCogCodePopReceiverReg)(void);
-usqIntptr_t (*ceGetFP)(void);
-usqIntptr_t (*ceGetSP)(void);
+sqInt (*ceGetFP)(void);
+sqInt (*ceGetSP)(void);
 void (*ceInvokeInterpret)(void);
 void (*realCECallCogCodePopReceiverAndClassRegs)(void);
 void (*realCECallCogCodePopReceiverArg0Regs)(void);
@@ -3672,6 +3675,189 @@ cResultRegisterHigh(AbstractInstruction * self_in_cResultRegisterHigh)
 	return EDX;
 }
 
+uint32_t jit(char* name, BinaryenModuleRef module, BinaryenType params, BinaryenType results, BinaryenType* varTypes, BinaryenIndex numVarTypes, BinaryenExpressionRef body) {
+    // Create the wrapper function (no local variables, no basic blocks)
+    BinaryenAddFunction(module, name, params, results, varTypes, numVarTypes, body);
+    BinaryenAddFunctionExport(module, name, name);
+    BinaryenAddMemoryImport(module, NULL, "env", "memory", 0);
+    BinaryenAddTableImport(module, NULL, "env", "table");
+    // Print module and generate bytecode
+    assert(BinaryenModuleValidate(module));
+    BinaryenModuleOptimize(module);
+    BinaryenModulePrint(module);
+    BinaryenModuleAllocateAndWriteResult result = BinaryenModuleAllocateAndWrite(module, NULL);
+    // Link module
+    uint32_t f_index = EM_ASM_INT({
+        return addFunction((new WebAssembly.Instance(new WebAssembly.Module(new Uint8Array(wasmMemory.buffer, $0, $1)), {
+                env: {
+                    memory: wasmMemory,
+                    table: wasmTable,
+                }
+            })).exports[UTF8ToString($2)]);
+        }, result.binary, result.binaryBytes, name);
+    // Clean up the module, which owns all objects above, and free the bytecode
+    BinaryenModuleDispose(module);
+    free(result.binary);
+    return f_index;
+}
+
+pub unsafe fn instr_0FA2() {
+    // cpuid
+    // TODO: Fill in with less bogus values
+
+    // http://lxr.linux.no/linux+%2a/arch/x86/include/asm/cpufeature.h
+    // http://www.sandpile.org/x86/cpuid.htm
+    let mut eax = 0;
+    let mut ecx = 0;
+    let mut edx = 0;
+    let mut ebx = 0;
+
+    let level = read_reg32(EAX) as u32;
+
+    match level {
+            0 => {
+                // maximum supported level (default 0x16, overwritten to 2 as a workaround for Windows NT)
+                eax = cpuid_level as i32;
+
+                ebx = 0x756E6547 | 0; // Genu
+                edx = 0x49656E69 | 0; // ineI
+                ecx = 0x6C65746E | 0; // ntel
+            },
+
+            1 => {
+                // pentium
+                eax = 3 | 6 << 4 | 15 << 8;
+                ebx = 1 << 16 | 8 << 8; // cpu count, clflush size
+                ecx = 1 << 0 | 1 << 23 | 1 << 30; // sse3, popcnt, rdrand
+                let vme = 0 << 1;
+                if ::config::VMWARE_HYPERVISOR_PORT {
+                    ecx |= 1 << 31
+                }; // hypervisor
+                edx = (if true /* have fpu */ { 1 } else {  0 }) |      // fpu
+                vme | 1 << 3 | 1 << 4 | 1 << 5 | 1 << 6 |  // vme, pse, tsc, msr, pae
+                1 << 8 | 1 << 11 | 1 << 13 | 1 << 15 | // cx8, sep, pge, cmov
+                1 << 23 | 1 << 24 | 1 << 25 | 1 << 26; // mmx, fxsr, sse1, sse2
+
+                if *acpi_enabled
+                //&& this.apic_enabled[0])
+                {
+                    edx |= 1 << 9; // apic
+                }
+            },
+
+            2 => {
+                // Taken from http://siyobik.info.gf/main/reference/instruction/CPUID
+                eax = 0x665B5001;
+                ebx = 0;
+                ecx = 0;
+                edx = 0x007A7000;
+            },
+
+            4 => {
+                // from my local machine
+                match read_reg32(ECX) {
+                    0 => {
+                        eax = 0x00000121;
+                        ebx = 0x01c0003f;
+                        ecx = 0x0000003f;
+                        edx = 0x00000001;
+                    },
+                    1 => {
+                        eax = 0x00000122;
+                        ebx = 0x01c0003f;
+                        ecx = 0x0000003f;
+                        edx = 0x00000001;
+                    },
+                    2 => {
+                        eax = 0x00000143;
+                        ebx = 0x05c0003f;
+                        ecx = 0x00000fff;
+                        edx = 0x00000001;
+                    },
+                    _ => {},
+                }
+            },
+
+            5 => {
+                // from my local machine
+                eax = 0x40;
+                ebx = 0x40;
+                ecx = 3;
+                edx = 0x00142120;
+            },
+
+            7 => {
+                if read_reg32(ECX) == 0 {
+                    eax = 0; // maximum supported sub-level
+                    ebx = 1 << 9; // enhanced REP MOVSB/STOSB
+                    ecx = 0;
+                    edx = 0;
+                }
+            },
+
+            0x80000000 => {
+                // maximum supported extended level
+                eax = 5;
+                // other registers are reserved
+            },
+
+            0x40000000 => {
+                // hypervisor
+                if ::config::VMWARE_HYPERVISOR_PORT {
+                    // h("Ware".split("").reduce((a, c, i) => a | c.charCodeAt(0) << i * 8, 0))
+                    ebx = 0x61774D56 | 0; // VMwa
+                    ecx = 0x4D566572 | 0; // reVM
+                    edx = 0x65726177 | 0; // ware
+                }
+            },
+
+            0x15 => {
+                eax = 1; // denominator
+                ebx = 1; // numerator
+                ecx = (TSC_RATE * 1000.0) as u32 as i32; // core crystal clock frequency in Hz
+                dbg_assert!(ecx > 0);
+                //  (TSC frequency = core crystal clock frequency * EBX/EAX)
+            },
+
+            0x16 => {
+                eax = (TSC_RATE / 1000.0).floor() as u32 as i32; // core base frequency in MHz
+                ebx = (TSC_RATE / 1000.0).floor() as u32 as i32; // core maximum frequency in MHz
+                ecx = 10; // bus (reference) frequency in MHz
+
+                // 16-bit values
+                dbg_assert!(eax < 0x10000);
+                dbg_assert!(ebx < 0x10000);
+                dbg_assert!(ecx < 0x10000);
+            },
+
+            x => {
+                dbg_log!("cpuid: unimplemented eax: {:x}", x);
+            },
+    }
+
+    if level == 4 || level == 7 {
+        dbg_log!(
+                "cpuid: eax={:08x} ecx={:02x}",
+                        read_reg32(EAX),
+                        read_reg32(ECX),
+        );
+    }
+    else if level != 0 && level != 2 && level != 0x80000000 {
+        dbg_log!("cpuid: eax={:08x}", read_reg32(EAX));
+    }
+
+    write_reg32(EAX, eax);
+    write_reg32(ECX, ecx);
+    write_reg32(EDX, edx);
+    write_reg32(EBX, ebx);
+}
+
+typedef int (*iii_t)(int, int);
+
+int adder_func(int a, int b) {
+    return a + b;
+}
+
 
 /*	Do a throw-away compilation to get at the cpuid info and initialize
 	cpuidWord0 and cpuidWord1.
@@ -3689,6 +3875,19 @@ detectFeatures(AbstractInstruction * self_in_detectFeatures)
     sqInt fixupSize;
     sqInt opcodeSize;
     usqInt startAddress;
+
+    // Create a function type for: i32 (i32, i32)
+    BinaryenType ii[2] = {BinaryenTypeInt32(), BinaryenTypeInt32()};
+    BinaryenType params = BinaryenTypeCreate(ii, 2);
+    BinaryenType results = BinaryenTypeInt32();
+    BinaryenModuleRef m = BinaryenModuleCreate();
+    // Get the 0 and 1 arguments, and forward them to `func`
+    BinaryenExpressionRef operands[2] = {BinaryenLocalGet(m, 0, BinaryenTypeInt32()),
+                                         BinaryenLocalGet(m, 1, BinaryenTypeInt32())};
+    BinaryenExpressionRef adder_ptr = BinaryenConst(m, BinaryenLiteralInt32((uintptr_t) adder_func));
+    BinaryenExpressionRef adder_res = BinaryenCallIndirect(m, 0, adder_ptr, operands, 2, params, results);
+    // Execute code!
+    printf("adder_wrapper()=%d\n", ((int (*)(int,int)) (jit("f", m, params, results, NULL, 0, adder_res)))(3,4));
 
 	startAddress = methodZoneBase();
 	/* begin allocateOpcodes:bytecodes: */
@@ -11351,11 +11550,11 @@ static void (*genEnilopmartForandandforCallcalled(sqInt regArg1, sqInt regArg2Or
 	for call, looks like
 	ret pc
 	stackPointer ->	target address
-	
+
 	and if not for call, looks like
 	whatever
 	stackPointer ->	target address
-	
+
 	If forCall and running on a CISC, ret pc must be left on the stack. If
 	forCall and
 	running on a RISC, ret pc must be popped into LinkReg. In either case,
@@ -11694,7 +11893,7 @@ generateMapAtstart(usqInt addressOrNull, usqInt startAddress)
 
 
 /*	Generate the prototype OpenPIC to determine how much space an open PIC
-	takes. 
+	takes.
  */
 /*	stack allocate the various collections so that they
 	are effectively garbage collected on return. */
@@ -11827,7 +12026,7 @@ generateStackPointerCapture(void)
 /*	Generate the run-time entries and exits at the base of the native code
 	zone and update the base.
 	Read the class-side method trampolines for documentation on the various
-	trampolines 
+	trampolines
  */
 
 	/* Cogit>>#generateTrampolines */
@@ -11872,7 +12071,7 @@ generatorForPC(sqInt pc)
 	after a leaf call, used for checking stack pointer alignment, frame
 	pointer usage, etc. N.B.
 	these are exported to the CoInterpreter et al via Cogit
-	class>>mustBeGlobal:. 
+	class>>mustBeGlobal:.
  */
 
 	/* Cogit>>#genGetLeafCallStackPointers */
@@ -11899,7 +12098,7 @@ genGetLeafCallStackPointers(void)
 	genoperand(RetN, 0);
 	outputInstructionsForGeneratedRuntimeAt(startAddress);
 	recordGeneratedRunTimeaddress("ceGetFP", startAddress);
-	ceGetFP = ((usqIntptr_t (*)(void)) startAddress);
+	ceGetFP = ((sqInt (*)(void)) startAddress);
 	startAddress = methodZoneBase;
 	zeroOpcodeIndex();
 	genoperandoperand(MoveRR, NativeSPReg, ABIResultReg);
@@ -11910,7 +12109,7 @@ genGetLeafCallStackPointers(void)
 	genoperand(RetN, 0);
 	outputInstructionsForGeneratedRuntimeAt(startAddress);
 	recordGeneratedRunTimeaddress("ceGetSP", startAddress);
-	ceGetSP = ((usqIntptr_t (*)(void)) startAddress);
+	ceGetSP = ((sqInt (*)(void)) startAddress);
 }
 
 
@@ -11919,7 +12118,7 @@ genGetLeafCallStackPointers(void)
 	or a call of ceMNUFromPICMNUMethod:receiver: to handle an MNU dispatch
 	in a closed PIC. It distinguishes the two by testing ClassReg. If the
 	register is zero then this is an MNU.
-	
+
 	This poses a problem in 32-bit Spur, where zero is the cache tag for
 	immediate characters (tag pattern 2r10) because SmallIntegers have tag
 	patterns 2r11
@@ -11991,7 +12190,7 @@ static void (*genInvokeInterpretTrampoline(void))(void)
 
 /*	The in-line cache for a send is implemented as a constant load into
 	ClassReg. We always use a 32-bit load, even in 64-bits.
-	
+
 	In the initial (unlinked) state the in-line cache is notionally loaded
 	with the selector.
 	But since in 64-bits an arbitrary selector oop won't fit in a 32-bit
@@ -12000,7 +12199,7 @@ static void (*genInvokeInterpretTrampoline(void))(void)
 	frame of the
 	current method, or into the special selector array. Negative values are
 	1-relative indices into the special selector array.
-	
+
 	When a send is linked, the load of the selector, or selector index, is
 	overwritten with a
 	load of the receiver's class, or class tag. Hence, the 64-bit VM is
@@ -12307,7 +12506,7 @@ void
 initializeCodeZoneFromupTo(sqInt startAddress, sqInt endAddress)
 {
 	initializeBackend();
-	sqMakeMemoryExecutableFromToCodeToDataDelta(startAddress, endAddress, 
+	sqMakeMemoryExecutableFromToCodeToDataDelta(startAddress, endAddress,
 #  if DUAL_MAPPED_CODE_ZONE
 		(&codeToDataDelta)
 #  else
@@ -13094,7 +13293,7 @@ mapObjectReferencesInMachineCode(sqInt gcMode)
 {
 	switch (gcMode) {
 	case GCModeNewSpace:
-		
+
 		/* N.B. do *not* ensureWritableCodeZone for every scavenge. */
 		mapObjectReferencesInMachineCodeForYoungGC();
 		break;
@@ -13117,7 +13316,7 @@ mapObjectReferencesInMachineCode(sqInt gcMode)
 
 
 /*	Mark objects in machine-code of marked methods (or open PICs with marked
-	selectors). 
+	selectors).
  */
 
 	/* Cogit>>#markAndTraceMachineCodeOfMarkedMethods */
@@ -13373,7 +13572,7 @@ markAndTraceOrFreePICTargetin(sqInt entryPoint, CogMethod *cPIC)
 
 
 /*	Mark and trace literals. Unlink sends that have unmarked cache tags or
-	targets. 
+	targets.
  */
 
 	/* Cogit>>#markLiteralsAndUnlinkIfUnmarkedSend:pc:method: */
@@ -14570,7 +14769,7 @@ scanForCleanBlocks(void)
 
 /*	If a method is compiled to machine code via a block entry it won't have a
 	selector. A subsequent send can find the method and hence fill in the
-	selector. 
+	selector.
  */
 /*	self disassembleMethod: cogMethod */
 
@@ -14650,7 +14849,7 @@ traceLinkedSendOffset(void)
 /*	Encode true and false and 0 to N such that they can't be confused for
 	register numbers (including NoReg)
 	and can be tested for by isTrampolineArgConstant: and decoded by
-	trampolineArgValue: 
+	trampolineArgValue:
  */
 
 	/* Cogit>>#trampolineArgConstant: */
@@ -15128,7 +15327,7 @@ unlinkIfLinkedSendpcto(sqInt annotation, char *mcpc, CogMethod *theCogMethod)
 
 
 /*	Unlink all sends in cog methods whose class tag is that of a forwarded
-	class. 
+	class.
  */
 
 	/* Cogit>>#unlinkSendsLinkedForInvalidClasses */
@@ -15563,7 +15762,7 @@ voidCogCompiledCode(void)
 
 
 /*	Access for the object representations when they need to prepend code to
-	trampolines. 
+	trampolines.
  */
 /*	Eliminate stale dependent info. */
 
@@ -15581,7 +15780,7 @@ zeroOpcodeIndex(void)
 
 
 /*	Access for the object representations when they need to prepend code to
-	trampolines. 
+	trampolines.
  */
 
 	/* Cogit>>#zeroOpcodeIndexForNewOpcodes */
@@ -16039,7 +16238,7 @@ openPICWithSelector(sqInt aSelector)
 
 /*	Some methods have been freed. Compute how much each survivor needs to
 	move during the ensuing compaction and record it in the objectHeader
-	field. 
+	field.
 	For Sista, where we want PICs to last so they can be observed, we need to
 	keep PICs unless
 	they are definitely unused. So we need to identify unused PICs. So in
@@ -17264,7 +17463,7 @@ genPrimitiveHighBit(void)
 
 
 	/* remove excess tag bits from the receiver oop */
-	
+
 	/* and use the abstract cogit facility for case of single tag-bit */
 	/* begin genHighBitIn:ofSmallIntegerOopWithSingleTagBit: */
 	self_in_genHighBitInofSmallIntegerOopWithSingleTagBit1 = ((AbstractInstruction *) (backEnd()));
@@ -17898,7 +18097,7 @@ genAddSmallIntegerTagsTo(sqInt aRegister)
 
 
 /*	Set the SmallInteger tag bits when the tag bits may be filled with
-	garbage. 
+	garbage.
  */
 
 	/* CogObjectRepresentationFor32BitSpur>>#genClearAndSetSmallIntegerTagsIn: */
@@ -17992,7 +18191,7 @@ genFetchRegArgsForPerformWithArguments(sqInt sizeReg)
 
 
 /*	Fetch the instance's identity hash into destReg, encoded as a
-	SmallInteger. 
+	SmallInteger.
  */
 /*	Get header word in scratchReg */
 
@@ -18234,7 +18433,7 @@ genJumpSmallInteger(sqInt aRegister)
 
 
 /*	c.f. StackInterpreter>>stSizeOf: SpurMemoryManager>>lengthOf:format:
-	fixedFieldsOf:format:length: 
+	fixedFieldsOf:format:length:
  */
 
 	/* CogObjectRepresentationFor32BitSpur>>#genPrimitiveAtPut */
@@ -18516,7 +18715,7 @@ genPrimitiveAtPut(void)
 	signedVersion is false,
 	generate unsigned accesses (a la 60, 61, 63 & 64). */
 /*	c.f. StackInterpreter>>stSizeOf: SpurMemoryManager>>lengthOf:format:
-	fixedFieldsOf:format:length: 
+	fixedFieldsOf:format:length:
  */
 
 	/* CogObjectRepresentationFor32BitSpur>>#genPrimitiveAtPutSigned: */
@@ -18826,7 +19025,7 @@ genPrimitiveAtPutSigned(sqInt signedVersion)
 	signedVersion is false,
 	generate unsigned accesses (a la 60, 61, 63 & 64). */
 /*	c.f. StackInterpreter>>stSizeOf: SpurMemoryManager>>lengthOf:format:
-	fixedFieldsOf:format:length: 
+	fixedFieldsOf:format:length:
  */
 
 	/* CogObjectRepresentationFor32BitSpur>>#genPrimitiveAtSigned: */
@@ -19052,7 +19251,7 @@ genPrimitiveAtSigned(sqInt signedVersion)
 
 
 /*	Arguably we should fail for immediates, but so far no one has complained,
-	so... 
+	so...
  */
 
 	/* CogObjectRepresentationFor32BitSpur>>#genPrimitiveIdentityHash */
@@ -19109,7 +19308,7 @@ genPrimitiveIdentityHash(void)
 
 
 /*	:Assume the receiuver is never a SmallInteger. One would use ^self for
-	that. 
+	that.
  */
 
 	/* CogObjectRepresentationFor32BitSpur>>#genPrimitiveImmediateAsInteger */
@@ -19289,7 +19488,7 @@ genPrimitiveNew(void)
 	- the result fits in eden
 	See superclass method for dynamic frequencies of formats.
 	For the moment we implement only arrayFormat, firstByteFormat &
-	firstLongFormat 
+	firstLongFormat
  */
 
 	/* CogObjectRepresentationFor32BitSpur>>#genPrimitiveNewWithArg */
@@ -19667,7 +19866,7 @@ genPrimitiveShallowCopy(void)
 
 
 /*	c.f. StackInterpreter>>stSizeOf: SpurMemoryManager>>lengthOf:format:
-	fixedFieldsOf:format:length: 
+	fixedFieldsOf:format:length:
  */
 
 	/* CogObjectRepresentationFor32BitSpur>>#genPrimitiveStringAt */
@@ -19781,7 +19980,7 @@ genPrimitiveStringAt(void)
 
 
 /*	c.f. StackInterpreter>>stSizeOf: SpurMemoryManager>>lengthOf:format:
-	fixedFieldsOf:format:length: 
+	fixedFieldsOf:format:length:
  */
 
 	/* CogObjectRepresentationFor32BitSpur>>#genPrimitiveStringAtPut */
@@ -20374,7 +20573,7 @@ genCreateFullClosurenumArgsnumCopiedignoreContextcontextNumArgslargeinBlock(sqIn
 /*	Make sure that the object in reg is not forwarded. This routine assumes
 	the object will
 	never be forwarded to an immediate, as it is used to unforward literal
-	variables (associations). 
+	variables (associations).
 	Use the fact that isForwardedObjectClassIndexPun is a power of two to save
 	an instruction. */
 
@@ -20407,7 +20606,7 @@ genEnsureObjInRegNotForwardedscratchReg(sqInt reg, sqInt scratch)
 }
 
 
-/*	Make sure that the oop in reg is not forwarded. 
+/*	Make sure that the oop in reg is not forwarded.
 	Use the fact that isForwardedObjectClassIndexPun is a power of two to save
 	an instruction. */
 /*	maybe a fixup or an instruction */
@@ -21596,7 +21795,7 @@ genPrimitiveObjectAt(void)
 
 
 /*	c.f. StackInterpreter>>stSizeOf: lengthOf:baseHeader:format:
-	fixedFieldsOf:format:length: 
+	fixedFieldsOf:format:length:
  */
 
 	/* CogObjectRepresentationForSpur>>#genPrimitiveSize */
@@ -21843,27 +22042,27 @@ genPrimitiveStringCompareWith(void)
 }
 
 
-/*	replaceFrom: start to: stop with: replacement startingAt: repStart. 
-	
+/*	replaceFrom: start to: stop with: replacement startingAt: repStart.
+
 	The primitive in the JIT tries to deal with two pathological cases, copy
 	of arrays and byteStrings,
 	which often copies only a dozen of fields and where switching to the C
 	runtime cost a lot.
-	
+
 	Based on heuristics on the method class, I generate a quick array path
 	(typically for Array),
 	a quick byteString path (typically for ByteString, ByteArray and
-	LargeInteger) or no quick 
+	LargeInteger) or no quick
 	path at all (Typically for Bitmap).
-	
+
 	The many tests to ensure that the primitive won't fail are not super
 	optimised (multiple reloading
 	or stack arguments in registers) but this is still good enough and worth
-	it since we're avoiding 
-	the Smalltalk to C stack switch. The tight copying loops are optimised. 
-	
+	it since we're avoiding
+	the Smalltalk to C stack switch. The tight copying loops are optimised.
+
 	It is possible to build a bigger version with the 2 different paths but I
-	(Clement) believe this 
+	(Clement) believe this
 	is too big machine code wise to be worth it.
  */
 
@@ -22309,7 +22508,7 @@ genStoreSourceRegslotIndexdestRegscratchReginFrameneedsStoreCheck(sqInt sourceRe
 
 
 /*	This method is used for unchecked stores in objects after their creation
-	(typically, inlined creation of Array, closures and some temp vectors). 
+	(typically, inlined creation of Array, closures and some temp vectors).
 	Currently there is no need to do the immutability check here
  */
 
@@ -22328,10 +22527,10 @@ genStoreSourceRegslotIndexintoNewObjectInDestReg(sqInt sourceReg, sqInt index, s
 /*	Convention:
 	- RcvrResultReg holds the object mutated.
 	If immutability failure:
-	- TempReg holds the instance variable index mutated 
+	- TempReg holds the instance variable index mutated
 	if instVarIndex > numDedicatedStoreTrampoline
 	- ClassReg holds the value to store
-	Registers are not lived across this trampoline as the 
+	Registers are not lived across this trampoline as the
 	immutability failure may need new stack frames. */
 
 	/* CogObjectRepresentationForSpur>>#genStoreTrampolineCalled:instVarIndex: */
@@ -22482,7 +22681,7 @@ genStoreWithImmutabilityAndStoreCheckSourceRegslotIndexdestRegscratchRegneedRest
 
 
 /*	Gen an immutability check with no store check (e.g. assigning an immediate
-	literal) 
+	literal)
  */
 /*	imm check has its own trampoline */
 
@@ -22570,7 +22769,7 @@ genStoreWithImmutabilityCheckSourceRegslotIndexdestRegscratchRegneedsStoreCheckn
 
 /*	Make sure SendNumArgsReg and ClassReg are available in addition to
 	ReceiverResultReg and TempReg in
-	genGetActiveContextNumArgs:large:inBlock:. 
+	genGetActiveContextNumArgs:large:inBlock:.
  */
 
 	/* CogObjectRepresentationForSpur>>#getActiveContextAllocatesInMachineCode */
@@ -23479,7 +23678,7 @@ compileOnStackExternalPrimitiveflags(sqInt (*primitiveRoutine)(void), sqInt flag
 	stackPointerAddress();
 	anInstruction24 = genoperandoperand(MoveAwR, stackPointerAddress(), TempReg);
 	continueAfterProfileSample = anInstruction24;
-	
+
 	/* The original retpc is (argumentCount + 1) words below stackPointer. */
 	retpcOffset = -((methodOrBlockNumArgs + 1) * BytesPerWord);
 	/* begin checkQuickConstant:forInstruction: */
@@ -23546,7 +23745,7 @@ compileOnStackExternalPrimitiveflags(sqInt (*primitiveRoutine)(void), sqInt flag
 
 		/* must reload SPReg to undo any alignment change, */
 		if (((flags & PrimCallOnSmalltalkStackAlign2x) != 0)) {
-			
+
 			/* remember to include return address; use scratch to avoid an interrupt overwriting retpc */
 			/* begin checkLiteral:forInstruction: */
 			stackPointerAddress();
@@ -23796,10 +23995,10 @@ compilePrimitive(void)
 	}
 	primitiveRoutine = functionPointerForCompiledMethodprimitiveIndexprimitivePropertyFlagsInto(methodObj, primitiveIndex, (&flags));
 	if ((primitiveRoutine == 0)
-	 || (primitiveRoutine == (((void (*)(void)) primitiveFail)))) {
+	 || (primitiveRoutine == (((sqInt (*)(void)) primitiveFail)))) {
 		return genFastPrimFail();
 	}
-	if ((primitiveRoutine == (((void (*)(void)) primitiveHighResClock)))
+	if ((primitiveRoutine == (((sqInt (*)(void)) primitiveHighResClock)))
 	 && (methodOrBlockNumArgs == 0)) {
 		/* begin genPrimitiveHighResClock32 */
 		code = UnimplementedPrimitive;
@@ -23934,7 +24133,7 @@ genDoubleFailIfZeroArgRcvrarg(int rcvrReg, int argReg)
 
 
 /*	Can use any of the first 32 literals for the selector and pass up to 7
-	arguments. 
+	arguments.
  */
 
 	/* SimpleStackBasedCogit>>#genExtendedSendBytecode */
@@ -24013,7 +24212,7 @@ genExtNopBytecode(void)
 
 
 /*	SistaV1:		233		11101001	iiiiiiii		Push Character #iiiiiiii (+ Extend A *
-	256) 
+	256)
  */
 
 	/* SimpleStackBasedCogit>>#genExtPushCharacterBytecode */
@@ -24081,7 +24280,7 @@ genExtPushLiteralVariableBytecode(void)
 
 
 /*	SistaV1: *	82			01010010			Push thisContext, (then Extend B = 1 => push
-	thisProcess) 
+	thisProcess)
  */
 
 	/* SimpleStackBasedCogit>>#genExtPushPseudoVariable */
@@ -24520,7 +24719,7 @@ genMustBeBooleanTrampolineForcalled(sqInt boolean, char *trampolineName)
 
 
 /*	Implement 28-bit hashMultiply for SmallInteger and LargePositiveInteger
-	receivers. 
+	receivers.
  */
 
 	/* SimpleStackBasedCogit>>#genPrimitiveHashMultiply */
@@ -24926,7 +25125,7 @@ genReturnTrue(void)
 
 
 /*	Can use any of the first 64 literals for the selector and pass up to 3
-	arguments. 
+	arguments.
  */
 
 	/* SimpleStackBasedCogit>>#genSecondExtendedSendBytecode */
@@ -26431,10 +26630,10 @@ compileFullBlockMethodFrameBuild(sqInt numCopied)
 	This case has 20% overhead with Immutability compared to setter without
 	immutability because of the stack
 	frame creation. We compile two path, one where the object is immutable,
-	one where it isn't. At the beginning 
+	one where it isn't. At the beginning
 	of the frame build, we take one path or the other depending on the
 	receiver mutability.
-	
+
 	Note: this specific case happens only where there are only instance
 	variabel stores. We could do something
 	similar for literal variable stores, but we don't as it's too uncommon.
@@ -26458,7 +26657,7 @@ compileTwoPathFrameBuild(void)
 	jumpImmutable = genJumpImmutablescratchReg(ReceiverResultReg, TempReg);
 
 	/* first path. The receiver is mutable */
-	
+
 	/* N.B. FLAGS := destReg - scratchReg */
 	/* begin checkQuickConstant:forInstruction: */
 	storeCheckBoundary();
@@ -26517,7 +26716,7 @@ compileTwoPathFrameBuild(void)
 /*	We are in a frameless method with at least two inst var stores. We compile
 	two paths,
 	one where the object is in new space, and one where it isn't. At the
-	beginning 
+	beginning
 	of the method, we take one path or the other depending on the receiver
 	being in newSpace.
  */
@@ -26534,7 +26733,7 @@ compileTwoPathFramelessInit(void)
 	assert(useTwoPaths);
 
 	/* first path. The receiver is young */
-	
+
 	/* N.B. FLAGS := destReg - scratchReg */
 	/* begin checkQuickConstant:forInstruction: */
 	storeCheckBoundary();
@@ -26563,10 +26762,10 @@ cPICMissTrampolineFor(sqInt numArgs)
 
 
 /*	Replaces the Blue Book double-extended send [132], in which the first byte
-	was wasted on 8 bits of argument count. 
+	was wasted on 8 bits of argument count.
 	Here we use 3 bits for the operation sub-type (opType), and the remaining
-	5 bits for argument count where needed. 
-	The last byte give access to 256 instVars or literals. 
+	5 bits for argument count where needed.
+	The last byte give access to 256 instVars or literals.
 	See also secondExtendedSendBytecode
  */
 
@@ -26634,7 +26833,7 @@ doubleExtendedDoAnythingBytecode(void)
 #    endif
 		break;
 	default:
-		
+
 		/* 5 & 6 */
 		if (isWriteMediatedContextInstVarIndex(byte2)) {
 			genStorePopMaybeContextReceiverVariableneedsStoreCheckneedsImmutabilityCheck(opType == 6, byte2, ((((ssTop())->type)) != SSConstant)
@@ -26851,7 +27050,7 @@ eventualTargetOf(sqInt targetBytecodePC)
 }
 
 
-/*	Spill the closest register on stack not conflicting with regMask. 
+/*	Spill the closest register on stack not conflicting with regMask.
 	Assertion Failure if regMask has already all the registers */
 
 	/* StackToRegisterMappingCogit>>#freeAnyRegNotConflictingWith: */

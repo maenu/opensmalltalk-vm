@@ -17,13 +17,21 @@
 
 #include "sq.h"
 
+#include <unistd.h>			/* for ioNumProcesors & sleep */
+
 #if COGMTVM
 
-#include <unistd.h>			/* for ioNumProcesors */
 #include <sys/types.h>		/* for ioNumProcesors */
+#if __linux__
+# include <linux/sysctl.h>		/* for ioNumProcesors */
+#else
 #include <sys/sysctl.h>		/* for ioNumProcesors */
+#endif
 #include <errno.h>
+#include <string.h>
 #include <pthread.h>
+
+#define pthreadperror(s,e) fprintf(stderr,"%s: %s\n", s, strerror(e))
 
 int
 ioNewOSThread(void (*func)(void *), void *arg)
@@ -36,7 +44,7 @@ ioNewOSThread(void (*func)(void *), void *arg)
 				0,						/* const pthread_attr_t *attr */
 				(void *(*)(void *))func,/* void * (*thread_execp)(void *) */
 				(void *)arg				/* void *arg */))) {
-		perror("pthread_create");
+		pthreadperror("pthread_create",err);
 		return err;
 	}
 	return 0;
@@ -61,6 +69,20 @@ ioNewOSSemaphore(sqOSSemaphore *sem)
 		? err
 		: 0;
 }
+
+#if !defined(ioDestroyOSSemaphore)
+void
+ioDestroyOSSemaphore(sqOSSemaphore *sem)
+{
+	int err;
+
+	sem->count = 0;
+	if ((err = pthread_cond_destroy(&sem->cond)))
+		pthreadperror("pthread_cond_destroy",err);
+	if ((err = pthread_mutex_destroy(&sem->mutex)))
+		pthreadperror("pthread_mutex_destroy",err);
+}
+#endif
 
 #define DEBUG 1
 #if DEBUG
@@ -98,12 +120,12 @@ ioSignalOSSemaphore(sqOSSemaphore *sem)
 	if ((err = pthread_mutex_lock(&sem->mutex)))
 		THRLOG("%d !! SIGN pthread_mutex_lock 0x%p => %d\n", tid, sem, err);
 	if (++sem->count <= 0) {
-		THRLOG("%d pthread_cond_signal 0x%x\n", tid, sem);
+		THRLOG("%d pthread_cond_signal 0x%p\n", tid, sem);
 		err = pthread_cond_signal(&sem->cond);
-		THRLOG("%d pthread_cond_signal 0x%x => %d\n", tid, sem, err);
+		THRLOG("%d pthread_cond_signal 0x%p => %d\n", tid, sem, err);
 	}
 	else
-		THRLOG("%d ioSig 0x%x ++count = %d\n", tid, sem, sem->count);
+		THRLOG("%d ioSig 0x%p ++count = %d\n", tid, sem, sem->count);
 	if ((err = pthread_mutex_unlock(&sem->mutex)))
 		THRLOG("%d !!pthread_mutex_unlock 0x%p => %d\n", tid, sem, err);
 #else
@@ -124,12 +146,12 @@ ioWaitOnOSSemaphore(sqOSSemaphore *sem)
 	if ((err = pthread_mutex_lock(&sem->mutex)))
 		THRLOG("%d !! WAIT pthread_mutex_lock 0x%p => %d\n", tid, sem, err);
 	if (--sem->count < 0) {
-		THRLOG("%d pthread_cond_wait 0x%x\n", tid, sem);
+		THRLOG("%d pthread_cond_wait 0x%p\n", tid, sem);
 		err = pthread_cond_wait(&sem->cond, &sem->mutex);
-		THRLOG("%d proceeding 0x%x (pcw err %d)\n", tid, sem, err);
+		THRLOG("%d proceeding 0x%p (pcw err %d)\n", tid, sem, err);
 	}
 	else
-		THRLOG("%d ioWait 0x%x --count = %d\n", tid, sem, sem->count);
+		THRLOG("%d ioWait 0x%p --count = %d\n", tid, sem, sem->count);
 	if ((err = pthread_mutex_unlock(&sem->mutex)))
 		THRLOG("%d !! WAIT pthread_mutex_unlock 0x%p => %d\n", tid, sem, err);
 #else
