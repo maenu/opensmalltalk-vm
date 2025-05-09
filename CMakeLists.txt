@@ -36,8 +36,8 @@ if (EMSCRIPTEN)
 	set(CMAKE_VERBOSE_MAKEFILE on)
 	SET_PROPERTY(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 	# <O2 yields too many locals in interpret and other async errors
-	set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DSTACKVM=1 -DCOGVM=1 -I/Users/maenu/Documents/feenk/binaryen/src")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DSTACKVM=1 -DCOGVM=1 -I/Users/maenu/Documents/feenk/binaryen/src")
+	set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -O2 -fno-inline -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DSTACKVM=1 -DCOGVM=1 -I/Users/maenu/Documents/feenk/binaryen/src")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -fno-inline -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1 -DSTACKVM=1 -DCOGVM=1 -I/Users/maenu/Documents/feenk/binaryen/src")
 	# -I/Users/maenu/Documents/feenk/binaryen-build/src -L/Users/maenu/Documents/feenk/binaryen-build/lib -lbinaryen -DDEBUG -DDEBUGVM
 	#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")
 	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3 -fPIC -DNOEXECINFO=1 -DNO_FFI_TEST=1")

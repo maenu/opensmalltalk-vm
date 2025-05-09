@@ -3675,6 +3675,14 @@ cResultRegisterHigh(AbstractInstruction * self_in_cResultRegisterHigh)
 	return EDX;
 }
 
+int registers[8] = {0,0,0,0,0,0,0,0};
+int register_read(int i) {
+    return registers[i];
+}
+void register_write(int i, int j) {
+    registers[i] = j;
+}
+
 uint32_t jit(char* name, BinaryenModuleRef module, BinaryenType params, BinaryenType results, BinaryenType* varTypes, BinaryenIndex numVarTypes, BinaryenExpressionRef body) {
     // Create the wrapper function (no local variables, no basic blocks)
     BinaryenAddFunction(module, name, params, results, varTypes, numVarTypes, body);
@@ -6243,6 +6251,16 @@ dispatchConcretize(AbstractInstruction * self_in_dispatchConcretize)
 
 	case PushR:
 		/* begin concretizePushR */
+        BinaryenType ii[2] = {BinaryenTypeInt32(), BinaryenTypeInt32()};
+            self_in_dispatchConcretize->expression = BinaryenCallIndirect(
+                    self_in_dispatchConcretize->module,
+                    0,
+                    BinaryenConst(self_in_dispatchConcretize->module, BinaryenLiteralInt32((uintptr_t) register_write)),
+                    {BinaryenLocalGet(self_in_dispatchConcretize->module, 0, BinaryenTypeInt32()),
+                     BinaryenLocalGet(self_in_dispatchConcretize->module, 1, BinaryenTypeInt32())},
+                    2,
+                    BinaryenTypeCreate(ii, 2);,
+                    BinaryenTypeNone());
 		((self_in_dispatchConcretize->machineCode))[0] = (80 + (((self_in_dispatchConcretize->operands))[0]));
 		return 1;
 
